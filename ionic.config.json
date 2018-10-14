@@ -1,0 +1,7 @@
+{
+  "name": "V10Mobile",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

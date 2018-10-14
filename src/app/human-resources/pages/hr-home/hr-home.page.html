@@ -1,0 +1,84 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title><span class="navbar-title">Salary Slips</span></ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-grid class="salary-details" (click)="toggleSalaryValuesStateAction()">
+        <ion-row>
+            <ion-col>
+                <div class="salary-date">
+                    {{salaryDate}}
+                </div>
+            </ion-col>
+        </ion-row>
+        <!-- Salary Portions -->
+        <ion-row>
+            <ion-col class="salary-portion" *ngFor="let salaryPortion of salaryPortions" size="6" [ngClass]="{'show-money': salaryValuesState === 'money', 'show-percentage': salaryValuesState === 'percentage'}">
+                <div class="label">{{ salaryPortion.label }}</div>
+                <div class="value">
+                    <span class="money">{{ salaryPortion.value | currency: salaryPortion.currency }}</span>
+                    <span class="percentage" *ngIf="salaryPortion.percentualValue">{{ salaryPortion.percentualValue }}
+                        %</span>
+                </div>
+            </ion-col>
+        </ion-row>
+        <!-- Salary Extra Info -->
+        <ion-row class="salary-extra-information-section" *ngFor="let salaryExtraInfo of salaryExtraInformations">
+            <ion-col>
+                <ion-row>
+                    <ion-col class="section-label">
+                        {{ salaryExtraInfo.label }}
+                    </ion-col>
+                </ion-row>
+                <ion-row class="extra-information" *ngFor="let info of salaryExtraInfo.infos" [ngClass]="{'show-money': salaryValuesState === 'money', 'show-percentage': salaryValuesState === 'percentage'}">
+                    <ion-col class="extra-information-label" size="6">
+                        {{ info.label }}
+                    </ion-col>
+                    <ion-col class="extra-information-value" size="6">
+                        <span class="money">
+                            {{ info.value | currency: info.currency }}
+                        </span>
+                        <span class="percentage">
+                            {{ info.percentualValue }} %
+                        </span>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <!-- Salary Charts -->
+    <div class="salary-charts-drawer" [ngClass]="{'open': chartsDrawerState === 'open', 'close': chartsDrawerState === 'close'}">
+        <div class="salary-charts-drawer-handle" (click)="toogleChartsDrawerAction()">
+            <img src="../../../../assets/human-resources/handle.png" />
+        </div>
+        <div class="salary-chart-period-selector">
+            <div class="period" [ngClass]="{'active': salaryPeriodState === 'yearly'}" (click)="changeSalaryPeriodToYearlyAction()">
+                Yearly
+            </div>
+            <div class="period" [ngClass]="{'active': salaryPeriodState === 'monthly'}" (click)="changeSalaryPeriodToMonthlyAction()">
+                Monthly
+            </div>
+        </div>
+        <div class="chart-container">
+            <!-- yearly chart -->
+            <div class="chart" [ngClass]="{'visible' : salaryPeriodState === 'yearly' }">
+                <hr-salary-chart [labels]="yearlyChartData.labels" [lastYearValues]="yearlyChartData.lastYearValues" [currentYearValues]="yearlyChartData.currentYearValues"></hr-salary-chart>
+            </div>
+
+            <!-- monthly chart -->
+            <div class="chart" [ngClass]="{'visible' : salaryPeriodState === 'monthly' }">
+                <ion-slides style="height:300px">
+                    <ion-slide *ngFor="let dataChart of monthlyChartsData" style="height:300px">
+                        <hr-salary-chart [labels]="dataChart.labels" [lastYearValues]="dataChart.lastYearValues" [currentYearValues]="dataChart.currentYearValues"></hr-salary-chart>
+                    </ion-slide>
+                </ion-slides>
+            </div>
+        </div>
+    </div>
+</ion-content>

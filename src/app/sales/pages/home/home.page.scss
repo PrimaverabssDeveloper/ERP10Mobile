@@ -1,0 +1,106 @@
+$accent-color: rgb(80,130,254);
+$background-color: rgb(246,247,249);
+$chart-background-color: rgb(255,255,255);
+
+.page-title {
+    
+    span {
+        color: $accent-color;
+    }
+
+    img {
+        position: absolute;
+        height: 20px;
+        margin-left: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+.sales-content{
+    background-color: $background-color;
+    margin-top:-20px;
+    padding-top: 20px;
+    height: 100%;;
+}
+
+.sales-header {
+        
+    margin: 20px;
+
+    .chart-name {
+        font-weight: bolder;
+    }
+
+    .data-date{
+
+    }
+}
+
+.chart-controllers {
+    height: 40px;
+
+    .chart-ctrl-btn {
+        float: left;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 16pt;
+        line-height: 40px;
+
+        background-position: center;
+        background-size: 22px;
+        background-repeat: no-repeat;
+
+        &.selected {
+            background-color: white;
+            color: $accent-color;
+        }
+    }
+
+    .chart-ctrl-btn-month {
+        margin-left: 10px;
+        float: left;
+    }
+
+    .chart-ctrl-btn-quarter {
+        float: left;
+    }
+
+    .chart-ctrl-btn-table {
+        float: right;
+        margin-right:10px;
+        background-image: url('../../../../assets/sales/charts-top-table.png');
+
+        &.selected{
+            background-image: url('../../../../assets/sales/charts-top-table-pressed.png');
+        }
+    }
+
+    .chart-ctrl-btn-accumulated {
+        float: right;
+        background-image: url('../../../../assets/sales/charts-top-accumulated.png');
+
+        &.selected{
+            background-image: url('../../../../assets/sales/charts-top-accumulated-pressed.png');
+        }
+    }
+
+    .chart-ctrl-btn-absolute {
+        float: right;
+        background-image: url('../../../../assets/sales/charts-top-absolute.png');
+
+        &.selected{
+            background-image: url('../../../../assets/sales/charts-top-absolute-pressed.png');
+        }
+    }
+}
+
+.chart{
+    background: $chart-background-color;
+    padding:20px 10px;
+    canvas{
+        height: 500px !important;
+    }
+}

@@ -1,0 +1,177 @@
+$hr-theme-color: rgb(255, 118, 80);
+$hr-border:1px solid rgb(212, 212, 212);
+
+// hr salary portion
+$hr-salary-portion-border-top: $hr-border;
+$hr-salary-portion-label-color: $hr-theme-color;
+$hr-salary-portion-value-color: rgb(92, 92, 92);
+
+// hr salary extra information
+$hr-salary-extra-information-section-border-top: $hr-border;
+$hr-salary-extra-information-section-label-color: $hr-theme-color;
+$hr-salary-extra-information-label-color: rgb(92, 92, 92);
+$hr-salary-extra-information-value-color: rgb(92, 92, 92);
+
+
+// Charts
+$hr-charts-drawer-height: 400px;
+$hr-charts-drawer-handle-background-color: rgb(246, 247, 249);
+$hr-charts-drawer-handle-height: 40px;
+$hr-charts-drawer-handle-box-shadow: 0 -3px 3px -3px black;
+$hr-salary-chart-period-selector-height: 30px;
+$hr-chart-conteiner-height: $hr-charts-drawer-height - $hr-charts-drawer-handle-height - $hr-salary-chart-period-selector-height - 30px;
+
+
+.navbar-title {
+    color: $hr-theme-color;
+}
+
+.salary-details {
+    padding: 0;
+
+    .money {
+        transition: opacity 1s;
+        display: block;
+        float: left;
+        position: absolute;
+    }
+
+    .percentage {
+        transition: opacity 1s;
+        display: block;
+        float: left;
+        position: absolute;
+    }
+
+    .show-money {
+        .money {
+            opacity: 1;
+        }
+
+        .percentage {
+            opacity: 0;
+        }
+    }
+
+    .show-percentage {
+        .money {
+            opacity: 0;
+        }
+
+        .percentage {
+            opacity: 1;
+        }
+    }
+
+
+    .salary-date {
+        font-weight: bold;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    .salary-portion {
+        border-top:$hr-salary-portion-border-top;
+        padding: 20px 10px;
+        margin-bottom: 20px;
+
+        .label {
+            color: $hr-salary-portion-label-color;
+            font-size: 10pt;
+        }
+
+        .value{
+            color: $hr-salary-portion-value-color;
+            font-size: 12pt;
+            font-weight: bold;
+        }
+    }
+
+    .salary-extra-information-section {
+        border-top: $hr-salary-extra-information-section-border-top;
+
+        .section-label {
+            color: $hr-salary-extra-information-section-label-color;
+        }
+
+        .extra-information {
+            padding-left: 20px;
+            margin: 0;
+
+            .extra-information-label {
+                color: $hr-salary-extra-information-label-color;
+                padding: 0;
+            }
+    
+            .extra-information-value {
+                color: $hr-salary-extra-information-value-color;
+                padding: 0;
+            }
+        }
+    }
+}
+
+.salary-charts-drawer {
+    width: 100%;
+    position: absolute;
+    background-color: white;
+    bottom: 0;
+    height: $hr-charts-drawer-height;
+    transition: bottom .35s ease-in-out; 
+
+    &.open {
+        bottom: 0;
+    }
+
+    &.close {
+        bottom: -($hr-charts-drawer-height - $hr-charts-drawer-handle-height);
+    }
+
+    .salary-charts-drawer-handle {
+        height: 40px;
+        background: $hr-charts-drawer-handle-background-color;
+        box-shadow: $hr-charts-drawer-handle-box-shadow;
+        width: 100%;
+        position: relative;
+
+        img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    .salary-chart-period-selector {
+        height: $hr-salary-chart-period-selector-height;
+
+        .period {
+            float: right;
+            font-size: 11pt;
+            margin: 10px 15px 10px 0;
+            font-weight: bold;
+            color: rgb(184, 184, 184);  
+
+            &.active {
+                color: rgb(57, 57, 57);  
+            }
+        }
+    }
+
+    .chart-container {
+        height: $hr-chart-conteiner-height;
+        width: 100%;
+
+        .chart {
+            position: absolute;
+            width: 100%;
+            height: $hr-chart-conteiner-height;
+            transition: opacity 1s ease-in-out;
+            opacity: 0;
+
+            &.visible {
+                opacity: 1;
+            }
+        }
+    }
+}

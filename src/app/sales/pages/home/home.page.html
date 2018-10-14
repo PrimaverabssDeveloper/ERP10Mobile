@@ -1,0 +1,74 @@
+<!-- <ion-header>
+    <ion-toolbar>
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <ion-button expand="full" href="/" goBack>Back</ion-button>
+                </ion-col>
+                <ion-col>
+                    <ion-select value="jasmin" ok-text="Okay" cancel-text="Dismiss">
+                        <ion-select-option value="demo1">Demo 1</ion-select-option>
+                        <ion-select-option value="alcad">Alcad</ion-select-option>
+                        <ion-select-option value="sofrio">Sofrio</ion-select-option>
+                        <ion-select-option value="jasmin">Jasmin</ion-select-option>
+                    </ion-select>
+                </ion-col>
+                <ion-col>
+
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-header> -->
+
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            <div class="page-title" (click)="companySelectorAction($event)">
+                <span>ALCAD</span>
+                <img src="../../../../assets/sales/action-bar-dropdown-button.png"/>
+            </div>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="sales-content">
+        <div class="sales-header">
+            <div class="chart-name">MONTHLY SALES</div>
+            <div class="data-date">{{dataDate | date:'medium'}}</div>
+        </div>
+        <div class="chart-controllers">
+            <div 
+                class="selected chart-ctrl-btn chart-ctrl-btn-month"  
+                [ngClass]="{'selected': timeFrame === 'monthly'}" 
+                (click)="changeTimeFrameAction('monthly')">M</div>
+            <div class="chart-ctrl-btn chart-ctrl-btn-quarter" 
+                [ngClass]="{'selected': timeFrame === 'quarter'}" 
+                (click)="changeTimeFrameAction('quarter')">Q</div>
+
+            <div class="chart-ctrl-btn chart-ctrl-btn-table" 
+                [ngClass]="{'selected': viewType === 'table'}" 
+                (click)="toggleTableView()" ></div>
+
+            <div class="chart-ctrl-btn chart-ctrl-btn-accumulated" 
+                [ngClass]="{'selected': valueType === 'accumulated'}" 
+                (click)="changeValueType('accumulated')"></div>
+
+            <div class="selected chart-ctrl-btn chart-ctrl-btn-absolute" 
+                [ngClass]="{'selected': valueType === 'absolute'}" 
+                (click)="changeValueType('absolute')"></div>
+        </div>
+        <div class="chart">
+            <canvas #chartCanvas></canvas>
+        </div>
+    </div>
+</ion-content>
+<ion-footer>
+<ion-toolbar>
+    <ion-title>Actions</ion-title>
+</ion-toolbar>
+</ion-footer>

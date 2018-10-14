@@ -1,0 +1,18 @@
+
+
+
+.module-icon {
+    text-align: center;
+    margin:25px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+
+    img{
+        width: calc(100% - 50px);
+    }
+
+    .name {
+        margin-top: 5px;
+    }
+}
