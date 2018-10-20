@@ -1,10 +1,20 @@
 import { RouterModule, Routes } from '@angular/router';
 import { HomePage } from './pages';
+import { InstanceSelectorPage } from './pages/instance-selector/instance-selector.page';
 
 const routes: Routes = [
     {
-      path: '',
-      component: HomePage
+        path: '',
+        redirectTo: '/instances',
+        pathMatch: 'full'
+    },
+    {
+        path: 'home',
+        component: HomePage
+    },
+    {
+        path: 'instances',
+        component: InstanceSelectorPage
     }
 ];
 

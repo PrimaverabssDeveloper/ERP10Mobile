@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Deeplinks } from '@ionic-native/deeplinks/ngx';
 import { Router } from '@angular/router';
 
 
