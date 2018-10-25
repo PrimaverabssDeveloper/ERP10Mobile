@@ -1,6 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
-import { HomePage } from './pages';
-import { InstanceSelectorPage } from './pages/instance-selector/instance-selector.page';
+import { DashboardPage, InstancesPage } from './pages';
 
 const routes: Routes = [
     {
@@ -9,12 +8,12 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: 'home',
-        component: HomePage
+        path: 'dashboard',
+        component: DashboardPage
     },
     {
         path: 'instances',
-        component: InstanceSelectorPage
+        component: InstancesPage
     }
 ];
 

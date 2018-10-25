@@ -1,23 +1,27 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { IonicModule } from '@ionic/angular';
 
-import { PAGES } from './pages';
-import { COMPONENTS } from './components';
-import { ROUTING } from './core.routes';
 import { SERVICES } from './services';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ROUTING
-  ],
-  declarations: [PAGES, COMPONENTS],
-  providers: [SERVICES],
-  entryComponents: []
+    imports: [
+        CommonModule,
+        HttpClientModule,
+        FormsModule,
+        IonicModule,
+    ],
+    declarations: [],
+    providers: [SERVICES],
+    entryComponents: []
 })
-export class CoreModule {}
+export class CoreModule {
+    constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+        if (parentModule) {
+            throw new Error(
+                'CoreModule is already loaded. Import it in the AppModule only');
+        }
+    }
+}

@@ -10,9 +10,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { CoreModule } from './core/core.module';
+import { ShellModule } from './shell/shell.module';
 import { SalesModule } from './sales/sales.module';
 import { HumanResourcesModule } from './human-resources/human-resources.module';
-
 
 @NgModule({
     declarations: [AppComponent],
@@ -23,6 +23,7 @@ import { HumanResourcesModule } from './human-resources/human-resources.module';
         // IonicModule.forRoot(),
         AppRoutingModule,
         CoreModule,
+        ShellModule,
         SalesModule,
         HumanResourcesModule
     ],

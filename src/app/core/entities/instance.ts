@@ -21,7 +21,6 @@ export interface Instance {
      */
     key: string;
 
-
     /**
      * Defines the Instance Description;
      *

@@ -5,11 +5,7 @@
         </ion-title>
     </ion-toolbar>
 </ion-header>
-
 <ion-content padding>
-    <a target="_blank" rel="noopener" href="https://stg-identity.primaverabss.com/login?returnUrl=com.primavera.v10://authentication">Authentication2</a>
-    <br />
-
     <ion-grid>
         <!-- Modules Tickers -->
         <ion-row>
@@ -19,21 +15,21 @@
         </ion-row>
         <!-- Modules -->
         <ion-row>
-            <ion-col>
+            <ion-col *ngIf="salesModuleEnabled">
                 <a class="module-icon" [routerLink]="['/sales']">
                     <img src="../../assets/sales/sales_home.png">
                     <div class="name">Sales</div>
                 </a>
             </ion-col>
-            <ion-col>
+            <ion-col *ngIf="humanResourcesModuleEnabled">
                 <a class="module-icon" [routerLink]="['/hr']">
-                    <img src="../../assets/human-resources/hr_home.png" (click)="openHrModule()">
+                    <img src="../../assets/human-resources/hr_home.png">
                     <div class="name">HR</div>
                 </a>
             </ion-col>
-            <ion-col>
+            <ion-col *ngIf="customersModuleEnabled">
                 <a class="module-icon">
-                    <img src="../../assets/clients/clients_home.png" (click)="openClientsModule()">
+                    <img src="../../assets/clients/clients_home.png" (click)="menu()">
                     <div class="name">Clients</div>
                 </a>
             </ion-col>
