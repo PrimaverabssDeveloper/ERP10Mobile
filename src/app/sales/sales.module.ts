@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { PAGES } from './pages';
 import { SALES_ROUTING } from './sales.routes';
 import { ENTRY_COMPONENTS } from './components';
+import { SERVICES } from './services';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { ENTRY_COMPONENTS } from './components';
     SALES_ROUTING
   ],
   declarations: [PAGES, ENTRY_COMPONENTS],
-  entryComponents: [ENTRY_COMPONENTS]
+  entryComponents: [ENTRY_COMPONENTS],
+  providers: [SERVICES]
 })
 export class SalesModule {}
