@@ -1,16 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { MenuController, LoadingController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 import { Module } from '../../../core/entities';
 import { InstancesService } from '../../../core/services';
+
+import { BasePage } from '../../../shared/pages';
 
 
 @Component({
     templateUrl: 'dashboard.page.html',
     styleUrls: ['dashboard.page.scss'],
 })
-export class DashboardPage implements OnInit, OnDestroy {
+export class DashboardPage extends BasePage implements OnInit, OnDestroy {
 
     // #region 'Private Fields'
     private subscriptions: Subscription[] = [];
@@ -28,7 +30,11 @@ export class DashboardPage implements OnInit, OnDestroy {
 
     // #region 'Constructor'
 
-    constructor(private instancesService: InstancesService, public menuController: MenuController) {
+    constructor(
+        private instancesService: InstancesService,
+        public menuController: MenuController,
+        public loadingController: LoadingController) {
+        super(loadingController);
     }
 
     // #endregion
@@ -41,23 +47,27 @@ export class DashboardPage implements OnInit, OnDestroy {
     *
     * @memberof DashboardPage
     */
-    ngOnInit(): void {
+    async ngOnInit() {
+
+        await this.showLoading();
 
         if (!this.modules) {
-            const sub = this.instancesService
-                .getInstanceModules()
-                .subscribe(ms => {
-                    this.modules = ms;
+            const sub =
+                this.instancesService
+                    .getInstanceModules()
+                    .subscribe(ms => {
+                        this.modules = ms;
 
-                    // since this is an operation that will change the UI
-                    // and is performed from an callback,
-                    // it must be executed inside an setTimeout
-                    // to speed up the UI update
-                    setTimeout(() => {
-                        this.updateModulesAvailability(ms);
+                        // since this is an operation that will change the UI
+                        // and is performed from an callback,
+                        // it must be executed inside an setTimeout
+                        // to speed up the UI update
+                        this.hideLoading()
+                            .then(() => {
+                                this.updateModulesAvailability(ms);
+                            });
+
                     });
-
-                });
 
             this.subscriptions.push(sub);
         }

@@ -3,11 +3,14 @@ import { InstancesService } from '../../../core/services';
 import { Instance } from '../../../core/entities';
 import { Router } from '@angular/router';
 
+import { BasePage } from '../../../shared/pages';
+import { LoadingController } from '@ionic/angular';
+
 @Component({
     templateUrl: 'instances.page.html',
     styleUrls: ['instances.page.scss'],
 })
-export class InstancesPage implements OnInit {
+export class InstancesPage extends BasePage implements OnInit {
 
     // #region 'Public Properties'
 
@@ -29,8 +32,8 @@ export class InstancesPage implements OnInit {
      * @param {Router} router
      * @memberof InstancesPage
      */
-    constructor(private instancesService: InstancesService, private router: Router) {
-
+    constructor(private instancesService: InstancesService, private router: Router, public loadingController: LoadingController) {
+        super(loadingController);
     }
 
     // #endregion
@@ -42,11 +45,16 @@ export class InstancesPage implements OnInit {
      *
      * @memberof InstancesPage
      */
-    ngOnInit(): void {
+    async ngOnInit() {
+        await this.showLoading();
+
         this.instancesService
             .getInstances()
             .subscribe((instances) => {
-                this.handleInstances(instances);
+                this.hideLoading()
+                    .then(() => {
+                        this.handleInstances(instances);
+                    });
             });
     }
 
