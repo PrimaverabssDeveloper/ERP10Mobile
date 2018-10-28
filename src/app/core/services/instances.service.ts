@@ -28,6 +28,10 @@ export class InstancesService {
      * @memberof InstancesService
      */
     get currentInstance(): Instance {
+        if (!this._currentInstance) {
+            // get the selected instance from the storage
+        }
+
         return this._currentInstance;
     }
 
@@ -52,11 +56,11 @@ export class InstancesService {
     // #region 'Public Method'
 
     getInstances(): Observable<Instance[]> {
-        return this.httpRequestService.get<Instance[]>('instances');
+        return this.httpRequestService.get<Instance[]>('app/instances');
     }
 
     getInstanceModules(): Observable<Module[]> {
-        const partialUrl = `instances/${this.currentInstance.key}/modules`;
+        const partialUrl = `app/instances/${this.currentInstance.key}/modules`;
         return this.httpRequestService.get<Module[]>(partialUrl);
     }
 
