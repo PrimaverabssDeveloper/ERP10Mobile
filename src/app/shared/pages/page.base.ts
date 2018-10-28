@@ -7,7 +7,7 @@ import { LoadingController } from '@ionic/angular';
  * @abstract
  * @class BasePage
  */
-export abstract class BasePage {
+export abstract class PageBase {
 
     // #region 'Private Properties'
 

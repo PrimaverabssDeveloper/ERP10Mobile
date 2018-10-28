@@ -3,14 +3,14 @@ import { InstancesService } from '../../../core/services';
 import { Instance } from '../../../core/entities';
 import { Router } from '@angular/router';
 
-import { BasePage } from '../../../shared/pages';
+import { PageBase } from '../../../shared/pages';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
     templateUrl: 'instances.page.html',
     styleUrls: ['instances.page.scss'],
 })
-export class InstancesPage extends BasePage implements OnInit {
+export class InstancesPage extends PageBase implements OnInit {
 
     // #region 'Public Properties'
 

@@ -5,14 +5,14 @@ import { Subscription } from 'rxjs';
 import { Module } from '../../../core/entities';
 import { InstancesService } from '../../../core/services';
 
-import { BasePage } from '../../../shared/pages';
+import { PageBase } from '../../../shared/pages';
 
 
 @Component({
     templateUrl: 'dashboard.page.html',
     styleUrls: ['dashboard.page.scss'],
 })
-export class DashboardPage extends BasePage implements OnInit, OnDestroy {
+export class DashboardPage extends PageBase implements OnInit, OnDestroy {
 
     // #region 'Private Fields'
     private subscriptions: Subscription[] = [];
