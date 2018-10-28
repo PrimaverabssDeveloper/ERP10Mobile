@@ -30,6 +30,11 @@ export class InstancesService {
     get currentInstance(): Instance {
         if (!this._currentInstance) {
             // get the selected instance from the storage
+            return {
+                key: '100001-001',
+                id: '1',
+                description: 'Primavera'
+            };
         }
 
         return this._currentInstance;
