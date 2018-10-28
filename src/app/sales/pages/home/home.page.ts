@@ -1,16 +1,22 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 
 import { Chart } from 'chart.js';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, LoadingController } from '@ionic/angular';
 import { CompanySelectorComponent } from '../../components';
+import { PageBase } from '../../../shared/pages';
+import { SalesService } from '../../services';
+import { Company } from '../../entities';
 
 @Component({
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage extends PageBase implements OnInit {
 
     private chart: any;
+    private companies: Company[];
+
+    selectedCompany: Company;
 
     @ViewChild('chartCanvas') chartCanvas;
 
@@ -20,7 +26,14 @@ export class HomePage implements OnInit {
 
     public dataDate: Date;
 
-    constructor(public popoverController: PopoverController) {
+    constructor(
+        public popoverController: PopoverController,
+        public loadingController: LoadingController,
+        private salesService: SalesService
+        ) {
+
+        super(loadingController);
+
         this.dataDate = new Date();
         this.timeFrame = 'monthly';
         this.valueType = 'absolute';
@@ -28,12 +41,23 @@ export class HomePage implements OnInit {
     }
 
     ngOnInit(): void {
-        this.updateChart();
+        this.showLoading();
+        this.salesService
+            .getCompanies()
+            .subscribe(companies => {
+                this.companies = companies;
+                this.selectedCompany = companies[0];
+                this.companyUpdate();
+                this.hideLoading();
+            });
     }
 
     async companySelectorAction(event: any) {
         const popover = await this.popoverController.create({
             component: CompanySelectorComponent,
+            componentProps: {
+                companies: this.companies
+            },
             event: event,
             translucent: true
           });
@@ -53,6 +77,10 @@ export class HomePage implements OnInit {
 
     toggleTableView() {
         this.viewType = this.viewType === 'table' ? 'chart' : 'table';
+        this.updateChart();
+    }
+
+    private companyUpdate() {
         this.updateChart();
     }
 

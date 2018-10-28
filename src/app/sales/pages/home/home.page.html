@@ -26,9 +26,9 @@
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title>
+        <ion-title *ngIf="selectedCompany">
             <div class="page-title" (click)="companySelectorAction($event)">
-                <span>ALCAD</span>
+                <span>{{selectedCompany.key}}</span>
                 <img src="../../../../assets/sales/action-bar-dropdown-button.png"/>
             </div>
         </ion-title>

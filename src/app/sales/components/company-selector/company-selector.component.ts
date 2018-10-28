@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Company } from '../../entities';
 
 
 @Component({
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
 })
 
 export class CompanySelectorComponent {
+    @Input() companies: Company[];
 
+    companySelectedAction(company: Company) {
+
+    }
 }
