@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SalesSummary, Company } from '../entities';
-import { InstanceHttpRequestService } from '../../core/services';
-import { EventEmitter } from '@ionic/core/dist/types/stencil.core';
+import { SalesSummary, Company, CompanySalesSummary } from '../entities';
+import { InstanceHttpRequestService, DomService } from '../../core/services';
+import { SalesTickerComponent } from '../components';
 
 const SALES_SUMMARY = '/sales';
 
@@ -32,16 +32,38 @@ export class SalesService {
     // #region 'Constructor'
 
     /**
-     * Creates an instance of SalesService.
+     *Creates an instance of SalesService.
      * @param {InstanceHttpRequestService} instanceHttpRequestService
+     * @param {DomService} domService
      * @memberof SalesService
      */
-    constructor(private instanceHttpRequestService: InstanceHttpRequestService) {
+    constructor(private instanceHttpRequestService: InstanceHttpRequestService, private domService: DomService) {
 
     }
     // #endregion
 
     // #region 'Public Methods'
+
+
+    async createSalesSummaryTickers(): Promise<HTMLElement[]> {
+
+        return new Promise<HTMLElement[]>((resolve, reject) => {
+
+            const processCompanies = (companies: CompanySalesSummary[]) => {
+                const htmlTickers: HTMLElement[] = [];
+                for (const company of companies) {
+                    const htmlTicker = this.domService.createComponent(SalesTickerComponent, {companySalesSummary: company});
+                    htmlTickers.push(htmlTicker);
+                }
+
+                resolve(htmlTickers);
+            };
+
+            this.getSalesSummary().subscribe(
+                res => processCompanies(res.companies),
+                err => reject(err));
+        });
+    }
 
     /**
      * Get the companies.
