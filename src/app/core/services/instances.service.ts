@@ -69,5 +69,10 @@ export class InstancesService {
         return this.httpRequestService.get<Module[]>(partialUrl);
     }
 
+    getModuleSummary(module: Module): Observable<any> {
+        const partialUrl = `${this.currentInstance.key}/${module.name}`;
+        return this.httpRequestService.get<any>(partialUrl);
+    }
+
     // #endregion
 }
