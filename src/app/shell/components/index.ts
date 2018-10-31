@@ -1,10 +1,10 @@
 import { TickersComponent } from './tickers/tickers.component';
-import { SalesTickerComponent } from './sales-ticker/sales-ticker.component';
+import { TickerWrapperComponent } from './ticker-wrapper/ticker-wrapper.component';
 
 export * from './tickers/tickers.component';
-export * from './sales-ticker/sales-ticker.component';
+export * from './ticker-wrapper/ticker-wrapper.component';
 
 export const COMPONENTS = [
     TickersComponent,
-    SalesTickerComponent
+    TickerWrapperComponent
 ];
