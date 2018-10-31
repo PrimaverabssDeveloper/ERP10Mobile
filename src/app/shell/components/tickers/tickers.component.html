@@ -1,11 +1,7 @@
-<ion-slides pager="true">
-    <ion-slide>
-        <sales-ticker></sales-ticker>
-    </ion-slide>
-    <ion-slide>
-        <sales-ticker></sales-ticker>
-    </ion-slide>
-    <ion-slide>
-        <sales-ticker></sales-ticker>
+<ion-slides pager="true" #slide>
+    <ion-slide *ngFor="let ticker of tickers">
+        <ticker-wrapper [ticker]="ticker"></ticker-wrapper>
     </ion-slide>
 </ion-slides>
+
+<!--  -->    
