@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 
 import { Chart } from 'chart.js';
 import { PopoverController, LoadingController } from '@ionic/angular';
-import { CompanySelectorComponent } from '../../components';
+import { CompanySelectorComponent, FooterTabMenu, FooterMenuItemSelectedEvent } from '../../components';
 import { PageBase } from '../../../shared/pages';
 import { SalesService } from '../../services';
 import { Company } from '../../entities';
@@ -24,6 +24,8 @@ export class HomePage extends PageBase implements OnInit {
     valueType: 'absolute' | 'accumulated';
     viewType: 'chart' | 'table';
 
+    footerTabMenus: FooterTabMenu[];
+
     public dataDate: Date;
 
     constructor(
@@ -41,15 +43,80 @@ export class HomePage extends PageBase implements OnInit {
     }
 
     ngOnInit(): void {
-        this.showLoading();
+
+        // this.showLoading();
+
         this.salesService
             .getCompanies()
             .subscribe(companies => {
                 this.companies = companies;
                 this.selectedCompany = companies[0];
                 this.companyUpdate();
-                this.hideLoading();
+                // this.hideLoading();
             });
+
+
+        this.footerTabMenus = [
+            {
+                key: 'charts',
+                icon: '../../../../assets/sales/footer-menu-charts.png',
+                items: [
+                    {
+                        key: 'monthly_sales',
+                        label: 'Monthly sales',
+                        selected: true
+                    },
+                    {
+                        key: 'weekly_sales',
+                        label: 'Weekly sales'
+                    },
+                    {
+                        key: 'customers_top_5',
+                        label: 'Customers Top 5'
+                    },
+                    {
+                        key: 'sales_representatives_top_5',
+                        label: 'Sales Representatives Top 5'
+                    },
+                    {
+                        key: 'zones_top_5',
+                        label: 'Zones Top 5'
+                    }
+                ]
+            },
+            {
+                key: 'salesperson',
+                icon: '../../../../assets/sales/footer-menu-salesperson.png',
+                items: [
+                    {
+                        key: 'sp1',
+                        label: 'Sales Person 1'
+                    },
+                    {
+                        key: 'sp2',
+                        label: 'Sales Person 2'
+                    }
+                ]
+            },
+            {
+                key: 'share',
+                icon: '../../../../assets/sales/footer-menu-share.png',
+                items: [
+                    {
+                        key: 'send_chart_by_email',
+                        label: 'Send chart by email'
+                    },
+                    {
+                        key: 'send_pdf_chart_by_email',
+                        label: 'Send PDF chart by email'
+                    },
+                    {
+                        key: 'save_image_in_the_gallery',
+                        label: 'Save Image in the gallery'
+                    }
+                ]
+            }
+        ];
     }
 
     async companySelectorAction(event: any) {
@@ -78,6 +145,15 @@ export class HomePage extends PageBase implements OnInit {
     toggleTableView() {
         this.viewType = this.viewType === 'table' ? 'chart' : 'table';
         this.updateChart();
+    }
+
+    onFooterMenuItemSelected(event: FooterMenuItemSelectedEvent) {
+        // select the option
+        if (event.menu.key !== 'share') {
+            for (const menuItem of event.menu.items) {
+                menuItem.selected = menuItem === event.menuItem;
+            }
+        }
     }
 
     private companyUpdate() {

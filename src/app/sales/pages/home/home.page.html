@@ -1,26 +1,3 @@
-<!-- <ion-header>
-    <ion-toolbar>
-        <ion-grid>
-            <ion-row>
-                <ion-col>
-                    <ion-button expand="full" href="/" goBack>Back</ion-button>
-                </ion-col>
-                <ion-col>
-                    <ion-select value="jasmin" ok-text="Okay" cancel-text="Dismiss">
-                        <ion-select-option value="demo1">Demo 1</ion-select-option>
-                        <ion-select-option value="alcad">Alcad</ion-select-option>
-                        <ion-select-option value="sofrio">Sofrio</ion-select-option>
-                        <ion-select-option value="jasmin">Jasmin</ion-select-option>
-                    </ion-select>
-                </ion-col>
-                <ion-col>
-
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </ion-toolbar>
-</ion-header> -->
-
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
@@ -70,7 +47,5 @@
     </div>
 </ion-content>
 <ion-footer>
-<ion-toolbar>
-    <ion-title>Actions</ion-title>
-</ion-toolbar>
+    <footer-tab-menus [menus]="footerTabMenus" (menuItemSelected)="onFooterMenuItemSelected($event)"></footer-tab-menus>
 </ion-footer>

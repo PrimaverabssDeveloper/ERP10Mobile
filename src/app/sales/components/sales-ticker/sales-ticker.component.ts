@@ -9,7 +9,7 @@ import { CompanySalesSummary } from '../../entities';
     styleUrls: ['./sales-ticker.component.scss']
 })
 
-export class SalesTickerComponent implements OnInit{
+export class SalesTickerComponent implements OnInit {
 
     private chart: any;
 

@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { PAGES } from './pages';
 import { SALES_ROUTING } from './sales.routes';
-import { ENTRY_COMPONENTS } from './components';
+import { ENTRY_COMPONENTS, COMPONENTS } from './components';
 import { SERVICES, SalesService } from './services';
 import { ModulesSummariesService } from '../core/services';
 
@@ -16,7 +16,7 @@ import { ModulesSummariesService } from '../core/services';
         IonicModule,
         SALES_ROUTING
     ],
-    declarations: [PAGES, ENTRY_COMPONENTS],
+    declarations: [PAGES, COMPONENTS],
     entryComponents: [ENTRY_COMPONENTS],
     providers: [SERVICES]
 })
