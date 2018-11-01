@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Definitions</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="settings">
+    <div class="settings-group">
+        <div class="settings-group-title">
+            General
+        </div>
+        <div class="settings-group-item settings-group-item-with-action" [routerLink]="['/shell/language']">
+            <div class="settings-group-item-label">
+                Language
+            </div>
+            <img class="settings-group-item-arrow" src="../../../../assets/shell/forward_arrow.png" />
+        </div>
+    </div>
+    <div class="settings-group">
+        <div class="settings-group-title">
+            Modules
+        </div>
+        <div class="settings-group-item settings-group-item-with-image settings-group-item-with-action">
+            <img class="settings-group-item-image" src="../../../../assets/sales/sales_home.png" />
+            <div class="settings-group-item-label">
+                Sales
+            </div>
+            <img class="settings-group-item-arrow" src="../../../../assets/shell/forward_arrow.png" />
+        </div>
+        <div class="settings-group-item settings-group-item-with-image settings-group-item-with-action">
+            <img class="settings-group-item-image" src="../../../../assets/human-resources/hr_home.png" />
+            <div class="settings-group-item-label">
+                Human Resources
+            </div>
+            <img class="settings-group-item-arrow" src="../../../../assets/shell/forward_arrow.png" />
+        </div>
+    </div>
+    <div class="settings-group">
+        <div class="settings-group-title">
+            Version
+        </div>
+        <div class="settings-group-item">
+            <div class="settings-group-item-label">
+                XXX.XXX.XXX.XXX
+            </div>
+        </div>
+    </div>
+</ion-content>

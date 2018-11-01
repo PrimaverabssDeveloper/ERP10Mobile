@@ -1,5 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardPage, InstancesPage } from './pages';
+import { DashboardPage, InstancesPage, SettingsPage, LanguagePage } from './pages';
 
 const routes: Routes = [
     {
@@ -14,6 +14,14 @@ const routes: Routes = [
     {
         path: 'instances',
         component: InstancesPage
+    },
+    {
+        path: 'settings',
+        component: SettingsPage
+    },
+    {
+        path: 'language',
+        component: LanguagePage
     }
 ];
 
