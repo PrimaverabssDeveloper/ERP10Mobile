@@ -1,11 +1,34 @@
+<!-- MENU -->
+<ion-menu side="end" type="overlay" contentId="contentId2">
+    <ion-header translucent>
+        <ion-toolbar>
+            <ion-title></ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <div class="menu">
+            <div class="menu-row">
+                <img src="../../../../assets/shell/menu_settings.png" />
+                <span>Definitions</span>
+            </div>
+            <div class="menu-row">
+                    <img src="../../../../assets/shell/menu_logout.png">
+                <span>Logout</span>
+            </div>
+        </div>
+    </ion-content>
+</ion-menu>
+
+<!-- PAGE -->
 <ion-header>
     <ion-toolbar>
-        <ion-title>
-            V10 Mobile
-        </ion-title>
+        <ion-title>V10 Mobile</ion-title>
+        <ion-buttons slot="end">
+            <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content padding>
+<ion-content padding id="contentId2">
     <ion-grid>
         <!-- Modules Tickers -->
         <ion-row>
@@ -13,6 +36,7 @@
                 <tickers [tickers]="tickers"></tickers>
             </ion-col>
         </ion-row>
+
         <!-- Modules -->
         <ion-row>
             <ion-col *ngIf="salesModuleEnabled">

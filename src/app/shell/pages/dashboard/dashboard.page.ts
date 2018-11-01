@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MenuController, LoadingController } from '@ionic/angular';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { MenuController, LoadingController, Menu } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 import { Module } from '../../../core/entities';
@@ -22,6 +22,8 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
     // #endregion
 
     // #region 'Public Properties'
+
+    @ViewChild('menu') menu: Menu;
 
     /**
      * The collection of modules available to the user.

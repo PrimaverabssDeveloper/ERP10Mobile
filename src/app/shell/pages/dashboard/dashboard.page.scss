@@ -14,3 +14,26 @@
         margin-top: 5px;
     }
 }
+
+.menu {
+    .menu-row {
+        height: 50px;
+        width: 100%;
+        padding: 14px 10px;
+
+        &:hover {
+            background: lightgrey;
+        }
+
+        img {
+            height: 25px;
+            float: left;
+        }
+
+        span {
+            font-weight: bold;
+            font-size: 10pt;
+            margin-left: 10px;
+        }
+    }
+}
