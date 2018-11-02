@@ -4,24 +4,21 @@ $chart-background-color: rgb(255,255,255);
 
 .page-title {
     width: 100%;
-    background: red;
+    color: $accent-color;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
-    div {
-        color: $accent-color;
-        max-width: calc(100% - 25px);
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        float: left;
-    }
-
-    img {
-        // position: absolute;
-         height: 20px;
-         float: left;
-        // margin-left: 5px;
-        // top: 50%;
-        // transform: translateY(-50%);
+    &:before {
+        content: ' ';
+        background-image: url('../../../../assets/sales/action-bar-dropdown-button.png');
+        background-repeat: no-repeat;
+        background-size: 17px;
+        width: 17px;
+        height: 17px;
+        display: block;
+        float: right;
+        margin: 2px 5px;
     }
 }
 
@@ -34,7 +31,7 @@ $chart-background-color: rgb(255,255,255);
 
 .sales-header {
         
-    margin: 20px;
+    margin: 10px;
 
     .chart-name {
         font-weight: bolder;

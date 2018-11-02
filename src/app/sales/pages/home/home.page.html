@@ -5,10 +5,7 @@
         </ion-buttons>
         <ion-title *ngIf="selectedCompany">
             <div class="page-title" (click)="companySelectorAction($event)">
-                <div>
-                    {{selectedCompany.key}}
-                </div>
-                <img src="../../../../assets/sales/action-bar-dropdown-button.png"/>
+                {{selectedCompany.key}}
             </div>
         </ion-title>
     </ion-toolbar>
