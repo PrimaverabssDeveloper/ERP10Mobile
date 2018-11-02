@@ -1,3 +1,61 @@
 .language {
+    .language-selector {
+        background-image: url('../../../../assets/shell/settings_option_checked.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 12px;
+        width: 12px;
+        height: 12px;
+    }
+}
 
+
+.settings {
+    background: rgb(248, 248, 248);
+
+    .settings-group{
+        padding-top: 20px;
+
+        .setting-row {
+            background: white;
+            width: 100%;
+            height: 40px;
+            position: relative;
+
+            &:first-child {
+                border-top: 1px solid rgb(207, 207, 207);
+            }
+
+            &:last-child {
+                border-bottom: 1px solid rgb(207, 207, 207);;
+            }
+
+            &:not(:first-child) {
+                &:before {
+                    content: ' ';
+                    position: absolute;
+                    border-top: 1px solid rgb(207, 207, 207);;
+                    width: 100%;
+                    margin-left: 15px;
+                }
+            }
+
+            .setting-row-label {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 15px;
+                font-weight: bold;
+                font-size: 10pt;
+            }
+
+            .setting-row-right-container {
+                position: absolute;
+                top: 50%;
+                right: 15px;
+                transform: translateY(-50%);
+            }
+        }
+
+    }
 }
