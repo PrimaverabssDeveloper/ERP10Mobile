@@ -5,6 +5,7 @@ import { InstanceHttpRequestService } from './instance-http-requests.service';
 import { CoreStorageService } from './core-storage.service';
 import { DomService } from './dom.service';
 import { ModulesSummariesService } from './modules-summaries.service';
+import { LocaleService } from './locale.service';
 
 export * from './authentication.service';
 export * from './instances.service';
@@ -13,6 +14,7 @@ export * from './instance-http-requests.service';
 export * from './core-storage.service';
 export * from './dom.service';
 export * from './modules-summaries.service';
+export * from './locale.service';
 
 export const SERVICES = [
     AuthenticationService,
@@ -21,5 +23,6 @@ export const SERVICES = [
     InstanceHttpRequestService,
     CoreStorageService,
     DomService,
-    ModulesSummariesService
+    ModulesSummariesService,
+    LocaleService
 ];
