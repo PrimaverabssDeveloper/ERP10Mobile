@@ -51,3 +51,9 @@
     font-family: 'Open Sans Condensed';
 }
 
+// remove 'Back' from back button
+.back-button-native {
+    .button-text {
+        display: none;
+    }
+}
