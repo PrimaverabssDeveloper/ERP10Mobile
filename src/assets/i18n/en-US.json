@@ -1,0 +1,25 @@
+
+{
+    "SHELL": {
+        "INSTANCES_PAGE" : {
+            "PAGE_TITLE" : "Instance Selector"
+        },
+        "DASHBOARD_PAGE" : {
+            "MENU_DEFINITIONS" : "Definitions",
+            "MENU_LOGOUT" : "Logout"
+        },
+        "SETTINGS_PAGE" : {
+            "PAGE_TITLE" : "Definitions",
+            "MENU_GENERAL_TITLE" : "General",
+            "MENU_GENERAL_OPTION_LANGUAGE" : "Language",
+            "MENU_MODULES_TITLE" : "Modules",
+            "MENU_VERSION_TITLE" : "Version"
+        },
+        "LANGUAGE_PAGE" : {
+            "PAGE_TITLE" : "Language",
+            "LANGUAGE_PT_PT": "Português",
+            "LANGUAGE_EN_US": "English",
+            "LANGUAGE_ES_ES": "Español (Castellano)"
+        }
+    }
+}
