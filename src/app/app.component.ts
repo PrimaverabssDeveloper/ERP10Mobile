@@ -3,8 +3,7 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { AuthenticationService } from './core/services';
-import { TranslateService } from '@ngx-translate/core';
+import { AuthenticationService, LocaleService } from './core/services';
 
 @Component({
     selector: 'app-root',
@@ -17,7 +16,7 @@ export class AppComponent {
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         private authenticationService: AuthenticationService,
-        private translate: TranslateService
+        private locale: LocaleService
     ) {
         this.initializeApp();
     }
@@ -30,11 +29,10 @@ export class AppComponent {
             // start authentication
             this.authenticationService.authenticate();
 
-            // this language will be used as a fallback when a translation isn't found in the current language
-            this.translate.setDefaultLang('en');
-
-            // the lang to use, if the lang isn't available, it will use the current loader to get them
-            this.translate.use('en');
+            // defines locales
+            this.locale.setSupportedLocales(['pt-PT', 'en-US', 'es-ES']);
+            this.locale.setDefaultLocale('en-US');
+            this.locale.setLocale('en-US');
         });
     }
 }
