@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicModule } from '@ionic/angular';
+import { SafariViewController } from '@ionic-native/safari-view-controller/ngx';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 import { SERVICES } from './services';
 
@@ -14,7 +16,11 @@ import { SERVICES } from './services';
         IonicModule,
     ],
     declarations: [],
-    providers: [SERVICES],
+    providers: [
+        SERVICES,
+        SafariViewController,
+        NativeStorage
+    ],
     entryComponents: []
 })
 export class CoreModule {

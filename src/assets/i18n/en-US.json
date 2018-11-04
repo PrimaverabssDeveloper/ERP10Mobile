@@ -6,7 +6,9 @@
         },
         "DASHBOARD_PAGE" : {
             "MENU_DEFINITIONS" : "Definitions",
-            "MENU_LOGOUT" : "Logout"
+            "MENU_LOGOUT" : "Logout",
+            "ALERT_LOGOUT_HEADER": "Logout",
+            "ALERT_LOGOUT_MESSAGE": "Are you sure you want to log out?"
         },
         "SETTINGS_PAGE" : {
             "PAGE_TITLE" : "Definitions",

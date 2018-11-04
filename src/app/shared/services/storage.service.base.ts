@@ -41,7 +41,16 @@ export abstract class StorageServiceBase {
         }
 
         const dataKey = this.buildDataKey(key);
-        await this.nativeStorage.setItem(dataKey, data);
+        this.nativeStorage
+            .setItem(dataKey, data)
+            .then(
+                (resolve) => {
+                    console.log('stored');
+                },
+                (error) => {
+                    console.log('err ' + error);
+                }
+            );
     }
 
     /**
@@ -58,8 +67,12 @@ export abstract class StorageServiceBase {
             this.nativeStorage
                 .getItem(dataKey)
                 .then(
-                    data => resolve(data),
-                    err => error(err)
+                    data => {
+                        resolve(data);
+                    } ,
+                    err => {
+                        error(err);
+                    }
                 );
         });
     }

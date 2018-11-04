@@ -1,12 +1,14 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { MenuController, LoadingController, Menu } from '@ionic/angular';
+import { MenuController, LoadingController, Menu, AlertController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 import { Module } from '../../../core/entities';
-import { InstancesService, ModulesSummariesService } from '../../../core/services';
+import { InstancesService, ModulesSummariesService, AuthenticationService } from '../../../core/services';
 
 import { PageBase } from '../../../shared/pages';
 import { ModuleSummary } from '../../entities';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -81,8 +83,12 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
     constructor(
         private instancesService: InstancesService,
         private modulesSummariesService: ModulesSummariesService,
+        private authenticationService: AuthenticationService,
+        private translateService: TranslateService,
+        private router: Router,
         public menuController: MenuController,
         public loadingController: LoadingController,
+        public alertController: AlertController
     ) {
         super(loadingController);
 
@@ -148,6 +154,33 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
 
             this.subscriptions = null;
         }
+    }
+
+    /**
+     * Show's logout confirmation window.
+     *
+     * @memberof DashboardPage
+     */
+    async logoutAction() {
+        const header = await this.translateService.get('SHELL.DASHBOARD_PAGE.ALERT_LOGOUT_HEADER').toPromise();
+        const message = await this.translateService.get('SHELL.DASHBOARD_PAGE.ALERT_LOGOUT_MESSAGE').toPromise();
+
+        const alert = await this.alertController.create({
+            header: header,
+            message: message,
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel'
+                },
+                {
+                    text: 'Ok',
+                    handler: () => this.logout()
+                }
+            ]
+        });
+
+        await alert.present();
     }
 
     // #endregion
@@ -236,5 +269,9 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
         });
     }
 
+    private async logout() {
+        await this.authenticationService.endSession();
+        this.router.navigate(['/shell/authentication']);
+    }
     // #endregion
 }

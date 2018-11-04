@@ -3,7 +3,7 @@
     <name>V10Mobile</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.1.87:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -95,6 +95,6 @@
     </plugin>
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <allow-navigation href="http://192.168.1.131:8100" sessionid="757c47cb" />
-    <engine name="android" spec="^7.1.1" />
     <plugin name="cordova-plugin-nativestorage" spec="^2.3.2" />
+    <engine name="android" spec="^7.1.1" />
 </widget>

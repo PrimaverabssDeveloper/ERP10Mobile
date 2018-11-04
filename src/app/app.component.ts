@@ -26,8 +26,9 @@ export class AppComponent {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
 
-            // start authentication
-            this.authenticationService.authenticate();
+            // // start authentication
+            // this.authenticationService.authenticate();
+            // this.authenticationService.is
 
             // defines locales
             this.locale.setSupportedLocales(['pt-PT', 'en-US', 'es-ES']);

@@ -1,10 +1,11 @@
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardPage, InstancesPage, SettingsPage, LanguagePage } from './pages';
+import { AuthenticationPage } from './pages/authentication/authentication.page';
 
 const routes: Routes = [
     {
         path: '',
-        redirectTo: '/instances',
+        redirectTo: '/authentication',
         pathMatch: 'full'
     },
     {
@@ -22,6 +23,10 @@ const routes: Routes = [
     {
         path: 'language',
         component: LanguagePage
+    },
+    {
+        path: 'authentication',
+        component: AuthenticationPage
     }
 ];
 
