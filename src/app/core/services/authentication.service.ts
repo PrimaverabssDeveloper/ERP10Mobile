@@ -34,7 +34,7 @@ export class AuthenticationService {
     private authenticationEndpoint: string;
     private requestTokenEndpoint: string;
 
-    private authenticationResolve: (value: boolean) => void;
+    private authenticationResolve: (value?: boolean | PromiseLike<boolean>) => void;
 
     constructor(
         private http: HttpClient,
@@ -106,7 +106,7 @@ export class AuthenticationService {
         const error = params.get('error');
 
         if (error) {
-            this.endAuthenticationProcess(false);
+            this.authenticationResolve(false);
             return;
         }
 
