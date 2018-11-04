@@ -20,9 +20,14 @@
         height: 50px;
         width: 100%;
         padding: 14px 10px;
+        background-color: transparent;
 
-        &:hover {
-            background: lightgrey;
+        &:focus {
+            outline: 0;
+        }
+
+        &:active {
+            background-color: lightgrey;
         }
 
         img {
@@ -34,6 +39,8 @@
             font-weight: bold;
             font-size: 10pt;
             margin-left: 10px;
+            float: left;
+            margin-top: 5px;
         }
     }
 }

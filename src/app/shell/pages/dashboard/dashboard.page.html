@@ -7,14 +7,14 @@
     </ion-header>
     <ion-content>
         <div class="menu">
-            <div class="menu-row" [routerLink]="['/shell/settings']">
+            <button tappable class="menu-row" [routerLink]="['/shell/settings']">
                 <img src="../../../../assets/shell/menu_settings.png" />
                 <span>{{ 'SHELL.DASHBOARD_PAGE.MENU_DEFINITIONS' | translate }}</span>
-            </div>
-            <div class="menu-row" (click)="logoutAction()">
+            </button>
+            <button tappable class="menu-row" (click)="logoutAction()">
                 <img src="../../../../assets/shell/menu_logout.png">
                 <span>{{ 'SHELL.DASHBOARD_PAGE.MENU_LOGOUT' | translate }}</span>
-            </div>
+            </button>
         </div>
     </ion-content>
 </ion-menu>
