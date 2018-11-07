@@ -1,5 +1,9 @@
 .authentication {
-    background: #000;
+    .authentication-container {
+        background: #000;
+        width: 100%;
+        height: 100%;;
+    }
 
     .footer {
         position: absolute;
