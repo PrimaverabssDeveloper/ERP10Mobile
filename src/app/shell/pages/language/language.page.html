@@ -6,11 +6,13 @@
         <ion-title>{{ 'SHELL.LANGUAGE_PAGE.PAGE_TITLE' | translate }}</ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content class="settings language">
-    <div class="settings-group">
-        <div *ngFor="let lang of availableLanguages" class="setting-row" (click)="changeLocaleAction(lang.locale)">
+<ion-content scrollY='false'>
+    <div class="settings language">
+        <div class="settings-group">
+            <div *ngFor="let lang of availableLanguages" class="setting-row" (click)="changeLocaleAction(lang.locale)">
                 <div class="setting-row-label">{{lang.label}}</div>
                 <div class="setting-row-right-container language-selector" *ngIf="selectedLocale === lang.locale"></div>
+            </div>
         </div>
     </div>
 </ion-content>

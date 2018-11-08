@@ -6,44 +6,46 @@
         <ion-title>{{ 'SHELL.SETTINGS_PAGE.PAGE_TITLE' | translate }}</ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content class="settings">
-    <div class="settings-group">
-        <div class="settings-group-title">
-            {{ 'SHELL.SETTINGS_PAGE.MENU_GENERAL_TITLE' | translate }}
-        </div>
-        <div class="settings-group-item settings-group-item-with-action" [routerLink]="['/shell/language']">
-            <div class="settings-group-item-label">
-                {{ 'SHELL.SETTINGS_PAGE.MENU_GENERAL_OPTION_LANGUAGE' | translate }}
+<ion-content scrollY='false'>
+    <div class="settings">
+        <div class="settings-group">
+            <div class="settings-group-title">
+                {{ 'SHELL.SETTINGS_PAGE.MENU_GENERAL_TITLE' | translate }}
             </div>
-            <img class="settings-group-item-arrow" src="../../../../assets/shell/forward_arrow.png" />
+            <button class="settings-group-item" [routerLink]="['/shell/language']">
+                <div class="settings-group-item-label">
+                    {{ 'SHELL.SETTINGS_PAGE.MENU_GENERAL_OPTION_LANGUAGE' | translate }}
+                </div>
+                <img class="settings-group-item-arrow" src="../../../../assets/shell/forward_arrow.png" />
+            </button>
         </div>
-    </div>
-    <div class="settings-group">
-        <div class="settings-group-title">
-            {{ 'SHELL.SETTINGS_PAGE.MENU_MODULES_TITLE' | translate }}
-        </div>
-        <div class="settings-group-item settings-group-item-with-image settings-group-item-with-action">
-            <img class="settings-group-item-image" src="../../../../assets/sales/sales_home.png" />
-            <div class="settings-group-item-label">
-                Sales
+        <div class="settings-group">
+            <div class="settings-group-title">
+                {{ 'SHELL.SETTINGS_PAGE.MENU_MODULES_TITLE' | translate }}
             </div>
-            <img class="settings-group-item-arrow" src="../../../../assets/shell/forward_arrow.png" />
+            <button class="settings-group-item settings-group-item-with-image">
+                <img class="settings-group-item-image" src="../../../../assets/sales/sales_home.png" />
+                <div class="settings-group-item-label">
+                    Sales
+                </div>
+                <img class="settings-group-item-arrow" src="../../../../assets/shell/forward_arrow.png" />
+            </button>
+            <button class="settings-group-item settings-group-item-with-image">
+                <img class="settings-group-item-image" src="../../../../assets/human-resources/hr_home.png" />
+                <div class="settings-group-item-label">
+                    Human Resources
+                </div>
+                <img class="settings-group-item-arrow" src="../../../../assets/shell/forward_arrow.png" />
+            </button>
         </div>
-        <div class="settings-group-item settings-group-item-with-image settings-group-item-with-action">
-            <img class="settings-group-item-image" src="../../../../assets/human-resources/hr_home.png" />
-            <div class="settings-group-item-label">
-                Human Resources
+        <div class="settings-group">
+            <div class="settings-group-title">
+                {{ 'SHELL.SETTINGS_PAGE.MENU_VERSION_TITLE' | translate }}
             </div>
-            <img class="settings-group-item-arrow" src="../../../../assets/shell/forward_arrow.png" />
-        </div>
-    </div>
-    <div class="settings-group">
-        <div class="settings-group-title">
-            {{ 'SHELL.SETTINGS_PAGE.MENU_VERSION_TITLE' | translate }}
-        </div>
-        <div class="settings-group-item">
-            <div class="settings-group-item-label">
-                XXX.XXX.XXX.XXX
+            <div class="settings-group-item">
+                <div class="settings-group-item-label">
+                    XXX.XXX.XXX.XXX
+                </div>
             </div>
         </div>
     </div>

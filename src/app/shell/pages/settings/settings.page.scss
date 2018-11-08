@@ -30,12 +30,6 @@ $settings-row-border: 1px solid rgb(213, 213, 213);
             border-bottom: $settings-row-border;
         }
 
-        &-with-action {
-            &:hover {
-                background-color: lightgray;
-            }
-        }
-
         &-with-image {
             border-bottom: 0 !important;
             &:not(:last-child) {
@@ -55,6 +49,7 @@ $settings-row-border: 1px solid rgb(213, 213, 213);
                 height: 25px;
                 position: absolute;
                 top:50%;
+                left: 10px;
                 transform: translateY(-50%);
             }
         
@@ -80,6 +75,16 @@ $settings-row-border: 1px solid rgb(213, 213, 213);
             right: 10px;
             transform: translateY(-50%);
         }        
+    }
+
+    button.settings-group-item {
+        &:active {
+            background-color: lightgray;
+        }
+
+        &:focus {
+            outline: 0;
+        }
     }
 
 
