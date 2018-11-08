@@ -56,3 +56,10 @@
         opacity: 0;
     }
 }
+
+// remove 'outline' from all buttons
+button {
+    &:focus{
+        outline: 0;
+    }
+}
