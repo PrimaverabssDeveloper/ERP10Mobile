@@ -1,5 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardPage, InstancesPage, SettingsPage, LanguagePage } from './pages';
+import { DashboardPage, InstancesPage, SettingsPage, LanguagePage, TickerSettingsPage } from './pages';
 import { AuthenticationPage } from './pages/authentication/authentication.page';
 
 const routes: Routes = [
@@ -27,6 +27,10 @@ const routes: Routes = [
     {
         path: 'authentication',
         component: AuthenticationPage
+    },
+    {
+        path: 'ticker-settings',
+        component: TickerSettingsPage
     }
 ];
 

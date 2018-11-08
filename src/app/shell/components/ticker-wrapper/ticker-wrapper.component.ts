@@ -1,4 +1,5 @@
 import { Component, Input, ElementRef, OnInit } from '@angular/core';
+import { Ticker } from '../../../core/entities';
 
 @Component({
     selector: 'ticker-wrapper',
@@ -7,7 +8,7 @@ import { Component, Input, ElementRef, OnInit } from '@angular/core';
 })
 export class TickerWrapperComponent implements OnInit {
 
-    @Input() ticker: HTMLElement;
+    @Input() ticker: Ticker;
 
     constructor(private el: ElementRef) {
 
@@ -19,6 +20,6 @@ export class TickerWrapperComponent implements OnInit {
     * @memberof TickerWrapperComponent
     */
     ngOnInit(): void {
-        this.el.nativeElement.appendChild(this.ticker);
+        this.el.nativeElement.appendChild(this.ticker.content);
     }
 }

@@ -1,4 +1,5 @@
 import { Injectable, EmbeddedViewRef, ApplicationRef, Injector, ComponentFactoryResolver } from '@angular/core';
+import { Ticker } from '../entities';
 
 @Injectable({
     providedIn: 'root',
@@ -15,8 +16,8 @@ export class ModulesSummariesService {
         this.modulesSummariesHandlers[moduleKey] = summariesHandler;
     }
 
-    async getAllModulesSummariesTickers(): Promise<{moduleKey: string, tickers: HTMLElement[]}[]> {
-        const summariesTickers: {moduleKey: string, tickers: HTMLElement[]}[] = [];
+    async getAllModulesSummariesTickers(): Promise<{moduleKey: string, tickers: Ticker[]}[]> {
+        const summariesTickers: {moduleKey: string, tickers: Ticker[]}[] = [];
         let error: any;
 
         try {
@@ -26,9 +27,18 @@ export class ModulesSummariesService {
                     const handler = this.modulesSummariesHandlers[moduleKey];
                     const htmlElements = await handler();
 
+                    const tickers: Ticker[] = [];
+
+                    for (const htmlElement of htmlElements) {
+                        tickers.push({
+                            title: moduleKey,
+                            content: htmlElement
+                        });
+                    }
+
                     summariesTickers.push({
                         moduleKey: moduleKey,
-                        tickers: htmlElements
+                        tickers: tickers
                     });
                 }
             }
@@ -36,7 +46,7 @@ export class ModulesSummariesService {
             error = err;
         }
 
-        return new Promise<{moduleKey: string, tickers: HTMLElement[]}[]>((resolve, reject) => {
+        return new Promise<{moduleKey: string, tickers: Ticker[]}[]>((resolve, reject) => {
             if (error) {
                 reject(error);
             } else {

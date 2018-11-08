@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MenuController, LoadingController, Menu, AlertController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
-import { Module } from '../../../core/entities';
+import { Module, Ticker } from '../../../core/entities';
 import { InstancesService, ModulesSummariesService, AuthenticationService } from '../../../core/services';
 
 import { PageBase } from '../../../shared/pages';
@@ -47,10 +47,10 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
     /**
      * HTML Elements from all tickers from the modules that provide tickers.
      *
-     * @type {HTMLElement[]}
+     * @type {Ticker[]}
      * @memberof DashboardPage
      */
-    tickers: HTMLElement[];
+    tickers: Ticker[];
 
     /**
      * Defines if the user has access to the sales module.

@@ -1,7 +1,12 @@
-<ion-slides pager="true" #slide>
+<ion-slides #slide>
     <ion-slide *ngFor="let ticker of tickers">
-        <ticker-wrapper [ticker]="ticker"></ticker-wrapper>
+        <div class="ticker">
+            <div class="ticker-title">{{ticker.title}}</div>
+            <button class="ticker-settings" [routerLink]="['/shell/ticker-settings']"></button>
+            <div class="ticker-content">
+                <ticker-wrapper [ticker]="ticker"></ticker-wrapper>
+            </div>
+        </div>
     </ion-slide>
 </ion-slides>
-
-<!--  -->    
+<div class="tickers-pager">{{currentTickerIndex}}/{{totalTickers}}</div>

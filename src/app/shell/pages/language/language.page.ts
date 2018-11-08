@@ -4,7 +4,10 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     templateUrl: './language.page.html',
-    styleUrls: ['./language.page.scss']
+    styleUrls: [
+        './language.page.scss',
+        '../../../shared/styles/settings.scss'
+    ]
 })
 export class LanguagePage implements OnInit {
 
