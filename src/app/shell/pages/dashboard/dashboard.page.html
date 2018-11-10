@@ -51,15 +51,15 @@
                 </a>
             </ion-col>
             <ion-col *ngIf="humanResourcesModuleEnabled">
-                <a class="module-icon" [routerLink]="['/hr']">
+                <a class="module-icon" [routerLink]="['/humanresources']">
                     <img src="../../assets/human-resources/hr_home.png">
                     <div class="name">HR</div>
                 </a>
             </ion-col>
             <ion-col *ngIf="customersModuleEnabled">
-                <a class="module-icon">
-                    <img src="../../assets/clients/clients_home.png" (click)="menu()">
-                    <div class="name">Clients</div>
+                <a class="module-icon" [routerLink]="['/costumers']">
+                    <img src="../../assets/costumers/costumers_home.png">
+                    <div class="name">Costumers</div>
                 </a>
             </ion-col>
         </ion-row>

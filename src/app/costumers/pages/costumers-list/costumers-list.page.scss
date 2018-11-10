@@ -1,0 +1,175 @@
+@import '../../styles/variables.scss';
+
+$toogle-menu-text-color: rgb(148,148,148);
+$toogle-menu-active-text-color: $costumers-accent-color;
+$toogle-menu-height: 50px;
+$search-height: 50px;
+$list-search-state-height: calc(100% - #{$toogle-menu-height + $search-height});
+$list-recents-state-height: calc(100% - #{$toogle-menu-height});
+
+$border:1px solid lightgray;
+
+.costumers-list-title {
+    color: $costumers-accent-color;
+}
+
+.costumers-list {
+    background-color: rgb(246, 247, 249);
+    height: 100%;
+
+    .toogle-menu{
+        height: $toogle-menu-height;
+        widows: 100%;
+        border-bottom: $border;
+
+        button {
+            width: 50%;
+            height: 100%;
+            float: left;
+            background-color: transparent;
+            position: relative;
+            
+            .content-wrapper {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                position: absolute;
+            }
+
+            .label {
+                float: left;
+                font-size: 11pt;
+                font-family: 'Open Sans';
+                font-weight: 600;
+                color: $toogle-menu-text-color;
+            }
+
+            .order-icon {
+                background-image: url('../../../../assets/costumers/order.png');
+                background-repeat: no-repeat;
+                background-size: 20px;
+                width: 20px;
+                height: 14px;
+                float: left;
+                margin-right: 5px;
+            }
+        }
+
+        button.selected {
+            .label {
+                color: $toogle-menu-active-text-color;
+            }
+
+            .order-icon {
+                background-image: url('../../../../assets/costumers/order_selected.png');
+            }
+        }
+
+        button.order-asc {
+            .order-icon {
+                transform: rotate(0deg);
+            }
+        }
+
+        button.order-desc {
+            .order-icon {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    .search {
+        width: 100%;
+        height: $search-height;
+        position: relative;
+        overflow: hidden;
+        transition: height .35s ease-in-out;
+
+        .magnifier {
+            width: 20px;
+            height: 20px;
+            margin: 15px;
+            background-image: url('../../../../assets/costumers/search.png');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            float: left;
+            position: absolute;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            height: 30px;
+            margin: 10px;
+            border-width: 0;
+            border-radius: 10px;
+            padding-left: 30px;
+        }
+    }
+
+    .list {
+        background: white;
+        width: 100%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        border-top: $border;
+        transition: height .35s ease-in-out;
+        position: relative;
+        top: -1px;
+        
+        .list-item {
+            border-bottom: $border;
+            margin: 10px 0 10px 20px;
+            height: 70px;
+            padding-right: 10px;
+            width: calc(100% - 20px);
+
+            .key {
+                float: left;
+                width: 50%;
+                color: $costumers-accent-color;
+                font-weight: bold;
+            }
+
+            .company-key {
+                float: left;
+                width: 50%;
+                text-align: right;
+                color: $costumers-accent-color;
+                font-weight: bold;
+            }
+
+            .name {
+                float: left;
+                width: 100%;
+                font-weight: bold;
+            }
+
+            .location {
+                float: left;
+                width: 100%;
+            }
+        }
+    }
+
+    &.recent-state {
+
+        .search {
+            height: 0;
+        }
+    
+        .list {
+            height: $list-recents-state-height;
+        }
+    }
+    
+    &.search-state {
+        .search {
+            height: $search-height;
+        }
+    
+        .list {
+            height: $list-search-state-height;
+        }
+    }
+}

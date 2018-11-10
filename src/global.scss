@@ -63,3 +63,10 @@ button {
         outline: 0;
     }
 }
+
+// remove 'outline' from all inputs
+input {
+    &:focus{
+        outline: 0;
+    }
+}

@@ -5,7 +5,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'shell', pathMatch: 'full' },
   { path: 'shell', loadChildren: './shell/shell.module#ShellModule' },
   { path: 'sales', loadChildren: './sales/sales.module#SalesModule' },
-  { path: 'hr', loadChildren: './human-resources/human-resources.module#HumanResourcesModule' },
+  { path: 'humanresources', loadChildren: './human-resources/human-resources.module#HumanResourcesModule' },
+  { path: 'costumers', loadChildren: './costumers/costumers.module#CostumersModule' },
 ];
 
 @NgModule({

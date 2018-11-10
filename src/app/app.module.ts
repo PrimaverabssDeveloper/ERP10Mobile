@@ -18,6 +18,7 @@ import { CoreModule } from './core/core.module';
 import { ShellModule } from './shell/shell.module';
 import { SalesModule } from './sales/sales.module';
 import { HumanResourcesModule } from './human-resources/human-resources.module';
+import { CostumersModule } from './costumers/costumers.module';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -30,7 +31,7 @@ export function createTranslateLoader(http: HttpClient) {
     imports: [
         BrowserModule,
         IonicModule.forRoot({mode: 'ios'}),
-        // IonicModule.forRoot(),
+         // IonicModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
               provide: TranslateLoader,
@@ -42,7 +43,8 @@ export function createTranslateLoader(http: HttpClient) {
         CoreModule,
         ShellModule,
         SalesModule,
-        HumanResourcesModule
+        HumanResourcesModule,
+        CostumersModule
     ],
     providers: [
         StatusBar,

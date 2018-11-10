@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title><span class="navbar-title">Costumers</span></ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content scrollY='false'>
+    <div class="costumers-list" [ngClass]="{'recent-state': state === 'recent', 'search-state': state === 'search'}">
+        <div class="toogle-menu">
+            <button (click)="recentOptionAction()" [ngClass]="{'selected': state === 'recent', 'order-desc': recentOrder === 'desc' }">
+                <div class="content-wrapper">
+                    <div class="order-icon"></div>
+                    <div class="label">Recent</div>
+                </div>
+            </button>
+            <button (click)="searchOptionAction()" [ngClass]="{'selected': state === 'search', 'order-desc': searchOrder === 'desc' }">
+                <div class="content-wrapper">
+                    <div class="order-icon"></div>
+                    <div *ngIf="searchOrder === 'asc'" class="label">from A to Z</div>
+                    <div *ngIf="searchOrder === 'desc'" class="label">from Z to A</div>
+                </div>
+            </button>
+        </div>
+        <div class="search">
+            <div class="magnifier"></div>
+            <input />
+        </div>
+        <div class="list">
+            <div class="list-item" *ngFor="let costumer of customers">
+                <div class="key">{{costumer.key}}</div>
+                <div class="company-key">{{costumer.companyKey}}</div>
+                <div class="name">{{costumer.name}}</div>
+                <div class="location">{{costumer.location}}</div>
+            </div>
+        </div>
+    </div>
+</ion-content>
