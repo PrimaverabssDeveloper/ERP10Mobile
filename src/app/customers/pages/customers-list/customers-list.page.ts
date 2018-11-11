@@ -3,13 +3,15 @@ import { Customer } from '../../entities';
 import { CustomersService, CustomersServiceProvider } from '../../services';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { PageBase } from '../../../shared/pages';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
     templateUrl: './customers-list.page.html',
     styleUrls: ['./customers-list.page.scss'],
     providers: [CustomersServiceProvider]
 })
-export class CustomersListPage implements OnInit {
+export class CustomersListPage extends PageBase implements OnInit {
 
     private searchUpdated = new Subject<string>();
 
@@ -18,7 +20,9 @@ export class CustomersListPage implements OnInit {
     recentOrder: 'asc' | 'desc';
     searchOrder: 'asc' | 'desc';
 
-    constructor(private customersService: CustomersService) {
+    constructor(public loadingController: LoadingController, private customersService: CustomersService) {
+        super(loadingController);
+
         this.state = 'recent';
         this.recentOrder = 'asc';
         this.searchOrder = 'asc';
