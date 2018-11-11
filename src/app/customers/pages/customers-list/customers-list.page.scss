@@ -1,7 +1,7 @@
 @import '../../styles/variables.scss';
 
 $toogle-menu-text-color: rgb(148,148,148);
-$toogle-menu-active-text-color: $costumers-accent-color;
+$toogle-menu-active-text-color: $customers-accent-color;
 $toogle-menu-height: 50px;
 $search-height: 50px;
 $list-search-state-height: calc(100% - #{$toogle-menu-height + $search-height});
@@ -9,11 +9,11 @@ $list-recents-state-height: calc(100% - #{$toogle-menu-height});
 
 $border:1px solid lightgray;
 
-.costumers-list-title {
-    color: $costumers-accent-color;
+.customers-list-title {
+    color: $customers-accent-color;
 }
 
-.costumers-list {
+.customers-list {
     background-color: rgb(246, 247, 249);
     height: 100%;
 
@@ -45,7 +45,7 @@ $border:1px solid lightgray;
             }
 
             .order-icon {
-                background-image: url('../../../../assets/costumers/order.png');
+                background-image: url('../../../../assets/customers/order.png');
                 background-repeat: no-repeat;
                 background-size: 20px;
                 width: 20px;
@@ -61,7 +61,7 @@ $border:1px solid lightgray;
             }
 
             .order-icon {
-                background-image: url('../../../../assets/costumers/order_selected.png');
+                background-image: url('../../../../assets/customers/order_selected.png');
             }
         }
 
@@ -89,7 +89,7 @@ $border:1px solid lightgray;
             width: 20px;
             height: 20px;
             margin: 15px;
-            background-image: url('../../../../assets/costumers/search.png');
+            background-image: url('../../../../assets/customers/search.png');
             background-repeat: no-repeat;
             background-size: 100%;
             float: left;
@@ -127,7 +127,7 @@ $border:1px solid lightgray;
             .key {
                 float: left;
                 width: 50%;
-                color: $costumers-accent-color;
+                color: $customers-accent-color;
                 font-weight: bold;
             }
 
@@ -135,7 +135,7 @@ $border:1px solid lightgray;
                 float: left;
                 width: 50%;
                 text-align: right;
-                color: $costumers-accent-color;
+                color: $customers-accent-color;
                 font-weight: bold;
             }
 

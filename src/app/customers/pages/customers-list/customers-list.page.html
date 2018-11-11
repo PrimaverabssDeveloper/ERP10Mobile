@@ -3,12 +3,12 @@
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title><span class="navbar-title">Costumers</span></ion-title>
+        <ion-title><span class="navbar-title">Customers</span></ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content scrollY='false'>
-    <div class="costumers-list" [ngClass]="{'recent-state': state === 'recent', 'search-state': state === 'search'}">
+    <div class="customers-list" [ngClass]="{'recent-state': state === 'recent', 'search-state': state === 'search'}">
         <div class="toogle-menu">
             <button (click)="recentOptionAction()" [ngClass]="{'selected': state === 'recent', 'order-desc': recentOrder === 'desc' }">
                 <div class="content-wrapper">

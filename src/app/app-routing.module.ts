@@ -6,7 +6,7 @@ const routes: Routes = [
   { path: 'shell', loadChildren: './shell/shell.module#ShellModule' },
   { path: 'sales', loadChildren: './sales/sales.module#SalesModule' },
   { path: 'humanresources', loadChildren: './human-resources/human-resources.module#HumanResourcesModule' },
-  { path: 'costumers', loadChildren: './costumers/costumers.module#CostumersModule' },
+  { path: 'customers', loadChildren: './customers/customers.module#CustomersModule' },
 ];
 
 @NgModule({

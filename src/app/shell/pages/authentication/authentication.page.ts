@@ -36,5 +36,7 @@ export class AuthenticationPage implements OnInit {
     }
 
     async demoAction() {
+        this.authenticationService.authenticateAsDemo();
+        this.router.navigate(['/shell/instances']);
     }
 }

@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { Costumer } from '../../entities';
+import { Customer } from '../../entities';
+import { CustomersService, CustomersServiceProvider } from '../../services';
 
 @Component({
-    templateUrl: './costumers-list.page.html',
-    styleUrls: ['./costumers-list.page.scss']
+    templateUrl: './customers-list.page.html',
+    styleUrls: ['./customers-list.page.scss'],
+    providers: [CustomersServiceProvider]
 })
-export class CostumersListPage implements OnInit {
+export class CustomersListPage implements OnInit {
 
-    customers: Costumer[];
+    customers: Customer[];
 
     state: 'recent' | 'search';
     recentOrder: 'asc' | 'desc';
     searchOrder: 'asc' | 'desc';
 
-    constructor() {
+    constructor(private customersService: CustomersService) {
         this.state = 'recent';
         this.recentOrder = 'asc';
         this.searchOrder = 'asc';
@@ -25,6 +27,7 @@ export class CostumersListPage implements OnInit {
     * @memberof CostumersListPage
     */
     ngOnInit(): void {
+
         this.customers = [
             {
                 name: 'DSF Lts',

@@ -1,10 +1,10 @@
 import { RouterModule, Routes } from '@angular/router';
-import { CostumersListPage } from './pages';
+import { CustomersListPage } from './pages';
 
-const costumersRoutes: Routes = [
+const customersRoutes: Routes = [
     {
       path: '',
-      component: CostumersListPage
+      component: CustomersListPage
     //   children: [
     //         {
     //             path: '',
@@ -19,4 +19,4 @@ const costumersRoutes: Routes = [
     }
 ];
 
-export const COSTUMERS_ROUTING = RouterModule.forChild(costumersRoutes);
+export const CUSTOMERS_ROUTING = RouterModule.forChild(customersRoutes);

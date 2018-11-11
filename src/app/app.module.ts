@@ -18,7 +18,7 @@ import { CoreModule } from './core/core.module';
 import { ShellModule } from './shell/shell.module';
 import { SalesModule } from './sales/sales.module';
 import { HumanResourcesModule } from './human-resources/human-resources.module';
-import { CostumersModule } from './costumers/costumers.module';
+import { CustomersModule } from './customers/customers.module';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -44,7 +44,7 @@ export function createTranslateLoader(http: HttpClient) {
         ShellModule,
         SalesModule,
         HumanResourcesModule,
-        CostumersModule
+        CustomersModule
     ],
     providers: [
         StatusBar,

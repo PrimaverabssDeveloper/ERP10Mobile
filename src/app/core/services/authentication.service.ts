@@ -36,6 +36,8 @@ export class AuthenticationService {
 
     private authenticationResolve: (value?: boolean | PromiseLike<boolean>) => void;
 
+    public isAuthenticateAsDemo: boolean;
+
     constructor(
         private http: HttpClient,
         private safariViewController: SafariViewController,
@@ -77,17 +79,27 @@ export class AuthenticationService {
         });
     }
 
+    authenticateAsDemo() {
+        this.isAuthenticateAsDemo = true;
+    }
+
     async isAuthenticate(): Promise<boolean> {
         let isAuthenticated = false;
-        let sessionData: AuthenticationData;
-        try {
-            sessionData = await this.coreStorageService.getData<AuthenticationData>(AuthenticationService.STORAGE_SESSION_DATA_KEY);
-        } catch (error) {
-            isAuthenticated = false;
-        }
 
-        if (sessionData && new Date(sessionData.expirationDate) > (new Date()) ) {
+        if (this.isAuthenticateAsDemo) {
             isAuthenticated = true;
+        } else {
+            let sessionData: AuthenticationData;
+
+            try {
+                sessionData = await this.coreStorageService.getData<AuthenticationData>(AuthenticationService.STORAGE_SESSION_DATA_KEY);
+            } catch (error) {
+                isAuthenticated = false;
+            }
+
+            if (sessionData && new Date(sessionData.expirationDate) > (new Date()) ) {
+                isAuthenticated = true;
+            }
         }
 
         return new Promise<boolean>(
@@ -96,7 +108,26 @@ export class AuthenticationService {
             });
     }
 
+    // async isAuthenticateAsDemo(): Promise<boolean> {
+    //     let isAuthenticated: Boolean = false;
+
+    //     try {
+    //         const storageKey = AuthenticationService.STORAGE_SESSION_AUTHENTICATED_AS_DEMO;
+    //         isAuthenticated = await this.coreStorageService.getData<Boolean>(storageKey);
+    //     } catch (error) {
+    //         isAuthenticated = false;
+    //     }
+
+    //     return new Promise<boolean>(
+    //         (resolve) => {
+    //             resolve(isAuthenticated.valueOf());
+    //         });
+    // }
+
     async endSession() {
+        this.isAuthenticateAsDemo = false;
+
+        // remove regular authentication session data
         return this.coreStorageService.removeData(AuthenticationService.STORAGE_SESSION_DATA_KEY);
     }
 
