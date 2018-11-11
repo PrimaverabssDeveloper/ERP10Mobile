@@ -19,11 +19,15 @@ export class CustomersDemoService extends CustomersService {
             });
         }
 
-        return this.getDemoDataWithFileName('customers_list_10.json');
+        return this.getDemoDataWithFileName<CustomersSearchResult>('customers_list_10.json');
     }
 
-    private getDemoDataWithFileName(fileName: string): Promise<any> {
+    getCustomer(companyKey: string, customerKey: string): Promise<Customer> {
+        return this.getDemoDataWithFileName<Customer>('customer_PT.json');
+    }
+
+    private getDemoDataWithFileName<T>(fileName: string): Promise<T> {
         const path = `../assets/customers/demo-data/${fileName}`;
-        return this.http.get(path).toPromise();
+        return this.http.get<T>(path).toPromise();
     }
 }

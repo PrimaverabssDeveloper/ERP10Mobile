@@ -1,21 +1,24 @@
 import { RouterModule, Routes } from '@angular/router';
-import { CustomersListPage } from './pages';
+import { CustomersListPage, CustomerPage } from './pages';
 
 const customersRoutes: Routes = [
     {
-      path: '',
-      component: CustomersListPage
-    //   children: [
-    //         {
-    //             path: '',
-    //             redirectTo: 'home',
-    //             pathMatch: 'full'
-    //         },
-    //         {
-    //             path: 'home',
-    //             component: HomePage
-    //         }
-    //     ]
+        path: '',
+        children: [
+            {
+                path: '',
+                redirectTo: 'customers-list',
+                pathMatch: 'full'
+            },
+            {
+                path: 'customers-list',
+                component: CustomersListPage
+            },
+            {
+                path: 'customer/:companyKey/:customerKey',
+                component: CustomerPage
+            }
+        ]
     }
 ];
 

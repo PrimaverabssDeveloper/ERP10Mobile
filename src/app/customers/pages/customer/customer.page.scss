@@ -1,0 +1,29 @@
+@import '../../styles/variables.scss';
+
+$rows-height: 50px;
+
+.customer {
+    font-family: 'Open Sans';
+
+    .customer-name {
+        text-align: center;
+        font-weight: bold;
+        height: $rows-height;
+    }
+
+    .customer-address-part {
+        height: $rows-height;
+
+        .customer-address-part-icon {
+            float: left;
+            height: 20px;
+            margin-left: 5px;
+        }
+
+        .customer-address-part-label {
+            float: left;
+            margin-left: 15px;
+            font-weight: bold;
+        }
+    }
+}

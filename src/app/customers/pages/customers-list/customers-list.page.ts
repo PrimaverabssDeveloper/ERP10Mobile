@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { PageBase } from '../../../shared/pages';
 import { LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
     templateUrl: './customers-list.page.html',
@@ -20,7 +21,11 @@ export class CustomersListPage extends PageBase implements OnInit {
     recentOrder: 'asc' | 'desc';
     searchOrder: 'asc' | 'desc';
 
-    constructor(public loadingController: LoadingController, private customersService: CustomersService) {
+    constructor(
+        public loadingController: LoadingController,
+        private customersService: CustomersService,
+        private router: Router
+    ) {
         super(loadingController);
 
         this.state = 'recent';
@@ -57,15 +62,25 @@ export class CustomersListPage extends PageBase implements OnInit {
         }
     }
 
+    customerAction(customer: Customer) {
+        if (!customer) {
+            return;
+        }
+
+        this.router.navigate(['customers/customer', customer.companyKey, customer.key]);
+    }
+
     onSearchUpdate(searchTerm: string) {
         this.searchUpdated.next(searchTerm);
     }
 
-    private searchCustomers(searchTerm: string) {
+    private async searchCustomers(searchTerm: string) {
+        await this.showLoading();
         this.customersService
             .searchCustomers(searchTerm)
             .then(result => {
                 this.customers = result.customers;
+                this.hideLoading();
             });
     }
 }

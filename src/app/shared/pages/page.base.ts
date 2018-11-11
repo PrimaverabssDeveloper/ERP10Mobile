@@ -32,7 +32,7 @@ export abstract class PageBase {
      * @returns Promise
      * @memberof BasePage
      */
-    protected async showLoading() {
+    protected async showLoading(): Promise<void> {
         if (this.loading) {
             return;
         }
@@ -49,7 +49,7 @@ export abstract class PageBase {
      * @returns Promise
      * @memberof BasePage
      */
-    protected async hideLoading() {
+    protected async hideLoading(): Promise<void> {
 
         return await new Promise<void>((resolve) => {
             if (!this.loading) {

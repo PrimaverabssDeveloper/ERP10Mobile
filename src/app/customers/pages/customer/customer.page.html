@@ -1,0 +1,65 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title><span class="navbar-title">Customer</span></ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content scrollY='false'>
+    <div class="customer" *ngIf="customer">
+        <div class="customer-name">
+            {{customer.name}}
+        </div>
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <div class="customer-address-part">
+                        <img class="customer-address-part-icon" src="../../../../assets/customers/images/address.png">
+                        <div class="customer-address-part-label">
+                            {{customer.contacts.address}} {{customer.contacts.address2}},
+                            {{customer.contacts.postalLocation}}, {{customer.contacts.location}}
+                        </div>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="6">
+                    <div class="customer-address-part">
+                        <img class="customer-address-part-icon" src="../../../../assets/customers/images/tel1.png">
+                        <div class="customer-address-part-label">
+                            {{customer.contacts.phone}}
+                        </div>
+                    </div>
+                </ion-col>
+                <ion-col size="6">
+                    <div class="customer-address-part">
+                        <img class="customer-address-part-icon" src="../../../../assets/customers/images/tel2.png">
+                        <div class="customer-address-part-label">
+                            {{customer.contacts.phone2}}
+                        </div>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <div class="customer-address-part">
+                        <img class="customer-address-part-icon" src="../../../../assets/customers/images/website.png">
+                        <div class="customer-address-part-label">
+                            {{customer.contacts.webAddress}}
+                        </div>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <div class="customer-address-part">
+                        <div class="customer-address-part-icon"></div>
+                        <div class="customer-address-part-label"></div>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+</ion-content>

@@ -29,7 +29,7 @@
             <input (keyup)="onSearchUpdate($event.target.value)" />
         </div>
         <div class="list">
-            <div class="list-item" *ngFor="let costumer of customers">
+            <div class="list-item" *ngFor="let costumer of customers" (click)="customerAction(costumer)">
                 <div class="key">{{costumer.key}}</div>
                 <div class="company-key">{{costumer.companyKey}}</div>
                 <div class="name">{{costumer.name}}</div>
