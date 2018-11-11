@@ -1,0 +1,223 @@
+{
+  "name": " José Arlindo Pinto e Costa, S.A.",
+  "key": "98374982374982374",
+  "companyKey" : "COMP_MZ",
+  "contacts" : {
+    "phone" : "00351930000000",
+    "phone2" : "00351930000000",
+    "fax" : "00351930000000",
+    "address"  : "Largo dos Penedos",
+    "address2" : "nr 3, Dto",
+    "location" : "Braga",
+    "postalCode" : "4700-343",
+    "postalLocation" : "Braga",
+    "webAddress" : "http://www.primaverabss.com",
+    "otherAddresses" :[
+      { 
+        "code" : "COMP1",
+        "phone" : "00351930000000",
+        "fax" : "00351930000000",
+        "address" : "Largo do Cais",
+        "address2" : "3º Esq.",
+        "location" : "Braga",
+        "postalCode" : "4710-332",
+        "postalLocation" : "Braga",
+        "country" : "Portugal"
+      },
+      {
+        "code" : "COMP1",
+        "phone" : "00351930000000",
+        "fax" : "00351930000000",
+        "address" : "Largo do Cais",
+        "address2" : "3º Esq.",
+        "location" : "Braga",
+        "postalCode" : "4710-332",
+        "postalLocation" : "Braga",
+        "country" : "Portugal"
+      },
+      {
+        "code" : "COMP1",
+        "phone" : "00351930000000",
+        "fax" : "00351930000000",
+        "address" : "Largo do Cais",
+        "address2" : "3º Esq.",
+        "location" : "Braga",
+        "postalCode" : "4710-332",
+        "postalLocation" : "Braga",
+        "country" : "Portugal"
+      },
+      {
+        "code" : "COMP1",
+        "phone" : "00351930000000",
+        "fax" : "00351930000000",
+        "address" : "Largo do Cais",
+        "address2" : "3º Esq.",
+        "location" : "Braga",
+        "postalCode" : "4710-332",
+        "postalLocation" : "Braga",
+        "country" : "Portugal"
+      },
+      {
+        "code" : "COMP1",
+        "phone" : "00351930000000",
+        "fax" : "00351930000000",
+        "address" : "Largo do Cais",
+        "address2" : "3º Esq.",
+        "location" : "Braga",
+        "postalCode" : "4710-332",
+        "postalLocation" : "Braga",
+        "country" : "Portugal"
+      },
+      {
+        "code" : "COMP1",
+        "phone" : "00351930000000",
+        "fax" : "00351930000000",
+        "address" : "Largo do Cais",
+        "address2" : "3º Esq.",
+        "location" : "Braga",
+        "postalCode" : "4710-332",
+        "postalLocation" : "Braga",
+        "country" : "Portugal"
+      },
+      {
+        "code" : "COMP1",
+        "phone" : "00351930000000",
+        "fax" : "00351930000000",
+        "address" : "Largo do Cais",
+        "address2" : "3º Esq.",
+        "location" : "Braga",
+        "postalCode" : "4710-332",
+        "postalLocation" : "Braga",
+        "country" : "Portugal"
+      }
+    ],
+    "otherContacts" : [
+          {
+            "type" : "Comercial",
+            "name" : "José Inácio da Cunha e Silva",
+            "position" : "Comercial Chefe",
+            "phone" : "00351930000000",
+            "mobilePhone" : "00351930000000",
+            "fax" : "00351930000000",
+            "email" : "jose.inacio.da.cunha.e.silva@primaverabss.com"
+          },
+          {
+            "type" : "Comercial",
+            "name" : "José Inácio da Cunha e Silva",
+            "position" : "Comercial Chefe",
+            "phone" : "00351930000000",
+            "mobilePhone" : "00351930000000",
+            "fax" : "00351930000000",
+            "email" : "jose.inacio.da.cunha.e.silva@primaverabss.com"
+          },
+          {
+            "type" : "Comercial",
+            "name" : "José Inácio da Cunha e Silva",
+            "position" : "Comercial Chefe",
+            "phone" : "00351930000000",
+            "mobilePhone" : "00351930000000",
+            "fax" : "00351930000000",
+            "email" : "jose.inacio.da.cunha.e.silva@primaverabss.com"
+          },
+          {
+            "type" : "Comercial",
+            "name" : "José Inácio da Cunha e Silva",
+            "position" : "Comercial Chefe",
+            "phone" : "00351930000000",
+            "mobilePhone" : "00351930000000",
+            "fax" : "00351930000000",
+            "email" : "jose.inacio.da.cunha.e.silva@primaverabss.com"
+          },
+          {
+            "type" : "Comercial",
+            "name" : "José Inácio da Cunha e Silva",
+            "position" : "Comercial Chefe",
+            "phone" : "00351930000000",
+            "mobilePhone" : "00351930000000",
+            "fax" : "00351930000000",
+            "email" : "jose.inacio.da.cunha.e.silva@primaverabss.com"
+          },
+          {
+            "type" : "Comercial",
+            "name" : "José Inácio da Cunha e Silva",
+            "position" : "Comercial Chefe",
+            "phone" : "00351930000000",
+            "mobilePhone" : "00351930000000",
+            "fax" : "00351930000000",
+            "email" : "jose.inacio.da.cunha.e.silva@primaverabss.com"
+          },
+          {
+            "type" : "Comercial",
+            "name" : "José Inácio da Cunha e Silva",
+            "position" : "Comercial Chefe",
+            "phone" : "00351930000000",
+            "mobilePhone" : "00351930000000",
+            "fax" : "00351930000000",
+            "email" : "jose.inacio.da.cunha.e.silva@primaverabss.com"
+          },
+          {
+            "type" : "Comercial",
+            "name" : "José Inácio da Cunha e Silva",
+            "position" : "Comercial Chefe",
+            "phone" : "00351930000000",
+            "mobilePhone" : "00351930000000",
+            "fax" : "00351930000000",
+            "email" : "jose.inacio.da.cunha.e.silva@primaverabss.com"
+          },
+          {
+            "type" : "Comercial",
+            "name" : "José Inácio da Cunha e Silva",
+            "position" : "Comercial Chefe",
+            "phone" : "00351930000000",
+            "mobilePhone" : "00351930000000",
+            "fax" : "00351930000000",
+            "email" : "jose.inacio.da.cunha.e.silva@primaverabss.com"
+          },
+          {
+            "type" : "Comercial",
+            "name" : "José Inácio da Cunha e Silva",
+            "position" : "Comercial Chefe",
+            "phone" : "00351930000000",
+            "mobilePhone" : "00351930000000",
+            "fax" : "00351930000000",
+            "email" : "jose.inacio.da.cunha.e.silva@primaverabss.com"
+          },
+          {
+            "type" : "Comercial",
+            "name" : "José Inácio da Cunha e Silva",
+            "position" : "Comercial Chefe",
+            "phone" : "00351930000000",
+            "mobilePhone" : "00351930000000",
+            "fax" : "00351930000000",
+            "email" : "jose.inacio.da.cunha.e.silva@primaverabss.com"
+          },
+          {
+            "type" : "Comercial",
+            "name" : "José Inácio da Cunha e Silva",
+            "position" : "Comercial Chefe",
+            "phone" : "00351930000000",
+            "mobilePhone" : "00351930000000",
+            "fax" : "00351930000000",
+            "email" : "jose.inacio.da.cunha.e.silva@primaverabss.com"
+          }
+    ]
+  },
+  "sales": {
+    "currency": "MZN",
+    "totalSales": {
+      "previousSales": 393623859,
+      "currentSales": 293623859
+    },
+    "pendingOrders": 3859,
+    "valueCurrentAccount": 3359,
+    "averagePayDays": {
+      "days": 45,
+      "paymentConditions": 30
+    },
+    "recentActivity": {
+      "type": "invoice",
+      "number": "8974329874",
+      "date": "2014-12-23"
+    }
+  }
+}

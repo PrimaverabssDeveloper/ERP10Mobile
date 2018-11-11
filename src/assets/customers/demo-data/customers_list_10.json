@@ -1,0 +1,53 @@
+{
+	"hasMore" : false,
+	"customers" : [{
+   		"name" : "José Pinto Costa #0", 
+   		"key" : "4075011588",
+   		"companyKey" : "COMP_PT",
+   		"location" : "Braga"
+   	},{
+   		"name" : "José Pinto Costa #1", 
+   		"key" : "6433202975",
+   		"companyKey" : "COMP_PT",
+   		"location" : "Vila Nova de Famalicão"
+   	},{
+   		"name" : "José Pinto Costa #2", 
+   		"key" : "3762829662",
+   		"companyKey" : "COMP_AOA",
+   		"location" : "Vila Nova de Famalicão"
+   	},{
+   		"name" : "José Pinto Costa #3", 
+   		"key" : "2820491711",
+   		"companyKey" : "COMP_AOA",
+   		"location" : "Vila Nova de Famalicão"
+   	},{
+   		"name" : "José Pinto Costa #4", 
+   		"key" : "2457299705",
+   		"companyKey" : "COMP_AOA",
+   		"location" : "Braga"
+   	},{
+   		"name" : "José Pinto Costa #5", 
+   		"key" : "5876104359",
+   		"companyKey" : "COMP_PT",
+   		"location" : "Vila Nova de Famalicão"
+   	},{
+   		"name" : "José Pinto Costa #6", 
+   		"key" : "3370868665",
+   		"companyKey" : "COMP_AOA",
+   		"location" : "Braga"
+   	},{
+   		"name" : "José Pinto Costa #7", 
+   		"key" : "4056589097",
+   		"companyKey" : "COMP_AOA",
+   		"location" : "Vila Nova de Famalicão"
+   	},{
+   		"name" : "José Pinto Costa #8", 
+   		"key" : "6288898140",
+   		"companyKey" : "COMP_AOA",
+   		"location" : "Vila Nova de Famalicão"
+   	},{
+   		"name" : "José Pinto Costa #9", 
+   		"key" : "4179788687",
+   		"companyKey" : "COMP_PT",
+   		"location" : "Vila Nova de Famalicão"
+   	}]}

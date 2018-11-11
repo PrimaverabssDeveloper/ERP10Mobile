@@ -26,7 +26,7 @@
         </div>
         <div class="search">
             <div class="magnifier"></div>
-            <input />
+            <input (keyup)="onSearchUpdate($event.target.value)" />
         </div>
         <div class="list">
             <div class="list-item" *ngFor="let costumer of customers">

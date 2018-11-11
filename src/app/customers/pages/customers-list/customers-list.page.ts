@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../../entities';
 import { CustomersService, CustomersServiceProvider } from '../../services';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
     templateUrl: './customers-list.page.html',
@@ -9,8 +11,9 @@ import { CustomersService, CustomersServiceProvider } from '../../services';
 })
 export class CustomersListPage implements OnInit {
 
-    customers: Customer[];
+    private searchUpdated = new Subject<string>();
 
+    customers: Customer[];
     state: 'recent' | 'search';
     recentOrder: 'asc' | 'desc';
     searchOrder: 'asc' | 'desc';
@@ -28,104 +31,9 @@ export class CustomersListPage implements OnInit {
     */
     ngOnInit(): void {
 
-        this.customers = [
-            {
-                name: 'DSF Lts',
-                companyKey: 'ALCAD',
-                key: 'DSF',
-                location: 'Braga'
-            },
-            {
-                name: 'DSF Lts',
-                companyKey: 'ALCAD',
-                key: 'DSF',
-                location: 'Braga'
-            },
-            {
-                name: 'DSF Lts',
-                companyKey: 'ALCAD',
-                key: 'DSF',
-                location: 'Braga'
-            },
-            {
-                name: 'DSF Lts',
-                companyKey: 'ALCAD',
-                key: 'DSF',
-                location: 'Braga'
-            },
-            {
-                name: 'DSF Lts',
-                companyKey: 'ALCAD',
-                key: 'DSF',
-                location: 'Braga'
-            },
-            {
-                name: 'DSF Lts',
-                companyKey: 'ALCAD',
-                key: 'DSF',
-                location: 'Braga'
-            },
-            {
-                name: 'DSF Lts',
-                companyKey: 'ALCAD',
-                key: 'DSF',
-                location: 'Braga'
-            },
-            {
-                name: 'DSF Lts',
-                companyKey: 'ALCAD',
-                key: 'DSF',
-                location: 'Braga'
-            },
-            {
-                name: 'DSF Lts',
-                companyKey: 'ALCAD',
-                key: 'DSF',
-                location: 'Braga'
-            },
-            {
-                name: 'DSF Lts',
-                companyKey: 'ALCAD',
-                key: 'DSF',
-                location: 'Braga'
-            },
-            {
-                name: 'DSF Lts',
-                companyKey: 'ALCAD',
-                key: 'DSF',
-                location: 'Braga'
-            },
-            {
-                name: 'DSF Lts',
-                companyKey: 'ALCAD',
-                key: 'DSF',
-                location: 'Braga'
-            },
-            {
-                name: 'DSF Lts',
-                companyKey: 'ALCAD',
-                key: 'DSF',
-                location: 'Braga'
-            },
-            {
-                name: 'DSF Lts',
-                companyKey: 'ALCAD',
-                key: 'DSF',
-                location: 'Braga'
-            },
-            {
-                name: 'DSF Lts',
-                companyKey: 'ALCAD',
-                key: 'DSF',
-                location: 'Braga'
-            },
-            {
-                name: 'DSF Lts',
-                companyKey: 'ALCAD',
-                key: 'DSF',
-                location: 'Braga'
-            }
-        ];
+        this.searchUpdated
+            .pipe(debounceTime(500), distinctUntilChanged())
+            .subscribe(st => this.searchCustomers(st));
     }
 
     recentOptionAction() {
@@ -143,5 +51,17 @@ export class CustomersListPage implements OnInit {
         } else {
             this.state = 'search';
         }
+    }
+
+    onSearchUpdate(searchTerm: string) {
+        this.searchUpdated.next(searchTerm);
+    }
+
+    private searchCustomers(searchTerm: string) {
+        this.customersService
+            .searchCustomers(searchTerm)
+            .then(result => {
+                this.customers = result.customers;
+            });
     }
 }
