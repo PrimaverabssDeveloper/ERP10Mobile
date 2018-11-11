@@ -19,7 +19,7 @@ export class CustomersDemoService extends CustomersService {
             });
         }
 
-        return this.getDemoDataWithFileName('clients_list_10.json');
+        return this.getDemoDataWithFileName('customers_list_10.json');
     }
 
     private getDemoDataWithFileName(fileName: string): Promise<any> {
