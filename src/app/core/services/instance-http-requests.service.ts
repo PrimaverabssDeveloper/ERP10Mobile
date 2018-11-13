@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequestService } from './http-request.service';
 import { HttpClient } from '@angular/common/http';
 import { InstancesService } from './instances.service';
+import { AppSettings } from '../app-settings';
 
 
 /**
@@ -27,13 +28,14 @@ export class InstanceHttpRequestService extends HttpRequestService {
     // #region 'Constructor'
 
     /**
-     * Creates an instance of InstanceHttpRequestService.
+     *Creates an instance of InstanceHttpRequestService.
      * @param {HttpClient} http
+     * @param {AppSettings} appSettings
      * @param {InstancesService} instanceService
      * @memberof InstanceHttpRequestService
      */
-    constructor(protected http: HttpClient, private instanceService: InstancesService) {
-        super(http);
+    constructor(protected http: HttpClient, protected appSettings: AppSettings, private instanceService: InstancesService) {
+        super(http, appSettings);
     }
     // #endregion
 
