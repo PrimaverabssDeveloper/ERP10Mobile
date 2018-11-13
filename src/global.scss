@@ -46,8 +46,13 @@
     font-weight: 700;
 }
 
+// defined the default font type
 * {
     font-family: 'Open Sans Condensed';
+}
+
+.font-regular {
+    font-family: 'Open Sans Regular';
 }
 
 // remove 'Back' from back button
