@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-
-import { StorageServiceBase } from '../../shared/services';
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { ModuleStorageServiceBase } from './storage/module-storage.service.base';
+import { StorageService } from './storage/storage.service';
+import { InstancesService } from './instances.service';
 
 
 /**
@@ -14,12 +14,12 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 @Injectable({
     providedIn: 'root',
 })
-export class CoreStorageService extends StorageServiceBase {
+export class CoreStorageService extends ModuleStorageServiceBase {
 
     // #region 'Constructor'
 
-    constructor(protected nativeStorage: NativeStorage) {
-        super(nativeStorage);
+    constructor(protected storage: StorageService, protected instancesService: InstancesService) {
+        super(storage, instancesService);
     }
     // #endregion
 
