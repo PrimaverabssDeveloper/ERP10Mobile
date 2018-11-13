@@ -13,6 +13,8 @@ import { ActivatedRoute } from '@angular/router';
 export class CustomerPage extends PageBase implements OnInit {
 
     customer: Customer;
+    currentYear: number;
+    previousYear: number;
 
     constructor(
         public loadingController: LoadingController,
@@ -20,7 +22,9 @@ export class CustomerPage extends PageBase implements OnInit {
         private route: ActivatedRoute
     ) {
         super(loadingController);
-
+        const date = new Date();
+        this.currentYear = date.getFullYear();
+        this.previousYear = date.getFullYear() - 1;
     }
 
     /**

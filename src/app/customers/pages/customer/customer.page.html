@@ -3,7 +3,7 @@
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title><span class="navbar-title">Customer</span></ion-title>
+        <ion-title><span class="navbar-title">{{ 'CUSTOMERS.CUSTOMER_PAGE.PAGE_TITLE' | translate }}</span></ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -12,54 +12,88 @@
         <div class="customer-name">
             {{customer.name}}
         </div>
-        <ion-grid>
-            <ion-row>
-                <ion-col>
-                    <div class="customer-address-part">
-                        <img class="customer-address-part-icon" src="../../../../assets/customers/images/address.png">
-                        <div class="customer-address-part-label">
-                            {{customer.contacts.address}} {{customer.contacts.address2}},
-                            {{customer.contacts.postalLocation}}, {{customer.contacts.location}}
-                        </div>
-                    </div>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col size="6">
-                    <div class="customer-address-part">
-                        <img class="customer-address-part-icon" src="../../../../assets/customers/images/tel1.png">
-                        <div class="customer-address-part-label">
-                            {{customer.contacts.phone}}
-                        </div>
-                    </div>
-                </ion-col>
-                <ion-col size="6">
-                    <div class="customer-address-part">
-                        <img class="customer-address-part-icon" src="../../../../assets/customers/images/tel2.png">
-                        <div class="customer-address-part-label">
-                            {{customer.contacts.phone2}}
-                        </div>
-                    </div>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    <div class="customer-address-part">
-                        <img class="customer-address-part-icon" src="../../../../assets/customers/images/website.png">
-                        <div class="customer-address-part-label">
-                            {{customer.contacts.webAddress}}
-                        </div>
-                    </div>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    <div class="customer-address-part">
-                        <div class="customer-address-part-icon"></div>
-                        <div class="customer-address-part-label"></div>
-                    </div>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
+        <div class="customer-address-part">
+            <img class="customer-address-part-icon" src="../../../../assets/customers/images/address.png">
+            <div class="customer-address-part-label">
+                {{customer.contacts.address}} {{customer.contacts.address2}},
+                {{customer.contacts.postalLocation}}, {{customer.contacts.location}}
+            </div>
+        </div>
+        <div class="customer-address-part col-6">
+            <img class="customer-address-part-icon" src="../../../../assets/customers/images/tel1.png">
+            <div class="customer-address-part-label">
+                {{customer.contacts.phone}}
+            </div>
+        </div>
+        <div class="customer-address-part col-6">
+            <img class="customer-address-part-icon" src="../../../../assets/customers/images/tel2.png">
+            <div class="customer-address-part-label">
+                {{customer.contacts.phone2}}
+            </div>
+        </div>
+        <div class="customer-address-part">
+            <img class="customer-address-part-icon" src="../../../../assets/customers/images/fax.png">
+            <div class="customer-address-part-label">
+                {{customer.contacts.fax}}
+            </div>
+        </div>
+        <div class="customer-address-part">
+            <img class="customer-address-part-icon" src="../../../../assets/customers/images/website.png">
+            <div class="customer-address-part-label">
+                {{customer.contacts.webAddress}}
+            </div>
+        </div>
+        <div class="other-contacts">
+            {{ 'CUSTOMERS.CUSTOMER_PAGE.CONTACTS_OTHER_CONTACTS' | translate }}
+        </div>
+        <div class="other-addresses">
+            {{ 'CUSTOMERS.CUSTOMER_PAGE.CONTACTS_OTHER_ADDRESSES' | translate }}
+        </div>
+        <div class="sales">
+            <div class="sales-header">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_TITLE' | translate }}</div>
+            <div class="sales-row">
+                <div class="col-6">
+                    <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_CURRENT_YEAR_TOTAL_SALES_LABEL' | translate }} {{currentYear}}</div>
+                    <div class="sales-row-value left">{{customer.sales.totalSales.currentSales |
+                        currency:customer.sales.currency}}</div>
+                </div>
+
+                <div class="col-6">
+                    <div class="sales-row-label right">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_PREVIOUS_YEAR_TOTAL_SALES_LABEL' | translate }} {{previousYear}}</div>
+                    <div class="sales-row-value right">{{customer.sales.totalSales.previousSales |
+                        currency:customer.sales.currency}}</div>
+                </div>
+            </div>
+            <div class="sales-row">
+                <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_PENDING_ORDERS_LABEL' | translate }}</div>
+                <div class="sales-row-value left">{{customer.sales.pendingOrders | currency:customer.sales.currency}}</div>
+            </div>
+            <div class="sales-row">
+                <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_CURRENT_ACCOUNT_VALUE_LABEL' | translate }}</div>
+                <div class="sales-row-value left">{{customer.sales.valueCurrentAccount |
+                    currency:customer.sales.currency}}</div>
+            </div>
+            <div class="sales-row">
+                <div class="col-6">
+                    <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_AVERAGE_COLLECTION_PERIOD_LABEL' | translate }}</div>
+                    <div class="sales-row-value left">{{customer.sales.averagePayDays.days}} {{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_DAYS_PARTIAL_LABEL' | translate }}</div>
+                </div>
+
+                <div class="col-6">
+                    <div class="sales-row-sub-label right">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_PAYMENT_CONDITIONS_LABEL' | translate }}</div>
+                    <div class="sales-row-value right">{{customer.sales.averagePayDays.paymentConditions}} {{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_DAYS_PARTIAL_LABEL' | translate }}</div>
+                </div>
+            </div>
+            <div class="sales-row">
+                <div class="col-6">
+                    <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_RECENT_ACTIVITY_LABEL' | translate }}</div>
+                    <div class="sales-row-value left">{{customer.sales.recentActivity.type}} {{customer.sales.recentActivity.number}}</div>
+                </div>
+
+                <div class="col-6">
+                    <div class="sales-row-sub-label right">{{customer.sales.recentActivity.date | date:'shortDate'}}</div>
+                </div>
+            </div>
+        </div>
     </div>
 </ion-content>

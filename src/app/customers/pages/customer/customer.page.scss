@@ -1,18 +1,37 @@
 @import '../../styles/variables.scss';
 
-$rows-height: 50px;
+$customer-name-rows-height: 50px;
+$contacts-rows-height: 50px;
+$sales-rows-height: 50px;
+$row-border: 1px solid rgb(213, 213, 213);
 
 .customer {
-    font-family: 'Open Sans';
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .col-6 {
+        width: 50%;
+        float: left;
+    }
 
     .customer-name {
         text-align: center;
         font-weight: bold;
-        height: $rows-height;
+        height: $customer-name-rows-height;
+        padding: 13px 0;
+        border-bottom: $row-border;
+        width: 100%;
+        background: rgb(248, 248, 248);
+        color: rgb(43, 43, 43);
     }
 
     .customer-address-part {
-        height: $rows-height;
+        height: $contacts-rows-height;
+        width: 100%;
+        float: left;
+        padding: 15px 10px;
+        font-size: 11pt;
 
         .customer-address-part-icon {
             float: left;
@@ -22,8 +41,76 @@ $rows-height: 50px;
 
         .customer-address-part-label {
             float: left;
-            margin-left: 15px;
-            font-weight: bold;
+            margin-left: 10px;
+            font-weight: 600;
+            color: rgb(43, 43, 43);
+        }
+    }
+
+    .other-contacts {
+        padding: 15px 0;
+        border-top: $row-border;
+        border-bottom: $row-border;
+        width: 50%;
+        float: left;
+        font-weight: 600;
+        text-align: center;
+        color: rgb(43, 43, 43);
+        font-size: 11pt;
+    }
+
+    .other-addresses {
+        @extend .other-contacts;
+        border-left: $row-border;
+    }
+
+    .sales {
+        float: left;
+        width: 100%;
+
+        .sales-header {
+            height: 25px;
+            width: 100%;
+            float: left;
+            border-bottom: $row-border;
+            padding: 3px 10px;
+            font-size: 10pt;
+            color: rgb(43, 43, 43);
+            background: rgb(248, 248, 248);
+        }
+
+        .sales-row {
+            height: $sales-rows-height;
+            border-bottom: $row-border;
+            width: 100%;
+            float: left;
+            padding: 5px 10px;
+
+            .sales-row-label {
+                color: $customers-accent-color;
+                width: 100%;
+                font-size: 10pt;
+            }
+
+            .sales-row-sub-label {
+                @extend .sales-row-label;
+                color: rgb(149, 149, 149);
+            }
+
+            .sales-row-value {
+                font-weight: bold;
+                width: 100%;
+                color: rgb(43, 43, 43);
+            }
+
+            .left {
+                float: left;
+            }
+
+            .right {
+                float: right;
+                text-align: right;
+            }
         }
     }
 }
