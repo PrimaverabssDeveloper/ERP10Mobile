@@ -16,7 +16,7 @@ import { HttpRequestService } from './http-request.service';
 export class InstancesService {
 
     // #region 'Private Fields'
-    _currentInstance: Instance;
+    private _currentInstance: Instance;
     // #endregion
 
     // #region 'Public Properties'
