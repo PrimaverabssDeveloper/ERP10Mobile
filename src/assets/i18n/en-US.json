@@ -26,5 +26,30 @@
         "TICKER_SETTINGS_PAGE": {
             "PAGE_TITLE" : "Ticker data"
         }
+    },
+    "CUSTOMERS" : {
+        "CUSTOMERS_LIST_PAGE": {
+            "PAGE_TITLE": "Customers",
+            "TOOGLE_MENU_RECENT": "Recent",
+            "TOOGLE_MENU_SEARCH_ASC": "from A to Z",
+            "TOOGLE_MENU_SEARCH_DESC": "from Z to A",
+            "RECENT_LIST_EMPTY_MESSAGE": "Here you will have the last clients that you have accessed.",
+            "NO_SEARCH_PERFORMED_MESSAGE": "Use the search to find your clients."
+        },
+        "CUSTOMER_PAGE" : {
+            "PAGE_TITLE": "Customer",
+            "CONTACTS_OTHER_ADDRESSES": "Other addresses",
+            "CONTACTS_OTHER_CONTACTS": "Other contacts",
+            "SALES_TITLE": "Sales data",
+            "SALES_CURRENT_YEAR_TOTAL_SALES_LABEL" : "Total sales",
+            "SALES_PREVIOUS_YEAR_TOTAL_SALES_LABEL" : "Total sales",
+            "SALES_PENDING_ORDERS_LABEL": "Pending orders",
+            "SALES_CURRENT_ACCOUNT_VALUE_LABEL": "Current account values",
+            "SALES_AVERAGE_COLLECTION_PERIOD_LABEL": "Average collection period",
+            "SALES_PAYMENT_CONDITIONS_LABEL": "Payment conditions",
+            "SALES_RECENT_ACTIVITY_LABEL": "Recent activity",
+            "SALES_DAYS_PARTIAL_LABEL": "Days"
+
+        }
     }
 }

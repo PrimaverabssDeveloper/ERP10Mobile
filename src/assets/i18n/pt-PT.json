@@ -26,5 +26,30 @@
         "TICKER_SETTINGS_PAGE": {
             "PAGE_TITLE" : "Dados do ticker"
         }
+    },
+    "CUSTOMERS" : {
+        "CUSTOMERS_LIST_PAGE": {
+            "PAGE_TITLE": "Clientes",
+            "TOOGLE_MENU_RECENT": "Recentes",
+            "TOOGLE_MENU_SEARCH_ASC": "de A a Z",
+            "TOOGLE_MENU_SEARCH_DESC": "de Z a A",
+            "RECENT_LIST_EMPTY_MESSAGE": "Aqui poderá encontrar os últimos clientes aos que acedeu.",
+            "NO_SEARCH_PERFORMED_MESSAGE": "Utilize a pesquisa para encontrar clientes."
+        },
+        "CUSTOMER_PAGE" : {
+            "PAGE_TITLE": "Cliente",
+            "CONTACTS_OTHER_ADDRESSES": "Outros endereços",
+            "CONTACTS_OTHER_CONTACTS": "Outros contactos",
+            "SALES_TITLE": "Dados de Vendas",
+            "SALES_CURRENT_YEAR_TOTAL_SALES_LABEL" : "Vendas Totais",
+            "SALES_PREVIOUS_YEAR_TOTAL_SALES_LABEL" : "Vendas Totais",
+            "SALES_PENDING_ORDERS_LABEL": "Encomendas Pendentes",
+            "SALES_CURRENT_ACCOUNT_VALUE_LABEL": "Valores da Conta Corrente",
+            "SALES_AVERAGE_COLLECTION_PERIOD_LABEL": "Prazo Médio de Recebimento",
+            "SALES_PAYMENT_CONDITIONS_LABEL": "Condição de Pagamento",
+            "SALES_RECENT_ACTIVITY_LABEL": "Atividade Recente",
+            "SALES_DAYS_PARTIAL_LABEL": "Dias"
+
+        }
     }
 }
