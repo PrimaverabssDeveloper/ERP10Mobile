@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import Auth0Cordova from '@auth0/cordova';
 import { HttpClient } from '@angular/common/http';
 import { SafariViewController } from '@ionic-native/safari-view-controller/ngx';
-import { encodeUriSegment } from '@angular/router/src/url_tree';
-import { environment } from '../../../environments/environment';
 import { CoreStorageService } from './core-storage.service';
+import { AppSettings } from '../app-settings';
 
 const authenticationSettings = require('../../../authentication-settings.json');
 const crypto = require('crypto');
@@ -23,7 +21,6 @@ export class AuthenticationService {
 
     private static readonly STORAGE_SESSION_DATA_KEY = 'STORAGE_SESSION_DATA_KEY';
 
-    private auth0: any;
     private proofKey: ProofKey;
     private clientId: string;
     private redirectUri: string;
@@ -41,7 +38,8 @@ export class AuthenticationService {
     constructor(
         private http: HttpClient,
         private safariViewController: SafariViewController,
-        private coreStorageService: CoreStorageService
+        private coreStorageService: CoreStorageService,
+        private appSettings: AppSettings
     ) {
 
         this.clientId = authenticationSettings.clientId;
@@ -50,8 +48,8 @@ export class AuthenticationService {
         this.responseType = 'code';
         this.codeChallengeMethod = 'S256';
         this.grantType = 'authorization_code';
-        this.authenticationEndpoint = environment.authentication.endpoint;
-        this.requestTokenEndpoint = environment.authentication.requestTokenEndpoint;
+        this.authenticationEndpoint = this.appSettings.authenticationEndpoint;
+        this.requestTokenEndpoint = this.appSettings.authenticationRequestTokenEndpoint;
     }
 
     async authenticate(): Promise<boolean> {
