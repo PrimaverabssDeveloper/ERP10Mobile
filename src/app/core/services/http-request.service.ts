@@ -1,8 +1,7 @@
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import { Injectable } from '@angular/core';
-
+import { AppSettings } from '../app-settings';
 
 /**
  * Service to be used to perform all http request to the API.
@@ -24,11 +23,9 @@ export class HttpRequestService {
     // #region 'Private Properties'
     private get baseEndpoint(): string {
         if (!this._baseEndpoint) {
-            // get the endpoint from the environment config class.
-            const environmentBaseEndpoint = environment.apiEndpoint;
 
             // removes the tail slash from the endpoint
-            this._baseEndpoint = this.removeTailSlashFromUrl(environmentBaseEndpoint);
+            this._baseEndpoint = this.removeTailSlashFromUrl(this.appSettings.apiEndpoint);
         }
 
         return this._baseEndpoint;
@@ -39,10 +36,12 @@ export class HttpRequestService {
     // #region 'Constructor'
 
     /**
-     * Creates an instance of HttpRequestBaseService.
+     * Creates an instance of HttpRequestService.
      * @param {HttpClient} http
+     * @param {AppSettings} appSettings
+     * @memberof HttpRequestService
      */
-    constructor(protected http: HttpClient) {
+    constructor(protected http: HttpClient, protected appSettings: AppSettings) {
     }
 
     // #endregion
