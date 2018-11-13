@@ -3,7 +3,7 @@
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title><span class="navbar-title">Customers</span></ion-title>
+        <ion-title><span class="navbar-title">{{ 'CUSTOMERS.CUSTOMERS_LIST_PAGE.PAGE_TITLE' | translate }}</span></ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -11,17 +11,11 @@
     <div class="customers-list" [ngClass]="{'recent-state': state === 'recent', 'search-state': state === 'search'}">
         <div class="toogle-menu">
             <button (click)="recentOptionAction()" [ngClass]="{'selected': state === 'recent', 'order-desc': recentOrder === 'desc' }">
-                <div class="content-wrapper">
-                    <div class="order-icon"></div>
-                    <div class="label">Recent</div>
-                </div>
+                <div class="label">{{ 'CUSTOMERS.CUSTOMERS_LIST_PAGE.TOOGLE_MENU_RECENT' | translate }}</div>
             </button>
             <button (click)="searchOptionAction()" [ngClass]="{'selected': state === 'search', 'order-desc': searchOrder === 'desc' }">
-                <div class="content-wrapper">
-                    <div class="order-icon"></div>
-                    <div *ngIf="searchOrder === 'asc'" class="label">from A to Z</div>
-                    <div *ngIf="searchOrder === 'desc'" class="label">from Z to A</div>
-                </div>
+                    <div *ngIf="searchOrder === 'asc'" class="label">{{ 'CUSTOMERS.CUSTOMERS_LIST_PAGE.TOOGLE_MENU_SEARCH_ASC' | translate }}</div>
+                    <div *ngIf="searchOrder === 'desc'" class="label">{{ 'CUSTOMERS.CUSTOMERS_LIST_PAGE.TOOGLE_MENU_SEARCH_DESC' | translate }}</div>
             </button>
         </div>
         <div class="search">

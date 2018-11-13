@@ -2,12 +2,13 @@ import { CustomersService } from './customers.service';
 import { Injectable } from '@angular/core';
 import { Customer, CustomersSearchResult } from '../entities';
 import { HttpClient } from '@angular/common/http';
+import { CustomersStorageService } from './customers-storage.service';
 
 @Injectable()
 export class CustomersDemoService extends CustomersService {
 
-    constructor(private http: HttpClient) {
-        super();
+    constructor(private http: HttpClient, protected storageService: CustomersStorageService) {
+        super(storageService);
     }
 
     searchCustomers(searchTerm: string): Promise<CustomersSearchResult> {

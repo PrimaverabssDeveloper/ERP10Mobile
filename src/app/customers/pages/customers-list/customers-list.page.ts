@@ -15,8 +15,17 @@ import { Router } from '@angular/router';
 export class CustomersListPage extends PageBase implements OnInit {
 
     private searchUpdated = new Subject<string>();
+    private searchedCustomers: Customer[];
+    private recentViewedCustomers: Customer[];
 
-    customers: Customer[];
+    get customers(): Customer[] {
+        if (this.state === 'recent') {
+            return this.recentOrder === 'asc' ? this.recentViewedCustomers : this.recentViewedCustomers.reverse();
+        } else {
+            return this.searchedCustomers;
+        }
+    }
+
     state: 'recent' | 'search';
     recentOrder: 'asc' | 'desc';
     searchOrder: 'asc' | 'desc';
@@ -38,7 +47,10 @@ export class CustomersListPage extends PageBase implements OnInit {
     *
     * @memberof CostumersListPage
     */
-    ngOnInit(): void {
+    async ngOnInit() {
+        await this.showLoading();
+        await this.updateRecentCustomersList();
+        this.hideLoading();
 
         this.searchUpdated
             .pipe(debounceTime(500), distinctUntilChanged())
@@ -62,10 +74,13 @@ export class CustomersListPage extends PageBase implements OnInit {
         }
     }
 
-    customerAction(customer: Customer) {
+    async customerAction(customer: Customer) {
         if (!customer) {
             return;
         }
+
+        await this.addCustomerToRecentList(customer);
+        await this.updateRecentCustomersList();
 
         this.router.navigate(['customers/customer', customer.companyKey, customer.key]);
     }
@@ -79,8 +94,16 @@ export class CustomersListPage extends PageBase implements OnInit {
         this.customersService
             .searchCustomers(searchTerm)
             .then(result => {
-                this.customers = result.customers;
+                this.searchedCustomers = result.customers;
                 this.hideLoading();
             });
+    }
+
+    private async addCustomerToRecentList(customer: Customer) {
+        await this.customersService.addToRecentViewedCustomers(customer);
+    }
+
+    private async updateRecentCustomersList() {
+        this.recentViewedCustomers = await this.customersService.getRecentViewedCustomers();
     }
 }
