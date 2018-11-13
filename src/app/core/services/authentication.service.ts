@@ -33,7 +33,7 @@ export class AuthenticationService {
 
     private authenticationResolve: (value?: boolean | PromiseLike<boolean>) => void;
 
-    public isAuthenticateAsDemo = true;
+    public isAuthenticateAsDemo: boolean;
 
     constructor(
         private http: HttpClient,
@@ -126,7 +126,7 @@ export class AuthenticationService {
         this.isAuthenticateAsDemo = false;
 
         // remove regular authentication session data
-        return this.coreStorageService.removeData(AuthenticationService.STORAGE_SESSION_DATA_KEY);
+        await this.coreStorageService.removeData(AuthenticationService.STORAGE_SESSION_DATA_KEY);
     }
 
     private handleAuthenticationUrl(url: string) {
