@@ -14,20 +14,7 @@ const SALES_SUMMARY = '/sales';
  * @export
  * @class SalesService
  */
-@Injectable({
-    providedIn: 'root',
-})
 export class SalesService {
-
-    // #region 'Private Properties'
-
-    private companies: Company[];
-
-    // #endregion
-
-    // #region 'Public Properties'
-
-    // #endregion
 
     // #region 'Constructor'
 
@@ -37,7 +24,7 @@ export class SalesService {
      * @param {DomService} domService
      * @memberof SalesService
      */
-    constructor(private instanceHttpRequestService: InstanceHttpRequestService, private domService: DomService) {
+    constructor(protected instanceHttpRequestService: InstanceHttpRequestService, protected domService: DomService) {
 
     }
     // #endregion
@@ -47,89 +34,54 @@ export class SalesService {
 
     async createSalesSummaryTickers(): Promise<HTMLElement[]> {
 
-        return new Promise<HTMLElement[]>((resolve, reject) => {
+        const salesSummary = await this.getSalesSummary();
 
-            const processCompanies = (companies: CompanySalesSummary[]) => {
-                const htmlTickers: HTMLElement[] = [];
-                for (const company of companies) {
-                    const htmlTicker = this.domService.createComponent(SalesTickerComponent, {companySalesSummary: company});
-                    htmlTickers.push(htmlTicker);
-                }
+        const htmlTickers: HTMLElement[] = [];
+        for (const company of salesSummary.companies) {
+            const htmlTicker = this.domService.createComponent(SalesTickerComponent, { companySalesSummary: company });
+            htmlTickers.push(htmlTicker);
+        }
 
-                resolve(htmlTickers);
-            };
-
-            this.getSalesSummary().subscribe(
-                res => processCompanies(res.companies),
-                err => reject(err));
-        });
+        return htmlTickers;
     }
 
     /**
      * Get the companies.
      *
-     * @returns {Observable<Company[]>}
+     * @returns {Promise<Company[]>}
      * @memberof SalesService
      */
-    getCompanies(): Observable<Company[]> {
-        return new Observable<Company[]>(o => {
+    async getCompanies(): Promise<Company[]> {
+        const salesSummary = await this.getSalesSummary();
+        let companies: Company[];
 
-            // the companies already exists
-            // return them
-            if (this.companies) {
-                o.next(this.companies);
-            } else {
+        if (salesSummary && salesSummary.companies) {
+            companies = this.extractCompaniesFromSalesSummary(salesSummary);
+        }
 
-            }
-
-            let sub =
-                this.instanceHttpRequestService
-                    .get<SalesSummary>(SALES_SUMMARY)
-                    .subscribe(ss => {
-
-                        // extract companies from sales summaries
-                        if (ss && ss.companies) {
-                            this.companies = ss.companies.map(css => ({ key: css.key, name: css.name }));
-                        }
-
-                        o.next(this.companies);
-                    });
-
-            return () => {
-                if (sub) {
-                    sub.unsubscribe();
-                    sub = null;
-                }
-            };
-        });
+        return companies;
     }
 
     /**
      * Gets the Sales Summaries
      *
-     * @returns {Observable<SalesSummary>}
+     * @returns {Promise<SalesSummary>}
      * @memberof SalesService
      */
-    getSalesSummary(): Observable<SalesSummary> {
-        return new Observable<SalesSummary>(o => {
-            let sub =
-                this.instanceHttpRequestService
-                    .get<SalesSummary>(SALES_SUMMARY)
-                    .subscribe(ss => {
+    async getSalesSummary(): Promise<SalesSummary> {
 
-                        // extract companies from sales summaries
-                        if (ss && ss.companies) {
-                            this.companies = this.extractCompaniesFromSalesSummary(ss);
-                        }
+        let salesSummary: SalesSummary;
 
-                        o.next(ss);
-                    });
+        try {
+            salesSummary = await this.instanceHttpRequestService
+                .get<SalesSummary>(SALES_SUMMARY)
+                .toPromise();
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
 
-            return () => {
-                sub.unsubscribe();
-                sub = null;
-            };
-        });
+        return salesSummary;
     }
 
     // #endregion

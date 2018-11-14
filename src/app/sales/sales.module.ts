@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { PAGES } from './pages';
 import { SALES_ROUTING } from './sales.routes';
 import { ENTRY_COMPONENTS, COMPONENTS } from './components';
-import { SERVICES, SalesService } from './services';
+import { SalesService, SalesServiceProvider } from './services';
 import { ModulesSummariesService } from '../core/services';
 
 @NgModule({
@@ -18,7 +18,7 @@ import { ModulesSummariesService } from '../core/services';
     ],
     declarations: [PAGES, COMPONENTS],
     entryComponents: [ENTRY_COMPONENTS],
-    providers: [SERVICES]
+    providers: [SalesServiceProvider]
 })
 export class SalesModule {
     constructor(

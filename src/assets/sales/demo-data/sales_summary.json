@@ -1,0 +1,82 @@
+{
+    "companies": [
+        {
+            "key": "ALCAD",
+            "name": "ALCAD",
+            "totalSales": 21.0,
+            "totalSalesReporting": 76.0,
+            "totalSalesPrevious": 93.0,
+            "totalSalesPreviousReporting": 137.0,
+            "currency": "EUR",
+            "reportingCurrency": "EUR",
+            "totalSalesLegend": "2018",
+            "totalSalesPreviousLegend": "2017",
+            "dataTimestamp": "1542155683",
+            "dailySales": {
+                "key": "Key0ee9047a-a2fa-454e-8152-9a473471f01b",
+                "name": "Name3e071c5e-ef47-432c-af75-3f543ecb0e43",
+                "currency": "Currency4dc76af0-1618-44d3-8524-0eb75d53bab3",
+                "reportingCurrency": "ReportingCurrencyba013310-85db-4af3-9f19-6df72577fc42",
+                "dataTimestamp": "DataTimestamp9293782c-bdf7-43ba-a7b5-f79df4564497",
+                "sales": 214.0,
+                "salesReporting": 129.0,
+                "salesPrevious": 7.0,
+                "salesPreviousReporting": 125.0,
+                "salesLegend": "SalesLegend18bebbf6-26eb-4d56-82b5-dc85873129c3",
+                "salesPreviousLegend": "SalesPreviousLegendb3ce0f18-9c31-4d73-a718-1438cc19f3b8"
+            }
+        },
+        {
+            "key": "SOFRIO",
+            "name": "SOFRIO",
+            "totalSales": 246.0,
+            "totalSalesReporting": 105.0,
+            "totalSalesPrevious": 152.0,
+            "totalSalesPreviousReporting": 136.0,
+            "currency": "USD",
+            "reportingCurrency": "USD",
+            "totalSalesLegend": "2018",
+            "totalSalesPreviousLegend": "2017",
+            "dataTimestamp": "1542155683",
+            "dailySales": {
+                "key": "Keyc8614ddf-b3f9-4bbb-a065-5e795619ac78",
+                "name": "Nameef1d246b-97f2-4fd3-a52f-490e1b315fe9",
+                "currency": "Currency685db295-7ff1-413b-8b6b-eab5acbfd150",
+                "reportingCurrency": "ReportingCurrency9cf7f461-34a7-438a-bac7-7e9c726f74c1",
+                "dataTimestamp": "DataTimestamp80f061da-6d9b-4a3b-8d06-c920ae506f39",
+                "sales": 217.0,
+                "salesReporting": 230.0,
+                "salesPrevious": 40.0,
+                "salesPreviousReporting": 37.0,
+                "salesLegend": "SalesLegend2fd22a10-310f-4f51-8c11-fb8acf018dcf",
+                "salesPreviousLegend": "SalesPreviousLegendcc0e9f8e-8224-40d5-9ab1-4ab8015ec615"
+            }
+        },
+        {
+            "key": "ZEMA",
+            "name": "ZEMA",
+            "totalSales": 39.0,
+            "totalSalesReporting": 191.0,
+            "totalSalesPrevious": 51.0,
+            "totalSalesPreviousReporting": 155.0,
+            "currency": "EUR",
+            "reportingCurrency": "EUR",
+            "totalSalesLegend": "2018",
+            "totalSalesPreviousLegend": "2017",
+            "dataTimestamp": "1542155683",
+            "dailySales": {
+                "key": "Key619b1be5-1078-44af-8a07-48007e31c102",
+                "name": "Named5da44c8-ccf2-4769-886d-aa7e9a8d4342",
+                "currency": "Currencyac4a4c58-8df3-4d0c-85b9-7858b480a344",
+                "reportingCurrency": "ReportingCurrencydf731fd1-3c74-4976-b81f-e7962146baa1",
+                "dataTimestamp": "DataTimestampefba609a-226e-4d2d-9f16-025a59cbdd2b",
+                "sales": 215.0,
+                "salesReporting": 70.0,
+                "salesPrevious": 165.0,
+                "salesPreviousReporting": 242.0,
+                "salesLegend": "SalesLegend163a0223-5b9a-4596-b760-96478075a757",
+                "salesPreviousLegend": "SalesPreviousLegend74c0351a-afd9-42cf-8375-2e9a37f5f2d2"
+            }
+        }
+    ]
+}
