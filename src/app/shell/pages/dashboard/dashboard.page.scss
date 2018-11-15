@@ -1,17 +1,22 @@
 
-.module-icon {
-    text-align: center;
-    margin:25px;
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
+.modules-drawer {
 
-    img{
-        width: calc(100% - 50px);
-    }
+    position: absolute;
+    bottom: 0;
 
-    .name {
-        margin-top: 5px;
+    .module-icon {
+        width: calc(33% - 50px);
+        text-align: center;
+        margin:25px;
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        display: block;
+        float: left;
+    
+        .name {
+            margin-top: 5px;
+        }
     }
 }
 

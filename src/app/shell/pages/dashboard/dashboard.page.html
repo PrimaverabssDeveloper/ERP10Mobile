@@ -34,35 +34,22 @@
     </ion-toolbar>
 </ion-header>
 <ion-content id="contentId2">
-    <ion-grid>
-        <!-- Modules Tickers -->
-        <ion-row>
-            <ion-col>
-                <tickers [tickers]="tickers"></tickers>
-            </ion-col>
-        </ion-row>
-
-        <!-- Modules -->
-        <ion-row>
-            <ion-col *ngIf="salesModuleEnabled">
-                <a class="module-icon" [routerLink]="['/sales']">
-                    <img src="../../assets/sales/sales_home.png">
-                    <div class="name">Sales</div>
-                </a>
-            </ion-col>
-            <ion-col *ngIf="humanResourcesModuleEnabled">
-                <a class="module-icon" [routerLink]="['/humanresources']">
-                    <img src="../../assets/human-resources/hr_home.png">
-                    <div class="name">HR</div>
-                </a>
-            </ion-col>
-            <ion-col *ngIf="customersModuleEnabled">
-                <a class="module-icon" [routerLink]="['/customers']">
-                    <img src="../../assets/customers/customers_home.png">
-                    <div class="name">Customers</div>
-                </a>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
-
+    <!-- Modules Tickers -->
+    <tickers [tickers]="tickers"></tickers>
+    
+    <!-- Modules -->
+    <div class="modules-drawer">
+        <a *ngIf="salesModuleEnabled" class="module-icon" [routerLink]="['/sales']">
+            <img src="../../assets/sales/sales_home.png">
+            <div class="name">Sales</div>
+        </a>
+        <a *ngIf="humanResourcesModuleEnabled" class="module-icon" [routerLink]="['/humanresources']">
+            <img src="../../assets/human-resources/hr_home.png">
+            <div class="name">HR</div>
+        </a>
+        <a *ngIf="customersModuleEnabled" class="module-icon" [routerLink]="['/customers']">
+            <img src="../../assets/customers/customers_home.png">
+            <div class="name">Customers</div>
+        </a>
+    </div>
 </ion-content>
