@@ -46,6 +46,14 @@
     font-weight: 700;
 }
 
+// remove padding
+ion-grid,
+ion-row,
+ion-col
+{
+    padding: 0;
+}
+
 // defined the default font type
 * {
     font-family: 'Open Sans Condensed';
