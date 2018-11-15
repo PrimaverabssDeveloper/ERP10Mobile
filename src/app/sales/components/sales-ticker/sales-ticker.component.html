@@ -1,31 +1,25 @@
 <div class="sales-ticker">
-    <ion-grid>
-        <ion-row>
-            <ion-col size="6">
-                <div class="chart">
-                    <div class="last-year-label">{{companySalesSummary.totalSalesPreviousLegend}}</div>
-                    <div class="current-year-label">{{companySalesSummary.totalSalesLegend}}</div>
-                    <canvas #chart></canvas>
-                </div>
-            </ion-col>
-            <ion-col size="6">
-                <div class="data">
-                    <div class="date">
-                        {{companySalesSummary.dateTimestamp | date:'mediumDate'}}
-                    </div>
-                    <div class="company">
-                        {{companySalesSummary.name}}
-                    </div>
-                    <div class="total-sales">
-                        <div class="label">
-                            Total Sales
-                        </div>
-                        <div class="value">
-                            {{companySalesSummary.totalSales | currency:companySalesSummary.currency}}
-                        </div>
-                    </div>
-                </div>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+    <div class="chart">
+        <canvas #chart></canvas>
+        <div class="last-year-label">{{companySalesSummary.totalSalesPreviousLegend}}</div>
+        <div class="current-year-label">{{companySalesSummary.totalSalesLegend}}</div>
+        <div class="end-chart"><div></div></div>
+        <div class="sales-delta" [ngClass]="{negative: salesDelta < 0}">{{salesDelta | round }}%</div>
+    </div>
+    <div class="data">
+        <div class="date">
+            {{companySalesSummary.dataTimestamp | date:'mediumDate'}}
+        </div>
+        <div class="company">
+            {{companySalesSummary.name}}
+        </div>
+        <div class="total-sales">
+            <div class="label">
+                Total Sales
+            </div>
+            <div class="value">
+                {{companySalesSummary.totalSales | currency:companySalesSummary.currency}}
+            </div>
+        </div>
+    </div>
 </div>

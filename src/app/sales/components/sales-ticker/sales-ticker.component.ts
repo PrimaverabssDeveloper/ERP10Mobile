@@ -15,7 +15,9 @@ export class SalesTickerComponent implements OnInit {
 
     @ViewChild('chart') chartCanvas: ElementRef;
 
-    public companySalesSummary: CompanySalesSummary;
+    companySalesSummary: CompanySalesSummary;
+    salesDelta: number;
+
 
     constructor() {
 
@@ -38,12 +40,14 @@ export class SalesTickerComponent implements OnInit {
         let totalSales = companySalesSummary.totalSales;
         let totalSalesPrevious = companySalesSummary.totalSalesPrevious;
 
+        this.salesDelta = ((totalSales - totalSalesPrevious) / (totalSalesPrevious)) * 100;
+
         if (totalSales > totalSalesPrevious) {
-            totalSalesPrevious = (totalSalesPrevious * 60) / totalSales;
-            totalSales = 60;
+            totalSalesPrevious = (totalSalesPrevious * 62.5) / totalSales;
+            totalSales = 62.5;
         } else {
-            totalSales = (totalSales * 60) / totalSalesPrevious;
-            totalSalesPrevious = 60;
+            totalSales = (totalSales * 62.5) / totalSalesPrevious;
+            totalSalesPrevious = 62.5;
         }
 
         this.chart = new Chart(this.chartCanvas.nativeElement, {
@@ -54,16 +58,20 @@ export class SalesTickerComponent implements OnInit {
                     {
                    //     label: '2018',
                         data: [totalSales, 100 - totalSales],
-                        borderColor: 'transparent',
-                        hoverBorderColor: 'transparent',
+                        barThickness: '200px',
+                        borderColor: 'white',
+                        borderWidth: 1,
+                        hoverBorderColor: 'white',
                         hoverBackgroundColor: ['rgb(0, 164, 229)', 'transparent'],
                         backgroundColor: ['rgb(0, 164, 229)', 'transparent']
                     },
                     {
                     //    label: '2017',
                         data: [totalSalesPrevious, 100 - totalSalesPrevious],
-                        borderColor: 'transparent',
-                        hoverBorderColor: 'transparent',
+                        barThickness: '200px',
+                        borderColor: 'white',
+                        borderWidth: 1,
+                        hoverBorderColor: 'white',
                         hoverBackgroundColor: ['rgb(212, 212, 212)', 'transparent'],
                         backgroundColor: ['rgb(212, 212, 212)', 'transparent']
                     }
@@ -71,31 +79,16 @@ export class SalesTickerComponent implements OnInit {
             },
             options: {
                 rotation: Math.PI * .5,
+                legend: {
+                    display: false,
+                },
                 responsive: true,
                 maintainAspectRatio: false,
+                cutoutPercentage: 45,
                 tooltips: {
                     enabled: false
                 }
             }
-            // options: {
-            //     responsive: true,
-            //     maintainAspectRatio: false,
-            //     scales: {
-            //         yAxes: [{
-            //             ticks: {
-            //                 beginAtZero: true
-            //             }
-            //         }],
-            //         xAxes: [
-            //             {
-            //                 display: true,
-            //                 gridLines: {
-            //                     display: false
-            //                 }
-            //             }
-            //         ]
-            //     }
-            // }
         });
     }
 }

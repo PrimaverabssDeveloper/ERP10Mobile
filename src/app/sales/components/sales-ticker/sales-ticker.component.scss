@@ -1,38 +1,107 @@
 
 
 .sales-ticker {
-    height: 230px;
+    width: 100%;
+    height: 100%;
 
     .chart {
-        width: 150px;
-        height: 150px;
+        width: 50%;
+        height: 100%;
+        position: absolute;
+        float: left;
 
         .last-year-label {
             position: absolute;
             top:120px;
             left: 90px;
-            color: rgb(212, 212, 212);
+            color: rgb(160, 160, 160);
+            top: 72%;
+            left: 52%;
+            font-size: 14pt;
         }
 
         .current-year-label {
             position: absolute;
             color: rgb(0, 164,229);
-            top:140px;
-            left: 90px;
+            top: 86%;
+            left: 52%;
+            font-size: 14pt;
+        }
+
+        .end-chart {
+            height: 1px;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top:50%;
+            transform: rotate(-45deg);
+
+            > div {
+                background: rgb(238,238,238);
+                position: relative;
+                width: 35%;
+                height: 100%;
+                left: 64%;
+            }
+        }
+
+        .sales-delta {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 15pt;
+            font-weight: bold;
+            color: rgb(32, 184, 99);
+
+            &:after {
+                content: ' ';
+                border-width: 7px;
+                border-style: solid;
+                border-top-color: transparent;
+                border-right-color: transparent;
+                border-bottom-color: rgb(32, 184, 99);
+                border-left-color: transparent;
+                width: 0;
+                height: 0;
+                position: absolute;
+                right: -20px;
+            }
+
+            &.negative {
+                color: rgb(229, 57, 55);
+
+                &:after {
+                    top: 7px;
+                    border-top-color: rgb(229, 57, 55);
+                    border-right-color: transparent;
+                    border-bottom-color: transparent;
+                    border-left-color: transparent;
+                }
+            }
         }
     }
 
     .data {
+        width: 50%;
+        height: 100%;
+        position: absolute;
+        float: left;
+        margin-left: 50%;
+
         .date {
             float: left;
             width:100%;
             text-align: left;
+            font-size: 11pt;
         }
 
         .company {
             float: left;
             width:100%;
             text-align: left;
+            font-size: 11pt;
+            font-weight: bold;
             color: rgb(0, 164,229);
         }
 
@@ -44,7 +113,9 @@
             position: absolute;
 
             .label {
-                border-bottom: 1px solid gray;
+                font-size: 11pt;
+                border-bottom: 1px solid rgb(238,238,238);
+                padding-bottom: 2px;
             }
 
             .value {
