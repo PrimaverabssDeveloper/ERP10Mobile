@@ -18,31 +18,24 @@
             <div class="data-date">{{dataDate | date:'medium'}}</div>
         </div>
         <div class="chart-controllers">
-            <div 
-                class="selected chart-ctrl-btn chart-ctrl-btn-month"  
-                [ngClass]="{'selected': timeFrame === 'monthly'}" 
+            <div class="selected chart-ctrl-btn chart-ctrl-btn-month" [ngClass]="{'selected': timeFrame === 'monthly'}"
                 (click)="changeTimeFrameAction('monthly')">M</div>
-            <div class="chart-ctrl-btn chart-ctrl-btn-quarter" 
-                [ngClass]="{'selected': timeFrame === 'quarter'}" 
+            <div class="chart-ctrl-btn chart-ctrl-btn-quarter" [ngClass]="{'selected': timeFrame === 'quarter'}"
                 (click)="changeTimeFrameAction('quarter')">Q</div>
 
-            <div class="chart-ctrl-btn chart-ctrl-btn-table" 
-                [ngClass]="{'selected': viewType === 'table'}" 
-                (click)="toggleTableView()" ></div>
+            <div class="chart-ctrl-btn chart-ctrl-btn-table" [ngClass]="{'selected': viewType === 'table'}" (click)="toggleTableView()"></div>
 
-            <div class="chart-ctrl-btn chart-ctrl-btn-accumulated" 
-                [ngClass]="{'selected': valueType === 'accumulated'}" 
+            <div class="chart-ctrl-btn chart-ctrl-btn-accumulated" [ngClass]="{'selected': valueType === 'accumulated'}"
                 (click)="changeValueType('accumulated')"></div>
 
-            <div class="selected chart-ctrl-btn chart-ctrl-btn-absolute" 
-                [ngClass]="{'selected': valueType === 'absolute'}" 
+            <div class="selected chart-ctrl-btn chart-ctrl-btn-absolute" [ngClass]="{'selected': valueType === 'absolute'}"
                 (click)="changeValueType('absolute')"></div>
         </div>
         <div class="chart">
             <canvas #chartCanvas></canvas>
         </div>
     </div>
+    <div class="footer-tab-menus-wrapper">
+        <footer-tab-menus [menus]="footerTabMenus" (menuItemSelected)="onFooterMenuItemSelected($event)"></footer-tab-menus>
+    </div>
 </ion-content>
-<ion-footer>
-    <footer-tab-menus [menus]="footerTabMenus" (menuItemSelected)="onFooterMenuItemSelected($event)"></footer-tab-menus>
-</ion-footer>

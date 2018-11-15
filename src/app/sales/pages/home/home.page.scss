@@ -3,11 +3,14 @@ $background-color: rgb(246,247,249);
 $chart-background-color: rgb(255,255,255);
 
 .page-title {
-    width: 100%;
     color: $accent-color;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
     &:before {
         content: ' ';
@@ -18,7 +21,7 @@ $chart-background-color: rgb(255,255,255);
         height: 17px;
         display: block;
         float: right;
-        margin: 2px 5px;
+        margin: 3px 5px;
     }
 }
 
@@ -108,4 +111,10 @@ $chart-background-color: rgb(255,255,255);
     canvas{
         height: 500px !important;
     }
+}
+
+.footer-tab-menus-wrapper {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
