@@ -95,10 +95,10 @@ export interface CompanySalesSummary {
     /**
      * The date when the sales values were processed.
      *
-     * @type {Date}
+     * @type {String}
      * @memberof CompanySalesSummary
      */
-    dataTimestamp: Date;
+    dataTimestamp: string;
 
     /**
      * Defines the Sales Summary of a company for the current day.
