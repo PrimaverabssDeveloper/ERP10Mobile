@@ -8,12 +8,14 @@ import { SALES_ROUTING } from './sales.routes';
 import { ENTRY_COMPONENTS, COMPONENTS } from './components';
 import { SalesService, SalesServiceProvider } from './services';
 import { ModulesSummariesService } from '../core/services';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
+        SharedModule,
         SALES_ROUTING
     ],
     declarations: [PAGES, COMPONENTS],
