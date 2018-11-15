@@ -35,6 +35,10 @@ export class FooterTabMenuComponent {
 
     getMenuArrowComputedStyle(): any {
 
+        if (!this.menus || this.menus.length === 0) {
+            return {};
+        }
+
         const index = this.menus.indexOf(this.selectedMenu);
         const menuItemWidthPercentage = 100 / this.menus.length;
 
