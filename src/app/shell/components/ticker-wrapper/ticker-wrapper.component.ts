@@ -20,6 +20,6 @@ export class TickerWrapperComponent implements OnInit {
     * @memberof TickerWrapperComponent
     */
     ngOnInit(): void {
-        this.el.nativeElement.appendChild(this.ticker.content);
+        this.el.nativeElement.firstChild.appendChild(this.ticker.content);
     }
 }
