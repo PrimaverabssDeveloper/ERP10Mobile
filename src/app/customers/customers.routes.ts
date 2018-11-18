@@ -1,5 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
-import { CustomersListPage, CustomerPage } from './pages';
+import { CustomersListPage, CustomerPage, OtherContactsPage } from './pages';
 
 const customersRoutes: Routes = [
     {
@@ -17,6 +17,10 @@ const customersRoutes: Routes = [
             {
                 path: 'customer/:companyKey/:customerKey',
                 component: CustomerPage
+            },
+            {
+                path: 'customer/:companyKey/:customerKey/othercontacts',
+                component: OtherContactsPage
             }
         ]
     }
