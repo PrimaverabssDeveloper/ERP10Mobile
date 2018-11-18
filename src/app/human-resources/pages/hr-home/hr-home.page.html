@@ -1,14 +1,22 @@
+<!-- SIDE MENU -->
+<side-menu contentId="content"></side-menu>
+
+
+<!-- PAGE -->
+
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title><span class="navbar-title">Salary Slips</span></ion-title>
+        <ion-buttons slot="end">
+            <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content id="content">
     <ion-grid class="salary-details" (click)="toggleSalaryValuesStateAction()">
         <ion-row>
             <ion-col>
@@ -68,14 +76,16 @@
         <div class="chart-container">
             <!-- yearly chart -->
             <div class="chart" [ngClass]="{'visible' : salaryPeriodState === 'yearly' }">
-                <hr-salary-chart [labels]="yearlyChartData.labels" [lastYearValues]="yearlyChartData.lastYearValues" [currentYearValues]="yearlyChartData.currentYearValues"></hr-salary-chart>
+                <hr-salary-chart [labels]="yearlyChartData.labels" [lastYearValues]="yearlyChartData.lastYearValues"
+                    [currentYearValues]="yearlyChartData.currentYearValues"></hr-salary-chart>
             </div>
 
             <!-- monthly chart -->
             <div class="chart" [ngClass]="{'visible' : salaryPeriodState === 'monthly' }">
                 <ion-slides style="height:300px">
                     <ion-slide *ngFor="let dataChart of monthlyChartsData" style="height:300px">
-                        <hr-salary-chart [labels]="dataChart.labels" [lastYearValues]="dataChart.lastYearValues" [currentYearValues]="dataChart.currentYearValues"></hr-salary-chart>
+                        <hr-salary-chart [labels]="dataChart.labels" [lastYearValues]="dataChart.lastYearValues"
+                            [currentYearValues]="dataChart.currentYearValues"></hr-salary-chart>
                     </ion-slide>
                 </ion-slides>
             </div>

@@ -1,13 +1,20 @@
+<!-- SIDE MENU -->
+<side-menu contentId="content"></side-menu>
+
+<!-- PAGE -->
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title><span class="navbar-title">{{ 'CUSTOMERS.CUSTOMER_PAGE.PAGE_TITLE' | translate }}</span></ion-title>
+        <ion-buttons slot="end">
+            <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content scrollY='false'>
+<ion-content id="content" scrollY='false'>
     <div class="customer" *ngIf="customer">
         <div class="customer-name">
             {{customer.name}}
@@ -21,7 +28,8 @@
         </div>
         <div class="customer-address-part col-6" *ngIf="customer.contacts.phone">
             <img class="customer-address-part-icon" src="../../../../assets/customers/images/tel1.png">
-            <a class="customer-address-part-label" [href]="'phone:' + customer.contacts.phone | safeUrl">{{customer.contacts.phone}} </a>
+            <a class="customer-address-part-label" [href]="'phone:' + customer.contacts.phone | safeUrl">{{customer.contacts.phone}}
+            </a>
         </div>
         <div class="customer-address-part col-6" *ngIf="customer.contacts.phone2">
             <img class="customer-address-part-icon" src="../../../../assets/customers/images/tel2.png">
@@ -45,41 +53,51 @@
             <div class="sales-header">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_TITLE' | translate }}</div>
             <div class="sales-row">
                 <div class="col-6">
-                    <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_CURRENT_YEAR_TOTAL_SALES_LABEL' | translate }} {{currentYear}}</div>
+                    <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_CURRENT_YEAR_TOTAL_SALES_LABEL'
+                        | translate }} {{currentYear}}</div>
                     <div class="sales-row-value left">{{customer.sales.totalSales.currentSales |
                         currency:customer.sales.currency}}</div>
                 </div>
 
                 <div class="col-6">
-                    <div class="sales-row-label right">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_PREVIOUS_YEAR_TOTAL_SALES_LABEL' | translate }} {{previousYear}}</div>
+                    <div class="sales-row-label right">{{
+                        'CUSTOMERS.CUSTOMER_PAGE.SALES_PREVIOUS_YEAR_TOTAL_SALES_LABEL' | translate }} {{previousYear}}</div>
                     <div class="sales-row-value right">{{customer.sales.totalSales.previousSales |
                         currency:customer.sales.currency}}</div>
                 </div>
             </div>
             <div class="sales-row">
-                <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_PENDING_ORDERS_LABEL' | translate }}</div>
+                <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_PENDING_ORDERS_LABEL' | translate
+                    }}</div>
                 <div class="sales-row-value left">{{customer.sales.pendingOrders | currency:customer.sales.currency}}</div>
             </div>
             <div class="sales-row">
-                <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_CURRENT_ACCOUNT_VALUE_LABEL' | translate }}</div>
+                <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_CURRENT_ACCOUNT_VALUE_LABEL' |
+                    translate }}</div>
                 <div class="sales-row-value left">{{customer.sales.valueCurrentAccount |
                     currency:customer.sales.currency}}</div>
             </div>
             <div class="sales-row">
                 <div class="col-6">
-                    <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_AVERAGE_COLLECTION_PERIOD_LABEL' | translate }}</div>
-                    <div class="sales-row-value left">{{customer.sales.averagePayDays.days}} {{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_DAYS_PARTIAL_LABEL' | translate }}</div>
+                    <div class="sales-row-label left">{{
+                        'CUSTOMERS.CUSTOMER_PAGE.SALES_AVERAGE_COLLECTION_PERIOD_LABEL' | translate }}</div>
+                    <div class="sales-row-value left">{{customer.sales.averagePayDays.days}} {{
+                        'CUSTOMERS.CUSTOMER_PAGE.SALES_DAYS_PARTIAL_LABEL' | translate }}</div>
                 </div>
 
                 <div class="col-6">
-                    <div class="sales-row-sub-label right">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_PAYMENT_CONDITIONS_LABEL' | translate }}</div>
-                    <div class="sales-row-value right">{{customer.sales.averagePayDays.paymentConditions}} {{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_DAYS_PARTIAL_LABEL' | translate }}</div>
+                    <div class="sales-row-sub-label right">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_PAYMENT_CONDITIONS_LABEL'
+                        | translate }}</div>
+                    <div class="sales-row-value right">{{customer.sales.averagePayDays.paymentConditions}} {{
+                        'CUSTOMERS.CUSTOMER_PAGE.SALES_DAYS_PARTIAL_LABEL' | translate }}</div>
                 </div>
             </div>
             <div class="sales-row">
                 <div class="col-6">
-                    <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_RECENT_ACTIVITY_LABEL' | translate }}</div>
-                    <div class="sales-row-value left">{{customer.sales.recentActivity.type}} {{customer.sales.recentActivity.number}}</div>
+                    <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_RECENT_ACTIVITY_LABEL' |
+                        translate }}</div>
+                    <div class="sales-row-value left">{{customer.sales.recentActivity.type}}
+                        {{customer.sales.recentActivity.number}}</div>
                 </div>
 
                 <div class="col-6">

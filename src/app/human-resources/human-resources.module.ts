@@ -7,12 +7,14 @@ import { PAGES } from './pages';
 import { COMPONENTS } from './components';
 
 import { HR_ROUTING } from './human-resources.routing';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     HR_ROUTING
   ],
   declarations: [PAGES, COMPONENTS]

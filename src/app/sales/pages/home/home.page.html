@@ -1,3 +1,7 @@
+<!-- SIDE MENU -->
+<side-menu contentId="content"></side-menu>
+
+<!-- PAGE -->
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
@@ -8,10 +12,13 @@
                 {{selectedCompany.key}}
             </div>
         </ion-title>
+        <ion-buttons slot="end">
+            <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content id="content">
     <div class="sales-content">
         <div class="sales-header">
             <div class="chart-name">MONTHLY SALES</div>

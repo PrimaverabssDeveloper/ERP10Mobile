@@ -1,13 +1,20 @@
+<!-- SIDE MENU -->
+<side-menu contentId="content"></side-menu>
+
+<!-- PAGE -->
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title><span class="navbar-title">{{ 'CUSTOMERS.OTHER_CONTACTS_PAGE.PAGE_TITLE' | translate }}</span></ion-title>
+        <ion-buttons slot="end">
+            <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content scrollY='false'>
+<ion-content id="content" scrollY='false'>
     <div class="other-contacts">
         <div class="customer-name">
             {{customerName}}
