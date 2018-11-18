@@ -1,21 +1,21 @@
 
 {
-    "SHELL": {
-        "INSTANCES_PAGE" : {
-            "PAGE_TITLE" : "Selector de Instâncias"
-        },
-        "DASHBOARD_PAGE" : {
-            "MENU_DEFINITIONS" : "Definições",
-            "MENU_LOGOUT" : "Logout",
-            "ALERT_LOGOUT_HEADER": "Logout",
-            "ALERT_LOGOUT_MESSAGE": "Pretende mesmo sair da aplicação?"
-        },
-        "SETTINGS_PAGE" : {
-            "PAGE_TITLE" : "Definições",
+    "SHARED": {
+        "SIDE_MENU_COMPONENT" : {
             "MENU_GENERAL_TITLE" : "Geral",
             "MENU_GENERAL_OPTION_LANGUAGE" : "Idioma",
             "MENU_MODULES_TITLE" : "Módulos",
-            "MENU_VERSION_TITLE" : "Versão"
+            "MENU_SESSION_TITLE" : "Sessão",
+            "MENU_SESSION_LOGOUT" : "Logout",
+            "ALERT_LOGOUT_HEADER": "Logout",
+            "ALERT_LOGOUT_MESSAGE": "Pretende mesmo sair da aplicação?"
+        }
+    },
+    "SHELL": {
+        "INSTANCES_PAGE" : {
+            "PAGE_TITLE" : "Selecione a Sua Instância"
+        },
+        "DASHBOARD_PAGE" : {
         },
         "LANGUAGE_PAGE" : {
             "PAGE_TITLE" : "Idioma",

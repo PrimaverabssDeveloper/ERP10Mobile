@@ -1,21 +1,21 @@
 
 {
-    "SHELL": {
-        "INSTANCES_PAGE" : {
-            "PAGE_TITLE" : "Instance Selector"
-        },
-        "DASHBOARD_PAGE" : {
-            "MENU_DEFINITIONS" : "Definitions",
-            "MENU_LOGOUT" : "Logout",
-            "ALERT_LOGOUT_HEADER": "Logout",
-            "ALERT_LOGOUT_MESSAGE": "Are you sure you want to log out?"
-        },
-        "SETTINGS_PAGE" : {
-            "PAGE_TITLE" : "Definitions",
+    "SHARED": {
+        "SIDE_MENU_COMPONENT" : {
             "MENU_GENERAL_TITLE" : "General",
             "MENU_GENERAL_OPTION_LANGUAGE" : "Language",
             "MENU_MODULES_TITLE" : "Modules",
-            "MENU_VERSION_TITLE" : "Version"
+            "MENU_SESSION_TITLE" : "Session",
+            "MENU_SESSION_LOGOUT" : "Logout",
+            "ALERT_LOGOUT_HEADER": "Logout",
+            "ALERT_LOGOUT_MESSAGE": "Are you sure you want to log out?"
+        }
+    },
+    "SHELL": {
+        "INSTANCES_PAGE" : {
+            "PAGE_TITLE" : "Select Your Instance"
+        },
+        "DASHBOARD_PAGE" : {
         },
         "LANGUAGE_PAGE" : {
             "PAGE_TITLE" : "Language",
