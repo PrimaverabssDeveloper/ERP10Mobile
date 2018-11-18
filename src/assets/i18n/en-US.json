@@ -49,7 +49,9 @@
             "SALES_PAYMENT_CONDITIONS_LABEL": "Payment conditions",
             "SALES_RECENT_ACTIVITY_LABEL": "Recent activity",
             "SALES_DAYS_PARTIAL_LABEL": "Days"
-
+        },
+        "OTHER_CONTACTS_PAGE" : {
+            "PAGE_TITLE": "Related contacts"
         }
     }
 }

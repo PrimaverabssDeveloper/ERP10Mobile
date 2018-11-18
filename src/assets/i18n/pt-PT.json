@@ -50,6 +50,9 @@
             "SALES_RECENT_ACTIVITY_LABEL": "Atividade Recente",
             "SALES_DAYS_PARTIAL_LABEL": "Dias"
 
+        },
+        "OTHER_CONTACTS_PAGE" : {
+            "PAGE_TITLE": "Contactos relacionados"
         }
     }
 }
