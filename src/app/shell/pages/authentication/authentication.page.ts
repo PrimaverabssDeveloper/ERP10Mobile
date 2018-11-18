@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../../core/services';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AppSettings } from '../../../core/app-settings';
 import { AlertController } from '@ionic/angular';
 
@@ -13,6 +13,7 @@ export class AuthenticationPage implements OnInit {
 
     constructor(
         private authenticationService: AuthenticationService,
+        private route: ActivatedRoute,
         private router: Router,
         private appSettings: AppSettings,
         private alertController: AlertController
@@ -25,6 +26,12 @@ export class AuthenticationPage implements OnInit {
     * @memberof AuthenticationPage
     */
     async ngOnInit() {
+
+        const logout = this.route.snapshot.queryParams['logout'];
+        if (logout) {
+            await this.authenticationService.endSession();
+        }
+
         const isAuthenticated = await this.authenticationService.isAuthenticate();
 
         if (isAuthenticated) {
