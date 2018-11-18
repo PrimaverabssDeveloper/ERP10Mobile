@@ -8,6 +8,7 @@ import { PAGES } from './pages';
 import { COMPONENTS } from './components';
 import { ROUTING } from './shell.routes';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     imports: [
@@ -16,6 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
         FormsModule,
         IonicModule,
         TranslateModule,
+        SharedModule,
         ROUTING
     ],
     declarations: [PAGES, COMPONENTS],

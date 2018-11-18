@@ -1,28 +1,6 @@
 <!-- MENU -->
-<ion-menu side="end" type="overlay" contentId="contentId2">
-    <ion-header translucent>
-        <ion-toolbar>
-            <ion-title></ion-title>
-        </ion-toolbar>
-    </ion-header>
-    <ion-content>
-        <div class="menu">
-            <ion-menu-toggle>
-                <button tappable class="menu-row" [routerLink]="['/shell/settings']">
-                    <img src="../../../../assets/shell/menu_settings.png" />
-                    <span>{{ 'SHELL.DASHBOARD_PAGE.MENU_DEFINITIONS' | translate }}</span>
-                </button>
-            </ion-menu-toggle>
+<side-menu contentId="contentId2"></side-menu>
 
-            <ion-menu-toggle>
-                <button tappable class="menu-row" (click)="logoutAction()">
-                    <img src="../../../../assets/shell/menu_logout.png">
-                    <span>{{ 'SHELL.DASHBOARD_PAGE.MENU_LOGOUT' | translate }}</span>
-                </button>
-            </ion-menu-toggle>
-        </div>
-    </ion-content>
-</ion-menu>
 
 <!-- PAGE -->
 <ion-header>

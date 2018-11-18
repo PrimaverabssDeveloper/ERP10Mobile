@@ -83,9 +83,6 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
     constructor(
         private instancesService: InstancesService,
         private modulesSummariesService: ModulesSummariesService,
-        private authenticationService: AuthenticationService,
-        private translateService: TranslateService,
-        private router: Router,
         public menuController: MenuController,
         public loadingController: LoadingController,
         public alertController: AlertController
@@ -154,33 +151,6 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
 
             this.subscriptions = null;
         }
-    }
-
-    /**
-     * Show's logout confirmation window.
-     *
-     * @memberof DashboardPage
-     */
-    async logoutAction() {
-        const header = await this.translateService.get('SHELL.DASHBOARD_PAGE.ALERT_LOGOUT_HEADER').toPromise();
-        const message = await this.translateService.get('SHELL.DASHBOARD_PAGE.ALERT_LOGOUT_MESSAGE').toPromise();
-
-        const alert = await this.alertController.create({
-            header: header,
-            message: message,
-            buttons: [
-                {
-                    text: 'Cancel',
-                    role: 'cancel'
-                },
-                {
-                    text: 'Ok',
-                    handler: () => this.logout()
-                }
-            ]
-        });
-
-        await alert.present();
     }
 
     // #endregion
@@ -267,11 +237,6 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
                     );
             }
         });
-    }
-
-    private async logout() {
-        await this.authenticationService.endSession();
-        this.router.navigate(['/shell/authentication']);
     }
     // #endregion
 }
