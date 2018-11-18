@@ -10,6 +10,7 @@ import { CUSTOMERS_ROUTING } from './customers.routes';
 import { ModulesSummariesService, AuthenticationService } from '../core/services';
 import { CustomersService, CustomersDemoService, MODULE_SERVICES } from './services';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     imports: [
@@ -17,6 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
         FormsModule,
         IonicModule,
         TranslateModule,
+        SharedModule,
         CUSTOMERS_ROUTING
     ],
     declarations: [PAGES],
