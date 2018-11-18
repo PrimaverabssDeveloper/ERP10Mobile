@@ -1,10 +1,13 @@
-import { RoundPipe } from './round';
-import { AbsolutePipe } from './absolute';
+import { RoundPipe } from './round.pipe';
+import { AbsolutePipe } from './absolute.pipe';
+import { SafeUrlPipe } from './safe-url.pipe';
 
-export * from './round';
-export * from './absolute';
+export * from './round.pipe';
+export * from './absolute.pipe';
+export * from './safe-url.pipe';
 
 export const PIPES = [
     RoundPipe,
-    AbsolutePipe
+    AbsolutePipe,
+    SafeUrlPipe
 ];
