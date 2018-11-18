@@ -3,7 +3,7 @@ import { LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../../entities';
 import { CustomersService, CustomersServiceProvider } from '../../services';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     templateUrl: './customer.page.html',
@@ -19,7 +19,8 @@ export class CustomerPage extends PageBase implements OnInit {
     constructor(
         public loadingController: LoadingController,
         private customersService: CustomersService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private router: Router
     ) {
         super(loadingController);
         const date = new Date();
@@ -45,5 +46,18 @@ export class CustomerPage extends PageBase implements OnInit {
         }
 
         await this.hideLoading();
+    }
+
+    async otherContactsAction() {
+        const commands = ['customers/customer', this.customer.companyKey, this.customer.key, 'othercontacts'];
+
+        const extras = {
+            queryParams: {
+                contacts: JSON.stringify(this.customer.contacts.otherContacts),
+                customerName: this.customer.name
+            }
+        };
+
+        this.router.navigate(commands, extras);
     }
 }
