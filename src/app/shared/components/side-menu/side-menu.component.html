@@ -1,0 +1,59 @@
+<ion-menu *ngIf="contentId" side="end" type="overlay" [contentId]="contentId">
+    <ion-header translucent>
+        <ion-toolbar>
+            <ion-title></ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <div class="settings">
+            <div class="settings-group">
+                <div class="settings-group-title">
+                    {{ 'SHARED.SIDE_MENU_COMPONENT.MENU_GENERAL_TITLE' | translate }}
+                </div>
+                <ion-menu-toggle>
+                    <button class="settings-group-item" [routerLink]="['/shell/language']">
+                        <div class="settings-group-item-label">
+                            {{ 'SHARED.SIDE_MENU_COMPONENT.MENU_GENERAL_OPTION_LANGUAGE' | translate }}
+                        </div>
+                        <img class="settings-group-item-arrow" src="../../../../assets/shell/forward_arrow.png" />
+                    </button>
+                </ion-menu-toggle>
+            </div>
+            <div class="settings-group">
+                <div class="settings-group-title">
+                    {{ 'SHARED.SIDE_MENU_COMPONENT.MENU_MODULES_TITLE' | translate }}
+                </div>
+                <ion-menu-toggle>
+                    <button class="settings-group-item settings-group-item-with-image">
+                        <img class="settings-group-item-image" src="../../../../assets/sales/sales_home.png" />
+                        <div class="settings-group-item-label">
+                            Sales
+                        </div>
+                        <img class="settings-group-item-arrow" src="../../../../assets/shell/forward_arrow.png" />
+                    </button>
+                </ion-menu-toggle>
+                <ion-menu-toggle>
+                    <button class="settings-group-item settings-group-item-with-image">
+                        <img class="settings-group-item-image" src="../../../../assets/human-resources/hr_home.png" />
+                        <div class="settings-group-item-label">
+                            Human Resources
+                        </div>
+                        <img class="settings-group-item-arrow" src="../../../../assets/shell/forward_arrow.png" />
+                    </button>
+                </ion-menu-toggle>
+            </div>
+            <div class="settings-group">
+                <div class="settings-group-title">
+                    {{ 'SHARED.SIDE_MENU_COMPONENT.MENU_SESSION_TITLE' | translate }}
+                </div>
+                <ion-menu-toggle>
+                    <button class="settings-group-item" (click)="logoutAction()">
+                        <div class="settings-group-item-label">
+                            {{ 'SHARED.SIDE_MENU_COMPONENT.MENU_SESSION_LOGOUT' | translate }}
+                        </div>
+                    </button>
+                </ion-menu-toggle>
+            </div>
+        </div>
+    </ion-content>
+</ion-menu>

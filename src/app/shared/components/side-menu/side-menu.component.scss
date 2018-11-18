@@ -1,0 +1,122 @@
+
+.menu {
+    .menu-row {
+        height: 50px;
+        width: 100%;
+        padding: 14px 10px;
+        background-color: transparent;
+
+        &:focus {
+            outline: 0;
+        }
+
+        &:active {
+            background-color: lightgrey;
+        }
+
+        img {
+            height: 25px;
+            float: left;
+        }
+
+        span {
+            font-weight: bold;
+            font-size: 10pt;
+            margin-left: 10px;
+            float: left;
+            margin-top: 5px;
+        }
+    }
+}
+
+$settings-row-height: 40px;
+$settings-row-border: 1px solid rgb(213, 213, 213);
+
+.settings {
+    background-color: rgb(246, 247, 249);
+}
+
+.settings-group {
+
+    &:last-child {
+        border-bottom: $settings-row-border;
+    }
+    
+    .settings-group-title{
+        height: $settings-row-height;
+        width: 100%;
+        border-top: $settings-row-border;
+        border-bottom: $settings-row-border;
+        padding: 10px;
+    }
+
+    .settings-group-item {
+        background: white;
+        height: $settings-row-height;
+        width: 100%;
+        padding: 10px;
+        position: relative;
+        
+        &:not(:last-child) {
+            border-bottom: $settings-row-border;
+        }
+
+        &-with-image {
+            border-bottom: 0 !important;
+            &:not(:last-child) {
+                &:after {
+                    content: ' ';
+                    position: absolute;
+                    bottom: 0;
+                    left: 45px;
+                    width: calc(100% - 40px);
+                    border-bottom: $settings-row-border;
+                }
+            }
+
+            .settings-group-item-image {
+                float: left;
+                margin-right: 10px;
+                height: 25px;
+                position: absolute;
+                top:50%;
+                left: 10px;
+                transform: translateY(-50%);
+            }
+        
+            .settings-group-item-label {
+                left: 45px;
+            }
+            
+        }
+
+        .settings-group-item-label{
+            float: left;
+            font-weight: bold;
+            font-size: 10pt;
+            position: absolute;
+            top:50%;
+            transform: translateY(-50%);
+        }
+
+        .settings-group-item-arrow{
+            height: 15px;
+            position: absolute;
+            top:50%;
+            right: 10px;
+            transform: translateY(-50%);
+        }        
+    }
+
+    button.settings-group-item {
+        &:active {
+            background-color: lightgray;
+        }
+
+        &:focus {
+            outline: 0;
+        }
+    }
+
+
+}

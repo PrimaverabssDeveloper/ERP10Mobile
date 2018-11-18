@@ -1,13 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PIPES } from './pipes';
+import { COMPONENTS } from './components';
+import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
+        IonicModule,
+        RouterModule,
+        TranslateModule
     ],
-    declarations: [PIPES],
-    exports: [PIPES]
+    declarations: [PIPES, COMPONENTS],
+    exports: [PIPES, COMPONENTS]
 })
 export class SharedModule {
 }
