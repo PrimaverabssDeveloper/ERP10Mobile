@@ -35,6 +35,16 @@ export class AuthenticationService {
 
     public isAuthenticateAsDemo: boolean;
 
+    public sessionData: AuthenticationData;
+
+    public get accessToken(): string {
+        if (this.sessionData) {
+            return this.sessionData.accessToken;
+        } else {
+            return null;
+        }
+    }
+
     constructor(
         private http: HttpClient,
         private safariViewController: SafariViewController,
@@ -50,6 +60,13 @@ export class AuthenticationService {
         this.grantType = 'authorization_code';
         this.authenticationEndpoint = this.appSettings.authenticationEndpoint;
         this.requestTokenEndpoint = this.appSettings.authenticationRequestTokenEndpoint;
+    }
+
+    async init(): Promise<any> {
+        const sessionData = await this.coreStorageService.getData<AuthenticationData>(AuthenticationService.STORAGE_SESSION_DATA_KEY);
+        if (sessionData) {
+            this.sessionData = sessionData;
+        }
     }
 
     async authenticate(): Promise<boolean> {
@@ -91,6 +108,7 @@ export class AuthenticationService {
 
             try {
                 sessionData = await this.coreStorageService.getData<AuthenticationData>(AuthenticationService.STORAGE_SESSION_DATA_KEY);
+                this.sessionData = sessionData;
             } catch (error) {
                 isAuthenticated = false;
             }

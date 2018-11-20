@@ -48,6 +48,7 @@ export class SideMenuComponent {
     }
 
     private async logout() {
-        this.router.navigate(['/shell/authentication'], { queryParams: { logout: true } } );
+        // If the router was used to navigate, the app page stack was not clean
+        window.location.href = '/shell/authentication?logout=true';
     }
 }
