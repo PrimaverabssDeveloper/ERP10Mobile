@@ -1,0 +1,27 @@
+
+.year-selector {
+    position: absolute;
+    height: 30px;
+    width: 100%;
+
+    &.dragging {
+        .years {
+            .year {
+                transition: none;
+            }
+         }
+    }
+
+    .years {
+        height: 100%;
+        width: 100%;
+        .year {
+            height: 100%;
+            width: 40px;
+            text-align: center;
+            float: left;
+            position: absolute;
+            transition: transform .1s ease-in-out; 
+        }
+    }
+}

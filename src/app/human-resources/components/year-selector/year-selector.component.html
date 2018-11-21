@@ -1,0 +1,7 @@
+<div class="year-selector" [ngClass]="{ dragging: hasDragStarted }">    
+    <div class="years" [ngStyle]="style">
+        <div class="year" *ngFor="let year of years; let i = index" [ngStyle]="getYearStyle(i)">
+            {{year}}
+        </div>
+    </div>
+</div>

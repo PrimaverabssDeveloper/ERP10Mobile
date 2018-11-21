@@ -172,6 +172,10 @@ $hr-chart-conteiner-height: $hr-charts-drawer-height - $hr-charts-drawer-handle-
             &.visible {
                 opacity: 1;
             }
+
+            > * {
+                height: 100%;
+            }
         }
     }
 }

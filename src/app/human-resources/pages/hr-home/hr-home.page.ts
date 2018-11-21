@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Slides } from '@ionic/angular';
 
 @Component({
     templateUrl: './hr-home.page.html',
@@ -6,6 +7,8 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 })
 
 export class HrHomePage implements OnInit {
+
+    @ViewChild('monthlyChartsSlide') monthlyChartsSlide: Slides;
 
     salaryPeriodState: 'yearly' | 'monthly';
     salaryValuesState: 'money' | 'percentage';
@@ -163,7 +166,11 @@ export class HrHomePage implements OnInit {
     }
 
     ngOnInit() {
-
+        this.monthlyChartsSlide
+            .ionSlideDrag
+            .subscribe(v => {
+                console.log(v);
+            });
     }
 
     toggleSalaryValuesStateAction() {
