@@ -33,7 +33,7 @@ export class AuthenticationService {
 
     private authenticationResolve: (value?: boolean | PromiseLike<boolean>) => void;
 
-    public isAuthenticateAsDemo: boolean = true;
+    public isAuthenticateAsDemo: boolean;
 
     public sessionData: AuthenticationData;
 
@@ -63,9 +63,11 @@ export class AuthenticationService {
     }
 
     async init(): Promise<any> {
-        const sessionData = await this.coreStorageService.getData<AuthenticationData>(AuthenticationService.STORAGE_SESSION_DATA_KEY);
-        if (sessionData) {
+        try {
+            const sessionData = await this.coreStorageService.getData<AuthenticationData>(AuthenticationService.STORAGE_SESSION_DATA_KEY);
             this.sessionData = sessionData;
+        } catch (error) {
+            console.log('No session storage');
         }
     }
 
@@ -226,6 +228,7 @@ export class AuthenticationService {
             .then(
                 (resolve) => {
                     console.log('stored');
+                    this.sessionData = authenticationData;
                     this.authenticationResolve(true);
                 },
                 (error) => {
