@@ -43,11 +43,11 @@
             <img class="customer-address-part-icon" src="../../../../assets/customers/images/website.png">
             <a class="customer-address-part-label" [href]='customer.contacts.webAddress | safeUrl'>{{customer.contacts.webAddress}}</a>
         </div>
+        <div class="other-addresses" (click)="otherAddressesAction()">
+            {{ 'CUSTOMERS.CUSTOMER_PAGE.CONTACTS_OTHER_ADDRESSES' | translate }}
+        </div>
         <div class="other-contacts" (click)="otherContactsAction()">
             {{ 'CUSTOMERS.CUSTOMER_PAGE.CONTACTS_OTHER_CONTACTS' | translate }}
-        </div>
-        <div class="other-addresses">
-            {{ 'CUSTOMERS.CUSTOMER_PAGE.CONTACTS_OTHER_ADDRESSES' | translate }}
         </div>
         <div class="sales">
             <div class="sales-header">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_TITLE' | translate }}</div>
@@ -66,12 +66,12 @@
                         currency:customer.sales.currency}}</div>
                 </div>
             </div>
-            <div class="sales-row">
+            <div class="sales-row" (click)="pendingOrdersAction()">
                 <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_PENDING_ORDERS_LABEL' | translate
                     }}</div>
                 <div class="sales-row-value left">{{customer.sales.pendingOrders | currency:customer.sales.currency}}</div>
             </div>
-            <div class="sales-row">
+            <div class="sales-row" (click)="currentAccountAction()">
                 <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_CURRENT_ACCOUNT_VALUE_LABEL' |
                     translate }}</div>
                 <div class="sales-row-value left">{{customer.sales.valueCurrentAccount |
@@ -92,7 +92,7 @@
                         'CUSTOMERS.CUSTOMER_PAGE.SALES_DAYS_PARTIAL_LABEL' | translate }}</div>
                 </div>
             </div>
-            <div class="sales-row">
+            <div class="sales-row" (click)="recentActivityAction()">
                 <div class="col-6">
                     <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_RECENT_ACTIVITY_LABEL' |
                         translate }}</div>

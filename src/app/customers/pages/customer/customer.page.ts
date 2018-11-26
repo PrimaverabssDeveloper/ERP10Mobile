@@ -60,4 +60,56 @@ export class CustomerPage extends PageBase implements OnInit {
 
         this.router.navigate(commands, extras);
     }
+
+    async otherAddressesAction() {
+        const commands = ['customers/customer', this.customer.companyKey, this.customer.key, 'otheraddresses'];
+
+        const extras = {
+            queryParams: {
+                addresses: JSON.stringify(this.customer.contacts.otherAddresses),
+                customerName: this.customer.name
+            }
+        };
+
+        this.router.navigate(commands, extras);
+    }
+
+    async pendingOrdersAction() {
+        const commands = ['customers/customer', this.customer.companyKey, this.customer.key, 'pendingorders'];
+
+        const extras = {
+            // queryParams: {
+            //     addresses: JSON.stringify(this.customer.contacts.otherAddresses),
+            //     customerName: this.customer.name
+            // }
+        };
+
+        this.router.navigate(commands, extras);
+    }
+
+    async currentAccountAction() {
+        const commands = ['customers/customer', this.customer.companyKey, this.customer.key, 'currentaccount'];
+
+        const extras = {
+            // queryParams: {
+            //     addresses: JSON.stringify(this.customer.contacts.otherAddresses),
+            //     customerName: this.customer.name
+            // }
+        };
+
+        this.router.navigate(commands, extras);
+    }
+
+    async recentActivityAction() {
+        const commands = ['customers/customer', this.customer.companyKey, this.customer.key, 'recentactivity'];
+
+        const extras = {
+            // queryParams: {
+            //     addresses: JSON.stringify(this.customer.contacts.otherAddresses),
+            //     customerName: this.customer.name
+            // }
+        };
+
+        this.router.navigate(commands, extras);
+    }
 }

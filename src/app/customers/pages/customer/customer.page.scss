@@ -10,11 +10,6 @@ $row-border: 1px solid rgb(213, 213, 213);
     overflow-x: hidden;
     overflow-y: auto;
 
-    .col-6 {
-        width: 50%;
-        float: left;
-    }
-
     .customer-name {
         text-align: center;
         font-weight: bold;
@@ -63,6 +58,11 @@ $row-border: 1px solid rgb(213, 213, 213);
     .other-addresses {
         @extend .other-contacts;
         border-left: $row-border;
+    }
+
+    .col-6 {
+        width: 50%;
+        float: left;
     }
 
     .sales {

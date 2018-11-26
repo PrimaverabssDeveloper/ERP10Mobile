@@ -1,0 +1,54 @@
+<!-- SIDE MENU -->
+<side-menu contentId="content"></side-menu>
+
+<!-- PAGE -->
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title><span class="navbar-title">{{ 'CUSTOMERS.OTHER_CONTACTS_PAGE.PAGE_TITLE' | translate }}</span></ion-title>
+        <ion-buttons slot="end">
+            <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<!-- 
+export interface CustomerOtherAddress {
+    code: string;
+    phone: string;
+    fax: string;
+    address: string;
+    address2: string;
+    location: string;
+    postalCode: string;
+    postalLocation: string;
+    country: string;
+} 
+-->
+
+
+<ion-content id="content" scrollY='false'>
+    <div class="content">
+        <div class="customer-name">
+            {{customerName}}
+        </div>
+        <div class="contact-card" *ngFor="let address of addresses">
+            <div class="name">{{address.code}}</div>
+            <div class="contact" *ngIf="address.phone">
+                <img class="contact-icon" src="../../../../assets/customers/images/tel1.png">
+                <a class="contact-value" [href]="'phone:' + address.phone | safeUrl">{{address.phone}}</a>
+            </div>
+            <div class="contact" *ngIf="address.fax">
+                <img class="contact-icon" src="../../../../assets/customers/images/fax.png">
+                <a class="contact-value" [href]="'fax:' + address.fax | safeUrl">{{address.fax}}</a>
+            </div>
+
+            <div class="contact" *ngIf="address.fax">
+                <img class="contact-icon" src="../../../../assets/customers/images/address.png">
+                <a class="contact-value" >Build address</a>
+            </div>
+        </div>
+    </div>
+</ion-content>

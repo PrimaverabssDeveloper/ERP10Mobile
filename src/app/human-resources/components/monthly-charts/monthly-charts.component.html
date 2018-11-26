@@ -1,0 +1,16 @@
+<div class="monthly-charts" [ngClass]="{dragging: hasDragStarted}">
+    <div #chartsWrapper class="charts-wrapper">
+        <div class="charts" [ngStyle]="getChartsStyle()">
+            <div class="chart" *ngFor="let year of years" [ngStyle]="getChartStyle()">
+                {{year}}
+            </div>
+        </div>
+    </div>
+    <div #yearsWrapper class="years-wrapper">
+        <div class="years" [ngStyle]="getYearsStyle()">
+            <div class="year" *ngFor="let year of years; let i = index" [ngStyle]="getYearStyle(i)" (click)="jumpToYearAction(i)">
+                {{year}}
+            </div>
+        </div>
+    </div>
+</div>

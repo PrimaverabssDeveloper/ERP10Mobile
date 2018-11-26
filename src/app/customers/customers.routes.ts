@@ -1,5 +1,15 @@
 import { RouterModule, Routes } from '@angular/router';
-import { CustomersListPage, CustomerPage, OtherContactsPage } from './pages';
+import {
+    CustomersListPage,
+    CustomerPage,
+    OtherContactsPage,
+    OtherAddressesPage,
+    PendingOrdersPage,
+    FinancialDocumentPage,
+    FinancialDocumentLinePage,
+    CurrentAccountPage,
+    RecentActivityPage
+} from './pages';
 
 const customersRoutes: Routes = [
     {
@@ -21,7 +31,32 @@ const customersRoutes: Routes = [
             {
                 path: 'customer/:companyKey/:customerKey/othercontacts',
                 component: OtherContactsPage
+            },
+            {
+                path: 'customer/:companyKey/:customerKey/otheraddresses',
+                component: OtherAddressesPage
+            },
+            {
+                path: 'customer/:companyKey/:customerKey/pendingorders',
+                component: PendingOrdersPage
+            },
+            {
+                path: 'customer/:companyKey/:customerKey/currentaccount',
+                component: CurrentAccountPage
+            },
+            {
+                path: 'customer/:companyKey/:customerKey/recentactivity',
+                component: RecentActivityPage
+            },
+            {
+                path: 'customer/finantialdocument',
+                component: FinancialDocumentPage
+            },
+            {
+                path: 'customer/finantialdocumentline',
+                component: FinancialDocumentLinePage
             }
+
         ]
     }
 ];

@@ -1,0 +1,50 @@
+<!-- SIDE MENU -->
+<side-menu contentId="content"></side-menu>
+
+<!-- PAGE -->
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title><span class="navbar-title">{{ 'CUSTOMERS.RECENT_ACTIVITY_PAGE.PAGE_TITLE' | translate }}</span></ion-title>
+        <ion-buttons slot="end">
+            <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content id="content" scrollY='false'>
+    <div class="recent-activity">
+        <div class="group">
+            <div class="group-header">Invoices</div>
+            <div class="group-rows">
+                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+            </div>
+        </div>
+        <div class="group">
+            <div class="group-header">Orders</div>
+            <div class="group-rows">
+                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+            </div>
+        </div>
+        <div class="group">
+            <div class="group-header">Payments</div>
+            <div class="group-rows">
+                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+            </div>
+        </div>
+    </div>
+</ion-content>

@@ -53,6 +53,18 @@
         },
         "OTHER_CONTACTS_PAGE" : {
             "PAGE_TITLE": "Contactos relacionados"
+        },
+        "PENDING_ORDERS_PAGE" : {
+            "PAGE_TITLE": "Encomendas pendentes"
+        },
+        "CURRENT_ACCOUNT_PAGE" : {
+            "PAGE_TITLE": "Conta corrente"
+        },
+        "RECENT_ACTIVITY_PAGE" : {
+            "PAGE_TITLE": "Atividate recente"
+        },
+        "FINANTIAL_DOCUMENT_PAGE" : {
+            "PAGE_TITLE": "Documento"
         }
     }
 }

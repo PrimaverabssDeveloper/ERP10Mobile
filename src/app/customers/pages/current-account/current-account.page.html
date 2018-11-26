@@ -1,0 +1,56 @@
+<!-- SIDE MENU -->
+<side-menu contentId="content"></side-menu>
+
+<!-- PAGE -->
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title><span class="navbar-title">{{ 'CUSTOMERS.CURRENT_ACCOUNT_PAGE.PAGE_TITLE' | translate }}</span></ion-title>
+        <ion-buttons slot="end">
+            <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content id="content" scrollY='false'>
+    <div class="current-account">
+        <div class="customer-name">Alcad</div>
+        <div class="current-account-total">
+            <div class="label">Current account</div>
+            <div class="value"> XXXX €</div>
+        </div>
+        <div class="tabs">
+            <div class="tab tab-older" [ngClass]="{'selected': state === 'older' }" (click)="changeStateAction('older')">
+                <div class="label">Older</div>
+                <div class="value">XXXX €</div>
+            </div>
+            <div class="tab tab-last-month" [ngClass]="{'selected': state === 'lastMonth' }" (click)="changeStateAction('lastMonth')">
+                <div class="label">Last month</div>
+                <div class="value">XXXX €</div>
+            </div>
+            <div class="tab tab-unexpired" [ngClass]="{'selected': state === 'unexpired' }" (click)="changeStateAction('unexpired')">
+                <div class="label">Unexpired</div>
+                <div class="value">XXXX €</div>
+            </div>
+            <div class="arrow" [ngStyle]="getArrowComputedStyle()"></div>
+        </div>
+        <div class="documents">
+            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+        </div>
+    </div>
+</ion-content>

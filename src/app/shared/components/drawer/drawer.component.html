@@ -1,0 +1,6 @@
+<div class="drawer" [ngClass]="{'open': state === 'open', 'close': state === 'close'}">
+    <div class="drawer-handle" (click)="toogleStateAction()">
+        <img src="../../../../assets/shared/images/handle.png" />
+    </div>
+    <ng-content></ng-content>
+</div>

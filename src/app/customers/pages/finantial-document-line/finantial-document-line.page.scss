@@ -1,0 +1,14 @@
+@import '../../styles/variables.scss';
+
+
+.finantial-document-line {
+    
+    height: 100%;
+
+    .finantial-document-line-details {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: calc(100% - 50px); // 50px => header height
+        border-top: 15px solid #F8F8F8;
+    }
+}

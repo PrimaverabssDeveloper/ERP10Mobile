@@ -1,0 +1,66 @@
+<!-- SIDE MENU -->
+<side-menu contentId="content"></side-menu>
+
+<!-- PAGE -->
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title><span class="navbar-title">{{ 'CUSTOMERS.FINANTIAL_DOCUMENT_PAGE.PAGE_TITLE' | translate }}</span></ion-title>
+        <ion-buttons slot="end">
+            <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content id="content" scrollY='false'>
+    <div class="finantial-document">
+        <finantial-document-row></finantial-document-row>
+        <finantial-document-detail-row label="Description" value="Order"></finantial-document-detail-row>
+        <finantial-document-detail-row label="Payment conditions" value="30 days"></finantial-document-detail-row>
+        <finantial-document-detail-row label="Loading point" value="Our Site"></finantial-document-detail-row>
+        <finantial-document-detail-row label="Unloading point" value="Your Site"></finantial-document-detail-row>
+        <finantial-document-detail-row label="Description" value="Order"></finantial-document-detail-row>
+        <finantial-document-detail-row label="Payment conditions" value="30 days"></finantial-document-detail-row>
+        <finantial-document-detail-row label="Loading point" value="Our Site"></finantial-document-detail-row>
+        <finantial-document-detail-row label="Unloading point" value="Your Site"></finantial-document-detail-row>
+        <finantial-document-detail-row label="Description" value="Order"></finantial-document-detail-row>
+        <finantial-document-detail-row label="Payment conditions" value="30 days"></finantial-document-detail-row>
+        <finantial-document-detail-row label="Loading point" value="Our Site"></finantial-document-detail-row>
+        <finantial-document-detail-row label="Unloading point" value="Your Site"></finantial-document-detail-row>
+        <finantial-document-detail-row label="Description" value="Order"></finantial-document-detail-row>
+        <finantial-document-detail-row label="Payment conditions" value="30 days"></finantial-document-detail-row>
+        <finantial-document-detail-row label="Loading point" value="Our Site"></finantial-document-detail-row>
+        <finantial-document-detail-row label="Unloading point" value="Your Site"></finantial-document-detail-row>
+        <finantial-document-detail-row label="Description" value="Order"></finantial-document-detail-row>
+        <finantial-document-detail-row label="Payment conditions" value="30 days"></finantial-document-detail-row>
+        <finantial-document-detail-row label="Loading point" value="Our Site"></finantial-document-detail-row>
+        <finantial-document-detail-row label="Unloading point" value="Your Site"></finantial-document-detail-row>
+    </div>
+    <drawer>
+        <div class="finantial-document-lines">
+            <div class="finantial-document-line-row" (click)="documentLineAction()">
+                <div class="row-index">
+                    001
+                </div>
+                <div class="row-data">
+                    <div class="row-data-label">
+                        cenas fixolas
+                    </div>
+                    <div class="row-data-value">
+                        <div class="row-data-value-label">Qty.</div>
+                        <div class="row-data-value-value">0 UN</div>
+                    </div>
+                    <div class="row-data-value">
+                        <div class="row-data-value-label">Qty.</div>
+                        <div class="row-data-value-value">0 UN</div>
+                    </div>
+                </div>
+                <div class="row-arrow">
+                    >
+                </div>
+            </div>
+        </div>
+    </drawer>
+</ion-content>

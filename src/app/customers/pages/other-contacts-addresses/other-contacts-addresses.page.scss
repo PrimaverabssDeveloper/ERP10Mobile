@@ -1,0 +1,56 @@
+@import '../../styles/variables.scss';
+
+
+.content {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .customer-name {
+        font-weight: bold;
+        width: 100%;
+        border-bottom: $border;
+        margin-left: 20px;
+        padding: 15px 0;
+    }
+
+    .contact-card {
+        border-bottom: $border;
+        float: left;
+        width: calc(100% - 30px);
+        margin: 10px 0 10px 30px;
+
+        .name {
+            float: left;
+            width: 100%;
+            color: $customers-accent-color;
+            font-weight: bold;
+        }
+
+        .position {
+            float: left;
+            width: 100%;
+            text-transform: uppercase;
+        }
+
+        .contact {
+            width: 100%;
+            float: left;
+            padding: 15px 0;
+            font-size: 11pt;
+
+            .contact-icon {
+                float: left;
+                height: 20px;
+            }
+
+            .contact-value {
+                float: left;
+                margin-left: 10px;
+                font-weight: 600;
+                color: rgb(43, 43, 43);
+                text-decoration: none;
+            }
+        }
+    }
+}

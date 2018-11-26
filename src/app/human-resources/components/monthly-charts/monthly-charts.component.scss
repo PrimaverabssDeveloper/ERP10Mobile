@@ -1,0 +1,75 @@
+
+.monthly-charts {
+    background: red;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+
+    &.dragging {
+        .charts {
+            transition: none;
+        } 
+
+        .years {
+            transition: none;
+        } 
+    }
+
+    // charts
+
+    .charts-wrapper {
+        background: azure;
+        width:100%;
+        height: calc(100% - 50px);
+        position: relative;
+    }
+
+    .charts {
+        height: 100%;
+        position: absolute;
+        right: 0;
+        transition: transform .35s ease-in-out;
+    }
+
+    .chart {
+        float: left;
+        height: 100%;
+        
+        &:nth-child(even) {
+            background: transparent;
+        }
+
+        &:nth-child(odd) {
+            background: orange;
+        }
+    }
+
+    // years
+    .years-wrapper {
+        // background: yellow;
+        width:100%;
+        height: 50px;
+        position: relative;
+    }
+
+    .years {
+        height: 100%;
+        position: absolute;
+        transition: transform .35s ease-in-out;
+    }
+
+    .year {
+        float: left;
+        height: 100%;
+        text-align: center;
+        padding: 10px;
+        
+        // &:nth-child(even) {
+        //     background: transparent;
+        // }
+
+        // &:nth-child(odd) {
+        //     background: orange;
+        // }
+    }
+}

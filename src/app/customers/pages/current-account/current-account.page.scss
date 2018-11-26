@@ -1,0 +1,118 @@
+@import '../../styles/variables.scss';
+
+
+.current-account {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: calc(100% - 40px); // 40px => drawer height
+
+    .customer-name {
+        width: 100%;
+        padding: 10px;
+        font-weight: bold;
+    }
+
+    .current-account-total {
+        color: $customers-accent-color;
+        font-weight: bold;
+        font-size: 10pt;
+        padding: 10px;
+
+        .label {
+            float: left;
+        }
+
+        .value {
+            float: right;
+        }
+    }
+
+    .tabs {
+        width: 100%;
+        float: left;
+        margin-top: 10px;
+
+        .tab {
+            width: 33%;
+            float: left;
+            border-right: $border;
+            border-bottom: $border;
+            padding: 0px 10px 5px 10px;
+            font-size: 9pt;
+            font-weight: bold;
+
+            &:first-child {
+                padding-left: 10px;
+            }
+
+            &:last-child {
+                border-right: none;
+            }
+
+            &.selected {
+                &.tab-older {
+                    .label {
+                        color: red;
+                    }
+                }
+    
+                &.tab-last-month {
+                    .label {
+                        color: red;
+                    }
+                }
+    
+                &.tab-unexpired {
+                    .label {
+                        color: lightgreen;
+                    }
+                }
+            }
+
+            .label {
+                color: #959595;
+                width: 100%;
+            }
+
+            .value {
+                width: 100%;
+            }
+        }
+
+        .arrow {
+            background: green;
+            position: absolute;
+            top: 117px;
+            transition: left .35s ease-in-out;
+    
+            &:before {
+                content: "";
+                top:1px;
+                width: 0;
+                height: 0;
+                position: absolute;
+                border-top: 10px solid rgb(211,212,214);
+                border-right: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+                border-left: 10px solid transparent;
+            }
+    
+            &:after {
+                content: "";
+                width: 0;
+                height: 0;
+                position: absolute;
+                border-top: 10px solid #fff;
+                border-right: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+                border-left: 10px solid transparent;
+            }
+        }
+    }
+
+    .documents {
+        width: 100%;
+        float: left;
+        border-top: 15px solid #F8F8F8;
+    }
+}

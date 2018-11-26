@@ -11,6 +11,7 @@ import { ModulesSummariesService, AuthenticationService } from '../core/services
 import { CustomersService, CustomersDemoService, MODULE_SERVICES } from './services';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../shared/shared.module';
+import { COMPONENTS } from './components';
 
 @NgModule({
     imports: [
@@ -21,7 +22,7 @@ import { SharedModule } from '../shared/shared.module';
         SharedModule,
         CUSTOMERS_ROUTING
     ],
-    declarations: [PAGES],
+    declarations: [PAGES, COMPONENTS],
     entryComponents: [],
     providers: [MODULE_SERVICES]
 })

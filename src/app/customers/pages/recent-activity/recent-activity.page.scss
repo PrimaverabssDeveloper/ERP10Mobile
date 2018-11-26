@@ -1,0 +1,29 @@
+@import '../../styles/variables.scss';
+
+
+.recent-activity {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
+
+    .group {
+        width: 100%;
+        float: left;
+
+        .group-header {
+            width: 100%;
+            float: left;
+            height: 25px;
+            font-size: 10pt;
+            line-height: 14px;
+            padding: 5px 10px;
+            background:#F8F8F8;
+        }
+
+        .group-rows {
+            width: 100%;
+            float: left;
+        }
+    }
+    
+}

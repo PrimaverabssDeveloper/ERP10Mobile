@@ -1,0 +1,38 @@
+
+@import '../../styles/variables.scss';
+
+$row-padding-top-bottom: 5px;
+$label-color: $customers-accent-color;
+$value-color: #959595;
+$color-width: 15px;
+
+
+.finantial-document-detail-row {
+    height: 50px;
+    padding-top: $row-padding-top-bottom;
+    padding-bottom: $row-padding-top-bottom;
+    border-bottom: $border;
+
+    .color {
+        float: left;
+        width: 10px;
+        height: calc(100% + #{$row-padding-top-bottom * 2});
+        margin-right: 5px;
+        margin-top: -$row-padding-top-bottom;
+    }
+
+    .label {
+        float: left;
+        width: calc(100% - #{$color-width});
+        color: $label-color;
+        font-size: 10pt;
+    }
+
+    .value {
+        float: left;
+        width: calc(100% - #{$color-width});
+        font-weight: bold;
+        font-size: 11pt;
+        color: $value-color;
+    }
+}

@@ -1,0 +1,45 @@
+
+@import '../../styles/variables.scss';
+
+
+.finantial-document-row {
+    height: 50px;
+    padding: 5px 10px;
+
+    border-bottom: $border;
+    font-weight: bold;
+
+    .label {
+        float: left;
+        width: calc(100% - 100px);
+    }
+
+    .dates {
+        float: left;
+        width: calc(100% - 100px);
+        font-size: 9pt;
+
+        .date {
+            float: left;
+        }
+
+        .second-date {
+            float: left;
+        }
+    }
+
+    .values {
+        float: right;
+        width: 100px;
+        text-align: right;
+
+        .value {
+            
+        }
+
+        .second-value {
+            font-size: 9pt;
+            color: #959595;
+        }
+    }
+}

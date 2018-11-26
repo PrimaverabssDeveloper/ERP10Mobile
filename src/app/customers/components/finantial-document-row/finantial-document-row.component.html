@@ -1,0 +1,19 @@
+<div class="finantial-document-row">
+    <div class="label">{{ title }}</div>
+
+    <div class="values">
+        <div class="value" *ngIf="value">
+            {{ value.value | currency: value.currency }}
+        </div>
+        <div class="second-value" *ngIf="secondValue">
+            {{ secondValue.value | currency: secondValue.currency }}
+        </div>
+    </div>
+
+    <div class="dates">
+        <div class="date" *ngIf="date">{{ date | date: "shortDate" }}</div>
+        <div class="second-date" *ngIf="secondDate">
+            {{ secondDate | date: "shortDate" }}
+        </div>
+    </div>
+</div>

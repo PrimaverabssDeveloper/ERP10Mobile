@@ -1,0 +1,39 @@
+
+$drawer-height: 40%;
+$drawer-handle-background-color: rgb(246, 247, 249);
+$drawer-handle-height: 40px;
+$drawer-handle-box-shadow: 0 -3px 3px -3px black;
+
+.drawer {
+    width: 100%;
+    position: absolute;
+    background-color: white;
+    bottom: 0;
+    height: $drawer-height;
+    transition: bottom .35s ease-in-out; 
+
+    &.open {
+        bottom: 0;
+    }
+
+    &.close {
+        bottom: calc(-#{$drawer-height} + #{$drawer-handle-height});
+    }
+
+    .drawer-handle {
+        height: $drawer-handle-height;
+        background: $drawer-handle-background-color;
+        box-shadow: $drawer-handle-box-shadow;
+        width: calc(100% + 10px);
+        margin-left: -5px;
+        position: relative;
+
+        img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+    
