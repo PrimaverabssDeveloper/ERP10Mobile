@@ -25,7 +25,7 @@ export class LocaleService {
     // #region 'Public Properteis'
 
     /**
-     *  Provides the current locale.
+     *  Provides the current locale code.
      *
      * @readonly
      * @type {string}
@@ -33,6 +33,18 @@ export class LocaleService {
      */
     get locale(): string {
         return this._locale ? this._locale : this._defaultLocale;
+    }
+
+    /**
+     * Provides the current base language code.
+     * When the current locale is 'pt-PT', the provided language code will be 'pt'.
+     *
+     * @readonly
+     * @type {string}
+     * @memberof LocaleService
+     */
+    get language(): string {
+        return this._locale.split('-')[0];
     }
 
     /**

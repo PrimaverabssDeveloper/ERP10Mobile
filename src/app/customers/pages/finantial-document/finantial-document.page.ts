@@ -1,7 +1,7 @@
 import { PageBase } from '../../../shared/pages';
 import { LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { Customer } from '../../entities';
+import { Document, FinantialDocumentPageConfiguration, DocumentValue, DocumentLine } from '../../entities';
 import { CustomersService, CustomersServiceProvider } from '../../services';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -11,6 +11,10 @@ import { ActivatedRoute, Router } from '@angular/router';
     providers: [CustomersServiceProvider]
 })
 export class FinancialDocumentPage extends PageBase implements OnInit {
+
+    document: Document;
+    configuration: FinantialDocumentPageConfiguration;
+    documentValues: DocumentValue[];
 
     constructor(
         public loadingController: LoadingController,
@@ -27,31 +31,48 @@ export class FinancialDocumentPage extends PageBase implements OnInit {
     * @memberof CustomerPage
     */
     async ngOnInit() {
-        // const companyKey = this.route.snapshot.paramMap.get('companyKey');
-        // const customerKey = this.route.snapshot.paramMap.get('customerKey');
+        const documentJson = this.route.snapshot.queryParams['document'];
+        const configurationJson = this.route.snapshot.queryParams['configuration'];
 
-        // await this.showLoading();
+        this.document = JSON.parse(documentJson);
+        this.configuration = JSON.parse(configurationJson);
 
-        // try {
-        //     this.customer = await this.customersService.getCustomer(companyKey, customerKey);
-        // } catch (error) {
-        //     console.log(error);
-        // }
-
-        // await this.hideLoading();
+        this.documentValues = this.getDocumentValuesForKeys(this.document.headerItems, this.configuration.documentHeaderListKeys);
     }
 
-
-    async documentLineAction() {
+    async documentLineAction(line: DocumentLine) {
         const commands = ['customers/customer', 'finantialdocumentline'];
 
         const extras = {
-            // queryParams: {
-            //     addresses: JSON.stringify(this.customer.contacts.otherAddresses),
-            //     customerName: this.customer.name
-            // }
+            queryParams: {
+                documentLine: JSON.stringify(line),
+                documentHeaderItems: JSON.stringify(this.document.headerItems),
+                headerConfiguration: JSON.stringify(this.configuration.documentHeader),
+            }
         };
 
         this.router.navigate(commands, extras);
+    }
+
+    private getDocumentValuesForKeys(documentValues: DocumentValue[], documentsKeys: string[]): DocumentValue[] {
+
+        if (!documentValues) {
+            throw Error('The parameter "documentValues" can not be null');
+        }
+
+        if (!documentsKeys) {
+            throw Error('The parameter "documentsKeys" can not be null');
+        }
+
+        const filteredDocuments: DocumentValue[] = [];
+        for (const documentKey of documentsKeys) {
+            const documentValue = documentValues.find(dv => dv.key === documentKey);
+
+            if (documentValue) {
+                filteredDocuments.push(documentValue);
+            }
+        }
+
+        return filteredDocuments;
     }
 }

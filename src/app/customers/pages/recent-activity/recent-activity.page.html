@@ -15,35 +15,32 @@
 </ion-header>
 
 <ion-content id="content" scrollY='false'>
-    <div class="recent-activity">
-        <div class="group">
+    <div class="recent-activity" *ngIf="recentActivity">
+        <div class="group" *ngIf="recentActivity.invoices">
             <div class="group-header">Invoices</div>
             <div class="group-rows">
-                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+                <finantial-document-row *ngFor="let doc of recentActivity.invoices" [title]="doc.headerItems | valueFromDocumentValues:'DocumentName|DocumentNumber'"
+                    [date]="doc.headerItems | valueFromDocumentValues:'DocumentDate'" [value]="doc.headerItems | valueFromDocumentValues:'DocumentTotalValue'"
+                    (click)="showInvoicesDetailAction(doc)">
+                </finantial-document-row>
             </div>
         </div>
-        <div class="group">
+        <div class="group" *ngIf="recentActivity.orders">
             <div class="group-header">Orders</div>
             <div class="group-rows">
-                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+                <finantial-document-row *ngFor="let doc of recentActivity.orders" [title]="doc.headerItems | valueFromDocumentValues:'DocumentName|DocumentNumber'"
+                    [date]="doc.headerItems | valueFromDocumentValues:'DocumentDate'" [value]="doc.headerItems | valueFromDocumentValues:'DocumentTotalValue'"
+                    (click)="showOrdersDetailAction(doc)">
+                </finantial-document-row>
             </div>
         </div>
-        <div class="group">
+        <div class="group" *ngIf="recentActivity.payments">
             <div class="group-header">Payments</div>
             <div class="group-rows">
-                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-                <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+                <finantial-document-row *ngFor="let doc of recentActivity.payments" [title]="doc.headerItems | valueFromDocumentValues:'DocumentName|DocumentNumber'"
+                    [date]="doc.headerItems | valueFromDocumentValues:'DocumentDate'" [value]="doc.headerItems | valueFromDocumentValues:'DocumentTotalValue'"
+                    (click)="showPaymentsDetailAction(doc)">
+                </finantial-document-row>
             </div>
         </div>
     </div>

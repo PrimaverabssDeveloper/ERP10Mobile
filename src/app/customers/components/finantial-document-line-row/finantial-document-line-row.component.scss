@@ -1,0 +1,105 @@
+
+@import '../../styles/variables.scss';
+
+$row-height: 40px;
+$row-index-width: $row-height;
+$row-arrow-width: $row-height / 2;
+$row-data-width: calc(100% - #{$row-index-width + $row-arrow-width});
+
+
+.finantial-document-line-row {
+    height: $row-height;
+    border-bottom: $border;
+
+    &:active {
+        background: darkgray;
+    }
+
+    .row-index {
+        border-left: $border;
+        border-left-width: 5px;
+        width: $row-index-width;
+        height: 100%;
+        float: left;
+        text-align: center;
+        padding: 10px 0;
+
+        &.green-color {
+            border-left-color: #65B365;
+        }
+
+        &.yellow-color {
+            border-left-color: #FFED03;
+        }
+
+        &.red-color {
+            border-left-color: #CC3939;
+        }
+    }
+
+    .row-data {
+        width: $row-data-width;
+        height: 100%;
+        float: left;
+        border-left: $border;
+        border-right: $border;
+        font-size: 10pt;
+
+        .row-data-label {
+            width: 100%;
+            height: 50%;
+            float: left;
+            border-bottom: $border;
+            padding: 0 5px;
+            font-weight: bold;
+            color: #959595;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .row-data-value {
+            width: 50%;
+            height: 50%;
+            float: left;
+            
+            &:last-child {
+                border-left: $border;
+            }
+
+            .row-data-value-label {
+                float: left;
+                padding: 0 5px;
+                color: #959595;
+
+                &:after {
+                    content: ' ';
+                    width: 1px;;
+                    height: 12px;
+                    margin-top: 4px;
+                    margin-left: 4px;
+                    float: right;
+                    background: lightgrey;
+                }
+            }
+
+            .row-data-value-value {
+                float: right;
+                padding: 0 5px;
+                font-weight: bold;
+                color: #959595;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                max-width: 70%;
+            }
+        }
+    }
+
+    .row-arrow {
+        float: left;
+        width: $row-arrow-width;
+        height: 100%;
+        padding: 13px 0;
+    }
+}

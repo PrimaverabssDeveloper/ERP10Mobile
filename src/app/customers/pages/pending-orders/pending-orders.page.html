@@ -15,13 +15,13 @@
 </ion-header>
 
 <ion-content id="content" scrollY='false'>
-    <div class="pending-orders">
-        <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-        <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-        <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-        <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-        <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-        <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-        <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+    <div class="pending-orders" *ngIf="pendingOrders">
+        <finantial-document-row 
+            *ngFor="let doc of pendingOrders.documents"
+            [title]="doc.headerItems | valueFromDocumentValues:'DocumentName|DocumentNumber'"
+            [date]="doc.headerItems | valueFromDocumentValues:'DocumentDate'"
+            [value]="doc.headerItems | valueFromDocumentValues:'DocumentTotalValue'"
+            (click)="showDocumentDetailAction(doc)">
+        </finantial-document-row>
     </div>
 </ion-content>

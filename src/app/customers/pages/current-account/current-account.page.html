@@ -15,42 +15,35 @@
 </ion-header>
 
 <ion-content id="content" scrollY='false'>
-    <div class="current-account">
+    <div class="current-account" *ngIf="currentAccount">
         <div class="customer-name">Alcad</div>
         <div class="current-account-total">
             <div class="label">Current account</div>
-            <div class="value"> XXXX €</div>
+            <div class="value">{{currentAccount.total | currency:currentAccount.currency}}</div>
         </div>
         <div class="tabs">
             <div class="tab tab-older" [ngClass]="{'selected': state === 'older' }" (click)="changeStateAction('older')">
                 <div class="label">Older</div>
-                <div class="value">XXXX €</div>
+                <div class="value">{{currentAccount.expiredSixtyDays.total | currency:currentAccount.currency}}</div>
             </div>
             <div class="tab tab-last-month" [ngClass]="{'selected': state === 'lastMonth' }" (click)="changeStateAction('lastMonth')">
                 <div class="label">Last month</div>
-                <div class="value">XXXX €</div>
-            </div>
-            <div class="tab tab-unexpired" [ngClass]="{'selected': state === 'unexpired' }" (click)="changeStateAction('unexpired')">
-                <div class="label">Unexpired</div>
-                <div class="value">XXXX €</div>
+                <div class="value">{{currentAccount.expiredThirtyDays.total | currency:currentAccount.currency}}</div>
             </div>
             <div class="arrow" [ngStyle]="getArrowComputedStyle()"></div>
+            <div class="tab tab-unexpired" [ngClass]="{'selected': state === 'unexpired' }" (click)="changeStateAction('unexpired')">
+                <div class="label">Unexpired</div>
+                <div class="value">{{currentAccount.unexpired.total | currency:currentAccount.currency}}</div>
+            </div>
         </div>
-        <div class="documents">
-            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
-            <finantial-document-row (click)="showDocumentDetailAction()"></finantial-document-row>
+        <div class="documents-wrapper">
+            <div class="documents">
+                <finantial-document-row *ngFor="let doc of documents" [title]="doc.headerItems | valueFromDocumentValues:'DocumentName|DocumentNumber'"
+                    [date]="doc.headerItems | valueFromDocumentValues:'DocumentDate'" [secondDate]="doc.headerItems | valueFromDocumentValues:'DocumentDueDate'"
+                    [value]="doc.headerItems | valueFromDocumentValues:'DocumentTotalValue'" [secondValue]="doc.headerItems | valueFromDocumentValues:'DocumentPendingValue'"
+                    (click)="showDocumentDetailAction(doc)">
+                </finantial-document-row>
+            </div>
         </div>
     </div>
 </ion-content>

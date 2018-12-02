@@ -1,7 +1,7 @@
 import { PageBase } from '../../../shared/pages';
 import { LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { Customer } from '../../entities';
+import { Customer, DocumentLine, DocumentValue, FinantialDocumentDocumentHeaderConfiguration } from '../../entities';
 import { CustomersService, CustomersServiceProvider } from '../../services';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -12,11 +12,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class FinancialDocumentLinePage extends PageBase implements OnInit {
 
+    documentLine: DocumentLine;
+    documentLineValues: DocumentValue[];
+    documentHeaderItems: DocumentValue[];
+    headerConfiguration: FinantialDocumentDocumentHeaderConfiguration;
+
+    sidebarColorIndex: number;
+
     constructor(
         public loadingController: LoadingController,
-        private customersService: CustomersService,
         private route: ActivatedRoute,
-        private router: Router
     ) {
         super(loadingController);
     }
@@ -27,17 +32,24 @@ export class FinancialDocumentLinePage extends PageBase implements OnInit {
     * @memberof FinancialDocumentLinePage
     */
     async ngOnInit() {
-        // const companyKey = this.route.snapshot.paramMap.get('companyKey');
-        // const customerKey = this.route.snapshot.paramMap.get('customerKey');
+        const documentLineJson = this.route.snapshot.queryParams['documentLine'];
+        const documentHeaderItemsJson = this.route.snapshot.queryParams['documentHeaderItems'];
+        const headerConfigurationJson = this.route.snapshot.queryParams['headerConfiguration'];
 
-        // await this.showLoading();
+        this.documentLine = JSON.parse(documentLineJson);
+        this.documentHeaderItems = JSON.parse(documentHeaderItemsJson);
+        this.headerConfiguration = JSON.parse(headerConfigurationJson);
 
-        // try {
-        //     this.customer = await this.customersService.getCustomer(companyKey, customerKey);
-        // } catch (error) {
-        //     console.log(error);
-        // }
+        this.documentLineValues = [];
+        for (const dv of this.documentLine.values) {
+            if (dv.state === 0) {
+                this.documentLineValues.push(dv);
+            }
+        }
 
-        // await this.hideLoading();
+        const colorDv = this.documentLine.values.find(dv => dv.state === 1 && dv.key === 'SidebarColorState');
+        if (colorDv) {
+            this.sidebarColorIndex = colorDv.value as number;
+        }
     }
 }

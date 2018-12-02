@@ -16,28 +16,21 @@
 
 <ion-content id="content" scrollY='false'>
     <div class="finantial-document-line">
-        <finantial-document-row></finantial-document-row>
+        <finantial-document-row 
+            [title]="documentHeaderItems | valueFromDocumentValues:headerConfiguration.titleKey"
+            [date]="documentHeaderItems | valueFromDocumentValues:headerConfiguration.dateKey"
+            [secondDate]="documentHeaderItems | valueFromDocumentValues:headerConfiguration.secondDateKey"
+            [value]="documentHeaderItems | valueFromDocumentValues:headerConfiguration.valueKey"
+            [secondValue]="documentHeaderItems | valueFromDocumentValues:headerConfiguration.secondValueKey">
+        </finantial-document-row>
+
         <div class="finantial-document-line-details">
-            <finantial-document-detail-row label="Description" value="Order" color="orange"></finantial-document-detail-row>
-            <finantial-document-detail-row label="Payment conditions" value="30 days" color="green"></finantial-document-detail-row>
-            <finantial-document-detail-row label="Loading point" value="Our Site"></finantial-document-detail-row>
-            <finantial-document-detail-row label="Unloading point" value="Your Site"></finantial-document-detail-row>
-            <finantial-document-detail-row label="Description" value="Order"></finantial-document-detail-row>
-            <finantial-document-detail-row label="Payment conditions" value="30 days"></finantial-document-detail-row>
-            <finantial-document-detail-row label="Loading point" value="Our Site"></finantial-document-detail-row>
-            <finantial-document-detail-row label="Unloading point" value="Your Site"></finantial-document-detail-row>
-            <finantial-document-detail-row label="Description" value="Order"></finantial-document-detail-row>
-            <finantial-document-detail-row label="Payment conditions" value="30 days"></finantial-document-detail-row>
-            <finantial-document-detail-row label="Loading point" value="Our Site"></finantial-document-detail-row>
-            <finantial-document-detail-row label="Unloading point" value="Your Site"></finantial-document-detail-row>
-            <finantial-document-detail-row label="Description" value="Order"></finantial-document-detail-row>
-            <finantial-document-detail-row label="Payment conditions" value="30 days"></finantial-document-detail-row>
-            <finantial-document-detail-row label="Loading point" value="Our Site"></finantial-document-detail-row>
-            <finantial-document-detail-row label="Unloading point" value="Your Site"></finantial-document-detail-row>
-            <finantial-document-detail-row label="Description" value="Order"></finantial-document-detail-row>
-            <finantial-document-detail-row label="Payment conditions" value="30 days"></finantial-document-detail-row>
-            <finantial-document-detail-row label="Loading point" value="Our Site"></finantial-document-detail-row>
-            <finantial-document-detail-row label="Unloading point" value="Your Site"></finantial-document-detail-row>
+                <finantial-document-value-row 
+                    *ngFor="let documentValue of documentLineValues" 
+                    [documentValue]="documentValue"
+                    [colorIndex]="sidebarColorIndex"
+                    >
+                </finantial-document-value-row>
         </div>
     </div>
 </ion-content>

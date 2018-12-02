@@ -1,0 +1,1974 @@
+{
+    "documents": [
+        {
+            "type": null,
+            "headerItems": [
+                {
+                    "value": "ECL",
+                    "key": "DocumentName",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Description",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Descripción",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Descrição",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "A/14",
+                    "key": "DocumentNumber",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Number",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Número",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Número",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "2018-11-28T00:00:00Z",
+                    "key": "DocumentDate",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Date",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Fecha",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Data",
+                            "short": null
+                        }
+                    },
+                    "type": 2
+                },
+                {
+                    "value": {
+                        "value": 174.46,
+                        "currency": "EUR"
+                    },
+                    "key": "DocumentTotalValue",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Total",
+                            "short": "Tot."
+                        },
+                        "es": {
+                            "full": "Total",
+                            "short": "Tot."
+                        },
+                        "pt": {
+                            "full": "Total",
+                            "short": "Tot."
+                        }
+                    },
+                    "type": 1
+                },
+                {
+                    "value": "Encomenda de Cliente",
+                    "key": "DocumentDescription",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Description",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Descripción",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Descrição",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "Factura 30 dias",
+                    "key": "DocumentPaymentConditions",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Payment conditions",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Condiciones de pago",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Condições de pagamento",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "N/ Morada",
+                    "key": "DocumentLoadingLocation",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Loading point",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Puesto de carga",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Local de carga",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "V/ Morada",
+                    "key": "DocumentUnloadingLocation",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Unloading point",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Puesto de descarga",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Local de descarga",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": {
+                        "value": 0.0,
+                        "currency": "EUR"
+                    },
+                    "key": "TotalDiscount",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Discount",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Descuento",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Desconto",
+                            "short": null
+                        }
+                    },
+                    "type": 1
+                },
+                {
+                    "value": {
+                        "value": 174.46,
+                        "currency": "EUR"
+                    },
+                    "key": "DocumentNetValue",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Net value",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Valor liquido",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Valor líquido",
+                            "short": null
+                        }
+                    },
+                    "type": 1
+                }
+            ],
+            "lines": [
+                {
+                    "type": null,
+                    "values": [
+                        {
+                            "value": "DVD +-RW",
+                            "key": "LineDescription",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Description",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Descripción",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Descrição",
+                                    "short": null
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "CMP-DVD001",
+                            "key": "LineCode",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Item",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Artículo",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Artigo",
+                                    "short": null
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "5 UN",
+                            "key": "Quantity",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Quantity",
+                                    "short": "Qty."
+                                },
+                                "es": {
+                                    "full": "Cantidad",
+                                    "short": "Ctd."
+                                },
+                                "pt": {
+                                    "full": "Quantidade",
+                                    "short": "Qtd."
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "0 UN",
+                            "key": "DeliveredQuantity",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Delivered quantity",
+                                    "short": "Dlv."
+                                },
+                                "es": {
+                                    "full": "Cantidad entregada",
+                                    "short": "Ent."
+                                },
+                                "pt": {
+                                    "full": "Quantidade entregue",
+                                    "short": "Ent."
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": {
+                                "value": 149.5,
+                                "currency": "EUR"
+                            },
+                            "key": "DocumentTotalValue",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                },
+                                "es": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                },
+                                "pt": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                }
+                            },
+                            "type": 1
+                        },
+                        {
+                            "value": {
+                                "value": 149.5,
+                                "currency": "EUR"
+                            },
+                            "key": "DocumentNetValue",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Net value",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Valor liquido",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Valor líquido",
+                                    "short": null
+                                }
+                            },
+                            "type": 1
+                        },
+                        {
+                            "value": "2019-01-12T00:00:00Z",
+                            "key": "DeliveryDate",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Delivery date",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Fecha de entrega",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Data de entrega",
+                                    "short": null
+                                }
+                            },
+                            "type": 2
+                        },
+                        {
+                            "value": 0,
+                            "key": "SidebarColorState",
+                            "state": 1,
+                            "label": null,
+                            "type": 3
+                        }
+                    ]
+                },
+                {
+                    "type": null,
+                    "values": [
+                        {
+                            "value": "FDD 3,5",
+                            "key": "LineDescription",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Description",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Descripción",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Descrição",
+                                    "short": null
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "CMP-FDD001",
+                            "key": "LineCode",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Item",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Artículo",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Artigo",
+                                    "short": null
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "4 UN",
+                            "key": "Quantity",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Quantity",
+                                    "short": "Qty."
+                                },
+                                "es": {
+                                    "full": "Cantidad",
+                                    "short": "Ctd."
+                                },
+                                "pt": {
+                                    "full": "Quantidade",
+                                    "short": "Qtd."
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "0 UN",
+                            "key": "DeliveredQuantity",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Delivered quantity",
+                                    "short": "Dlv."
+                                },
+                                "es": {
+                                    "full": "Cantidad entregada",
+                                    "short": "Ent."
+                                },
+                                "pt": {
+                                    "full": "Quantidade entregue",
+                                    "short": "Ent."
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": {
+                                "value": 24.96,
+                                "currency": "EUR"
+                            },
+                            "key": "DocumentTotalValue",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                },
+                                "es": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                },
+                                "pt": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                }
+                            },
+                            "type": 1
+                        },
+                        {
+                            "value": {
+                                "value": 24.96,
+                                "currency": "EUR"
+                            },
+                            "key": "DocumentNetValue",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Net value",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Valor liquido",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Valor líquido",
+                                    "short": null
+                                }
+                            },
+                            "type": 1
+                        },
+                        {
+                            "value": "2019-01-12T00:00:00Z",
+                            "key": "DeliveryDate",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Delivery date",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Fecha de entrega",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Data de entrega",
+                                    "short": null
+                                }
+                            },
+                            "type": 2
+                        },
+                        {
+                            "value": 0,
+                            "key": "SidebarColorState",
+                            "state": 1,
+                            "label": null,
+                            "type": 3
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": null,
+            "headerItems": [
+                {
+                    "value": "ECL",
+                    "key": "DocumentName",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Description",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Descripción",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Descrição",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "A/13",
+                    "key": "DocumentNumber",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Number",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Número",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Número",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "2018-11-27T00:00:00Z",
+                    "key": "DocumentDate",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Date",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Fecha",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Data",
+                            "short": null
+                        }
+                    },
+                    "type": 2
+                },
+                {
+                    "value": {
+                        "value": 64.87,
+                        "currency": "EUR"
+                    },
+                    "key": "DocumentTotalValue",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Total",
+                            "short": "Tot."
+                        },
+                        "es": {
+                            "full": "Total",
+                            "short": "Tot."
+                        },
+                        "pt": {
+                            "full": "Total",
+                            "short": "Tot."
+                        }
+                    },
+                    "type": 1
+                },
+                {
+                    "value": "Encomenda de Cliente",
+                    "key": "DocumentDescription",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Description",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Descripción",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Descrição",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "Factura 30 dias",
+                    "key": "DocumentPaymentConditions",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Payment conditions",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Condiciones de pago",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Condições de pagamento",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "N/ Morada",
+                    "key": "DocumentLoadingLocation",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Loading point",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Puesto de carga",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Local de carga",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "V/ Morada",
+                    "key": "DocumentUnloadingLocation",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Unloading point",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Puesto de descarga",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Local de descarga",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": {
+                        "value": 0.0,
+                        "currency": "EUR"
+                    },
+                    "key": "TotalDiscount",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Discount",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Descuento",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Desconto",
+                            "short": null
+                        }
+                    },
+                    "type": 1
+                },
+                {
+                    "value": {
+                        "value": 64.87,
+                        "currency": "EUR"
+                    },
+                    "key": "DocumentNetValue",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Net value",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Valor liquido",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Valor líquido",
+                            "short": null
+                        }
+                    },
+                    "type": 1
+                }
+            ],
+            "lines": [
+                {
+                    "type": null,
+                    "values": [
+                        {
+                            "value": "Chassis MidTower 4Bay FA 400W Media",
+                            "key": "LineDescription",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Description",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Descripción",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Descrição",
+                                    "short": null
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "CMP-CX001",
+                            "key": "LineCode",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Item",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Artículo",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Artigo",
+                                    "short": null
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "1 UN",
+                            "key": "Quantity",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Quantity",
+                                    "short": "Qty."
+                                },
+                                "es": {
+                                    "full": "Cantidad",
+                                    "short": "Ctd."
+                                },
+                                "pt": {
+                                    "full": "Quantidade",
+                                    "short": "Qtd."
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "0 UN",
+                            "key": "DeliveredQuantity",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Delivered quantity",
+                                    "short": "Dlv."
+                                },
+                                "es": {
+                                    "full": "Cantidad entregada",
+                                    "short": "Ent."
+                                },
+                                "pt": {
+                                    "full": "Quantidade entregue",
+                                    "short": "Ent."
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": {
+                                "value": 64.87,
+                                "currency": "EUR"
+                            },
+                            "key": "DocumentTotalValue",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                },
+                                "es": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                },
+                                "pt": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                }
+                            },
+                            "type": 1
+                        },
+                        {
+                            "value": {
+                                "value": 64.87,
+                                "currency": "EUR"
+                            },
+                            "key": "DocumentNetValue",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Net value",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Valor liquido",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Valor líquido",
+                                    "short": null
+                                }
+                            },
+                            "type": 1
+                        },
+                        {
+                            "value": "2019-01-11T00:00:00Z",
+                            "key": "DeliveryDate",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Delivery date",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Fecha de entrega",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Data de entrega",
+                                    "short": null
+                                }
+                            },
+                            "type": 2
+                        },
+                        {
+                            "value": 0,
+                            "key": "SidebarColorState",
+                            "state": 1,
+                            "label": null,
+                            "type": 3
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": null,
+            "headerItems": [
+                {
+                    "value": "ECL",
+                    "key": "DocumentName",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Description",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Descripción",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Descrição",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "A/6",
+                    "key": "DocumentNumber",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Number",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Número",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Número",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "2018-11-26T00:00:00Z",
+                    "key": "DocumentDate",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Date",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Fecha",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Data",
+                            "short": null
+                        }
+                    },
+                    "type": 2
+                },
+                {
+                    "value": {
+                        "value": 1146.23,
+                        "currency": "EUR"
+                    },
+                    "key": "DocumentTotalValue",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Total",
+                            "short": "Tot."
+                        },
+                        "es": {
+                            "full": "Total",
+                            "short": "Tot."
+                        },
+                        "pt": {
+                            "full": "Total",
+                            "short": "Tot."
+                        }
+                    },
+                    "type": 1
+                },
+                {
+                    "value": "Encomenda de Cliente",
+                    "key": "DocumentDescription",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Description",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Descripción",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Descrição",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "Factura 30 dias",
+                    "key": "DocumentPaymentConditions",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Payment conditions",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Condiciones de pago",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Condições de pagamento",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "N/ Morada",
+                    "key": "DocumentLoadingLocation",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Loading point",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Puesto de carga",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Local de carga",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "V/ Morada",
+                    "key": "DocumentUnloadingLocation",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Unloading point",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Puesto de descarga",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Local de descarga",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": {
+                        "value": 4.77,
+                        "currency": "EUR"
+                    },
+                    "key": "TotalDiscount",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Discount",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Descuento",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Desconto",
+                            "short": null
+                        }
+                    },
+                    "type": 1
+                },
+                {
+                    "value": {
+                        "value": 1146.23,
+                        "currency": "EUR"
+                    },
+                    "key": "DocumentNetValue",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Net value",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Valor liquido",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Valor líquido",
+                            "short": null
+                        }
+                    },
+                    "type": 1
+                }
+            ],
+            "lines": [
+                {
+                    "type": null,
+                    "values": [
+                        {
+                            "value": "Mesa p/ PC",
+                            "key": "LineDescription",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Description",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Descripción",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Descrição",
+                                    "short": null
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "A0005",
+                            "key": "LineCode",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Item",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Artículo",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Artigo",
+                                    "short": null
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "16 UN",
+                            "key": "Quantity",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Quantity",
+                                    "short": "Qty."
+                                },
+                                "es": {
+                                    "full": "Cantidad",
+                                    "short": "Ctd."
+                                },
+                                "pt": {
+                                    "full": "Quantidade",
+                                    "short": "Qtd."
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "0 UN",
+                            "key": "DeliveredQuantity",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Delivered quantity",
+                                    "short": "Dlv."
+                                },
+                                "es": {
+                                    "full": "Cantidad entregada",
+                                    "short": "Ent."
+                                },
+                                "pt": {
+                                    "full": "Quantidade entregue",
+                                    "short": "Ent."
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": {
+                                "value": 992.0,
+                                "currency": "EUR"
+                            },
+                            "key": "DocumentTotalValue",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                },
+                                "es": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                },
+                                "pt": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                }
+                            },
+                            "type": 1
+                        },
+                        {
+                            "value": {
+                                "value": 992.0,
+                                "currency": "EUR"
+                            },
+                            "key": "DocumentNetValue",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Net value",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Valor liquido",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Valor líquido",
+                                    "short": null
+                                }
+                            },
+                            "type": 1
+                        },
+                        {
+                            "value": "2019-01-10T00:00:00Z",
+                            "key": "DeliveryDate",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Delivery date",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Fecha de entrega",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Data de entrega",
+                                    "short": null
+                                }
+                            },
+                            "type": 2
+                        },
+                        {
+                            "value": 0,
+                            "key": "SidebarColorState",
+                            "state": 1,
+                            "label": null,
+                            "type": 3
+                        }
+                    ]
+                },
+                {
+                    "type": null,
+                    "values": [
+                        {
+                            "value": "Monitor TFT 747D 17'",
+                            "key": "LineDescription",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Description",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Descripción",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Descrição",
+                                    "short": null
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "B0003",
+                            "key": "LineCode",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Item",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Artículo",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Artigo",
+                                    "short": null
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "1 UN",
+                            "key": "Quantity",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Quantity",
+                                    "short": "Qty."
+                                },
+                                "es": {
+                                    "full": "Cantidad",
+                                    "short": "Ctd."
+                                },
+                                "pt": {
+                                    "full": "Quantidade",
+                                    "short": "Qtd."
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "0 UN",
+                            "key": "DeliveredQuantity",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Delivered quantity",
+                                    "short": "Dlv."
+                                },
+                                "es": {
+                                    "full": "Cantidad entregada",
+                                    "short": "Ent."
+                                },
+                                "pt": {
+                                    "full": "Quantidade entregue",
+                                    "short": "Ent."
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": {
+                                "value": 154.23,
+                                "currency": "EUR"
+                            },
+                            "key": "DocumentTotalValue",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                },
+                                "es": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                },
+                                "pt": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                }
+                            },
+                            "type": 1
+                        },
+                        {
+                            "value": {
+                                "value": 154.23,
+                                "currency": "EUR"
+                            },
+                            "key": "DocumentNetValue",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Net value",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Valor liquido",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Valor líquido",
+                                    "short": null
+                                }
+                            },
+                            "type": 1
+                        },
+                        {
+                            "value": "2019-01-10T00:00:00Z",
+                            "key": "DeliveryDate",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Delivery date",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Fecha de entrega",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Data de entrega",
+                                    "short": null
+                                }
+                            },
+                            "type": 2
+                        },
+                        {
+                            "value": 0,
+                            "key": "SidebarColorState",
+                            "state": 1,
+                            "label": null,
+                            "type": 3
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": null,
+            "headerItems": [
+                {
+                    "value": "ECL",
+                    "key": "DocumentName",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Description",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Descripción",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Descrição",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "A/4",
+                    "key": "DocumentNumber",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Number",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Número",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Número",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "2018-11-25T00:00:00Z",
+                    "key": "DocumentDate",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Date",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Fecha",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Data",
+                            "short": null
+                        }
+                    },
+                    "type": 2
+                },
+                {
+                    "value": {
+                        "value": 873.23,
+                        "currency": "EUR"
+                    },
+                    "key": "DocumentTotalValue",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Total",
+                            "short": "Tot."
+                        },
+                        "es": {
+                            "full": "Total",
+                            "short": "Tot."
+                        },
+                        "pt": {
+                            "full": "Total",
+                            "short": "Tot."
+                        }
+                    },
+                    "type": 1
+                },
+                {
+                    "value": "Encomenda de Cliente",
+                    "key": "DocumentDescription",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Description",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Descripción",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Descrição",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "Factura 30 dias",
+                    "key": "DocumentPaymentConditions",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Payment conditions",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Condiciones de pago",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Condições de pagamento",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "N/ Morada",
+                    "key": "DocumentLoadingLocation",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Loading point",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Puesto de carga",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Local de carga",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": "V/ Morada",
+                    "key": "DocumentUnloadingLocation",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Unloading point",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Puesto de descarga",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Local de descarga",
+                            "short": null
+                        }
+                    },
+                    "type": 0
+                },
+                {
+                    "value": {
+                        "value": 22.32,
+                        "currency": "EUR"
+                    },
+                    "key": "TotalDiscount",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Discount",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Descuento",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Desconto",
+                            "short": null
+                        }
+                    },
+                    "type": 1
+                },
+                {
+                    "value": {
+                        "value": 721.68,
+                        "currency": "EUR"
+                    },
+                    "key": "DocumentNetValue",
+                    "state": 0,
+                    "label": {
+                        "en": {
+                            "full": "Net value",
+                            "short": null
+                        },
+                        "es": {
+                            "full": "Valor liquido",
+                            "short": null
+                        },
+                        "pt": {
+                            "full": "Valor líquido",
+                            "short": null
+                        }
+                    },
+                    "type": 1
+                }
+            ],
+            "lines": [
+                {
+                    "type": null,
+                    "values": [
+                        {
+                            "value": "TFT 19\" HV-926TS 1280x1024",
+                            "key": "LineDescription",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Description",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Descripción",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Descrição",
+                                    "short": null
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "B0005",
+                            "key": "LineCode",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Item",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Artículo",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Artigo",
+                                    "short": null
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "4 UN",
+                            "key": "Quantity",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Quantity",
+                                    "short": "Qty."
+                                },
+                                "es": {
+                                    "full": "Cantidad",
+                                    "short": "Ctd."
+                                },
+                                "pt": {
+                                    "full": "Quantidade",
+                                    "short": "Qtd."
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "0 UN",
+                            "key": "DeliveredQuantity",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Delivered quantity",
+                                    "short": "Dlv."
+                                },
+                                "es": {
+                                    "full": "Cantidad entregada",
+                                    "short": "Ent."
+                                },
+                                "pt": {
+                                    "full": "Quantidade entregue",
+                                    "short": "Ent."
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": {
+                                "value": 873.23,
+                                "currency": "EUR"
+                            },
+                            "key": "DocumentTotalValue",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                },
+                                "es": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                },
+                                "pt": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                }
+                            },
+                            "type": 1
+                        },
+                        {
+                            "value": {
+                                "value": 721.68,
+                                "currency": "EUR"
+                            },
+                            "key": "DocumentNetValue",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Net value",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Valor liquido",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Valor líquido",
+                                    "short": null
+                                }
+                            },
+                            "type": 1
+                        },
+                        {
+                            "value": "2019-01-09T00:00:00Z",
+                            "key": "DeliveryDate",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Delivery date",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Fecha de entrega",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Data de entrega",
+                                    "short": null
+                                }
+                            },
+                            "type": 2
+                        },
+                        {
+                            "value": 0,
+                            "key": "SidebarColorState",
+                            "state": 1,
+                            "label": null,
+                            "type": 3
+                        }
+                    ]
+                },
+                {
+                    "type": null,
+                    "values": [
+                        {
+                            "value": "Rato R17B",
+                            "key": "LineDescription",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Description",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Descripción",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Descrição",
+                                    "short": null
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "B0007",
+                            "key": "LineCode",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Item",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Artículo",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Artigo",
+                                    "short": null
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "3 UN",
+                            "key": "Quantity",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Quantity",
+                                    "short": "Qty."
+                                },
+                                "es": {
+                                    "full": "Cantidad",
+                                    "short": "Ctd."
+                                },
+                                "pt": {
+                                    "full": "Quantidade",
+                                    "short": "Qtd."
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": "0 UN",
+                            "key": "DeliveredQuantity",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Delivered quantity",
+                                    "short": "Dlv."
+                                },
+                                "es": {
+                                    "full": "Cantidad entregada",
+                                    "short": "Ent."
+                                },
+                                "pt": {
+                                    "full": "Quantidade entregue",
+                                    "short": "Ent."
+                                }
+                            },
+                            "type": 0
+                        },
+                        {
+                            "value": {
+                                "value": 0.0,
+                                "currency": "EUR"
+                            },
+                            "key": "DocumentTotalValue",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                },
+                                "es": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                },
+                                "pt": {
+                                    "full": "Total",
+                                    "short": "Tot."
+                                }
+                            },
+                            "type": 1
+                        },
+                        {
+                            "value": {
+                                "value": 0.0,
+                                "currency": "EUR"
+                            },
+                            "key": "DocumentNetValue",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Net value",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Valor liquido",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Valor líquido",
+                                    "short": null
+                                }
+                            },
+                            "type": 1
+                        },
+                        {
+                            "value": "2019-01-09T00:00:00Z",
+                            "key": "DeliveryDate",
+                            "state": 0,
+                            "label": {
+                                "en": {
+                                    "full": "Delivery date",
+                                    "short": null
+                                },
+                                "es": {
+                                    "full": "Fecha de entrega",
+                                    "short": null
+                                },
+                                "pt": {
+                                    "full": "Data de entrega",
+                                    "short": null
+                                }
+                            },
+                            "type": 2
+                        },
+                        {
+                            "value": 0,
+                            "key": "SidebarColorState",
+                            "state": 1,
+                            "label": null,
+                            "type": 3
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

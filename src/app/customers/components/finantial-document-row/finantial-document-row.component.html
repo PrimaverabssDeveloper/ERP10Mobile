@@ -1,5 +1,5 @@
 <div class="finantial-document-row">
-    <div class="label">{{ title }}</div>
+    <div class="label" *ngIf="title">{{ title }}</div>
 
     <div class="values">
         <div class="value" *ngIf="value">

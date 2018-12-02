@@ -7,7 +7,7 @@ $value-color: #959595;
 $color-width: 15px;
 
 
-.finantial-document-detail-row {
+.finantial-document-value-row {
     height: 50px;
     padding-top: $row-padding-top-bottom;
     padding-bottom: $row-padding-top-bottom;
@@ -16,7 +16,7 @@ $color-width: 15px;
     .color {
         float: left;
         width: 10px;
-        height: calc(100% + #{$row-padding-top-bottom * 2});
+        height: calc(100% + #{$row-padding-top-bottom * 2 + 1});
         margin-right: 5px;
         margin-top: -$row-padding-top-bottom;
     }

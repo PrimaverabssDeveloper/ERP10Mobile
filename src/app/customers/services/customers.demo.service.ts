@@ -1,6 +1,6 @@
 import { CustomersService } from './customers.service';
 import { Injectable } from '@angular/core';
-import { Customer, CustomersSearchResult } from '../entities';
+import { Customer, CustomersSearchResult, PendingOrders, RecentActivity, CurrentAccount } from '../entities';
 import { HttpClient } from '@angular/common/http';
 import { CustomersStorageService } from './customers-storage.service';
 
@@ -25,6 +25,18 @@ export class CustomersDemoService extends CustomersService {
 
     getCustomer(companyKey: string, customerKey: string): Promise<Customer> {
         return this.getDemoDataWithFileName<Customer>('customer_PT.json');
+    }
+
+    async getPendingOrders(companyKey: string, customerKey: string): Promise<PendingOrders> {
+        return this.getDemoDataWithFileName<PendingOrders>('pending_orders.json');
+    }
+
+    async getRecentActivity(companyKey: string, customerKey: string): Promise<RecentActivity> {
+        return this.getDemoDataWithFileName<RecentActivity>('recent_activity.json');
+    }
+
+    async getCurrentAccount(companyKey: string, customerKey: string): Promise<CurrentAccount> {
+        return this.getDemoDataWithFileName<CurrentAccount>('current_account.json');
     }
 
     private getDemoDataWithFileName<T>(fileName: string): Promise<T> {

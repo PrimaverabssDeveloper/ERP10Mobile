@@ -1,18 +1,24 @@
 @import '../../styles/variables.scss';
 
+$customer-name-height: 42px;
+$current-account-total-height: 20px;
+$tabs-height: 50px;
+$documents-wrapper-height: calc(100% - #{$customer-name-height + $current-account-total-height + $tabs-height});
 
 .current-account {
     overflow-x: hidden;
     overflow-y: auto;
-    height: calc(100% - 40px); // 40px => drawer height
+    height: 100%;
 
     .customer-name {
+        height: $customer-name-height;
         width: 100%;
         padding: 10px;
         font-weight: bold;
     }
 
     .current-account-total {
+        height: $current-account-total-height;
         color: $customers-accent-color;
         font-weight: bold;
         font-size: 10pt;
@@ -28,12 +34,13 @@
     }
 
     .tabs {
+        height: $tabs-height;
         width: 100%;
         float: left;
-        margin-top: 10px;
+        padding-top: 10px;
 
         .tab {
-            width: 33%;
+            width: calc(100% / 3);
             float: left;
             border-right: $border;
             border-bottom: $border;
@@ -110,9 +117,18 @@
         }
     }
 
-    .documents {
+    .documents-wrapper {
         width: 100%;
+        height: $documents-wrapper-height;
+        overflow-x: hidden;
+        overflow-y: auto;
         float: left;
-        border-top: 15px solid #F8F8F8;
+        background: #F8F8F8;
+        padding-top: 15px;
+
+        .documents {
+            max-height: 100%;
+            background: white;
+        }
     }
 }

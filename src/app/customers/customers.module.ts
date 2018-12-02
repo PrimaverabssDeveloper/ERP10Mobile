@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe, CurrencyPipe } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 
@@ -12,6 +12,7 @@ import { CustomersService, CustomersDemoService, MODULE_SERVICES } from './servi
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../shared/shared.module';
 import { COMPONENTS } from './components';
+import { PIPES } from './pipes';
 
 @NgModule({
     imports: [
@@ -22,9 +23,13 @@ import { COMPONENTS } from './components';
         SharedModule,
         CUSTOMERS_ROUTING
     ],
-    declarations: [PAGES, COMPONENTS],
+    declarations: [PAGES, COMPONENTS, PIPES],
     entryComponents: [],
-    providers: [MODULE_SERVICES]
+    providers: [
+        MODULE_SERVICES,
+        DatePipe,
+        CurrencyPipe
+    ]
 })
 export class CustomersModule {
     // constructor(

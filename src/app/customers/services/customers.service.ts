@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CustomersSearchResult, Customer } from '../entities';
+import { CustomersSearchResult, Customer, PendingOrders, RecentActivity, CurrentAccount } from '../entities';
 import { CustomersStorageService } from './customers-storage.service';
 
 @Injectable()
@@ -47,5 +47,17 @@ export class CustomersService {
         recentViewedCustomers.unshift(customer);
 
         await this.storageService.setData(CustomersService.RECENT_VIEWED_CUSTOMERS_STORAGE_KEY, recentViewedCustomers, true);
+    }
+
+    async getPendingOrders(companyKey: string, customerKey: string): Promise<PendingOrders> {
+        return null;
+    }
+
+    async getRecentActivity(companyKey: string, customerKey: string): Promise<RecentActivity> {
+        return null;
+    }
+
+    async getCurrentAccount(companyKey: string, customerKey: string): Promise<CurrentAccount> {
+        return null;
     }
 }
