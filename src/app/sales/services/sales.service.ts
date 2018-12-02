@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SalesSummary, Company, CompanySalesSummary } from '../entities';
+import { SalesSummary, Company, CompanySalesSummary, SalesCharts } from '../entities';
 import { InstanceHttpRequestService, DomService } from '../../core/services';
 import { SalesTickerComponent } from '../components';
 
@@ -82,6 +82,23 @@ export class SalesService {
         }
 
         return salesSummary;
+    }
+
+    async getSalesCharts(): Promise<SalesCharts> {
+
+        // let salesSummary: SalesSummary;
+
+        // try {
+        //     salesSummary = await this.instanceHttpRequestService
+        //         .get<SalesSummary>(SALES_SUMMARY)
+        //         .toPromise();
+        // } catch (error) {
+        //     console.log(error);
+        //     return null;
+        // }
+
+        // return salesSummary;
+        return null;
     }
 
     // #endregion

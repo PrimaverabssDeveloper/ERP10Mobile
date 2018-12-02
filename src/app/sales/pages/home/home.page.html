@@ -25,18 +25,22 @@
             <div class="data-date">{{dataDate | date:'medium'}}</div>
         </div>
         <div class="chart-controllers">
-            <div class="selected chart-ctrl-btn chart-ctrl-btn-month" [ngClass]="{'selected': timeFrame === 'monthly'}"
-                (click)="changeTimeFrameAction('monthly')">M</div>
-            <div class="chart-ctrl-btn chart-ctrl-btn-quarter" [ngClass]="{'selected': timeFrame === 'quarter'}"
-                (click)="changeTimeFrameAction('quarter')">Q</div>
+            <div class="selected chart-ctrl-btn chart-ctrl-btn-month" 
+                    *ngIf="showTimeFrameSelector"
+                    [ngClass]="{'selected': timeFrame === 'monthly'}" 
+                    (click)="changeTimeFrameAction('monthly')">M</div>
+            <div class="chart-ctrl-btn chart-ctrl-btn-quarter" 
+                    *ngIf="showTimeFrameSelector"
+                    [ngClass]="{'selected': timeFrame === 'quarter'}"
+                    (click)="changeTimeFrameAction('quarter')">Q</div>
 
             <div class="chart-ctrl-btn chart-ctrl-btn-table" [ngClass]="{'selected': viewType === 'table'}" (click)="toggleTableView()"></div>
 
-            <div class="chart-ctrl-btn chart-ctrl-btn-accumulated" [ngClass]="{'selected': valueType === 'accumulated'}"
-                (click)="changeValueType('accumulated')"></div>
+            <div class="chart-ctrl-btn chart-ctrl-btn-accumulated" [ngClass]="{'selected': valueType === 'accum'}"
+                (click)="changeValueType('accum')"></div>
 
-            <div class="selected chart-ctrl-btn chart-ctrl-btn-absolute" [ngClass]="{'selected': valueType === 'absolute'}"
-                (click)="changeValueType('absolute')"></div>
+            <div class="selected chart-ctrl-btn chart-ctrl-btn-absolute" [ngClass]="{'selected': valueType === 'abs'}"
+                (click)="changeValueType('abs')"></div>
         </div>
         <div class="chart">
             <canvas #chartCanvas></canvas>

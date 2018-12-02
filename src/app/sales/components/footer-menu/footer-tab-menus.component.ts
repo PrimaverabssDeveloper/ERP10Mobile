@@ -88,7 +88,7 @@ export interface FooterTabMenu {
 export interface FooterTabMenuItem {
     key: string;
     label: string;
-    selected?: boolean;
+    selected?: () => boolean;
 }
 
 export interface FooterMenuItemSelectedEvent {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SalesSummary, Company, CompanySalesSummary } from '../entities';
+import { SalesSummary, Company, CompanySalesSummary, SalesCharts } from '../entities';
 import { InstanceHttpRequestService, DomService } from '../../core/services';
 import { SalesTickerComponent } from '../components';
 import { SalesService } from './sales.service';
@@ -45,6 +45,12 @@ export class SalesDemoService extends SalesService {
         const salesSummary = await this.getDemoDataWithFileName<SalesSummary>('sales_summary.json');
 
         return salesSummary;
+    }
+
+    async getSalesCharts(): Promise<SalesCharts> {
+        const salesCharts = await this.getDemoDataWithFileName<SalesCharts>('sales-charts.json');
+
+        return salesCharts;
     }
 
     // #endregion
