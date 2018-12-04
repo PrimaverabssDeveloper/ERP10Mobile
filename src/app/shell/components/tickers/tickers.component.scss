@@ -1,34 +1,72 @@
+$tickers-pager-height: 50px;
+$tickers-slides-height: calc(100% - #{$tickers-pager-height});
+$ticker-header-height: 100px;
+$ticker-content-height: calc(100% - #{$ticker-header-height});
+
+.tickers {
+    width: 100%;
+    height: 100%;
+}
+
+.tickers-slides {
+    height: $tickers-slides-height;
+    width: 100%;
+
+    ion-slides {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.tickers-pager {
+    width: 100%;
+    height: $tickers-pager-height;
+    padding: 15px;
+    text-align: center;
+    font-size: 12pt;
+}
+
 .ticker{
     width: 100%;
-    margin: 10px;
+    height: 100%;
+    padding: 0 15%;
 
-    .ticker-title{
+    .ticker-header {
         width: 100%;
-        text-align: center;
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: 10pt;
-        margin-bottom: 20px;
-    }
+        height: $ticker-header-height;
+        position: relative;
 
-    .ticker-settings {
-        height: 15px;
-        width: 35px;
-        top: 10px;
-        right: 0;
-        position: absolute;
+        .ticker-title{
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 20pt;
+            color: #596278;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    
+        .ticker-settings {
+            height: 100%;
+            width: 25px;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
 
-        background-image: url(../../../../assets/shell/ticker_settings.png);
-        background-repeat: no-repeat;
-        background-color: transparent;
-        background-size: 15px;
-        background-position: center;
+            background-image: url(../../../../assets/shell/ticker_settings.png);
+            background-repeat: no-repeat;
+            background-color: transparent;
+            background-size: 25px;
+            background-position: center;
+        }
     }
 
     .ticker-content{
         width: 100%;
-        padding: 25%;
+        height: $ticker-content-height;
         position: relative;
+        
 
         >* {
             width: 100%;
@@ -38,10 +76,4 @@
             left: 0;
         }
     }
-}
-
-.tickers-pager {
-    width: 100%;
-    text-align: center;
-    font-size: 10pt;
 }

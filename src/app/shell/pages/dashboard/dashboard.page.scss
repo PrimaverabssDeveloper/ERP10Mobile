@@ -1,6 +1,13 @@
 
+$modules-drawer-height: 160px;
+$tickers-height: calc(100% - #{$modules-drawer-height});
+
 .v10-navbar-logo {
     height: 25px;
+}
+
+.tickers {
+    height: $tickers-height;
 }
 
 .modules-drawer {
@@ -9,6 +16,7 @@
     position: absolute;
     bottom: 0;
     width: 100%;
+    height: $modules-drawer-height;
     padding: 10px 30px;
 
     .module-icon {
