@@ -1,0 +1,3116 @@
+{
+    "chartBundle": [
+        {
+            "key": "MONTLHYTOTALS",
+            "order": 0,
+            "titles": {
+                "pt": "Vendas mensais",
+                "en": "Monthly sales",
+                "es": "Ventas mensuales"
+            },
+            "isTimeChart": true,
+            "periodType": "M",
+            "currency": "EUR",
+            "reportingCurrency": "EUR",
+            "series": [
+                {
+                    "key": "0",
+                    "legend": "2017"
+                },
+                {
+                    "key": "1",
+                    "legend": "2018"
+                }
+            ],
+            "charts": [
+                {
+                    "valueType": "abs",
+                    "hasTotal": true,
+                    "dataSet": [
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "1",
+                                    "description": "1",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 1311346.16,
+                                            "reportingValue": 1311346.16
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 735915.23916666664,
+                                            "reportingValue": 735915.23916666664
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "2",
+                                    "description": "2",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 1066633.37,
+                                            "reportingValue": 1066633.37
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 1023340.9491666667,
+                                            "reportingValue": 1023340.9491666667
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "3",
+                                    "description": "3",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 790379.08,
+                                            "reportingValue": 790379.08
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 989275.69916666672,
+                                            "reportingValue": 989275.69916666672
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "4",
+                                    "description": "4",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 747095.4,
+                                            "reportingValue": 747095.4
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 614696.25916666666,
+                                            "reportingValue": 614696.25916666666
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "5",
+                                    "description": "5",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 862624.9,
+                                            "reportingValue": 862624.9
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 1045901.3791666667,
+                                            "reportingValue": 1045901.3791666667
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "6",
+                                    "description": "6",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 735338.65,
+                                            "reportingValue": 735338.65
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 1339052.2591666668,
+                                            "reportingValue": 1339052.2591666668
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "7",
+                                    "description": "7",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 680610.45,
+                                            "reportingValue": 680610.45
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 1129092.0091666668,
+                                            "reportingValue": 1129092.0091666668
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "8",
+                                    "description": "8",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 701327.19,
+                                            "reportingValue": 701327.19
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 1014257.6791666667,
+                                            "reportingValue": 1014257.6791666667
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "9",
+                                    "description": "9",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 703524.71,
+                                            "reportingValue": 703524.71
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 888478.27916666656,
+                                            "reportingValue": 888478.27916666656
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "10",
+                                    "description": "10",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 1059207.04,
+                                            "reportingValue": 1059207.04
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 922351.20916666661,
+                                            "reportingValue": 922351.20916666661
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "11",
+                                    "description": "11",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 1461822.14,
+                                            "reportingValue": 1461822.14
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 1494833.4091666667,
+                                            "reportingValue": 1494833.4091666667
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "12",
+                                    "description": "12",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 1832653.42,
+                                            "reportingValue": 1832653.42
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 1796582.6391666667,
+                                            "reportingValue": 1796582.6391666667
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "totals",
+                            "dataPoints": [
+                                {
+                                    "label": "totals",
+                                    "description": "totals",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 11952562.510000002,
+                                            "reportingValue": 11952562.510000002
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 12993777.01,
+                                            "reportingValue": 12993777.01
+                                        }
+                                    ],
+                                    "isTotal": true
+                                }
+                            ],
+                            "hasTotal": true
+                        }
+                    ]
+                },
+                {
+                    "valueType": "accum",
+                    "hasTotal": false,
+                    "dataSet": [
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "1",
+                                    "description": "1",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 1311346.16,
+                                            "reportingValue": 1311346.16
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 735915.23916666664,
+                                            "reportingValue": 735915.23916666664
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "2",
+                                    "description": "2",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 2377979.53,
+                                            "reportingValue": 2377979.53
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 1759256.1883333335,
+                                            "reportingValue": 1759256.1883333335
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "3",
+                                    "description": "3",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 3168358.61,
+                                            "reportingValue": 3168358.61
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 2748531.8875,
+                                            "reportingValue": 2748531.8875
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "4",
+                                    "description": "4",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 3915454.01,
+                                            "reportingValue": 3915454.01
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 3363228.146666667,
+                                            "reportingValue": 3363228.146666667
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "5",
+                                    "description": "5",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 4778078.91,
+                                            "reportingValue": 4778078.91
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 4409129.5258333338,
+                                            "reportingValue": 4409129.5258333338
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "6",
+                                    "description": "6",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 5513417.56,
+                                            "reportingValue": 5513417.56
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 5748181.785,
+                                            "reportingValue": 5748181.785
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "7",
+                                    "description": "7",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 6194028.01,
+                                            "reportingValue": 6194028.01
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 6877273.7941666674,
+                                            "reportingValue": 6877273.7941666674
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "8",
+                                    "description": "8",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 6895355.2,
+                                            "reportingValue": 6895355.2
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 7891531.4733333346,
+                                            "reportingValue": 7891531.4733333346
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "9",
+                                    "description": "9",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 7598879.91,
+                                            "reportingValue": 7598879.91
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 8780009.7525000013,
+                                            "reportingValue": 8780009.7525000013
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "10",
+                                    "description": "10",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 8658086.95,
+                                            "reportingValue": 8658086.95
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 9702360.9616666678,
+                                            "reportingValue": 9702360.9616666678
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "11",
+                                    "description": "11",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 10119909.09,
+                                            "reportingValue": 10119909.09
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 11197194.370833334,
+                                            "reportingValue": 11197194.370833334
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "12",
+                                    "description": "12",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 11952562.51,
+                                            "reportingValue": 11952562.51
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 12993777.01,
+                                            "reportingValue": 12993777.01
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        }
+                    ]
+                }
+            ],
+            "filters": []
+        },
+        {
+            "key": "WEEKLYTOTALS",
+            "order": 0,
+            "titles": {
+                "pt": "Vendas semanais",
+                "en": "Weekly sales",
+                "es": "Ventas semanales"
+            },
+            "isTimeChart": true,
+            "periodType": "W",
+            "currency": "EUR",
+            "reportingCurrency": "EUR",
+            "series": [
+                {
+                    "key": "0",
+                    "legend": "2017"
+                },
+                {
+                    "key": "1",
+                    "legend": "2018"
+                }
+            ],
+            "charts": [
+                {
+                    "valueType": "abs",
+                    "hasTotal": true,
+                    "dataSet": [
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "1",
+                                    "description": "1",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 264100.48,
+                                            "reportingValue": 264100.48
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 1296.9,
+                                            "reportingValue": 1296.9
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "2",
+                                    "description": "2",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 168368.51,
+                                            "reportingValue": 168368.51
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 312419.95,
+                                            "reportingValue": 312419.95
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "3",
+                                    "description": "3",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 446735.36,
+                                            "reportingValue": 446735.36
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 198090.77,
+                                            "reportingValue": 198090.77
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "4",
+                                    "description": "4",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 214279.83,
+                                            "reportingValue": 214279.83
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 205503.48,
+                                            "reportingValue": 205503.48
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "5",
+                                    "description": "5",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 504798.4,
+                                            "reportingValue": 504798.4
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 540836.12,
+                                            "reportingValue": 540836.12
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "6",
+                                    "description": "6",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 179282.47,
+                                            "reportingValue": 179282.47
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 173775.4,
+                                            "reportingValue": 173775.4
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "7",
+                                    "description": "7",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 156830.66,
+                                            "reportingValue": 156830.66
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 146697.02,
+                                            "reportingValue": 146697.02
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "8",
+                                    "description": "8",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 220717.65,
+                                            "reportingValue": 220717.65
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 143428.27,
+                                            "reportingValue": 143428.27
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "9",
+                                    "description": "9",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 487682.36,
+                                            "reportingValue": 487682.36
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 472879.71,
+                                            "reportingValue": 472879.71
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "10",
+                                    "description": "10",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 173680.74,
+                                            "reportingValue": 173680.74
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 133315.44,
+                                            "reportingValue": 133315.44
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "11",
+                                    "description": "11",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 130388.42,
+                                            "reportingValue": 130388.42
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 190801.15,
+                                            "reportingValue": 190801.15
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "12",
+                                    "description": "12",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 149873.15,
+                                            "reportingValue": 149873.15
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 173675.26,
+                                            "reportingValue": 173675.26
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "13",
+                                    "description": "13",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 424555.16,
+                                            "reportingValue": 424555.16
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 276116.66,
+                                            "reportingValue": 276116.66
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "14",
+                                    "description": "14",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 31707.14,
+                                            "reportingValue": 31707.14
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 318024.13,
+                                            "reportingValue": 318024.13
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "15",
+                                    "description": "15",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 141142.32,
+                                            "reportingValue": 141142.32
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 363.13,
+                                            "reportingValue": 363.13
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "16",
+                                    "description": "16",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 137070.17,
+                                            "reportingValue": 137070.17
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 1588.2,
+                                            "reportingValue": 1588.2
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "17",
+                                    "description": "17",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 117504.06,
+                                            "reportingValue": 117504.06
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 117504.06,
+                                            "reportingValue": 117504.06
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "18",
+                                    "description": "18",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 264100.48,
+                                            "reportingValue": 264100.48
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 264100.48,
+                                            "reportingValue": 264100.48
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "19",
+                                    "description": "19",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 124265.81,
+                                            "reportingValue": 124265.81
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 432145.81,
+                                            "reportingValue": 432145.81
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "20",
+                                    "description": "20",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 122147.89,
+                                            "reportingValue": 122147.89
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 213546.89,
+                                            "reportingValue": 213546.89
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "21",
+                                    "description": "21",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 111084.64,
+                                            "reportingValue": 111084.64
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 321345.64,
+                                            "reportingValue": 321345.64
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "22",
+                                    "description": "22",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 472106.3,
+                                            "reportingValue": 472106.3
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 532123.3,
+                                            "reportingValue": 532123.3
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "23",
+                                    "description": "23",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 278281.81,
+                                            "reportingValue": 278281.81
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 152446.81,
+                                            "reportingValue": 152446.81
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "24",
+                                    "description": "24",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 88275.37,
+                                            "reportingValue": 88275.37
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 314532.37,
+                                            "reportingValue": 314532.37
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "25",
+                                    "description": "25",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 89059.97,
+                                            "reportingValue": 89059.97
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 452356.97,
+                                            "reportingValue": 452356.97
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "26",
+                                    "description": "26",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 259621.41,
+                                            "reportingValue": 259621.41
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 89372.41,
+                                            "reportingValue": 89372.41
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "27",
+                                    "description": "27",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 90245.66,
+                                            "reportingValue": 90245.66
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 145234.66,
+                                            "reportingValue": 145234.66
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "28",
+                                    "description": "28",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 136099.83,
+                                            "reportingValue": 136099.83
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 423523.83,
+                                            "reportingValue": 423523.83
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "29",
+                                    "description": "29",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 117338.55,
+                                            "reportingValue": 117338.55
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 143524.55,
+                                            "reportingValue": 143524.55
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "30",
+                                    "description": "30",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 203593.24,
+                                            "reportingValue": 203593.24
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 343256.24,
+                                            "reportingValue": 343256.24
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "31",
+                                    "description": "31",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 173769.76,
+                                            "reportingValue": 173769.76
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 304923.76,
+                                            "reportingValue": 304923.76
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "32",
+                                    "description": "32",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 109356.99,
+                                            "reportingValue": 109356.99
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 203948.99,
+                                            "reportingValue": 203948.99
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "33",
+                                    "description": "33",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 97489.9,
+                                            "reportingValue": 97489.9
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 150349.9,
+                                            "reportingValue": 150349.9
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "34",
+                                    "description": "34",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 72500.15,
+                                            "reportingValue": 72500.15
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 90348.15,
+                                            "reportingValue": 90348.15
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "35",
+                                    "description": "35",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 401401.04,
+                                            "reportingValue": 401401.04
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 304924.04,
+                                            "reportingValue": 304924.04
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "36",
+                                    "description": "36",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 137090.05,
+                                            "reportingValue": 137090.05
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 324252.05,
+                                            "reportingValue": 324252.05
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "37",
+                                    "description": "37",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 133739.99,
+                                            "reportingValue": 133739.99
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 47010.99,
+                                            "reportingValue": 47010.99
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "38",
+                                    "description": "38",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 116959.43,
+                                            "reportingValue": 116959.43
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 163145.43,
+                                            "reportingValue": 163145.43
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "39",
+                                    "description": "39",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 228059.77,
+                                            "reportingValue": 228059.77
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 341244.77,
+                                            "reportingValue": 341244.77
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "40",
+                                    "description": "40",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 159624.88,
+                                            "reportingValue": 159624.88
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 352345.88,
+                                            "reportingValue": 352345.88
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "41",
+                                    "description": "41",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 209417.71,
+                                            "reportingValue": 209417.71
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 242352.71,
+                                            "reportingValue": 242352.71
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "42",
+                                    "description": "42",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 219928.63,
+                                            "reportingValue": 219928.63
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 348374.63,
+                                            "reportingValue": 348374.63
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "43",
+                                    "description": "43",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 177837.92,
+                                            "reportingValue": 177837.92
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 542242.92,
+                                            "reportingValue": 542242.92
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "44",
+                                    "description": "44",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 395017.01,
+                                            "reportingValue": 395017.01
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 343259.01,
+                                            "reportingValue": 343259.01
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "45",
+                                    "description": "45",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 192465.23,
+                                            "reportingValue": 192465.23
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 648392.23,
+                                            "reportingValue": 648392.23
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "46",
+                                    "description": "46",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 258316.58,
+                                            "reportingValue": 258316.58
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 398347.58,
+                                            "reportingValue": 398347.58
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "47",
+                                    "description": "47",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 353086.88,
+                                            "reportingValue": 353086.88
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 293948.88,
+                                            "reportingValue": 293948.88
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "48",
+                                    "description": "48",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 643009.81,
+                                            "reportingValue": 643009.81
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 437289.81,
+                                            "reportingValue": 437289.81
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "49",
+                                    "description": "49",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 270928.67,
+                                            "reportingValue": 270928.67
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 223249.67,
+                                            "reportingValue": 223249.67
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "50",
+                                    "description": "50",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 308663.17,
+                                            "reportingValue": 308663.17
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 0.0,
+                                            "reportingValue": 0.0
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "51",
+                                    "description": "51",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 298199.6,
+                                            "reportingValue": 298199.6
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 0.0,
+                                            "reportingValue": 0.0
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "52",
+                                    "description": "52",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 555695.54,
+                                            "reportingValue": 555695.54
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 0.0,
+                                            "reportingValue": 0.0
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "53",
+                                    "description": "53",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 399166.44,
+                                            "reportingValue": 399166.44
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 0.0,
+                                            "reportingValue": 0.0
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "totals",
+                            "dataPoints": [
+                                {
+                                    "label": "totals",
+                                    "description": "totals",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 12216662.99,
+                                            "reportingValue": 12216662.99
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 12993777.010000004,
+                                            "reportingValue": 12993777.010000004
+                                        }
+                                    ],
+                                    "isTotal": true
+                                }
+                            ],
+                            "hasTotal": true
+                        }
+                    ]
+                },
+                {
+                    "valueType": "accum",
+                    "hasTotal": false,
+                    "dataSet": [
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "1",
+                                    "description": "1",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 0.0,
+                                            "reportingValue": 0.0
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 1296.9,
+                                            "reportingValue": 1296.9
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "2",
+                                    "description": "2",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 168368.51,
+                                            "reportingValue": 168368.51
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 313716.85000000003,
+                                            "reportingValue": 313716.85000000003
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "3",
+                                    "description": "3",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 615103.87,
+                                            "reportingValue": 615103.87
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 511807.62,
+                                            "reportingValue": 511807.62
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "4",
+                                    "description": "4",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 829383.7,
+                                            "reportingValue": 829383.7
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 717311.1,
+                                            "reportingValue": 717311.1
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "5",
+                                    "description": "5",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 1334182.1,
+                                            "reportingValue": 1334182.1
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 1258147.22,
+                                            "reportingValue": 1258147.22
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "6",
+                                    "description": "6",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 1513464.57,
+                                            "reportingValue": 1513464.57
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 1431922.6199999999,
+                                            "reportingValue": 1431922.6199999999
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "7",
+                                    "description": "7",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 1670295.23,
+                                            "reportingValue": 1670295.23
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 1578619.64,
+                                            "reportingValue": 1578619.64
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "8",
+                                    "description": "8",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 1891012.88,
+                                            "reportingValue": 1891012.88
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 1722047.91,
+                                            "reportingValue": 1722047.91
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "9",
+                                    "description": "9",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 2378695.24,
+                                            "reportingValue": 2378695.24
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 2194927.62,
+                                            "reportingValue": 2194927.62
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "10",
+                                    "description": "10",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 2552375.98,
+                                            "reportingValue": 2552375.98
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 2328243.06,
+                                            "reportingValue": 2328243.06
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "11",
+                                    "description": "11",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 2682764.4,
+                                            "reportingValue": 2682764.4
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 2519044.21,
+                                            "reportingValue": 2519044.21
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "12",
+                                    "description": "12",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 2832637.55,
+                                            "reportingValue": 2832637.55
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 2692719.4699999997,
+                                            "reportingValue": 2692719.4699999997
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "13",
+                                    "description": "13",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 3257192.71,
+                                            "reportingValue": 3257192.71
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 2968836.13,
+                                            "reportingValue": 2968836.13
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "14",
+                                    "description": "14",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 3288899.85,
+                                            "reportingValue": 3288899.85
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 3286860.26,
+                                            "reportingValue": 3286860.26
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "15",
+                                    "description": "15",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 3430042.17,
+                                            "reportingValue": 3430042.17
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 3287223.3899999997,
+                                            "reportingValue": 3287223.3899999997
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "16",
+                                    "description": "16",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 3567112.34,
+                                            "reportingValue": 3567112.34
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 3288811.59,
+                                            "reportingValue": 3288811.59
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "17",
+                                    "description": "17",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 3684616.4,
+                                            "reportingValue": 3684616.4
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 3406315.65,
+                                            "reportingValue": 3406315.65
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "18",
+                                    "description": "18",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 3948716.88,
+                                            "reportingValue": 3948716.88
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 3670416.13,
+                                            "reportingValue": 3670416.13
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "19",
+                                    "description": "19",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 4072982.69,
+                                            "reportingValue": 4072982.69
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 4102561.94,
+                                            "reportingValue": 4102561.94
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "20",
+                                    "description": "20",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 4195130.58,
+                                            "reportingValue": 4195130.58
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 4316108.83,
+                                            "reportingValue": 4316108.83
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "21",
+                                    "description": "21",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 4306215.22,
+                                            "reportingValue": 4306215.22
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 4637454.47,
+                                            "reportingValue": 4637454.47
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "22",
+                                    "description": "22",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 4778321.52,
+                                            "reportingValue": 4778321.52
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 5169577.77,
+                                            "reportingValue": 5169577.77
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "23",
+                                    "description": "23",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 5056603.33,
+                                            "reportingValue": 5056603.33
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 5322024.5799999991,
+                                            "reportingValue": 5322024.5799999991
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "24",
+                                    "description": "24",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 5144878.7,
+                                            "reportingValue": 5144878.7
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 5636556.9499999993,
+                                            "reportingValue": 5636556.9499999993
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "25",
+                                    "description": "25",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 5233938.67,
+                                            "reportingValue": 5233938.67
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 6088913.919999999,
+                                            "reportingValue": 6088913.919999999
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "26",
+                                    "description": "26",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 5493560.08,
+                                            "reportingValue": 5493560.08
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 6178286.3299999991,
+                                            "reportingValue": 6178286.3299999991
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "27",
+                                    "description": "27",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 5583805.74,
+                                            "reportingValue": 5583805.74
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 6323520.9899999993,
+                                            "reportingValue": 6323520.9899999993
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "28",
+                                    "description": "28",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 5719905.57,
+                                            "reportingValue": 5719905.57
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 6747044.8199999994,
+                                            "reportingValue": 6747044.8199999994
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "29",
+                                    "description": "29",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 5837244.12,
+                                            "reportingValue": 5837244.12
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 6890569.3699999992,
+                                            "reportingValue": 6890569.3699999992
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "30",
+                                    "description": "30",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 6040837.36,
+                                            "reportingValue": 6040837.36
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 7233825.6099999994,
+                                            "reportingValue": 7233825.6099999994
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "31",
+                                    "description": "31",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 6214607.12,
+                                            "reportingValue": 6214607.12
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 7538749.3699999992,
+                                            "reportingValue": 7538749.3699999992
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "32",
+                                    "description": "32",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 6323964.11,
+                                            "reportingValue": 6323964.11
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 7742698.3599999994,
+                                            "reportingValue": 7742698.3599999994
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "33",
+                                    "description": "33",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 6421454.01,
+                                            "reportingValue": 6421454.01
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 7893048.26,
+                                            "reportingValue": 7893048.26
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "34",
+                                    "description": "34",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 6493954.16,
+                                            "reportingValue": 6493954.16
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 7983396.41,
+                                            "reportingValue": 7983396.41
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "35",
+                                    "description": "35",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 6895355.2,
+                                            "reportingValue": 6895355.2
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 8288320.45,
+                                            "reportingValue": 8288320.45
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "36",
+                                    "description": "36",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 7032445.25,
+                                            "reportingValue": 7032445.25
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 8612572.5,
+                                            "reportingValue": 8612572.5
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "37",
+                                    "description": "37",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 7166185.24,
+                                            "reportingValue": 7166185.24
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 8659583.49,
+                                            "reportingValue": 8659583.49
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "38",
+                                    "description": "38",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 7283144.67,
+                                            "reportingValue": 7283144.67
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 8822728.92,
+                                            "reportingValue": 8822728.92
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "39",
+                                    "description": "39",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 7511204.44,
+                                            "reportingValue": 7511204.44
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 9163973.69,
+                                            "reportingValue": 9163973.69
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "40",
+                                    "description": "40",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 7670829.32,
+                                            "reportingValue": 7670829.32
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 9516319.57,
+                                            "reportingValue": 9516319.57
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "41",
+                                    "description": "41",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 7880247.03,
+                                            "reportingValue": 7880247.03
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 9758672.2800000012,
+                                            "reportingValue": 9758672.2800000012
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "42",
+                                    "description": "42",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 8100175.66,
+                                            "reportingValue": 8100175.66
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 10107046.910000002,
+                                            "reportingValue": 10107046.910000002
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "43",
+                                    "description": "43",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 8278013.58,
+                                            "reportingValue": 8278013.58
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 10649289.830000002,
+                                            "reportingValue": 10649289.830000002
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "44",
+                                    "description": "44",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 8673030.59,
+                                            "reportingValue": 8673030.59
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 10992548.840000002,
+                                            "reportingValue": 10992548.840000002
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "45",
+                                    "description": "45",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 8865495.82,
+                                            "reportingValue": 8865495.82
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 11640941.070000002,
+                                            "reportingValue": 11640941.070000002
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "46",
+                                    "description": "46",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 9123812.4,
+                                            "reportingValue": 9123812.4
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 12039288.650000002,
+                                            "reportingValue": 12039288.650000002
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "47",
+                                    "description": "47",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 9476899.28,
+                                            "reportingValue": 9476899.28
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 12333237.530000003,
+                                            "reportingValue": 12333237.530000003
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "48",
+                                    "description": "48",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 10119909.09,
+                                            "reportingValue": 10119909.09
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 12770527.340000004,
+                                            "reportingValue": 12770527.340000004
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "49",
+                                    "description": "49",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 10390837.76,
+                                            "reportingValue": 10390837.76
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 12993777.010000004,
+                                            "reportingValue": 12993777.010000004
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "50",
+                                    "description": "50",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 10699500.93,
+                                            "reportingValue": 10699500.93
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 12993777.010000004,
+                                            "reportingValue": 12993777.010000004
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "51",
+                                    "description": "51",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 10997700.53,
+                                            "reportingValue": 10997700.53
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 12993777.010000004,
+                                            "reportingValue": 12993777.010000004
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "52",
+                                    "description": "52",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 11553396.07,
+                                            "reportingValue": 11553396.07
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 12993777.010000004,
+                                            "reportingValue": 12993777.010000004
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        },
+                        {
+                            "period": "-1",
+                            "dataPoints": [
+                                {
+                                    "label": "53",
+                                    "description": "53",
+                                    "values": [
+                                        {
+                                            "seriesKey": "0",
+                                            "value": 11952562.51,
+                                            "reportingValue": 11952562.51
+                                        },
+                                        {
+                                            "seriesKey": "1",
+                                            "value": 12993777.010000004,
+                                            "reportingValue": 12993777.010000004
+                                        }
+                                    ],
+                                    "isTotal": false
+                                }
+                            ],
+                            "hasTotal": false
+                        }
+                    ]
+                }
+            ],
+            "filters": []
+        }
+    ]
+}

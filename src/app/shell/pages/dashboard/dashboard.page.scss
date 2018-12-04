@@ -1,13 +1,20 @@
 
-.modules-drawer {
+.v10-navbar-logo {
+    height: 25px;
+}
 
+.modules-drawer {
+    border-top: 1px solid #dbe0eb;
+    background: #f8f9fc;
     position: absolute;
     bottom: 0;
+    width: 100%;
+    padding: 10px 30px;
 
     .module-icon {
-        width: calc(33% - 50px);
+        width: 30%;
+        padding: 10px;
         text-align: center;
-        margin:25px;
         text-decoration: none;
         color: black;
         font-weight: bold;
@@ -16,6 +23,7 @@
     
         .name {
             margin-top: 5px;
+            color: #596278
         }
     }
 }
