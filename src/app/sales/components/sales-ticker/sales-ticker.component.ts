@@ -18,8 +18,13 @@ export class SalesTickerComponent implements OnInit {
     companySalesSummary: CompanySalesSummary;
     salesDelta: number;
 
+    get dataStyle(): any {
+        return {
+            width: `${this.elementRef.nativeElement.children[0].clientHeight * .5}px`
+        };
+    }
 
-    constructor() {
+    constructor(private elementRef: ElementRef) {
 
     }
 
@@ -53,27 +58,24 @@ export class SalesTickerComponent implements OnInit {
         this.chart = new Chart(this.chartCanvas.nativeElement, {
             type: 'doughnut',
             data: {
-                // labels: ['2017', '2018'],
                 datasets: [
                     {
-                   //     label: '2018',
                         data: [totalSales, 100 - totalSales],
-                        barThickness: '200px',
+                        barThickness: '250px',
                         borderColor: 'white',
                         borderWidth: 1,
                         hoverBorderColor: 'white',
-                        hoverBackgroundColor: ['rgb(0, 164, 229)', 'transparent'],
-                        backgroundColor: ['rgb(0, 164, 229)', 'transparent']
+                        hoverBackgroundColor: ['#1D317D', 'transparent'],
+                        backgroundColor: ['#1D317D', 'transparent']
                     },
                     {
-                    //    label: '2017',
                         data: [totalSalesPrevious, 100 - totalSalesPrevious],
-                        barThickness: '200px',
+                        barThickness: '250px',
                         borderColor: 'white',
                         borderWidth: 1,
                         hoverBorderColor: 'white',
-                        hoverBackgroundColor: ['rgb(212, 212, 212)', 'transparent'],
-                        backgroundColor: ['rgb(212, 212, 212)', 'transparent']
+                        hoverBackgroundColor: ['#DBE0EB', 'transparent'],
+                        backgroundColor: ['#DBE0EB', 'transparent']
                     }
                 ],
             },
