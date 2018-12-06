@@ -15,13 +15,19 @@ import { LocaleService } from '../../../core/services';
 })
 export class HomePage extends PageBase implements OnInit {
 
+    private readonly yAxisNumberOfSteps = 4;
+
     private chart: any;
     private companies: Company[];
     private salesCharts: SalesCharts;
+    private yAxisMaxValues: number[];
 
     selectedCompanySales: CompanySales;
     selectedChartBundle: ChartBundle;
     showTimeFrameSelector: boolean;
+
+    yAxisScaleStep: number;
+    yAxisScaleUnitPrefix: string;
 
     @ViewChild('chartCanvas') chartCanvas;
 
@@ -38,7 +44,7 @@ export class HomePage extends PageBase implements OnInit {
         public loadingController: LoadingController,
         private salesService: SalesService,
         private localeService: LocaleService
-        ) {
+    ) {
 
         super(loadingController);
 
@@ -47,6 +53,8 @@ export class HomePage extends PageBase implements OnInit {
         this.valueType = 'abs';
         this.viewType = 'chart';
         this.showTimeFrameSelector = true;
+
+        this.yAxisMaxValues = this.getPossibleMaximumYValues(this.yAxisNumberOfSteps);
     }
 
     async ngOnInit() {
@@ -79,9 +87,9 @@ export class HomePage extends PageBase implements OnInit {
             },
             event: event,
             translucent: true
-          });
+        });
 
-          return await popover.present();
+        return await popover.present();
     }
 
     changeTimeFrameAction(timeFrame: 'monthly' | 'quarter') {
@@ -121,11 +129,12 @@ export class HomePage extends PageBase implements OnInit {
         const datasets = [];
         let labels: string[];
 
+        let maxValue = 0;
         for (const serie of chartBundle.series) {
             const dataSet = {
                 label: serie.legend,
                 data: [],
-                backgroundColor: serie.key === '0' ? 'rgba(204, 204, 204, .85)' : 'rgba(81, 131, 255, .85)'
+                backgroundColor: serie.key === '0' ? '#DBE0EB' : '#1D317D'
             };
 
             labels = [];
@@ -142,6 +151,7 @@ export class HomePage extends PageBase implements OnInit {
 
                 const value = dataPoint.values.find(v => v.seriesKey === serie.key);
                 if (value) {
+                    maxValue = value.value > maxValue ? value.value : maxValue;
                     dataSet.data.push(value.value);
                 } else {
                     dataSet.data.push(0);
@@ -150,6 +160,11 @@ export class HomePage extends PageBase implements OnInit {
 
             datasets.push(dataSet);
         }
+
+        const yAxisMaxValueStepAndUnit = this.calcYAxisMaxValueStepAndUnit(maxValue, this.yAxisNumberOfSteps, this.yAxisMaxValues);
+        this.yAxisScaleStep = yAxisMaxValueStepAndUnit.yAxisScaleStep;
+        this.yAxisScaleUnitPrefix = yAxisMaxValueStepAndUnit.yAxisScaleUnitPrefix;
+        const yAxisMaxValue = yAxisMaxValueStepAndUnit.yAxisMaxValue;
 
         if (this.chart && chartType !== this.chart.config.type) {
             this.chart.destroy();
@@ -171,10 +186,16 @@ export class HomePage extends PageBase implements OnInit {
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
                     scales: {
                         yAxes: [{
+                            display: false,
                             ticks: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                maxTicksLimit: this.yAxisNumberOfSteps,
+                                max: yAxisMaxValue
                             }
                         }],
                         xAxes: [
@@ -361,5 +382,123 @@ export class HomePage extends PageBase implements OnInit {
         }
 
         return aggregatedValues;
+    }
+
+    private getPossibleMaximumYValues(yAxisNumberOfSteps: number): number[] {
+
+        let baseTicks = yAxisNumberOfSteps;
+        let baseLcm = this.lcm(yAxisNumberOfSteps, 10);
+
+        while (baseTicks > 10) {
+            baseTicks /= 10;
+            baseLcm /= 10;
+        }
+
+        let limitTicks = baseTicks * 10;
+
+        let limitLcm = 1;
+        while (limitLcm < limitTicks) {
+            limitLcm *= 10;
+        }
+
+
+        let mode = true;
+        let value = baseTicks;
+        const values: number[] = [];
+
+        while (value < 10000) {
+
+            if (value < 10 && value + baseTicks < 10) {
+                value += baseTicks;
+                continue;
+            }
+
+            if (mode) {
+
+                value += baseTicks;
+                if (value >= limitTicks) {
+                    mode = false;
+                    baseTicks *= 10;
+                    limitTicks *= 10;
+                }
+
+            } else {
+
+                value += baseLcm;
+                if (value >= limitLcm && (value % baseTicks === 0)) {
+                    mode = true;
+                    baseLcm *= 10;
+                    limitLcm *= 10;
+                }
+
+            }
+
+            if (value < 10000) {
+                const dividend = value;
+                const divisor = 10;
+                values.push(dividend / divisor);
+            }
+        }
+
+        return values;
+    }
+
+    private calcYAxisMaxValueStepAndUnit(maximumValue: number, yAxisNumberOfSteps: number, yAxisMaxValues: number[])
+        : { yAxisMaxValue: number, yAxisScaleStep: number, yAxisScaleUnitPrefix: string } {
+
+        let divider = 1;
+        const thousandDecimal = 1000;
+
+        while (!((maximumValue / divider) < thousandDecimal)) {
+            divider *= 1000;
+        }
+
+        const baseMaximum = maximumValue / divider;
+
+        let scaleMaximum: number = null;
+
+        for (const possibleMaximum of yAxisMaxValues) {
+            if (baseMaximum < possibleMaximum) {
+                scaleMaximum = possibleMaximum;
+                break;
+            }
+        }
+
+        if (!scaleMaximum) {
+            scaleMaximum = yAxisMaxValues[0];
+            divider *= 1000;
+        }
+
+        let prefix = 'T';
+
+        switch (divider) {
+            case 1: prefix = ''; break;
+            case 1000: prefix = 'K'; break;
+            case 1000000: prefix = 'M'; break;
+            case 1000000000: prefix = 'B'; break;
+        }
+
+        const yMaximumValue = scaleMaximum * divider;
+        const yScaleStep = scaleMaximum / yAxisNumberOfSteps;
+
+        return {
+            yAxisMaxValue: yMaximumValue,
+            yAxisScaleStep: yScaleStep,
+            yAxisScaleUnitPrefix: prefix
+        };
+    }
+
+    private lcm(x: number, y: number) {
+        const l = Math.min(x, y);
+        const h = Math.max(x, y);
+        const m = l * h;
+
+        for (let i = h; i < m; i += h) {
+            if (i % l === 0) {
+                return i;
+            }
+        }
+
+        return m;
     }
 }

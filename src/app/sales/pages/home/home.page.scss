@@ -2,6 +2,17 @@ $accent-color: rgb(80,130,254);
 $background-color: rgb(246,247,249);
 $chart-background-color: rgb(255,255,255);
 
+
+$footer-tab-menus-wrapper-height: 50px;
+$sales-content-height: calc(100% - #{$footer-tab-menus-wrapper-height});
+
+$sales-header-height:64px;
+$chart-controllers-height:40px;
+$chart-legend-height: 40px;
+$extra-info-height:40px;
+$month-selector:40px;
+$chart-height: calc(100% - #{$sales-header-height + $chart-controllers-height + $chart-legend-height + $extra-info-height + $month-selector});
+
 .page-title {
     color: $accent-color;
     overflow: hidden;
@@ -27,26 +38,26 @@ $chart-background-color: rgb(255,255,255);
 
 .sales-content{
     background-color: $background-color;
-    margin-top:-20px;
-    padding-top: 20px;
-    height: 100%;;
+    // margin-top:-20px;
+    // padding-top: 20px;
+    height: $sales-content-height;;
 }
 
 .sales-header {
-        
-    margin: 10px;
+    height: $sales-header-height;
+    padding: 10px;
 
     .chart-name {
         font-weight: bolder;
     }
 
-    .data-date{
+    .data-date {
 
     }
 }
 
 .chart-controllers {
-    height: 40px;
+    height: $chart-controllers-height;
 
     .chart-ctrl-btn {
         float: left;
@@ -105,11 +116,97 @@ $chart-background-color: rgb(255,255,255);
     }
 }
 
+.chart-legend {
+    background-color: white;
+    width: 100%;
+    height: $chart-legend-height;
+}
+
 .chart{
     background: $chart-background-color;
-    padding:20px 10px;
-    canvas{
-        height: 500px !important;
+    position: relative;
+    height: $chart-height;
+    
+    .scale-line {
+        width: 100%;
+        height: 1px;
+        position: absolute;
+
+        span {
+            font-size: 8pt;
+            font-weight: bold;
+            position: absolute;
+            margin-top: -7px;
+            margin-left: 8px;
+        }
+
+        &:after {
+            content: ' ';
+            width: 100%;
+            height: 1px;
+            background: gray;
+            position: absolute;
+            left: 0;
+            margin-left: 30px;
+        }
+
+        // 33px => 6px + 27px
+        // 6px => the top position of the axis
+        // 27px => the bottom position of the zero axis
+        // the '100%' of chart will be (100% - (6px + 27px))
+
+        &-one {
+            bottom: calc((100% - 33px) * .25 + 27px);
+        }
+
+        &-two {
+            bottom: calc((100% - 33px) * .5 + 27px);
+        }
+
+        &-three {
+            bottom: calc((100% - 33px) * .75 + 27px);
+        }
+
+        &-four {
+            bottom: calc((100% - 33px) * 1 + 27px);
+        }
+    }
+
+    .chart-canvas-wrapper {
+        width: 100%;
+        height: 100%;
+        padding-left: 25px;
+        
+        canvas{
+            position: absolute;
+            z-index: 1;
+        }
+    }
+}
+
+.extra-info {
+    width: 100%;
+    height: $extra-info-height;
+    background: white;
+    text-align: center;
+}
+
+.month-selector {
+    width: 100%;
+    height: $month-selector;
+    padding: 0 10px;
+
+    .month {
+        background: white;
+        float: left;
+        height: 35px;
+        text-align: center;
+        width: calc(100% / 12);
+        padding: 5px;
+
+        &:nth-child(odd) {
+            background: transparent;
+        }
     }
 }
 
@@ -117,4 +214,5 @@ $chart-background-color: rgb(255,255,255);
     position: absolute;
     bottom: 0;
     width: 100%;
+    height: $footer-tab-menus-wrapper-height;
 }

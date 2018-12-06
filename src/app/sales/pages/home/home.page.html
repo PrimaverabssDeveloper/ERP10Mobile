@@ -25,14 +25,10 @@
             <div class="data-date">{{dataDate | date:'medium'}}</div>
         </div>
         <div class="chart-controllers">
-            <div class="selected chart-ctrl-btn chart-ctrl-btn-month" 
-                    *ngIf="showTimeFrameSelector"
-                    [ngClass]="{'selected': timeFrame === 'monthly'}" 
-                    (click)="changeTimeFrameAction('monthly')">M</div>
-            <div class="chart-ctrl-btn chart-ctrl-btn-quarter" 
-                    *ngIf="showTimeFrameSelector"
-                    [ngClass]="{'selected': timeFrame === 'quarter'}"
-                    (click)="changeTimeFrameAction('quarter')">Q</div>
+            <div class="selected chart-ctrl-btn chart-ctrl-btn-month" *ngIf="showTimeFrameSelector" [ngClass]="{'selected': timeFrame === 'monthly'}"
+                (click)="changeTimeFrameAction('monthly')">M</div>
+            <div class="chart-ctrl-btn chart-ctrl-btn-quarter" *ngIf="showTimeFrameSelector" [ngClass]="{'selected': timeFrame === 'quarter'}"
+                (click)="changeTimeFrameAction('quarter')">Q</div>
 
             <div class="chart-ctrl-btn chart-ctrl-btn-table" [ngClass]="{'selected': viewType === 'table'}" (click)="toggleTableView()"></div>
 
@@ -42,8 +38,40 @@
             <div class="selected chart-ctrl-btn chart-ctrl-btn-absolute" [ngClass]="{'selected': valueType === 'abs'}"
                 (click)="changeValueType('abs')"></div>
         </div>
+        <div class="chart-legend">
+            {{yAxisScaleUnitPrefix}} | 2018 | 2017
+        </div>
         <div class="chart">
-            <canvas #chartCanvas></canvas>
+            <div class="chart-canvas-wrapper">
+                <canvas #chartCanvas></canvas>
+            </div>
+            <div class="scale-line scale-line-one">
+                <span>{{yAxisScaleStep}}</span>
+            </div>
+            <div class="scale-line scale-line-two">
+                <span>{{yAxisScaleStep * 2}}</span>
+            </div>
+            <div class="scale-line scale-line-three">
+                <span>{{yAxisScaleStep * 3}}</span>
+            </div>
+            <div class="scale-line scale-line-four">
+                <span>{{yAxisScaleStep * 4}}</span>
+            </div>
+        </div>
+        <div class="extra-info"> Others: 100k€</div>
+        <div class="month-selector">
+            <div class="month">jan</div>
+            <div class="month">fev</div>
+            <div class="month">mar</div>
+            <div class="month">apr</div>
+            <div class="month">may</div>
+            <div class="month">jun</div>
+            <div class="month">jul</div>
+            <div class="month">aug</div>
+            <div class="month">sep</div>
+            <div class="month">oct</div>
+            <div class="month">nov</div>
+            <div class="month">dec</div>
         </div>
     </div>
     <div class="footer-tab-menus-wrapper">
