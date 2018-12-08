@@ -23,11 +23,11 @@ export interface ChartBundle {
     currency: string;
     reportingCurrency: string;
     series: { key: string, legend: string}[];
-    charts: Chart[];
+    charts: ChartData[];
     filters: Filter[];
 }
 
-export interface Chart {
+export interface ChartData {
     valueType: string;
     hasTotal: boolean;
     dataSet: DataSet[];

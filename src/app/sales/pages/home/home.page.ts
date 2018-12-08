@@ -5,7 +5,7 @@ import { PopoverController, LoadingController } from '@ionic/angular';
 import { CompanySelectorComponent, FooterTabMenu, FooterMenuItemSelectedEvent } from '../../components';
 import { PageBase } from '../../../shared/pages';
 import { SalesService, SalesServiceProvider } from '../../services';
-import { Company, SalesCharts, CompanySales, ChartBundle } from '../../entities';
+import { Company, SalesCharts, CompanySales, ChartBundle, ChartData } from '../../entities';
 import { LocaleService } from '../../../core/services';
 
 @Component({
@@ -16,6 +16,8 @@ import { LocaleService } from '../../../core/services';
 export class HomePage extends PageBase implements OnInit {
 
     private readonly yAxisNumberOfSteps = 4;
+    private readonly currentYearAccentColor = '#DBE0EB';
+    private readonly previouseYearAccentColor = '#1D317D';
 
     private chart: any;
     private companies: Company[];
@@ -23,9 +25,16 @@ export class HomePage extends PageBase implements OnInit {
     private yAxisMaxValues: number[];
 
     selectedCompanySales: CompanySales;
-    selectedChartBundle: ChartBundle;
-    showTimeFrameSelector: boolean;
+    selectedChartBundleKey: string;
+    selectedChartBundleLocalizedTitles: {[key: string]: string };
+    selectedChartBundleIsTimeChart: boolean;
 
+    selectedPeriod: string;
+
+    showTimeFrameSelector: boolean;
+    currentCurrency: string;
+    currentYearLegend: string;
+    previousYearLegend: string;
     yAxisScaleStep: number;
     yAxisScaleUnitPrefix: string;
 
@@ -53,6 +62,7 @@ export class HomePage extends PageBase implements OnInit {
         this.valueType = 'abs';
         this.viewType = 'chart';
         this.showTimeFrameSelector = true;
+        this.selectedPeriod = '1';
 
         this.yAxisMaxValues = this.getPossibleMaximumYValues(this.yAxisNumberOfSteps);
     }
@@ -70,8 +80,8 @@ export class HomePage extends PageBase implements OnInit {
         // by default, select the first company
         this.selectedCompanySales = this.salesCharts.data[0];
 
-        // by default, select the first chart bundle
-        this.selectedChartBundle = this.selectedCompanySales.chartBundle[0];
+        // by default, select the first chart bundle key
+        this.selectedChartBundleKey = this.selectedCompanySales.chartBundle[0].key;
 
         // update view
         this.updateView();
@@ -109,79 +119,80 @@ export class HomePage extends PageBase implements OnInit {
 
     onFooterMenuItemSelected(event: FooterMenuItemSelectedEvent) {
         // select the option
-        if (event.menu.key !== 'share') {
+        if (event.menu.key === 'share') {
             // for (const menuItem of event.menu.items) {
             //     menuItem.selected = menuItem === event.menuItem;
             // }
+        } else {
+            this.selectedChartBundleKey = event.menuItem.key;
+            this.updateView();
         }
+    }
+
+    onPeriodChanged(period: string) {
+        this.selectedPeriod = period;
+        this.updateView();
     }
 
     private updateView() {
+
+        const chartBundle = this.selectedCompanySales.chartBundle.find(b => b.key === this.selectedChartBundleKey);
+        this.selectedChartBundleLocalizedTitles = chartBundle.titles;
+        this.selectedChartBundleIsTimeChart = chartBundle.isTimeChart;
         this.updateFooterMenu(this.selectedCompanySales);
-        this.updateChart(this.selectedChartBundle, this.valueType, this.timeFrame);
+        this.updateChart(chartBundle, this.valueType, this.timeFrame, this.selectedPeriod);
     }
 
-    private updateChart(chartBundle: ChartBundle, valueType: 'abs' | 'accum', timeFrame: 'monthly' | 'quarter') {
-
+    private updateChart(chartBundle: ChartBundle, valueType: 'abs' | 'accum', timeFrame: 'monthly' | 'quarter', period: string) {
 
         const chart = chartBundle.charts.find(c => c.valueType === valueType);
         const chartType = valueType === 'accum' && chartBundle.isTimeChart ? 'line' : 'bar';
-        const datasets = [];
-        let labels: string[];
 
-        let maxValue = 0;
-        for (const serie of chartBundle.series) {
-            const dataSet = {
-                label: serie.legend,
-                data: [],
-                backgroundColor: serie.key === '0' ? '#DBE0EB' : '#1D317D'
-            };
+        this.currentCurrency = chartBundle.currency;
 
-            labels = [];
+        this.previousYearLegend = chartBundle.series[0].legend;
+        this.currentYearLegend = chartBundle.series[1].legend;
 
-            for (const ds of chart.dataSet) {
-                const dataPoint = ds.dataPoints[0];
+        let data: {
+            maxValue: number,
+            labels: string[],
+            dataSets: { label: string, backgroundColor: string, data: number[] }[]
+        };
 
-                // if "is total", this value is not presented on the chart
-                if (dataPoint.isTotal) {
-                    continue;
-                }
-
-                labels.push(dataPoint.label);
-
-                const value = dataPoint.values.find(v => v.seriesKey === serie.key);
-                if (value) {
-                    maxValue = value.value > maxValue ? value.value : maxValue;
-                    dataSet.data.push(value.value);
-                } else {
-                    dataSet.data.push(0);
-                }
-            }
-
-            datasets.push(dataSet);
+        if (chartBundle.isTimeChart) {
+            data = this.buildTimeChartData(chart, chartBundle, valueType, false);
+        } else {
+            data = this.buildTopChartData(chart, chartBundle, valueType, period, false);
         }
 
-        const yAxisMaxValueStepAndUnit = this.calcYAxisMaxValueStepAndUnit(maxValue, this.yAxisNumberOfSteps, this.yAxisMaxValues);
+        // Y axis configurations
+        const yAxisMaxValueStepAndUnit = this.calcYAxisMaxValueStepAndUnit(data.maxValue, this.yAxisNumberOfSteps, this.yAxisMaxValues);
         this.yAxisScaleStep = yAxisMaxValueStepAndUnit.yAxisScaleStep;
         this.yAxisScaleUnitPrefix = yAxisMaxValueStepAndUnit.yAxisScaleUnitPrefix;
         const yAxisMaxValue = yAxisMaxValueStepAndUnit.yAxisMaxValue;
 
+        // if the chart change type, it needs to be created again
         if (this.chart && chartType !== this.chart.config.type) {
             this.chart.destroy();
             this.chart = null;
         }
 
+        // create or update the chart config
         if (this.chart) {
+
             this.chart.type = chartType;
-            this.chart.data.labels = labels;
-            this.chart.data.datasets = datasets;
+            this.chart.data.labels = data.labels;
+            this.chart.data.datasets = data.dataSets;
+            this.chart.options.scales.yAxes[0].ticks.max = yAxisMaxValue;
             this.chart.update();
+
         } else {
+
             this.chart = new Chart(this.chartCanvas.nativeElement, {
                 type: chartType,
                 data: {
-                    labels: labels,
-                    datasets: datasets,
+                    labels: data.labels,
+                    datasets: data.dataSets,
                 },
                 options: {
                     responsive: true,
@@ -308,7 +319,7 @@ export class HomePage extends PageBase implements OnInit {
         const chartItems = companySales.chartBundle.map(cb => ({
             key: cb.key,
             label: cb.titles[currentLanguage],
-            selected: () => cb.key === this.selectedChartBundle.key
+            selected: () =>  cb.key === this.selectedChartBundleKey
         }));
 
         this.footerTabMenus = [
@@ -500,5 +511,119 @@ export class HomePage extends PageBase implements OnInit {
         }
 
         return m;
+    }
+
+    private buildTimeChartData(chart: ChartData, chartBundle: ChartBundle, chartType: 'abs' | 'accum', useReportingValue: boolean)
+        : {
+            maxValue: number,
+            labels: string[],
+            dataSets: { label: string, backgroundColor: string, data: number[] }[]
+        } {
+
+            const labels: string[] = [];
+            const dataSets: { label: string, backgroundColor: string, data: number[] }[] = [];
+            let maxValue = 0;
+
+            for (const serie of chartBundle.series) {
+                dataSets.push(
+                    {
+                        label: serie.legend,
+                        data: [],
+                        backgroundColor: serie.key === '0' ? this.previouseYearAccentColor : this.currentYearAccentColor
+                    }
+                );
+            }
+
+            for (const dataSet of chart.dataSet) {
+                // the Monthly Chart has always only one set of datapoins
+                const dataPoint = dataSet.dataPoints[0];
+
+                // the dataPoint with total values is not used on the chart
+                if (dataPoint.isTotal) {
+                    continue;
+                }
+
+                labels.push(dataPoint.label);
+
+                for (let i = 0; i < chartBundle.series.length; i++) {
+                    const serie = chartBundle.series[i];
+                    const value = dataPoint.values.find(v => v.seriesKey === serie.key);
+                    let finalValue = 0;
+
+                    if (value) {
+                        finalValue = this.getCorrectValue(value, useReportingValue);
+                        maxValue = finalValue > maxValue ? finalValue : maxValue;
+                    }
+
+                    dataSets[i].data.push(finalValue);
+                }
+            }
+
+        return {
+            dataSets: dataSets,
+            maxValue: maxValue,
+            labels: labels
+        };
+    }
+
+    private buildTopChartData(
+        chart: ChartData,
+        chartBundle: ChartBundle,
+        chartType: 'abs' | 'accum',
+        period: string, useReportingValue: boolean)
+        : {
+            maxValue: number,
+            labels: string[],
+            dataSets: { label: string, backgroundColor: string, data: number[] }[]
+        } {
+
+            const labels: string[] = [];
+            const dataSets: { label: string, backgroundColor: string, data: number[] }[] = [];
+            let maxValue = 0;
+
+            for (const serie of chartBundle.series) {
+                dataSets.push(
+                    {
+                        label: serie.legend,
+                        data: [],
+                        backgroundColor: serie.key === '0' ? this.previouseYearAccentColor : this.currentYearAccentColor
+                    }
+                );
+            }
+
+            const dataSet = chart.dataSet.find(ds => ds.period === period);
+
+            for (const dataPoint of dataSet.dataPoints) {
+
+                // the dataPoint with total values or label '@@OTHERS@@' are not used on the chart
+                if (dataPoint.isTotal || dataPoint.label === '@@OTHERS@@') {
+                    continue;
+                }
+
+                labels.push(dataPoint.label.substr(0, 5));
+
+                for (let i = 0; i < chartBundle.series.length; i++) {
+                    const serie = chartBundle.series[i];
+                    const value = dataPoint.values.find(v => v.seriesKey === serie.key);
+                    let finalValue = 0;
+
+                    if (value) {
+                        finalValue = this.getCorrectValue(value, useReportingValue);
+                        maxValue = finalValue > maxValue ? finalValue : maxValue;
+                    }
+
+                    dataSets[i].data.push(finalValue);
+                }
+            }
+
+        return {
+            dataSets: dataSets,
+            maxValue: maxValue,
+            labels: labels
+        };
+    }
+
+    private getCorrectValue(value: {seriesKey: string, value: number, reportingValue: number }, useReportingValue: boolean): number {
+        return useReportingValue ? value.reportingValue : value.value;
     }
 }

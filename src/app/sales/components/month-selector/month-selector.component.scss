@@ -1,0 +1,37 @@
+
+@import '../../styles/variables.scss';
+
+.month-selector {
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+
+    .magnified-selected-month {    
+        position: absolute;
+        bottom: 89px;
+        background: white;
+        z-index: 1;
+        padding: 15px;
+        font-weight: bold;
+        font-size: 10pt;
+        color: #1c2e7f;
+        border-bottom-color: transparent;
+        border: 2px solid #f6f7f9;
+        border-bottom-color: transparent;
+    }
+
+    .month {
+        float: left;
+        height: 30px;
+        width: calc(100% / 12);
+        padding: 7px 0;
+        text-align: center;
+        font-size: 8pt;
+        font-weight: bold;
+
+        &.selected {
+            background: white;
+            color: #1c2e7f;
+        }
+    }
+}

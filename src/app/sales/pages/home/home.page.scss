@@ -2,16 +2,20 @@ $accent-color: rgb(80,130,254);
 $background-color: rgb(246,247,249);
 $chart-background-color: rgb(255,255,255);
 
+$current-year-accent-color: #DBE0EB;
+$previous-year-accent-color: #1D317D;
 
 $footer-tab-menus-wrapper-height: 50px;
 $sales-content-height: calc(100% - #{$footer-tab-menus-wrapper-height});
 
 $sales-header-height:64px;
 $chart-controllers-height:40px;
-$chart-legend-height: 40px;
+$chart-legend-height: 20px;
 $extra-info-height:40px;
 $month-selector:40px;
 $chart-height: calc(100% - #{$sales-header-height + $chart-controllers-height + $chart-legend-height + $extra-info-height + $month-selector});
+$chart-yAxis-legend-wrapper-height: 30px;
+$chart-canvas-wrapper-height: calc(100% - #{$chart-yAxis-legend-wrapper-height});
 
 .page-title {
     color: $accent-color;
@@ -49,6 +53,7 @@ $chart-height: calc(100% - #{$sales-header-height + $chart-controllers-height + 
 
     .chart-name {
         font-weight: bolder;
+        text-transform: uppercase;
     }
 
     .data-date {
@@ -120,6 +125,34 @@ $chart-height: calc(100% - #{$sales-header-height + $chart-controllers-height + 
     background-color: white;
     width: 100%;
     height: $chart-legend-height;
+    padding: 1px 5px;
+
+    .chart-legend-year {
+        font-size: 10pt;
+        width: 35px;
+        margin-left: 10px;
+        float: right;
+
+        &:after {
+            content: ' ';
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            margin:4px;
+        }
+    }
+
+    .chart-legend-current-year {
+        &:after { 
+            background:$current-year-accent-color;
+        }
+    }
+
+    .chart-legend-previous-year {
+        &:after { 
+            background:$previous-year-accent-color;
+        }
+    }
 }
 
 .chart{
@@ -127,6 +160,18 @@ $chart-height: calc(100% - #{$sales-header-height + $chart-controllers-height + 
     position: relative;
     height: $chart-height;
     
+    .chart-yAxis-legend-wrapper {
+        width: 100%;
+        height: $chart-yAxis-legend-wrapper-height;
+
+        .legend {
+            font-size: 8pt;
+            font-weight: bold;
+            float: left;
+            transform: rotate(270deg);
+        }
+    }
+
     .scale-line {
         width: 100%;
         height: 1px;
@@ -142,7 +187,7 @@ $chart-height: calc(100% - #{$sales-header-height + $chart-controllers-height + 
 
         &:after {
             content: ' ';
-            width: 100%;
+            width: calc(100% - 40px);
             height: 1px;
             background: gray;
             position: absolute;
@@ -156,25 +201,25 @@ $chart-height: calc(100% - #{$sales-header-height + $chart-controllers-height + 
         // the '100%' of chart will be (100% - (6px + 27px))
 
         &-one {
-            bottom: calc((100% - 33px) * .25 + 27px);
+            bottom: calc((100% - (33px + #{$chart-yAxis-legend-wrapper-height})) * .25 + 27px);
         }
 
         &-two {
-            bottom: calc((100% - 33px) * .5 + 27px);
+            bottom: calc((100% - (33px + #{$chart-yAxis-legend-wrapper-height})) * .5 + 27px);
         }
 
         &-three {
-            bottom: calc((100% - 33px) * .75 + 27px);
+            bottom: calc((100% - (33px + #{$chart-yAxis-legend-wrapper-height})) * .75 + 27px);
         }
 
         &-four {
-            bottom: calc((100% - 33px) * 1 + 27px);
+            bottom: calc((100% - (33px + #{$chart-yAxis-legend-wrapper-height})) * 1 + 27px);
         }
     }
 
     .chart-canvas-wrapper {
         width: 100%;
-        height: 100%;
+        height: $chart-canvas-wrapper-height;
         padding-left: 25px;
         
         canvas{
@@ -191,23 +236,9 @@ $chart-height: calc(100% - #{$sales-header-height + $chart-controllers-height + 
     text-align: center;
 }
 
-.month-selector {
+.month-selector-wrapper {
     width: 100%;
     height: $month-selector;
-    padding: 0 10px;
-
-    .month {
-        background: white;
-        float: left;
-        height: 35px;
-        text-align: center;
-        width: calc(100% / 12);
-        padding: 5px;
-
-        &:nth-child(odd) {
-            background: transparent;
-        }
-    }
 }
 
 .footer-tab-menus-wrapper {
@@ -215,4 +246,5 @@ $chart-height: calc(100% - #{$sales-header-height + $chart-controllers-height + 
     bottom: 0;
     width: 100%;
     height: $footer-tab-menus-wrapper-height;
+    z-index: 1;
 }

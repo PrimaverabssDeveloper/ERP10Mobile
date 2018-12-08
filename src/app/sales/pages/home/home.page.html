@@ -7,9 +7,9 @@
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title *ngIf="selectedCompany">
+        <ion-title *ngIf="selectedCompanySales">
             <div class="page-title" (click)="companySelectorAction($event)">
-                {{selectedCompany.key}}
+                {{selectedCompanySales.key}}
             </div>
         </ion-title>
         <ion-buttons slot="end">
@@ -18,10 +18,10 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content id="content">
+<ion-content id="content"  scrollY='false'>
     <div class="sales-content">
         <div class="sales-header">
-            <div class="chart-name">MONTHLY SALES</div>
+            <div class="chart-name">{{selectedChartBundleLocalizedTitles | localizedStrings}}</div>
             <div class="data-date">{{dataDate | date:'medium'}}</div>
         </div>
         <div class="chart-controllers">
@@ -39,9 +39,15 @@
                 (click)="changeValueType('abs')"></div>
         </div>
         <div class="chart-legend">
-            {{yAxisScaleUnitPrefix}} | 2018 | 2017
+            <div class="chart-legend-year chart-legend-current-year">{{currentYearLegend}}</div>
+            <div class="chart-legend-year chart-legend-previous-year">{{previousYearLegend}}</div>
         </div>
         <div class="chart">
+            <div class="chart-yAxis-legend-wrapper">
+                <div class="legend">
+                    {{yAxisScaleUnitPrefix}} ({{currentCurrency | currencySymbol}})
+                </div>
+            </div>
             <div class="chart-canvas-wrapper">
                 <canvas #chartCanvas></canvas>
             </div>
@@ -59,19 +65,8 @@
             </div>
         </div>
         <div class="extra-info"> Others: 100k€</div>
-        <div class="month-selector">
-            <div class="month">jan</div>
-            <div class="month">fev</div>
-            <div class="month">mar</div>
-            <div class="month">apr</div>
-            <div class="month">may</div>
-            <div class="month">jun</div>
-            <div class="month">jul</div>
-            <div class="month">aug</div>
-            <div class="month">sep</div>
-            <div class="month">oct</div>
-            <div class="month">nov</div>
-            <div class="month">dec</div>
+        <div class="month-selector-wrapper" *ngIf="!selectedChartBundleIsTimeChart">
+            <month-selector (monthSelected)="onPeriodChanged($event)"></month-selector>
         </div>
     </div>
     <div class="footer-tab-menus-wrapper">

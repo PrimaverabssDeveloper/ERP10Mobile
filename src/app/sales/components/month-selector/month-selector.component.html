@@ -1,0 +1,6 @@
+<div class="month-selector">
+    <div class="magnified-selected-month" *ngIf="isTouchDown" [ngStyle]="magnifiedSelectedMonthStyle">
+        {{months[currentMonthSelected - 1]}}
+    </div>
+    <div class="month" *ngFor="let month of months; let i = index" [ngClass]="{selected: currentMonthSelected === i + 1}">{{month}}</div>
+</div>
