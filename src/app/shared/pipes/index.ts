@@ -2,6 +2,7 @@ import { RoundPipe } from './round.pipe';
 import { AbsolutePipe } from './absolute.pipe';
 import { SafeUrlPipe } from './safe-url.pipe';
 import { CurrencySymbolPipe } from './currency-symbol.pipe';
+import { LocalizedStringsPipe } from './localized-strings.pipe';
 
 export * from './round.pipe';
 export * from './absolute.pipe';
@@ -12,5 +13,6 @@ export const PIPES = [
     RoundPipe,
     AbsolutePipe,
     SafeUrlPipe,
-    CurrencySymbolPipe
+    CurrencySymbolPipe,
+    LocalizedStringsPipe
 ];
