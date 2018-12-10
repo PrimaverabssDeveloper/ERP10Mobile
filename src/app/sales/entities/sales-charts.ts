@@ -19,7 +19,7 @@ export interface ChartBundle {
     order: number;
     titles: {[key: string]: string };
     isTimeChart: boolean;
-    periodType: string;
+    periodType: 'M' | 'W';
     currency: string;
     reportingCurrency: string;
     series: { key: string, legend: string}[];

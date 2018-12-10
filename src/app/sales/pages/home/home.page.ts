@@ -26,6 +26,7 @@ export class HomePage extends PageBase implements OnInit {
 
     selectedCompanySales: CompanySales;
     selectedChartBundleKey: string;
+    selectedChartBundlePeriodType: 'M' | 'W';
     selectedChartBundleLocalizedTitles: {[key: string]: string };
     selectedChartBundleIsTimeChart: boolean;
 
@@ -139,6 +140,7 @@ export class HomePage extends PageBase implements OnInit {
         const chartBundle = this.selectedCompanySales.chartBundle.find(b => b.key === this.selectedChartBundleKey);
         this.selectedChartBundleLocalizedTitles = chartBundle.titles;
         this.selectedChartBundleIsTimeChart = chartBundle.isTimeChart;
+        this.selectedChartBundlePeriodType = chartBundle.periodType;
         this.updateFooterMenu(this.selectedCompanySales);
         this.updateChart(chartBundle, this.valueType, this.timeFrame, this.selectedPeriod);
     }

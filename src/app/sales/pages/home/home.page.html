@@ -49,7 +49,9 @@
                 </div>
             </div>
             <div class="chart-canvas-wrapper">
-                <canvas #chartCanvas></canvas>
+                <div class="chart-canvas-inner-wrapper" [ngClass]= "{'weeks': selectedChartBundlePeriodType === 'W'}">
+                    <canvas #chartCanvas></canvas>
+                </div>
             </div>
             <div class="scale-line scale-line-one">
                 <span>{{yAxisScaleStep}}</span>
