@@ -5,8 +5,9 @@ import { PopoverController, LoadingController } from '@ionic/angular';
 import { CompanySelectorComponent, FooterTabMenu, FooterMenuItemSelectedEvent } from '../../components';
 import { PageBase } from '../../../shared/pages';
 import { SalesService, SalesServiceProvider } from '../../services';
-import { Company, SalesCharts, CompanySales, ChartBundle, ChartData } from '../../entities';
+import { Company, SalesCharts, CompanySales, ChartBundle, ChartData, Serie } from '../../entities';
 import { LocaleService } from '../../../core/services';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
     templateUrl: 'home.page.html',
@@ -16,8 +17,11 @@ import { LocaleService } from '../../../core/services';
 export class HomePage extends PageBase implements OnInit {
 
     private readonly yAxisNumberOfSteps = 4;
-    private readonly currentYearAccentColor = '#DBE0EB';
-    private readonly previouseYearAccentColor = '#1D317D';
+    private readonly currentYearAccentColor = '#1D317D';
+    private readonly previouseYearAccentColor = '#DBE0EB';
+    private readonly currentYearSeriesKey = '1';
+    private readonly previousYearSeriesKey = '0';
+
 
     private chart: any;
     private companies: Company[];
@@ -27,8 +31,9 @@ export class HomePage extends PageBase implements OnInit {
     selectedCompanySales: CompanySales;
     selectedChartBundleKey: string;
     selectedChartBundlePeriodType: 'M' | 'W';
-    selectedChartBundleLocalizedTitles: {[key: string]: string };
+    selectedChartBundleLocalizedTitles: { [key: string]: string };
     selectedChartBundleIsTimeChart: boolean;
+    extraInfoValue: string;
 
     selectedPeriod: string;
 
@@ -53,7 +58,8 @@ export class HomePage extends PageBase implements OnInit {
         public popoverController: PopoverController,
         public loadingController: LoadingController,
         private salesService: SalesService,
-        private localeService: LocaleService
+        private localeService: LocaleService,
+        private currencyPipe: CurrencyPipe
     ) {
 
         super(loadingController);
@@ -142,18 +148,27 @@ export class HomePage extends PageBase implements OnInit {
         this.selectedChartBundleIsTimeChart = chartBundle.isTimeChart;
         this.selectedChartBundlePeriodType = chartBundle.periodType;
         this.updateFooterMenu(this.selectedCompanySales);
-        this.updateChart(chartBundle, this.valueType, this.timeFrame, this.selectedPeriod);
+        this.updateChart(chartBundle, this.valueType, this.timeFrame, this.selectedPeriod, false);
     }
 
-    private updateChart(chartBundle: ChartBundle, valueType: 'abs' | 'accum', timeFrame: 'monthly' | 'quarter', period: string) {
+    private updateChart(
+        chartBundle: ChartBundle,
+        valueType: 'abs' | 'accum',
+        timeFrame: 'monthly' | 'quarter',
+        period: string,
+        useReportingCurrency: boolean) {
 
+        const currency = useReportingCurrency ? chartBundle.reportingCurrency : chartBundle.currency;
         const chart = chartBundle.charts.find(c => c.valueType === valueType);
         const chartType = valueType === 'accum' && chartBundle.isTimeChart ? 'line' : 'bar';
 
-        this.currentCurrency = chartBundle.currency;
+        this.currentCurrency = currency;
 
-        this.previousYearLegend = chartBundle.series[0].legend;
-        this.currentYearLegend = chartBundle.series[1].legend;
+        const currentYearSerie = this.getSerieWithKey(chartBundle.series, this.currentYearSeriesKey);
+        const previousYearSerie = this.getSerieWithKey(chartBundle.series, this.previousYearSeriesKey);
+
+        this.currentYearLegend = currentYearSerie ? currentYearSerie.legend : null;
+        this.previousYearLegend = previousYearSerie ? previousYearSerie.legend : null;
 
         let data: {
             maxValue: number,
@@ -162,9 +177,9 @@ export class HomePage extends PageBase implements OnInit {
         };
 
         if (chartBundle.isTimeChart) {
-            data = this.buildTimeChartData(chart, chartBundle, valueType, false);
+            data = this.buildTimeChartData(chart, previousYearSerie, currentYearSerie, currency, useReportingCurrency);
         } else {
-            data = this.buildTopChartData(chart, chartBundle, valueType, period, false);
+            data = this.buildTopChartData(chart, chartBundle, previousYearSerie, currentYearSerie, period, currency, useReportingCurrency);
         }
 
         // Y axis configurations
@@ -199,6 +214,126 @@ export class HomePage extends PageBase implements OnInit {
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    tooltips: {
+                        enabled: false,
+                        mode: 'x',
+                        intersect: false,
+                        custom: function (tooltipModel) {
+                            // Tooltip Element
+                            let tooltipEl = document.getElementById('chartjs-tooltip') as any;
+
+                            // Create element on first render
+                            if (!tooltipEl) {
+                                tooltipEl = document.createElement('div');
+                                tooltipEl.id = 'chartjs-tooltip';
+                                // tooltipEl.innerHTML = `
+                                // <div style="border:1px solid red; width:100%; height: 100%">
+                                //     <div style="float:left; width:100%">${currentYearValue}</div>
+                                //     <div style="float:left; width:100%">${previousYearValue}</div>
+                                //     <div style="float:left; width:100%">${deltaValue}</div>
+                                //     <div style="float:left; width:100%; height:1px; background:red"></div>
+                                //     <div style="float:left; width:100%; text-align:center">
+                                //         <div style="border:1px solid gray;">
+                                //             ${label}
+                                //         </div>
+                                //     </div>
+                                // </div>`;
+                                document.body.appendChild(tooltipEl);
+                            }
+
+                            // Hide if no tooltip
+                            if (tooltipModel.opacity === 0) {
+                                tooltipEl.style.opacity = 0;
+                                return;
+                            }
+
+                            // Set caret Position
+                            tooltipEl.classList.remove('above', 'below', 'no-transform');
+                            if (tooltipModel.yAlign) {
+                                tooltipEl.classList.add(tooltipModel.yAlign);
+                            } else {
+                                tooltipEl.classList.add('no-transform');
+                            }
+
+                            const colIndex = tooltipModel.dataPoints[0].index;
+                            const label = data.labels[colIndex];
+                            const currentYearValue = data.dataSets[0].data[colIndex];
+                            const previousYearValue = data.dataSets[1].data[colIndex];
+                            const deltaValue = 0; //this.calcPercentageDeltaBetweenTwoNumbers(currentYearValue, previousYearValue);
+                            
+                            tooltipEl.innerHTML = `
+                            <div style="width:100%; height: 100%">
+                                <div style="float:left; width:100%">${currentYearValue}</div>
+                                <div style="float:left; width:100%">${previousYearValue}</div>
+                                <div style="float:left; width:100%">${deltaValue}</div>
+                                <div style="border-left:1px solid red;
+                                            border-top:1px solid red;
+                                            float:left;
+                                            height: calc(100% - 45px);
+                                            width:100%;">
+                                    <div style="border:1px solid gray;
+                                                padding: 0 5px;
+                                                text-align: center;
+                                                left: 50%;
+                                                transform: translateX(-50%);
+                                                position: absolute;
+                                                margin-top: 2px;
+                                                font-weight: bold;
+                                                font-size: 8pt;">
+                                        ${label}
+                                    </div>
+                                </div>
+                            </div>`;
+
+                            // function getBody(bodyItem) {
+                            //     return bodyItem.lines;
+                            // }
+
+                            // // Set Text
+                            // if (tooltipModel.body) {
+                            //     const titleLines = tooltipModel.title || [];
+                            //     const bodyLines = tooltipModel.body.map(getBody);
+
+                            //     let innerHtml = '<thead>';
+
+                            //     titleLines.forEach(function (title) {
+                            //         innerHtml += '<tr><th>' + title + '</th></tr>';
+                            //     });
+                            //     innerHtml += '</thead><tbody>';
+
+                            //     bodyLines.forEach(function (body, i) {
+                            //         const colors = tooltipModel.labelColors[i];
+                            //         let style = 'background:' + colors.backgroundColor;
+                            //         style += '; border-color:' + colors.borderColor;
+                            //         style += '; border-width: 2px';
+                            //         const span = '<span style="' + style + '"></span>';
+                            //         innerHtml += '<tr><td>' + span + body + '</td></tr>';
+                            //     });
+                            //     innerHtml += '</tbody>';
+
+                            //     const tableRoot = tooltipEl.querySelector('table');
+                            //     tableRoot.innerHTML = innerHtml;
+                            // }
+
+                            // `this` will be the overall tooltip
+                            const position = this._chart.canvas.getBoundingClientRect();
+
+                            // Display, position, and set styles for font
+                            tooltipEl.style.opacity = 1;
+                            tooltipEl.style.width = '100px';
+                            tooltipEl.style.height = '470px';
+
+                            tooltipEl.style.position = 'absolute';
+                            tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 'px';
+                            tooltipEl.style.top = position.top + window.pageYOffset + 'px';
+                             // position.top + window.pageYOffset + tooltipModel.caretY + 'px';
+                            tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
+                            tooltipEl.style.fontSize = tooltipModel.bodyFontSize + 'px';
+                            tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
+                            tooltipEl.style.padding = tooltipModel.yPadding + 'px ' + tooltipModel.xPadding + 'px';
+                            tooltipEl.style.pointerEvents = 'none';
+                        }
+                    },
                     legend: {
                         display: false
                     },
@@ -321,7 +456,7 @@ export class HomePage extends PageBase implements OnInit {
         const chartItems = companySales.chartBundle.map(cb => ({
             key: cb.key,
             label: cb.titles[currentLanguage],
-            selected: () =>  cb.key === this.selectedChartBundleKey
+            selected: () => cb.key === this.selectedChartBundleKey
         }));
 
         this.footerTabMenus = [
@@ -515,51 +650,82 @@ export class HomePage extends PageBase implements OnInit {
         return m;
     }
 
-    private buildTimeChartData(chart: ChartData, chartBundle: ChartBundle, chartType: 'abs' | 'accum', useReportingValue: boolean)
+    private buildTimeChartData(
+        chart: ChartData,
+        previousYearSerie: Serie,
+        currentYearSerie: Serie,
+        currency: string,
+        useReportingValue: boolean)
         : {
             maxValue: number,
             labels: string[],
             dataSets: { label: string, backgroundColor: string, data: number[] }[]
         } {
 
-            const labels: string[] = [];
-            const dataSets: { label: string, backgroundColor: string, data: number[] }[] = [];
-            let maxValue = 0;
 
-            for (const serie of chartBundle.series) {
-                dataSets.push(
-                    {
-                        label: serie.legend,
-                        data: [],
-                        backgroundColor: serie.key === '0' ? this.previouseYearAccentColor : this.currentYearAccentColor
-                    }
-                );
+        // get chart total
+        this.extraInfoValue = '';
+        const totalDataSet = chart.dataSet.find(ds => ds.hasTotal);
+        if (totalDataSet) {
+            const totalDataPoint = totalDataSet.dataPoints.find(dp => dp.isTotal);
+
+            if (totalDataPoint) {
+                const value = this.getCorrectValue(totalDataPoint.values[1], useReportingValue);
+                const moneyValue = this.currencyPipe.transform(value, currency);
+                this.extraInfoValue = `#Total sales: ${moneyValue}`;
+            }
+        }
+
+
+        const labels: string[] = [];
+        const dataSets: { label: string, backgroundColor: string, data: number[] }[] = [];
+        let maxValue = 0;
+
+        // current year serie
+        dataSets.push(
+            {
+                label: currentYearSerie.legend,
+                data: [],
+                backgroundColor: (this.currentYearAccentColor + '80')
+            }
+        );
+
+        // previous year serie
+        dataSets.push(
+            {
+                label: previousYearSerie.legend,
+                data: [],
+                backgroundColor: this.previouseYearAccentColor + '80'
+            }
+        );
+
+        // right display order series
+        const series = [currentYearSerie, previousYearSerie];
+
+        for (const dataSet of chart.dataSet) {
+            // the Monthly Chart has always only one set of datapoins
+            const dataPoint = dataSet.dataPoints[0];
+
+            // the dataPoint with total values is not used on the chart
+            if (dataPoint.isTotal) {
+                continue;
             }
 
-            for (const dataSet of chart.dataSet) {
-                // the Monthly Chart has always only one set of datapoins
-                const dataPoint = dataSet.dataPoints[0];
+            labels.push(dataPoint.label);
 
-                // the dataPoint with total values is not used on the chart
-                if (dataPoint.isTotal) {
-                    continue;
+            for (let i = 0; i < series.length; i++) {
+                const serie = series[i];
+                const value = dataPoint.values.find(v => v.seriesKey === serie.key);
+                let finalValue = 0;
+
+                if (value) {
+                    finalValue = this.getCorrectValue(value, useReportingValue);
+                    maxValue = finalValue > maxValue ? finalValue : maxValue;
                 }
 
-                labels.push(dataPoint.label);
-
-                for (let i = 0; i < chartBundle.series.length; i++) {
-                    const serie = chartBundle.series[i];
-                    const value = dataPoint.values.find(v => v.seriesKey === serie.key);
-                    let finalValue = 0;
-
-                    if (value) {
-                        finalValue = this.getCorrectValue(value, useReportingValue);
-                        maxValue = finalValue > maxValue ? finalValue : maxValue;
-                    }
-
-                    dataSets[i].data.push(finalValue);
-                }
+                dataSets[i].data.push(finalValue);
             }
+        }
 
         return {
             dataSets: dataSets,
@@ -571,52 +737,70 @@ export class HomePage extends PageBase implements OnInit {
     private buildTopChartData(
         chart: ChartData,
         chartBundle: ChartBundle,
-        chartType: 'abs' | 'accum',
-        period: string, useReportingValue: boolean)
+        previousYearSerie: Serie,
+        currentYearSerie: Serie,
+        period: string,
+        currency: string,
+        useReportingValue: boolean)
         : {
             maxValue: number,
             labels: string[],
             dataSets: { label: string, backgroundColor: string, data: number[] }[]
         } {
 
-            const labels: string[] = [];
-            const dataSets: { label: string, backgroundColor: string, data: number[] }[] = [];
-            let maxValue = 0;
+        const labels: string[] = [];
+        const dataSets: { label: string, backgroundColor: string, data: number[] }[] = [];
+        let maxValue = 0;
 
-            for (const serie of chartBundle.series) {
-                dataSets.push(
-                    {
-                        label: serie.legend,
-                        data: [],
-                        backgroundColor: serie.key === '0' ? this.previouseYearAccentColor : this.currentYearAccentColor
-                    }
-                );
+        for (const serie of chartBundle.series) {
+            dataSets.push(
+                {
+                    label: serie.legend,
+                    data: [],
+                    backgroundColor: serie.key === '0' ? this.previouseYearAccentColor : this.currentYearAccentColor
+                }
+            );
+        }
+
+        const dataSet = chart.dataSet.find(ds => ds.period === period);
+
+
+        // get others total
+        this.extraInfoValue = '';
+        const othersDataPoint = dataSet.dataPoints.find(dp => dp.label === '@@OTHERS@@');
+        const totalsDataPoint = dataSet.dataPoints.find(dp => dp.isTotal);
+        if (othersDataPoint && totalsDataPoint) {
+            const otherValue = this.getCorrectValue(othersDataPoint.values[1], useReportingValue);
+            const totalValue = this.getCorrectValue(totalsDataPoint.values[1], useReportingValue);
+            const moneyValue = this.currencyPipe.transform(otherValue, currency);
+            const ratioPercentage = this.calcPercentageRatioBetweenTwoNumbers(otherValue, otherValue + totalValue, true);
+            const rationString = ratioPercentage === 0 ? 'N/A' : `${ratioPercentage}%`;
+            this.extraInfoValue = `#Others: ${moneyValue} // ${rationString}`;
+        }
+
+
+        for (const dataPoint of dataSet.dataPoints) {
+
+            // the dataPoint with total values or label '@@OTHERS@@' are not used on the chart
+            if (dataPoint.isTotal || dataPoint.label === '@@OTHERS@@') {
+                continue;
             }
 
-            const dataSet = chart.dataSet.find(ds => ds.period === period);
+            labels.push(dataPoint.label.substr(0, 5));
 
-            for (const dataPoint of dataSet.dataPoints) {
+            for (let i = 0; i < chartBundle.series.length; i++) {
+                const serie = chartBundle.series[i];
+                const value = dataPoint.values.find(v => v.seriesKey === serie.key);
+                let finalValue = 0;
 
-                // the dataPoint with total values or label '@@OTHERS@@' are not used on the chart
-                if (dataPoint.isTotal || dataPoint.label === '@@OTHERS@@') {
-                    continue;
+                if (value) {
+                    finalValue = this.getCorrectValue(value, useReportingValue);
+                    maxValue = finalValue > maxValue ? finalValue : maxValue;
                 }
 
-                labels.push(dataPoint.label.substr(0, 5));
-
-                for (let i = 0; i < chartBundle.series.length; i++) {
-                    const serie = chartBundle.series[i];
-                    const value = dataPoint.values.find(v => v.seriesKey === serie.key);
-                    let finalValue = 0;
-
-                    if (value) {
-                        finalValue = this.getCorrectValue(value, useReportingValue);
-                        maxValue = finalValue > maxValue ? finalValue : maxValue;
-                    }
-
-                    dataSets[i].data.push(finalValue);
-                }
+                dataSets[i].data.push(finalValue);
             }
+        }
 
         return {
             dataSets: dataSets,
@@ -625,7 +809,35 @@ export class HomePage extends PageBase implements OnInit {
         };
     }
 
-    private getCorrectValue(value: {seriesKey: string, value: number, reportingValue: number }, useReportingValue: boolean): number {
+    private getCorrectValue(value: { seriesKey: string, value: number, reportingValue: number }, useReportingValue: boolean): number {
         return useReportingValue ? value.reportingValue : value.value;
+    }
+
+    private calcPercentageDeltaBetweenTwoNumbers(valueA: number, valueB: number, roundValue?: boolean) {
+        if (!valueA || valueA === 0) {
+            return 0;
+        }
+
+        let delta = ((valueB - valueA) / Math.abs(valueA)) * 100;
+        delta = roundValue ? Math.round(delta) : delta;
+        return delta;
+    }
+
+    private calcPercentageRatioBetweenTwoNumbers(valueA: number, valueB: number, roundValue?: boolean) {
+        if (!valueB || valueB === 0) {
+            return 0;
+        }
+
+        let ratio = (valueA / valueB) * 100;
+        ratio = roundValue ? Math.round(ratio) : ratio;
+        return ratio;
+    }
+
+    private getSerieWithKey(series: Serie[], key: string): Serie {
+        if (!series) {
+            return null;
+        }
+
+        return series.find(s => s.key === key);
     }
 }

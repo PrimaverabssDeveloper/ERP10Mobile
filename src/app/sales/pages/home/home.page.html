@@ -66,7 +66,7 @@
                 <span>{{yAxisScaleStep * 4}}</span>
             </div>
         </div>
-        <div class="extra-info"> Others: 100k€</div>
+        <div class="extra-info">{{extraInfoValue}}</div>
         <div class="month-selector-wrapper" *ngIf="!selectedChartBundleIsTimeChart">
             <month-selector (monthSelected)="onPeriodChanged($event)"></month-selector>
         </div>

@@ -22,9 +22,14 @@ export interface ChartBundle {
     periodType: 'M' | 'W';
     currency: string;
     reportingCurrency: string;
-    series: { key: string, legend: string}[];
+    series: Serie[];
     charts: ChartData[];
     filters: Filter[];
+}
+
+export interface Serie {
+    key: string;
+    legend: string;
 }
 
 export interface ChartData {
@@ -36,7 +41,7 @@ export interface ChartData {
 export interface DataSet {
     period: string;
     dataPoints: DataPoint[];
-    hastTotal: boolean;
+    hasTotal: boolean;
 }
 
 export interface DataPoint {

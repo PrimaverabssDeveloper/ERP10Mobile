@@ -167,6 +167,7 @@ $chart-canvas-wrapper-height: calc(100% - #{$chart-yAxis-legend-wrapper-height})
         .legend {
             font-size: 8pt;
             font-weight: bold;
+            padding: 0 7px;
             float: left;
             transform: rotate(270deg);
         }
@@ -183,6 +184,8 @@ $chart-canvas-wrapper-height: calc(100% - #{$chart-yAxis-legend-wrapper-height})
             position: absolute;
             margin-top: -7px;
             margin-left: 8px;
+            width: 20px;
+            text-align: center;
         }
 
         &:after {
@@ -246,6 +249,8 @@ $chart-canvas-wrapper-height: calc(100% - #{$chart-yAxis-legend-wrapper-height})
     height: $extra-info-height;
     background: white;
     text-align: center;
+    font-size: 10pt;
+    padding: 10px;
 }
 
 .month-selector-wrapper {
