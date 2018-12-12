@@ -31,6 +31,7 @@ export class HomePage extends PageBase implements OnInit {
     private yAxisMaxValues: number[];
     private touchDownWithoutMovement: boolean;
 
+    tableData: { chart: ChartData, previousYearSerie: Serie, currentYearSerie: Serie, useReportingValue: boolean };
 
     selectedCompanySales: CompanySales;
     selectedChartBundleKey: string;
@@ -170,19 +171,15 @@ export class HomePage extends PageBase implements OnInit {
         this.selectedChartBundleIsTimeChart = chartBundle.isTimeChart;
         this.selectedChartBundlePeriodType = chartBundle.periodType;
         this.updateFooterMenu(this.selectedCompanySales);
-        this.updateChart(chartBundle, this.valueType, this.timeFrame, this.selectedPeriod, false);
-    }
 
-    private updateChart(
-        chartBundle: ChartBundle,
-        valueType: 'abs' | 'accum',
-        timeFrame: 'monthly' | 'quarter',
-        period: string,
-        useReportingCurrency: boolean) {
 
+
+
+
+
+        const useReportingCurrency = false;
         const currency = useReportingCurrency ? chartBundle.reportingCurrency : chartBundle.currency;
-        const chart = chartBundle.charts.find(c => c.valueType === valueType);
-        const chartType = valueType === 'accum' && chartBundle.isTimeChart ? 'line' : 'bar';
+        const chart = chartBundle.charts.find(c => c.valueType === this.valueType);
 
         this.currentCurrency = currency;
 
@@ -199,10 +196,64 @@ export class HomePage extends PageBase implements OnInit {
         };
 
         if (chartBundle.isTimeChart) {
-            data = this.buildTimeChartData(chart, previousYearSerie, currentYearSerie, currency, valueType, useReportingCurrency);
+            data = this.buildTimeChartData(chart, previousYearSerie, currentYearSerie, currency, this.valueType, useReportingCurrency);
         } else {
-            data = this.buildTopChartData(chart, chartBundle, previousYearSerie, currentYearSerie, period, currency, useReportingCurrency);
+            data = this.buildTopChartData(
+                chart,
+                chartBundle,
+                previousYearSerie,
+                currentYearSerie,
+                this.selectedPeriod,
+                currency,
+                useReportingCurrency);
         }
+
+        if (this.viewType === 'chart') {
+            this.updateChart(chartBundle, this.valueType, currency, data);
+        } else {
+            this.tableData = {
+                chart: chart,
+                previousYearSerie: previousYearSerie,
+                currentYearSerie: currentYearSerie,
+                useReportingValue: useReportingCurrency
+            };
+        }
+    }
+
+    private updateChart(
+        chartBundle: ChartBundle,
+        valueType: 'abs' | 'accum',
+        currency: string,
+        data: {
+            maxValue: number,
+            labels: string[],
+            dataSets: { label: string, backgroundColor: string, hoverBackgroundColor: string, data: number[] }[]
+        }
+        ) {
+
+        // const currency = useReportingCurrency ? chartBundle.reportingCurrency : chartBundle.currency;
+        // const chart = chartBundle.charts.find(c => c.valueType === valueType);
+        const chartType = valueType === 'accum' && chartBundle.isTimeChart ? 'line' : 'bar';
+
+        // this.currentCurrency = currency;
+
+        // const currentYearSerie = this.getSerieWithKey(chartBundle.series, this.currentYearSeriesKey);
+        // const previousYearSerie = this.getSerieWithKey(chartBundle.series, this.previousYearSeriesKey);
+
+        // this.currentYearLegend = currentYearSerie ? currentYearSerie.legend : null;
+        // this.previousYearLegend = previousYearSerie ? previousYearSerie.legend : null;
+
+        // let data: {
+        //     maxValue: number,
+        //     labels: string[],
+        //     dataSets: { label: string, backgroundColor: string, hoverBackgroundColor: string, data: number[] }[]
+        // };
+
+        // if (chartBundle.isTimeChart) {
+        //     data = this.buildTimeChartData(chart, previousYearSerie, currentYearSerie, currency, valueType, useReportingCurrency);
+        // } else {
+        //     data = this.buildTopChartData(chart, chartBundle, previousYearSerie, currentYearSerie, period, currency, useReportingCurrency);
+        // }
 
         // Y axis configurations
         const yAxisMaxValueStepAndUnit = this.calcYAxisMaxValueStepAndUnit(data.maxValue, this.yAxisNumberOfSteps, this.yAxisMaxValues);
@@ -258,7 +309,7 @@ export class HomePage extends PageBase implements OnInit {
                         font-weight:bold;
                         font-size:8pt;
                         line-height:12px;
-                        transform:translateX(${isLeftTooltip ? 0 : -100 }%)
+                        transform:translateX(${isLeftTooltip ? 0 : -100}%)
                         ">
                 <div style="float:left; width:200px">
                     <div style="
@@ -281,8 +332,8 @@ export class HomePage extends PageBase implements OnInit {
                     <div style="float:left">${this.currencyPipe.transform(previousYearValue, currency)}</div>
                 </div>
                 <div style="float:left; width:100%; color:${accentColor}">Delta = ${deltaValue}%</div>
-                <div style="border-left:${isLeftTooltip ? 1 : 0 }px solid ${accentColor};
-                            border-right:${isLeftTooltip ? 0 : 1 }px solid ${accentColor};
+                <div style="border-left:${isLeftTooltip ? 1 : 0}px solid ${accentColor};
+                            border-right:${isLeftTooltip ? 0 : 1}px solid ${accentColor};
                             border-top:1px solid ${accentColor};
                             float:left;
                             height: calc(100% - 45px);
@@ -304,11 +355,11 @@ export class HomePage extends PageBase implements OnInit {
             // Display, position, and set styles for font
             tooltipEl.style.opacity = 0;
             tooltipEl.style.width = '90px';
-            tooltipEl.style.height = `${58 + this.chartCanvas.nativeElement.clientHeight - 6 - 27 }px`;
+            tooltipEl.style.height = `${58 + this.chartCanvas.nativeElement.clientHeight - 6 - 27}px`;
 
             tooltipEl.style.position = 'absolute';
             tooltipEl.style.left = leftTooltipPos + 'px';
-            tooltipEl.style.top =  '161px';
+            tooltipEl.style.top = '161px';
             tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
             tooltipEl.style.fontSize = tooltipModel.bodyFontSize + 'px';
             tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
@@ -597,7 +648,6 @@ export class HomePage extends PageBase implements OnInit {
             dataSets: { label: string, backgroundColor: string, hoverBackgroundColor: string, data: number[] }[]
         } {
 
-
         // get chart total
         this.extraInfoValue = '';
         const totalDataSet = chart.dataSet.find(ds => ds.hasTotal);
@@ -692,7 +742,7 @@ export class HomePage extends PageBase implements OnInit {
         : {
             maxValue: number,
             labels: string[],
-            dataSets: { label: string, backgroundColor: string, data: number[] }[]
+            dataSets: { label: string, backgroundColor: string, hoverBackgroundColor: string, data: number[] }[]
         } {
 
         const labels: string[] = [];

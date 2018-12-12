@@ -1,9 +1,8 @@
+@import '../../styles/variables.scss';
+
 $accent-color: rgb(80,130,254);
 $background-color: rgb(246,247,249);
 $chart-background-color: rgb(255,255,255);
-
-$current-year-accent-color: #DBE0EB;
-$previous-year-accent-color: #1D317D;
 
 $footer-tab-menus-wrapper-height: 50px;
 $sales-content-height: calc(100% - #{$footer-tab-menus-wrapper-height});

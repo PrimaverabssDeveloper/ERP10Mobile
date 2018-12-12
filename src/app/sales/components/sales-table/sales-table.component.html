@@ -1,0 +1,15 @@
+<div class="sales-table">
+    <div class="sales-table-header-row">
+        <div class="sales-table-row-label"></div>
+        <div class="sales-table-row-current-year-value">{{currentYearLabel}}</div>
+        <div class="sales-table-row-previous-year-value">{{previousYearLabel}}</div>
+        <div class="sales-table-row-delta-percentage"></div>
+    </div>
+    <div class="sales-table-row" *ngFor="let row of rows">
+        <div class="sales-table-row-label">{{row.label}}</div>
+        <div class="sales-table-row-current-year-value">{{row.currentYearValue | round | currency:'USD'}}</div>
+        <div class="sales-table-row-previous-year-value">{{row.previousYearValue | round | currency:'USD'}}</div>
+        <div class="sales-table-row-delta-percentage" [ngClass]="{negative: row.deltaPercentageValue < 0}">{{row.deltaPercentageValue
+            | round }} %</div>
+    </div>
+</div>

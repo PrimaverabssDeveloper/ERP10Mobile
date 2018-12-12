@@ -42,7 +42,10 @@
             <div class="chart-legend-year chart-legend-current-year">{{currentYearLegend}}</div>
             <div class="chart-legend-year chart-legend-previous-year">{{previousYearLegend}}</div>
         </div>
-        <div class="chart">
+        <div class="table" *ngIf="viewType === 'table'">
+            <sales-table [data]="tableData"></sales-table>
+        </div>
+        <div class="chart" *ngIf="viewType === 'chart'">
             <div class="chart-yAxis-legend-wrapper">
                 <div class="legend">
                     {{yAxisScaleUnitPrefix}} ({{currentCurrency | currencySymbol}})

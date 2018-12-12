@@ -2,17 +2,20 @@ import { CompanySelectorComponent } from './company-selector/company-selector.co
 import { SalesTickerComponent } from './sales-ticker/sales-ticker.component';
 import { FooterTabMenuComponent } from './footer-menu/footer-tab-menus.component';
 import { MonthSelectorComponent } from './month-selector/month-selector.component';
+import { SalesTableComponent } from './sales-table/sales-table.component';
 
 export * from './sales-ticker/sales-ticker.component';
 export * from './company-selector/company-selector.component';
 export * from './footer-menu/footer-tab-menus.component';
 export * from './month-selector/month-selector.component';
+export * from './sales-table/sales-table.component';
 
 export const COMPONENTS = [
     CompanySelectorComponent,
     SalesTickerComponent,
     FooterTabMenuComponent,
-    MonthSelectorComponent
+    MonthSelectorComponent,
+    SalesTableComponent
 ];
 
 export const ENTRY_COMPONENTS = [
