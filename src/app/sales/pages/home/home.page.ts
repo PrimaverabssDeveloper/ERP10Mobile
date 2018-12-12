@@ -19,6 +19,8 @@ export class HomePage extends PageBase implements OnInit {
     private readonly yAxisNumberOfSteps = 4;
     private readonly currentYearAccentColor = '#1D317D';
     private readonly previouseYearAccentColor = '#DBE0EB';
+    private readonly currentYearAccentColorWithTransparency = 'rgba(29, 49, 125, .5)'; // it has to be in RGBA not HEX
+    private readonly previouseYearAccentColorWithTransparency = 'rgba(219, 224, 235, .5)'; // it has to be in RGBA not HEX
     private readonly currentYearSeriesKey = '1';
     private readonly previousYearSeriesKey = '0';
 
@@ -193,11 +195,11 @@ export class HomePage extends PageBase implements OnInit {
         let data: {
             maxValue: number,
             labels: string[],
-            dataSets: { label: string, backgroundColor: string, data: number[] }[]
+            dataSets: { label: string, backgroundColor: string, hoverBackgroundColor: string, data: number[] }[]
         };
 
         if (chartBundle.isTimeChart) {
-            data = this.buildTimeChartData(chart, previousYearSerie, currentYearSerie, currency, useReportingCurrency);
+            data = this.buildTimeChartData(chart, previousYearSerie, currentYearSerie, currency, valueType, useReportingCurrency);
         } else {
             data = this.buildTopChartData(chart, chartBundle, previousYearSerie, currentYearSerie, period, currency, useReportingCurrency);
         }
@@ -587,11 +589,12 @@ export class HomePage extends PageBase implements OnInit {
         previousYearSerie: Serie,
         currentYearSerie: Serie,
         currency: string,
+        valueType: 'abs' | 'accum',
         useReportingValue: boolean)
         : {
             maxValue: number,
             labels: string[],
-            dataSets: { label: string, backgroundColor: string, data: number[] }[]
+            dataSets: { label: string, backgroundColor: string, hoverBackgroundColor: string, data: number[] }[]
         } {
 
 
@@ -609,15 +612,27 @@ export class HomePage extends PageBase implements OnInit {
         }
 
         const labels: string[] = [];
-        const dataSets: { label: string, backgroundColor: string, data: number[] }[] = [];
+        const dataSets: { label: string, backgroundColor: string, hoverBackgroundColor, data: number[] }[] = [];
         let maxValue = 0;
+
+        let currentYearAccentColor: string;
+        let previouseYearAccentColor: string;
+        if (valueType === 'abs') {
+            currentYearAccentColor = this.currentYearAccentColor;
+            previouseYearAccentColor = this.previouseYearAccentColor;
+        } else {
+            currentYearAccentColor = this.currentYearAccentColorWithTransparency;
+            previouseYearAccentColor = this.previouseYearAccentColorWithTransparency;
+        }
+
 
         // current year serie
         dataSets.push(
             {
                 label: currentYearSerie.legend,
                 data: [],
-                backgroundColor: this.currentYearAccentColor// + '80'
+                backgroundColor: currentYearAccentColor,
+                hoverBackgroundColor: currentYearAccentColor
             }
         );
 
@@ -626,7 +641,8 @@ export class HomePage extends PageBase implements OnInit {
             {
                 label: previousYearSerie.legend,
                 data: [],
-                backgroundColor: this.previouseYearAccentColor// + '80'
+                backgroundColor: previouseYearAccentColor,
+                hoverBackgroundColor: previouseYearAccentColor
             }
         );
 
@@ -680,7 +696,7 @@ export class HomePage extends PageBase implements OnInit {
         } {
 
         const labels: string[] = [];
-        const dataSets: { label: string, backgroundColor: string, data: number[] }[] = [];
+        const dataSets: { label: string, backgroundColor: string, hoverBackgroundColor: string, data: number[] }[] = [];
         let maxValue = 0;
 
         for (const serie of chartBundle.series) {
@@ -688,7 +704,8 @@ export class HomePage extends PageBase implements OnInit {
                 {
                     label: serie.legend,
                     data: [],
-                    backgroundColor: serie.key === '0' ? this.previouseYearAccentColor : this.currentYearAccentColor
+                    backgroundColor: serie.key === '0' ? this.previouseYearAccentColor : this.currentYearAccentColor,
+                    hoverBackgroundColor: serie.key === '0' ? this.previouseYearAccentColor : this.currentYearAccentColor
                 }
             );
         }
