@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, HostListener } from '@angular/core';
 
 import { Chart } from 'chart.js';
 import { PopoverController, LoadingController } from '@ionic/angular';
@@ -27,6 +27,8 @@ export class HomePage extends PageBase implements OnInit {
     private companies: Company[];
     private salesCharts: SalesCharts;
     private yAxisMaxValues: number[];
+    private touchDownWithoutMovement: boolean;
+
 
     selectedCompanySales: CompanySales;
     selectedChartBundleKey: string;
@@ -141,6 +143,24 @@ export class HomePage extends PageBase implements OnInit {
         this.updateView();
     }
 
+    @HostListener('touchstart', ['$event'])
+    onMouseDown(e: TouchEvent) {
+        console.log('touchstart');
+        this.touchDownWithoutMovement = true;
+    }
+
+    @HostListener('touchmove', ['$event'])
+    onMouseMove(e: TouchEvent) {
+        console.log('touchmove');
+        this.touchDownWithoutMovement = false;
+    }
+
+    @HostListener('touchend', ['$event'])
+    onMouseUp(e: TouchEvent) {
+        console.log('touchend');
+        this.touchDownWithoutMovement = false;
+    }
+
     private updateView() {
 
         const chartBundle = this.selectedCompanySales.chartBundle.find(b => b.key === this.selectedChartBundleKey);
@@ -194,6 +214,119 @@ export class HomePage extends PageBase implements OnInit {
             this.chart = null;
         }
 
+        const customTooltip = (tooltipModel: any) => {
+            // Tooltip Element
+            let tooltipEl = document.getElementById('chartjs-tooltip') as any;
+
+            // Create element on first render
+            if (!tooltipEl) {
+                tooltipEl = document.createElement('div');
+                tooltipEl.id = 'chartjs-tooltip';
+                document.body.appendChild(tooltipEl);
+            }
+
+            // Hide if no tooltip
+            if (tooltipModel.opacity === 0) {
+                tooltipEl.style.opacity = 0;
+                return;
+            }
+
+            // Set caret Position
+            tooltipEl.classList.remove('above', 'below', 'no-transform');
+            if (tooltipModel.yAlign) {
+                tooltipEl.classList.add(tooltipModel.yAlign);
+            } else {
+                tooltipEl.classList.add('no-transform');
+            }
+
+            const position = this.chart.canvas.getBoundingClientRect();
+            const leftTooltipPos = position.left + window.pageXOffset + tooltipModel.caretX;
+            const colIndex = tooltipModel.dataPoints[0].index;
+            const label = data.labels[colIndex];
+            const currentYearValue = data.dataSets[0].data[colIndex];
+            const previousYearValue = data.dataSets[1].data[colIndex];
+            const deltaValue = this.calcPercentageDeltaBetweenTwoNumbers(previousYearValue, currentYearValue, true);
+            const accentColor = deltaValue >= 0 ? 'green' : 'red';
+
+            const isLeftTooltip = leftTooltipPos + 100 < window.innerWidth;
+
+            tooltipEl.innerHTML = `
+            <div style="width:100%;
+                        height: 100%;
+                        font-weight:bold;
+                        font-size:8pt;
+                        line-height:12px;
+                        transform:translateX(${isLeftTooltip ? 0 : -100 }%)
+                        ">
+                <div style="float:left; width:200px">
+                    <div style="
+                        width:5px;
+                        height:5px;
+                        margin-top:3px;
+                        margin-right:3px;
+                        background-color:#1D317D;
+                        float:left"></div>
+                    <div style="float:left">${this.currencyPipe.transform(currentYearValue, currency)}</div>
+                </div>
+                <div style="float:left; width:200px">
+                    <div style="
+                        width:5px;
+                        height:5px;
+                        margin-top:3px;
+                        margin-right:3px;
+                        background-color:#DBE0EB;
+                        float:left"></div>
+                    <div style="float:left">${this.currencyPipe.transform(previousYearValue, currency)}</div>
+                </div>
+                <div style="float:left; width:100%; color:${accentColor}">Delta = ${deltaValue}%</div>
+                <div style="border-left:${isLeftTooltip ? 1 : 0 }px solid ${accentColor};
+                            border-right:${isLeftTooltip ? 0 : 1 }px solid ${accentColor};
+                            border-top:1px solid ${accentColor};
+                            float:left;
+                            height: calc(100% - 45px);
+                            width:100%;">
+                    <div style="border:1px solid gray;
+                                padding: 0 5px;
+                                text-align: center;
+                                left: 50%;
+                                transform: translateX(-50%);
+                                position: absolute;
+                                margin-top: 2px;
+                                font-weight: bold;
+                                font-size: 8pt;">
+                        ${label}
+                    </div>
+                </div>
+            </div>`;
+
+            // Display, position, and set styles for font
+            tooltipEl.style.opacity = 0;
+            tooltipEl.style.width = '90px';
+            tooltipEl.style.height = `${58 + this.chartCanvas.nativeElement.clientHeight - 6 - 27 }px`;
+
+            tooltipEl.style.position = 'absolute';
+            tooltipEl.style.left = leftTooltipPos + 'px';
+            tooltipEl.style.top =  '161px';
+            tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
+            tooltipEl.style.fontSize = tooltipModel.bodyFontSize + 'px';
+            tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
+            tooltipEl.style.padding = tooltipModel.yPadding + 'px ' + tooltipModel.xPadding + 'px';
+            tooltipEl.style.pointerEvents = 'none';
+
+            const checkVisibility = () => {
+                setTimeout(() => {
+                    if (this.touchDownWithoutMovement) {
+                        tooltipEl.style.opacity = 1;
+                        checkVisibility();
+                    } else {
+                        tooltipEl.style.opacity = 0;
+                    }
+                }, 300);
+            };
+
+            checkVisibility();
+        };
+
         // create or update the chart config
         if (this.chart) {
 
@@ -201,6 +334,7 @@ export class HomePage extends PageBase implements OnInit {
             this.chart.data.labels = data.labels;
             this.chart.data.datasets = data.dataSets;
             this.chart.options.scales.yAxes[0].ticks.max = yAxisMaxValue;
+            this.chart.options.tooltips.custom = customTooltip;
             this.chart.update();
 
         } else {
@@ -218,121 +352,7 @@ export class HomePage extends PageBase implements OnInit {
                         enabled: false,
                         mode: 'x',
                         intersect: false,
-                        custom: function (tooltipModel) {
-                            // Tooltip Element
-                            let tooltipEl = document.getElementById('chartjs-tooltip') as any;
-
-                            // Create element on first render
-                            if (!tooltipEl) {
-                                tooltipEl = document.createElement('div');
-                                tooltipEl.id = 'chartjs-tooltip';
-                                // tooltipEl.innerHTML = `
-                                // <div style="border:1px solid red; width:100%; height: 100%">
-                                //     <div style="float:left; width:100%">${currentYearValue}</div>
-                                //     <div style="float:left; width:100%">${previousYearValue}</div>
-                                //     <div style="float:left; width:100%">${deltaValue}</div>
-                                //     <div style="float:left; width:100%; height:1px; background:red"></div>
-                                //     <div style="float:left; width:100%; text-align:center">
-                                //         <div style="border:1px solid gray;">
-                                //             ${label}
-                                //         </div>
-                                //     </div>
-                                // </div>`;
-                                document.body.appendChild(tooltipEl);
-                            }
-
-                            // Hide if no tooltip
-                            if (tooltipModel.opacity === 0) {
-                                tooltipEl.style.opacity = 0;
-                                return;
-                            }
-
-                            // Set caret Position
-                            tooltipEl.classList.remove('above', 'below', 'no-transform');
-                            if (tooltipModel.yAlign) {
-                                tooltipEl.classList.add(tooltipModel.yAlign);
-                            } else {
-                                tooltipEl.classList.add('no-transform');
-                            }
-
-                            const colIndex = tooltipModel.dataPoints[0].index;
-                            const label = data.labels[colIndex];
-                            const currentYearValue = data.dataSets[0].data[colIndex];
-                            const previousYearValue = data.dataSets[1].data[colIndex];
-                            const deltaValue = 0; //this.calcPercentageDeltaBetweenTwoNumbers(currentYearValue, previousYearValue);
-                            
-                            tooltipEl.innerHTML = `
-                            <div style="width:100%; height: 100%">
-                                <div style="float:left; width:100%">${currentYearValue}</div>
-                                <div style="float:left; width:100%">${previousYearValue}</div>
-                                <div style="float:left; width:100%">${deltaValue}</div>
-                                <div style="border-left:1px solid red;
-                                            border-top:1px solid red;
-                                            float:left;
-                                            height: calc(100% - 45px);
-                                            width:100%;">
-                                    <div style="border:1px solid gray;
-                                                padding: 0 5px;
-                                                text-align: center;
-                                                left: 50%;
-                                                transform: translateX(-50%);
-                                                position: absolute;
-                                                margin-top: 2px;
-                                                font-weight: bold;
-                                                font-size: 8pt;">
-                                        ${label}
-                                    </div>
-                                </div>
-                            </div>`;
-
-                            // function getBody(bodyItem) {
-                            //     return bodyItem.lines;
-                            // }
-
-                            // // Set Text
-                            // if (tooltipModel.body) {
-                            //     const titleLines = tooltipModel.title || [];
-                            //     const bodyLines = tooltipModel.body.map(getBody);
-
-                            //     let innerHtml = '<thead>';
-
-                            //     titleLines.forEach(function (title) {
-                            //         innerHtml += '<tr><th>' + title + '</th></tr>';
-                            //     });
-                            //     innerHtml += '</thead><tbody>';
-
-                            //     bodyLines.forEach(function (body, i) {
-                            //         const colors = tooltipModel.labelColors[i];
-                            //         let style = 'background:' + colors.backgroundColor;
-                            //         style += '; border-color:' + colors.borderColor;
-                            //         style += '; border-width: 2px';
-                            //         const span = '<span style="' + style + '"></span>';
-                            //         innerHtml += '<tr><td>' + span + body + '</td></tr>';
-                            //     });
-                            //     innerHtml += '</tbody>';
-
-                            //     const tableRoot = tooltipEl.querySelector('table');
-                            //     tableRoot.innerHTML = innerHtml;
-                            // }
-
-                            // `this` will be the overall tooltip
-                            const position = this._chart.canvas.getBoundingClientRect();
-
-                            // Display, position, and set styles for font
-                            tooltipEl.style.opacity = 1;
-                            tooltipEl.style.width = '100px';
-                            tooltipEl.style.height = '470px';
-
-                            tooltipEl.style.position = 'absolute';
-                            tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 'px';
-                            tooltipEl.style.top = position.top + window.pageYOffset + 'px';
-                             // position.top + window.pageYOffset + tooltipModel.caretY + 'px';
-                            tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
-                            tooltipEl.style.fontSize = tooltipModel.bodyFontSize + 'px';
-                            tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
-                            tooltipEl.style.padding = tooltipModel.yPadding + 'px ' + tooltipModel.xPadding + 'px';
-                            tooltipEl.style.pointerEvents = 'none';
-                        }
+                        custom: customTooltip
                     },
                     legend: {
                         display: false
@@ -357,96 +377,8 @@ export class HomePage extends PageBase implements OnInit {
                     }
                 }
             });
+
         }
-
-
-        // let chartType: string;
-
-        // const lastYearValues = [10, 12, 3, 5, 2, 3, 5, 12, 5, 8, 9, 12];
-        // const currentYearValues = [5, 6, 6, 12, 5, 1, 11, 3, 2, 6, 4, 2];
-
-        // let lastYearDatasetValues: number[] = [];
-        // let currentYearDatasetValues: number[] = [];
-
-        // switch (valueType) {
-        //     case 'abs': {
-        //         chartType = 'bar';
-        //         currentYearDatasetValues = currentYearValues;
-        //         lastYearDatasetValues = lastYearValues;
-        //     }
-        //     break;
-        //     case 'accum': {
-        //         chartType = 'line';
-
-        //         currentYearDatasetValues = this.accumulateValues(currentYearValues);
-        //         lastYearDatasetValues = this.accumulateValues(lastYearValues);
-        //     }
-        //     break;
-        // }
-
-        // switch (timeFrame) {
-        //     case 'monthly': {
-        //         labels = ['jan', 'feb', 'mar', 'apr', 'may', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
-        //     }
-        //     break;   
-        //     case 'quarter': {
-        //         labels = ['Q1', 'Q2', 'Q3', 'Q4'];
-        //         currentYearDatasetValues = this.aggregateValues(currentYearDatasetValues, 3);
-        //         lastYearDatasetValues = this.aggregateValues(lastYearDatasetValues, 3);
-        //     }
-        //     break;
-        // }
-
-        // if (this.chart && chartType !== this.chart.config.type) {
-        //     this.chart.destroy();
-        //     this.chart = null;
-        // }
-
-        // if (this.chart) {
-        //     this.chart.type = chartType;
-        //     this.chart.data.labels = labels;
-        //     this.chart.data.datasets[0].data = currentYearDatasetValues;
-        //     this.chart.data.datasets[1].data = lastYearDatasetValues;
-        //     this.chart.update();
-        // } else {
-        //     this.chart = new Chart(this.chartCanvas.nativeElement, {
-        //         type: chartType,
-        //         data: {
-        //             labels: labels,
-        //             datasets: [
-        //                 {
-        //                     label: '2018',
-        //                     data: currentYearDatasetValues,
-        //                     backgroundColor: 'rgba(81, 131, 255, .85)'
-        //                 },
-        //                 {
-        //                     label: '2017',
-        //                     data: lastYearDatasetValues,
-        //                     backgroundColor: 'rgba(204, 204, 204, .85)'
-        //                 }
-        //             ],
-        //         },
-        //         options: {
-        //             responsive: true,
-        //             maintainAspectRatio: false,
-        //             scales: {
-        //                 yAxes: [{
-        //                     ticks: {
-        //                         beginAtZero: true
-        //                     }
-        //                 }],
-        //                 xAxes: [
-        //                     {
-        //                         display: true,
-        //                         gridLines: {
-        //                             display: false
-        //                         }
-        //                     }
-        //                 ]
-        //             }
-        //         }
-        //     });
-        // }
     }
 
     private updateFooterMenu(companySales: CompanySales) {
@@ -676,7 +608,6 @@ export class HomePage extends PageBase implements OnInit {
             }
         }
 
-
         const labels: string[] = [];
         const dataSets: { label: string, backgroundColor: string, data: number[] }[] = [];
         let maxValue = 0;
@@ -686,7 +617,7 @@ export class HomePage extends PageBase implements OnInit {
             {
                 label: currentYearSerie.legend,
                 data: [],
-                backgroundColor: (this.currentYearAccentColor + '80')
+                backgroundColor: this.currentYearAccentColor// + '80'
             }
         );
 
@@ -695,7 +626,7 @@ export class HomePage extends PageBase implements OnInit {
             {
                 label: previousYearSerie.legend,
                 data: [],
-                backgroundColor: this.previouseYearAccentColor + '80'
+                backgroundColor: this.previouseYearAccentColor// + '80'
             }
         );
 
