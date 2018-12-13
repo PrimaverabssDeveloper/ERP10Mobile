@@ -19,10 +19,23 @@ export class SalesTableComponent {
 
     currentYearLabel: string;
     previousYearLabel: string;
+    currency: string;
 
-    @Input() set data(data: { chart: ChartData, previousYearSerie: Serie, currentYearSerie: Serie, useReportingValue: boolean }) {
+    @Input() set data(data: {
+        chart: ChartData,
+        previousYearSerie: Serie,
+        currentYearSerie: Serie,
+        useReportingValue: boolean,
+        currency: string
+    }
+    ) {
         if (data) {
-            this.updateTable(data.chart, data.previousYearSerie, data.currentYearSerie, data.useReportingValue);
+            this.updateTable(
+                data.chart,
+                data.previousYearSerie,
+                data.currentYearSerie,
+                data.useReportingValue,
+                data.currency);
         }
     }
 
@@ -30,11 +43,13 @@ export class SalesTableComponent {
         chart: ChartData,
         previousYearSerie: Serie,
         currentYearSerie: Serie,
-        useReportingValue: boolean
+        useReportingValue: boolean,
+        currency: string
     ) {
 
         this.currentYearLabel = currentYearSerie.legend;
         this.previousYearLabel = previousYearSerie.legend;
+        this.currency = currency;
 
         const data: {
             label: string,

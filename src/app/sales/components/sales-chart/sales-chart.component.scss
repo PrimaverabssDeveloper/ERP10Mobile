@@ -1,0 +1,135 @@
+@import '../../styles/variables.scss';
+
+$chart-background-color: rgb(255,255,255);
+$chart-legend-height: 20px;
+$chart-yAxis-legend-wrapper-height: 30px;
+$chart-canvas-wrapper-height: calc(100% - #{$chart-yAxis-legend-wrapper-height});
+$chart-height: calc(100% - #{$chart-legend-height});
+
+.sales-chart {
+    width: 100%;
+    height: 100%;
+}
+
+.chart-legend {
+    background-color: white;
+    width: 100%;
+    height: $chart-legend-height;
+    padding: 1px 5px;
+
+    .chart-legend-year {
+        font-size: 10pt;
+        width: 35px;
+        margin-left: 10px;
+        float: right;
+
+        &:after {
+            content: ' ';
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            margin:4px;
+        }
+    }
+
+    .chart-legend-current-year {
+        &:after { 
+            background:$current-year-accent-color;
+        }
+    }
+
+    .chart-legend-previous-year {
+        &:after { 
+            background:$previous-year-accent-color;
+        }
+    }
+}
+
+.chart {
+    background: $chart-background-color;
+    position: relative;
+    height: $chart-height;
+    
+    .chart-yAxis-legend-wrapper {
+        width: 100%;
+        height: $chart-yAxis-legend-wrapper-height;
+
+        .legend {
+            font-size: 8pt;
+            font-weight: bold;
+            padding: 0 7px;
+            float: left;
+            transform: rotate(270deg);
+        }
+    }
+
+    .scale-line {
+        width: 100%;
+        height: .55px;
+        position: absolute;
+
+        span {
+            font-size: 8pt;
+            font-weight: bold;
+            position: absolute;
+            margin-top: -7px;
+            margin-left: 8px;
+            width: 20px;
+            text-align: center;
+        }
+
+        &:after {
+            content: ' ';
+            width: calc(100% - 40px);
+            height: 1px;
+            background: gray;
+            position: absolute;
+            left: 0;
+            margin-left: 30px;
+        }
+
+        // 33px => 6px + 27px
+        // 6px => the top position of the axis
+        // 27px => the bottom position of the zero axis
+        // the '100%' of chart will be (100% - (6px + 27px))
+
+        &-one {
+            bottom: calc((100% - (33px + #{$chart-yAxis-legend-wrapper-height})) * .25 + 27px);
+        }
+
+        &-two {
+            bottom: calc((100% - (33px + #{$chart-yAxis-legend-wrapper-height})) * .5 + 27px);
+        }
+
+        &-three {
+            bottom: calc((100% - (33px + #{$chart-yAxis-legend-wrapper-height})) * .75 + 27px);
+        }
+
+        &-four {
+            bottom: calc((100% - (33px + #{$chart-yAxis-legend-wrapper-height})) * 1 + 27px);
+        }
+    }
+
+    .chart-canvas-wrapper {
+        width: 100%;
+        height: $chart-canvas-wrapper-height;
+        padding-left: 25px;
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        .chart-canvas-inner-wrapper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+
+            &.weeks {
+                width: 500%;
+            }
+
+            canvas {
+                position: absolute;
+                z-index: 1;
+            }
+        }
+    }
+}

@@ -33,7 +33,7 @@ export interface Serie {
 }
 
 export interface ChartData {
-    valueType: string;
+    valueType: 'abs' | 'accum';
     hasTotal: boolean;
     dataSet: DataSet[];
 }

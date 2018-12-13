@@ -17,8 +17,8 @@ import { CurrencyPipe } from '@angular/common';
 export class HomePage extends PageBase implements OnInit {
 
     private readonly yAxisNumberOfSteps = 4;
-    private readonly currentYearAccentColor = '#1D317D';
-    private readonly previouseYearAccentColor = '#DBE0EB';
+    private readonly currentYearAccentColor = 'rgb(29, 49, 125)';
+    private readonly previouseYearAccentColor = 'rgb(219, 224, 235)';
     private readonly currentYearAccentColorWithTransparency = 'rgba(29, 49, 125, .5)'; // it has to be in RGBA not HEX
     private readonly previouseYearAccentColorWithTransparency = 'rgba(219, 224, 235, .5)'; // it has to be in RGBA not HEX
     private readonly currentYearSeriesKey = '1';
@@ -31,7 +31,27 @@ export class HomePage extends PageBase implements OnInit {
     private yAxisMaxValues: number[];
     private touchDownWithoutMovement: boolean;
 
-    tableData: { chart: ChartData, previousYearSerie: Serie, currentYearSerie: Serie, useReportingValue: boolean };
+    tableData: {
+        chart: ChartData,
+        previousYearSerie: Serie,
+        currentYearSerie: Serie,
+        useReportingValue: boolean,
+        currency: string
+    };
+
+    chartData: {
+        chartBundle: ChartBundle,
+        chart: ChartData,
+        period: string,
+        currency: string,
+        previousYearSerie: Serie,
+        currentYearSerie: Serie,
+        useReportingValue: boolean,
+        currentYearAccentColor: string,
+        previouseYearAccentColor: string,
+        currentYearAccentColorWithTransparency: string,
+        previouseYearAccentColorWithTransparency: string
+    };
 
     selectedCompanySales: CompanySales;
     selectedChartBundleKey: string;
@@ -43,9 +63,7 @@ export class HomePage extends PageBase implements OnInit {
     selectedPeriod: string;
 
     showTimeFrameSelector: boolean;
-    currentCurrency: string;
-    currentYearLegend: string;
-    previousYearLegend: string;
+
     yAxisScaleStep: number;
     yAxisScaleUnitPrefix: string;
 
@@ -166,58 +184,94 @@ export class HomePage extends PageBase implements OnInit {
 
     private updateView() {
 
+        this.updateFooterMenu(this.selectedCompanySales);
+
         const chartBundle = this.selectedCompanySales.chartBundle.find(b => b.key === this.selectedChartBundleKey);
         this.selectedChartBundleLocalizedTitles = chartBundle.titles;
         this.selectedChartBundleIsTimeChart = chartBundle.isTimeChart;
         this.selectedChartBundlePeriodType = chartBundle.periodType;
-        this.updateFooterMenu(this.selectedCompanySales);
 
-
-
-
-
-
-        const useReportingCurrency = false;
-        const currency = useReportingCurrency ? chartBundle.reportingCurrency : chartBundle.currency;
+        const useReportingValue = false;
+        const currency = useReportingValue ? chartBundle.reportingCurrency : chartBundle.currency;
         const chart = chartBundle.charts.find(c => c.valueType === this.valueType);
-
-        this.currentCurrency = currency;
 
         const currentYearSerie = this.getSerieWithKey(chartBundle.series, this.currentYearSeriesKey);
         const previousYearSerie = this.getSerieWithKey(chartBundle.series, this.previousYearSeriesKey);
 
-        this.currentYearLegend = currentYearSerie ? currentYearSerie.legend : null;
-        this.previousYearLegend = previousYearSerie ? previousYearSerie.legend : null;
+        // let data: {
+        //     maxValue: number,
+        //     labels: string[],
+        //     dataSets: { label: string, backgroundColor: string, hoverBackgroundColor: string, data: number[] }[]
+        // };
 
-        let data: {
-            maxValue: number,
-            labels: string[],
-            dataSets: { label: string, backgroundColor: string, hoverBackgroundColor: string, data: number[] }[]
-        };
-
-        if (chartBundle.isTimeChart) {
-            data = this.buildTimeChartData(chart, previousYearSerie, currentYearSerie, currency, this.valueType, useReportingCurrency);
-        } else {
-            data = this.buildTopChartData(
-                chart,
-                chartBundle,
-                previousYearSerie,
-                currentYearSerie,
-                this.selectedPeriod,
-                currency,
-                useReportingCurrency);
-        }
+        // if (chartBundle.isTimeChart) {
+        //     data = this.buildTimeChartData(chart, previousYearSerie, currentYearSerie, currency, this.valueType, useReportingCurrency);
+        // } else {
+        //     data = this.buildTopChartData(
+        //         chart,
+        //         chartBundle,
+        //         previousYearSerie,
+        //         currentYearSerie,
+        //         this.selectedPeriod,
+        //         currency,
+        //         useReportingCurrency);
+        // }
 
         if (this.viewType === 'chart') {
-            this.updateChart(chartBundle, this.valueType, currency, data);
+            this.chartData = {
+                chart: chart,
+                chartBundle: chartBundle,
+                period: this.selectedPeriod,
+                currency: currency,
+                useReportingValue: useReportingValue,
+                previousYearSerie: previousYearSerie,
+                currentYearSerie: currentYearSerie,
+                currentYearAccentColor: this.currentYearAccentColor,
+                currentYearAccentColorWithTransparency: this.currentYearAccentColorWithTransparency,
+                previouseYearAccentColor: this.previouseYearAccentColor,
+                previouseYearAccentColorWithTransparency: this.previouseYearAccentColorWithTransparency
+            };
         } else {
             this.tableData = {
                 chart: chart,
                 previousYearSerie: previousYearSerie,
                 currentYearSerie: currentYearSerie,
-                useReportingValue: useReportingCurrency
+                useReportingValue: useReportingValue,
+                currency: currency
             };
         }
+
+        // extra info
+
+        // get chart total
+        this.extraInfoValue = '';
+        if (chartBundle.isTimeChart) {
+            const totalDataSet = chart.dataSet.find(ds => ds.hasTotal);
+            if (totalDataSet) {
+                const totalDataPoint = totalDataSet.dataPoints.find(dp => dp.isTotal);
+
+                if (totalDataPoint) {
+                    const value = this.getCorrectValue(totalDataPoint.values[1], useReportingValue);
+                    const moneyValue = this.currencyPipe.transform(value, currency);
+                    this.extraInfoValue = `#Total sales: ${moneyValue}`;
+                }
+            }
+        } else {
+            const dataSet = chart.dataSet.find(ds => ds.period === this.selectedPeriod);
+            if (dataSet) {
+                const othersDataPoint = dataSet.dataPoints.find(dp => dp.label === '@@OTHERS@@');
+                const totalsDataPoint = dataSet.dataPoints.find(dp => dp.isTotal);
+                if (othersDataPoint && totalsDataPoint) {
+                    const otherValue = this.getCorrectValue(othersDataPoint.values[1], useReportingValue);
+                    const totalValue = this.getCorrectValue(totalsDataPoint.values[1], useReportingValue);
+                    const moneyValue = this.currencyPipe.transform(otherValue, currency);
+                    const ratioPercentage = this.calcPercentageRatioBetweenTwoNumbers(otherValue, otherValue + totalValue, true);
+                    const rationString = ratioPercentage === 0 ? 'N/A' : `${ratioPercentage}%`;
+                    this.extraInfoValue = `#Others: ${moneyValue} // ${rationString}`;
+                }
+            }
+        }
+
     }
 
     private updateChart(
@@ -229,7 +283,7 @@ export class HomePage extends PageBase implements OnInit {
             labels: string[],
             dataSets: { label: string, backgroundColor: string, hoverBackgroundColor: string, data: number[] }[]
         }
-        ) {
+    ) {
 
         // const currency = useReportingCurrency ? chartBundle.reportingCurrency : chartBundle.currency;
         // const chart = chartBundle.charts.find(c => c.valueType === valueType);
