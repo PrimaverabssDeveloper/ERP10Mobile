@@ -26,7 +26,9 @@ export class HomePage extends PageBase implements OnInit {
     private salesCharts: SalesCharts;
 
     tableData: {
+        chartBundle: ChartBundle,
         chart: ChartData,
+        period: string,
         previousYearSerie: Serie,
         currentYearSerie: Serie,
         useReportingValue: boolean,
@@ -185,7 +187,9 @@ export class HomePage extends PageBase implements OnInit {
             };
         } else {
             this.tableData = {
+                chartBundle: chartBundle,
                 chart: chart,
+                period: this.selectedPeriod,
                 previousYearSerie: previousYearSerie,
                 currentYearSerie: currentYearSerie,
                 useReportingValue: useReportingValue,

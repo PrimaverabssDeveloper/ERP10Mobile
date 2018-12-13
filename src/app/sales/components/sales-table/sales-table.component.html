@@ -9,8 +9,8 @@
         <div>
             <div class="sales-table-row" *ngFor="let row of rows">
                 <div class="sales-table-row-label">{{row.label}}</div>
-                <div class="sales-table-row-current-year-value">{{row.currentYearValue | round | currency:currency}}</div>
-                <div class="sales-table-row-previous-year-value">{{row.previousYearValue | round | currency:currency}}</div>
+                <div class="sales-table-row-current-year-value">{{row.currentYearValue | currency:currency:'symbol':'1.0-0'}}</div>
+                <div class="sales-table-row-previous-year-value">{{row.previousYearValue | currency:currency:'symbol':'1.0-0'}}</div>
                 <div class="sales-table-row-delta-percentage" [ngClass]="{negative: row.deltaPercentageValue < 0}">{{row.deltaPercentageValue
                     | round }} %</div>
             </div>

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Company, Serie, ChartData } from '../../entities';
+import { Company, Serie, ChartData, ChartBundle } from '../../entities';
 
 
 @Component({
@@ -22,7 +22,9 @@ export class SalesTableComponent {
     currency: string;
 
     @Input() set data(data: {
+        chartBundle: ChartBundle,
         chart: ChartData,
+        period: string,
         previousYearSerie: Serie,
         currentYearSerie: Serie,
         useReportingValue: boolean,
@@ -31,7 +33,9 @@ export class SalesTableComponent {
     ) {
         if (data) {
             this.updateTable(
+                data.chartBundle,
                 data.chart,
+                data.period,
                 data.previousYearSerie,
                 data.currentYearSerie,
                 data.useReportingValue,
@@ -40,7 +44,9 @@ export class SalesTableComponent {
     }
 
     private updateTable(
+        chartBundle: ChartBundle,
         chart: ChartData,
+        period: string,
         previousYearSerie: Serie,
         currentYearSerie: Serie,
         useReportingValue: boolean,
@@ -51,6 +57,24 @@ export class SalesTableComponent {
         this.previousYearLabel = previousYearSerie.legend;
         this.currency = currency;
 
+        if (chartBundle.isTimeChart) {
+            this.rows = this.buildTimeChartData(chart, previousYearSerie, currentYearSerie, useReportingValue);
+        } else {
+            this.rows = this.buildTopChartData(chart, period, previousYearSerie, currentYearSerie, useReportingValue);
+        }
+    }
+
+    private buildTimeChartData(
+        chart: ChartData,
+        previousYearSerie: Serie,
+        currentYearSerie: Serie,
+        useReportingValue: boolean,
+    ): {
+        label: string,
+        currentYearValue: number,
+        previousYearValue: number,
+        deltaPercentageValue: number
+    }[] {
         const data: {
             label: string,
             currentYearValue: number,
@@ -97,7 +121,77 @@ export class SalesTableComponent {
             });
         }
 
-        this.rows = data;
+        return data;
+    }
+
+    private buildTopChartData(
+        chart: ChartData,
+        period: string,
+        previousYearSerie: Serie,
+        currentYearSerie: Serie,
+        useReportingValue: boolean,
+    ): {
+        label: string,
+        currentYearValue: number,
+        previousYearValue: number,
+        deltaPercentageValue: number
+    }[] {
+        const data: {
+            label: string,
+            currentYearValue: number,
+            previousYearValue: number,
+            deltaPercentageValue: number
+        }[] = [];
+
+        const dataSet = chart.dataSet.find(ds => ds.period === period);
+
+        if (!dataSet) {
+            return [];
+        }
+
+        for (const dataPoint of dataSet.dataPoints) {
+            if (!dataPoint) {
+                data.push({
+                    label: 'N/A',
+                    currentYearValue: 0,
+                    previousYearValue: 0,
+                    deltaPercentageValue: 0
+                });
+
+                continue;
+            }
+
+            if (!dataPoint.values) {
+                data.push({
+                    label: dataPoint.label ? dataPoint.label : 'N/A',
+                    currentYearValue: 0,
+                    previousYearValue: 0,
+                    deltaPercentageValue: 0
+                });
+
+                continue;
+            }
+
+            // the other data point is not displayed on the table
+            if (dataPoint.label === '@@OTHERS@@') {
+                continue;
+            }
+
+            const label = dataPoint.label ? dataPoint.label : 'N/A';
+            const currentYearValue = dataPoint.values.find(v => v.seriesKey === currentYearSerie.key);
+            const previousYearValue = dataSet.dataPoints[0].values.find(v => v.seriesKey === previousYearSerie.key);
+            const currentYearFinalValue = this.getCorrectValue(currentYearValue, useReportingValue);
+            const previousYearFinalValue = this.getCorrectValue(previousYearValue, useReportingValue);
+
+            data.push({
+                label: label,
+                currentYearValue: currentYearFinalValue,
+                previousYearValue: previousYearFinalValue,
+                deltaPercentageValue: this.calcPercentageDeltaBetweenTwoNumbers(previousYearFinalValue, currentYearFinalValue)
+            });
+        }
+
+        return data;
     }
 
     private getCorrectValue(value: { seriesKey: string, value: number, reportingValue: number }, useReportingValue: boolean): number {
