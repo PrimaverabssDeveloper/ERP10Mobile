@@ -40,8 +40,11 @@ $sales-table-rows-height: calc(100% - #{$sales-table-header-row-height});
         border-bottom-width: 0.55px;
         font-size: 10pt;
 
-        &.sales-table-total-row {
+        &:last-child {
             border-bottom-width: 0;
+        }
+
+        &.sales-table-total-row {
             font-weight: bold;
         }
     }

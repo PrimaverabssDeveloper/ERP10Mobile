@@ -14,7 +14,8 @@ export class SalesTableComponent {
         label: string,
         currentYearValue: number,
         previousYearValue: number,
-        deltaPercentageValue: number
+        deltaPercentageValue: number,
+        isTotal: boolean
     }[] = [];
 
     currentYearLabel: string;
@@ -193,13 +194,15 @@ export class SalesTableComponent {
         label: string,
         currentYearValue: number,
         previousYearValue: number,
-        deltaPercentageValue: number
+        deltaPercentageValue: number,
+        isTotal: boolean
     }[] {
         const data: {
             label: string,
             currentYearValue: number,
             previousYearValue: number,
-            deltaPercentageValue: number
+            deltaPercentageValue: number,
+            isTotal: boolean
         }[] = [];
 
         const dataSet = chart.dataSet.find(ds => ds.period === period);
@@ -214,7 +217,8 @@ export class SalesTableComponent {
                     label: 'N/A',
                     currentYearValue: 0,
                     previousYearValue: 0,
-                    deltaPercentageValue: 0
+                    deltaPercentageValue: 0,
+                    isTotal: false
                 });
 
                 continue;
@@ -225,7 +229,8 @@ export class SalesTableComponent {
                     label: dataPoint.label ? dataPoint.label : 'N/A',
                     currentYearValue: 0,
                     previousYearValue: 0,
-                    deltaPercentageValue: 0
+                    deltaPercentageValue: 0,
+                    isTotal: false
                 });
 
                 continue;
@@ -246,7 +251,8 @@ export class SalesTableComponent {
                 label: label,
                 currentYearValue: currentYearFinalValue,
                 previousYearValue: previousYearFinalValue,
-                deltaPercentageValue: this.calcPercentageDeltaBetweenTwoNumbers(previousYearFinalValue, currentYearFinalValue)
+                deltaPercentageValue: this.calcPercentageDeltaBetweenTwoNumbers(previousYearFinalValue, currentYearFinalValue),
+                isTotal: dataPoint.isTotal
             });
         }
 
