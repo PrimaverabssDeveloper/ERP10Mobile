@@ -75,9 +75,8 @@
         </div>
         <div class="chart-container">
             <!-- yearly chart -->
-            <div class="chart" [ngClass]="{'visible' : salaryPeriodState === 'yearly' }">
-                <hr-salary-chart [labels]="yearlyChartData.labels" [lastYearValues]="yearlyChartData.lastYearValues"
-                    [currentYearValues]="yearlyChartData.currentYearValues"></hr-salary-chart>
+            <div class="chart" *ngIf="yearlyChartData" [ngClass]="{'visible' : salaryPeriodState === 'yearly' }">
+                <hr-salary-chart [data]="yearlyChartData" ></hr-salary-chart>
             </div>
 
             <!-- monthly chart -->
@@ -89,7 +88,7 @@
                     </ion-slide>
                 </ion-slides>
                 <hr-year-selector></hr-year-selector> -->
-                <hr-monthly-charts></hr-monthly-charts>
+                <!-- <hr-monthly-charts></hr-monthly-charts> -->
             </div>
         </div>
     </div>

@@ -1,12 +1,16 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { Slides } from '@ionic/angular';
+import { Slides, LoadingController } from '@ionic/angular';
+import { PageBase } from '../../../shared/pages';
+import { HumanResourcesServiceProvider, HumanResourcesService } from '../../services';
+import { Salaries, YearSalary } from '../../models';
 
 @Component({
     templateUrl: './hr-home.page.html',
-    styleUrls: ['./hr-home.page.scss']
+    styleUrls: ['./hr-home.page.scss'],
+    providers: [HumanResourcesServiceProvider]
 })
 
-export class HrHomePage implements OnInit {
+export class HrHomePage extends PageBase implements OnInit {
 
     @ViewChild('monthlyChartsSlide') monthlyChartsSlide: Slides;
 
@@ -14,23 +18,26 @@ export class HrHomePage implements OnInit {
     salaryValuesState: 'money' | 'percentage';
     chartsDrawerState: 'open' | 'close';
 
+    salaries: Salaries;
+
+
     salaryDate: string;
     salaryPortions: MoneyValue[];
     salaryExtraInformations: SalaryExtraInformations[];
 
-    yearlyChartData: ChartData;
+    yearlyChartData: { labels: string[], grossValues: number[], netValues: number[] };
     monthlyChartsData: ChartData[];
 
-    constructor() {
+    constructor(
+        public loadingController: LoadingController,
+        private humanResourcesService: HumanResourcesService
+    ) {
+
+        super(loadingController);
+
         this.chartsDrawerState = 'open';
         this.salaryValuesState = 'money';
         this.salaryPeriodState = 'monthly';
-
-        this.yearlyChartData = {
-            labels: ['2015', '2016', '2017', '2018'],
-            lastYearValues: [15000, 16000, 17000, 18000],
-            currentYearValues: [16000, 17000, 18000, 19000]
-        };
 
         this.monthlyChartsData = [
             {
@@ -165,12 +172,23 @@ export class HrHomePage implements OnInit {
         ];
     }
 
-    ngOnInit() {
-        this.monthlyChartsSlide
-            .ionSlideDrag
-            .subscribe(v => {
-                console.log(v);
-            });
+    /**
+    * Execute on page initialization.
+    *
+    * @memberof HrHomePage
+    */
+    async ngOnInit() {
+        await this.showLoading();
+
+        try {
+            this.salaries = await this.humanResourcesService.getSalaries();
+        } catch (error) {
+            alert(error);
+        }
+
+        this.buildCharts(this.salaries.data);
+
+        this.hideLoading();
     }
 
     toggleSalaryValuesStateAction() {
@@ -187,6 +205,25 @@ export class HrHomePage implements OnInit {
 
     changeSalaryPeriodToYearlyAction() {
         this.salaryPeriodState = 'yearly';
+    }
+
+    private buildCharts(years: YearSalary[]) {
+        // build year salary chart
+
+        const labels: string[] = [];
+        const grossValues: number[] = [];
+        const netValues: number[] = [];
+        for (const year of years) {
+            labels.push(`${year.year}`);
+            grossValues.push(year.grossTotal.value);
+            netValues.push(year.netTotal.value);
+        }
+
+        this.yearlyChartData = {
+            labels: labels,
+            grossValues: grossValues,
+            netValues: netValues
+        };
     }
 }
 

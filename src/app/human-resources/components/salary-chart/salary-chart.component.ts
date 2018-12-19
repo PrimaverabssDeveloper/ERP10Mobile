@@ -7,31 +7,37 @@ import { Chart } from 'chart.js';
     styleUrls: ['./salary-chart.component.scss']
 })
 
-export class SalaryChartComponent implements OnInit {
+export class SalaryChartComponent {
 
     private chart: any;
 
     @ViewChild('chartCanvas') chartCanvas: ElementRef;
-    @Input() labels: string[];
-    @Input() lastYearValues: number[];
-    @Input() currentYearValues: number[];
 
-    constructor() {
-
+    @Input() set data(data: {labels: string[], grossValues: number[], netValues: number[] }) {
+        if (data) {
+            this.buildChart(data);
+        }
     }
 
-    ngOnInit(): void {
+    private buildChart(data: {labels: string[], grossValues: number[], netValues: number[] }) {
+
+        // remove the net value to the gross value becouse the chart bars are stacked not over
+        const grossValues: number[] = [];
+        for (let i = 0; i < data.grossValues.length; i++) {
+            grossValues.push(data.grossValues[i] - data.netValues[i]);
+        }
+
         this.chart = new Chart(this.chartCanvas.nativeElement, {
             type: 'bar',
             data: {
-                labels: this.labels,
+                labels: data.labels,
                 datasets: [
                     {
-                        data: this.currentYearValues,
+                        data: data.netValues,
                         backgroundColor: 'rgb(255, 118, 80)'
                     },
                     {
-                        data: this.lastYearValues,
+                        data: grossValues,
                         backgroundColor: 'rgb(184, 184, 184)'
                     }
                 ],
