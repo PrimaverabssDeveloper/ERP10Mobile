@@ -29,6 +29,7 @@ export class HomePage extends PageBase implements OnInit {
         chartBundle: ChartBundle,
         chart: ChartData,
         period: string,
+        timeFrame: 'monthly' | 'quarter',
         previousYearSerie: Serie,
         currentYearSerie: Serie,
         useReportingValue: boolean,
@@ -39,6 +40,7 @@ export class HomePage extends PageBase implements OnInit {
         chartBundle: ChartBundle,
         chart: ChartData,
         period: string,
+        timeFrame: 'monthly' | 'quarter',
         currency: string,
         previousYearSerie: Serie,
         currentYearSerie: Serie,
@@ -175,6 +177,7 @@ export class HomePage extends PageBase implements OnInit {
             this.chartData = {
                 chart: chart,
                 chartBundle: chartBundle,
+                timeFrame: this.timeFrame,
                 period: this.selectedPeriod,
                 currency: currency,
                 useReportingValue: useReportingValue,
@@ -189,6 +192,7 @@ export class HomePage extends PageBase implements OnInit {
             this.tableData = {
                 chartBundle: chartBundle,
                 chart: chart,
+                timeFrame: this.timeFrame,
                 period: this.selectedPeriod,
                 previousYearSerie: previousYearSerie,
                 currentYearSerie: currentYearSerie,
@@ -196,6 +200,8 @@ export class HomePage extends PageBase implements OnInit {
                 currency: currency
             };
         }
+
+        this.showTimeFrameSelector = chartBundle.isTimeChart && chartBundle.periodType === 'M';
 
         // extra info
         this.extraInfoValue = '';

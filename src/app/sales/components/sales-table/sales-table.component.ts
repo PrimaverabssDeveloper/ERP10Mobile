@@ -25,6 +25,7 @@ export class SalesTableComponent {
         chartBundle: ChartBundle,
         chart: ChartData,
         period: string,
+        timeFrame: 'monthly' | 'quarter',
         previousYearSerie: Serie,
         currentYearSerie: Serie,
         useReportingValue: boolean,
@@ -36,6 +37,7 @@ export class SalesTableComponent {
                 data.chartBundle,
                 data.chart,
                 data.period,
+                data.timeFrame,
                 data.previousYearSerie,
                 data.currentYearSerie,
                 data.useReportingValue,
@@ -47,6 +49,7 @@ export class SalesTableComponent {
         chartBundle: ChartBundle,
         chart: ChartData,
         period: string,
+        timeFrame: 'monthly' | 'quarter',
         previousYearSerie: Serie,
         currentYearSerie: Serie,
         useReportingValue: boolean,
@@ -58,7 +61,7 @@ export class SalesTableComponent {
         this.currency = currency;
 
         if (chartBundle.isTimeChart) {
-            this.rows = this.buildTimeChartData(chart, previousYearSerie, currentYearSerie, useReportingValue);
+            this.rows = this.buildTimeChartData(chart, timeFrame, previousYearSerie, currentYearSerie, useReportingValue);
         } else {
             this.rows = this.buildTopChartData(chart, period, previousYearSerie, currentYearSerie, useReportingValue);
         }
@@ -66,6 +69,7 @@ export class SalesTableComponent {
 
     private buildTimeChartData(
         chart: ChartData,
+        timeFrame: 'monthly' | 'quarter',
         previousYearSerie: Serie,
         currentYearSerie: Serie,
         useReportingValue: boolean,
@@ -73,13 +77,15 @@ export class SalesTableComponent {
         label: string,
         currentYearValue: number,
         previousYearValue: number,
-        deltaPercentageValue: number
+        deltaPercentageValue: number,
+        isTotal: boolean
     }[] {
-        const data: {
+        let data: {
             label: string,
             currentYearValue: number,
             previousYearValue: number,
-            deltaPercentageValue: number
+            deltaPercentageValue: number,
+            isTotal: boolean
         }[] = [];
 
         for (const dataSet of chart.dataSet) {
@@ -90,7 +96,8 @@ export class SalesTableComponent {
                     label: 'N/A',
                     currentYearValue: 0,
                     previousYearValue: 0,
-                    deltaPercentageValue: 0
+                    deltaPercentageValue: 0,
+                    isTotal: false
                 });
 
                 continue;
@@ -101,7 +108,8 @@ export class SalesTableComponent {
                     label: dataPoint.label ? dataPoint.label : 'N/A',
                     currentYearValue: 0,
                     previousYearValue: 0,
-                    deltaPercentageValue: 0
+                    deltaPercentageValue: 0,
+                    isTotal: false
                 });
 
                 continue;
@@ -117,8 +125,59 @@ export class SalesTableComponent {
                 label: label,
                 currentYearValue: currentYearFinalValue,
                 previousYearValue: previousYearFinalValue,
-                deltaPercentageValue: this.calcPercentageDeltaBetweenTwoNumbers(previousYearFinalValue, currentYearFinalValue)
+                deltaPercentageValue: this.calcPercentageDeltaBetweenTwoNumbers(previousYearFinalValue, currentYearFinalValue),
+                isTotal: dataPoint.isTotal
             });
+        }
+
+        if (timeFrame === 'quarter') {
+
+            const quartersData: {
+                label: string,
+                currentYearValue: number,
+                previousYearValue: number,
+                deltaPercentageValue: number,
+                isTotal: boolean
+            }[] = [];
+
+            for (let i = 0; i < 4; i++) {
+                const quarterData = data.splice(0, 3);
+
+                let finalQuarterData: {
+                    label: string,
+                    currentYearValue: number,
+                    previousYearValue: number,
+                    deltaPercentageValue: number,
+                    isTotal: boolean
+                };
+
+                if (chart.valueType === 'abs') {
+                    finalQuarterData = quarterData.reduce((a, b) => {
+                        const currentYearValue = a.currentYearValue + b.currentYearValue;
+                        const previousYearValue = a.previousYearValue + b.previousYearValue;
+
+                        return {
+                            currentYearValue: currentYearValue,
+                            previousYearValue: previousYearValue,
+                            deltaPercentageValue: this.calcPercentageDeltaBetweenTwoNumbers(previousYearValue, currentYearValue),
+                            label: `Q${i + 1}`,
+                            isTotal: false
+                        };
+                    });
+                } else {
+                    finalQuarterData = quarterData[quarterData.length - 1];
+                    finalQuarterData.label = `Q${i + 1}`;
+                }
+
+                quartersData.push(finalQuarterData);
+            }
+
+            // the remaining value is the total value
+            if (data.length > 0) {
+                quartersData.push(data[0]);
+            }
+
+            data = quartersData;
         }
 
         return data;

@@ -30,6 +30,7 @@ export class SalesChartComponent {
         chartBundle: ChartBundle,
         chart: ChartData,
         period: string,
+        timeFrame: 'monthly' | 'quarter',
         currency: string,
         previousYearSerie: Serie,
         currentYearSerie: Serie,
@@ -44,6 +45,7 @@ export class SalesChartComponent {
                 data.chartBundle,
                 data.chart,
                 data.period,
+                data.timeFrame,
                 data.previousYearSerie,
                 data.currentYearSerie,
                 data.currency,
@@ -88,6 +90,7 @@ export class SalesChartComponent {
         chartBundle: ChartBundle,
         chart: ChartData,
         period: string,
+        timeFrame: 'monthly' | 'quarter',
         previousYearSerie: Serie,
         currentYearSerie: Serie,
         currency: string,
@@ -106,6 +109,7 @@ export class SalesChartComponent {
         if (chartBundle.isTimeChart) {
             const data = this.buildTimeChartData(
                 chart,
+                timeFrame,
                 previousYearSerie,
                 currentYearSerie,
                 useReportingValue,
@@ -326,6 +330,7 @@ export class SalesChartComponent {
 
     private buildTimeChartData(
         chart: ChartData,
+        timeFrame: 'monthly' | 'quarter',
         previousYearSerie: Serie,
         currentYearSerie: Serie,
         useReportingValue: boolean,
@@ -339,7 +344,7 @@ export class SalesChartComponent {
             dataSets: { label: string, backgroundColor: string, hoverBackgroundColor: string, data: number[] }[]
         } {
 
-        const labels: string[] = [];
+        let labels: string[] = [];
         const dataSets: { label: string, backgroundColor: string, hoverBackgroundColor, data: number[] }[] = [];
         let maxValue = 0;
 
@@ -399,6 +404,35 @@ export class SalesChartComponent {
                 }
 
                 dataSets[i].data.push(finalValue);
+            }
+        }
+
+        if (timeFrame === 'quarter') {
+            maxValue = 0;
+            labels = ['Q1', 'Q2', 'Q3', 'Q4'];
+
+            if (chart.valueType === 'abs') {
+                for (const ds of dataSets) {
+                    const quarterValues: number[] = [];
+                    for (let i = 0; i < 4; i++) {
+                        const quarterValue = ds.data.splice(0, 3).reduce((a , b) => a + b );
+                        maxValue = quarterValue > maxValue ? quarterValue : maxValue;
+                        quarterValues.push(quarterValue);
+                    }
+
+                    ds.data = quarterValues;
+                }
+            } else {
+                for (const ds of dataSets) {
+                    const quarterValues: number[] = [];
+                    for (let i = 1; i <= 4; i++) {
+                        const quarterValue = ds.data[i * 3 - 1];
+                        maxValue = quarterValue > maxValue ? quarterValue : maxValue;
+                        quarterValues.push(quarterValue);
+                    }
+
+                    ds.data = quarterValues;
+                }
             }
         }
 
