@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Slides, LoadingController } from '@ionic/angular';
 import { PageBase } from '../../../shared/pages';
 import { HumanResourcesServiceProvider, HumanResourcesService } from '../../services';
-import { Salaries, YearSalary } from '../../models';
+import { Salaries, YearSalary, MonthSalary } from '../../models';
 
 @Component({
     templateUrl: './hr-home.page.html',
@@ -20,13 +20,15 @@ export class HrHomePage extends PageBase implements OnInit {
 
     salaries: Salaries;
 
-
     salaryDate: string;
     salaryPortions: MoneyValue[];
     salaryExtraInformations: SalaryExtraInformations[];
 
-    yearlyChartData: { labels: string[], grossValues: number[], netValues: number[] };
+    yearlyChartData: { label: string, grossValue: number, netValue: number, source: YearSalary | MonthSalary }[];
     monthlyChartsData: ChartData[];
+
+    currentYearSalary: YearSalary;
+    currentMonthSalary: MonthSalary;
 
     constructor(
         public loadingController: LoadingController,
@@ -86,90 +88,6 @@ export class HrHomePage extends PageBase implements OnInit {
                     1207.71, 1807.71, 1207.71, 1207.71, 1207.71, 1207.71]
             },
         ];
-
-        this.salaryDate = 'August 2018';
-        this.salaryPortions = [
-            {
-                label: 'Net Earnings',
-                value: 1655.82,
-                currency: 'EUR',
-                percentualValue: 73.64
-            },
-            {
-                label: '',
-                value: null,
-                currency: '',
-                percentualValue: null
-            },
-            {
-                label: 'Gross Earnings',
-                value: 2249.38,
-                currency: 'EUR',
-                percentualValue: 100
-            },
-            {
-                label: 'Social Security',
-                value: 247.43,
-                currency: 'EUR',
-                percentualValue: 10.99
-            },
-            {
-                label: 'Income Tax',
-                value: 303.67,
-                currency: 'EUR',
-                percentualValue: 13.49
-            },
-            {
-                label: 'Others',
-                value: 42.46,
-                currency: 'EUR',
-                percentualValue: 1.88
-            }
-
-        ];
-
-        this.salaryExtraInformations = [
-            {
-                label: 'Payment Method',
-                infos: [
-                    {
-                        label: 'Meal Card',
-                        value: 0,
-                        currency: 'EUR',
-                        percentualValue: 0
-                    },
-                    {
-                        label: 'Transfer',
-                        value: 1655.82,
-                        currency: 'EUR',
-                        percentualValue: 100
-                    }
-                ]
-            },
-            {
-                label: 'Compensation Breakdown',
-                infos: [
-                    {
-                        label: 'Salary',
-                        value: 1019.16,
-                        currency: 'EUR',
-                        percentualValue: 61.56
-                    },
-                    {
-                        label: 'Christmas',
-                        value: 42.39,
-                        currency: 'EUR',
-                        percentualValue: 2.55
-                    },
-                    {
-                        label: 'Vacations',
-                        value: 594.27,
-                        currency: 'EUR',
-                        percentualValue: 594.27
-                    }
-                ]
-            }
-        ];
     }
 
     /**
@@ -188,6 +106,8 @@ export class HrHomePage extends PageBase implements OnInit {
 
         this.buildCharts(this.salaries.data);
 
+        this.currentYearSalary = this.salaries.data[0];
+        this.updateView();
         this.hideLoading();
     }
 
@@ -207,23 +127,98 @@ export class HrHomePage extends PageBase implements OnInit {
         this.salaryPeriodState = 'yearly';
     }
 
-    private buildCharts(years: YearSalary[]) {
-        // build year salary chart
+    onSelectedYearSalaryChange(yearSalary: YearSalary) {
+        this.currentYearSalary = yearSalary;
+        this.updateView();
+    }
 
-        const labels: string[] = [];
-        const grossValues: number[] = [];
-        const netValues: number[] = [];
-        for (const year of years) {
-            labels.push(`${year.year}`);
-            grossValues.push(year.grossTotal.value);
-            netValues.push(year.netTotal.value);
+    private updateView() {
+
+        const currency = this.salaries.currency;
+        const yearSalary = this.currentYearSalary;
+
+        this.salaryDate = `${yearSalary.year}`;
+
+        this.salaryPortions = [];
+
+        // net earnings
+        this.salaryPortions.push(
+            {
+                label: '#Net Earnings',
+                value: yearSalary.netTotal.value,
+                currency: currency,
+                percentualValue: yearSalary.netTotal.percentage
+            }
+        );
+
+        // empty to take the space on the right side of 'net earnings' slot
+        this.salaryPortions.push(
+            {
+                label: null,
+                value: null,
+                currency: null,
+                percentualValue: null
+            }
+        );
+
+        // gross earnings
+        this.salaryPortions.push(
+            {
+                label: '#Gross Earnings',
+                value: yearSalary.grossTotal.value,
+                currency: currency,
+                percentualValue: yearSalary.grossTotal.percentage
+            }
+        );
+
+        // deductions, p.e., Income Tax, Social Security and Others
+        for (const deduction of yearSalary.deductions) {
+            this.salaryPortions.push(
+                {
+                    label: deduction.label['pt'],
+                    value: deduction.value,
+                    currency: currency,
+                    percentualValue: deduction.percentage
+                }
+            );
         }
 
-        this.yearlyChartData = {
-            labels: labels,
-            grossValues: grossValues,
-            netValues: netValues
+        const paymentMethods: SalaryExtraInformations = {
+            label: '#Payment Method',
+            infos: yearSalary.paymentMethods.map(pm => (
+                {
+                    label: pm.label['pt'],
+                    value: pm.value,
+                    currency: currency,
+                    percentualValue: pm.percentage
+                }
+            ))
         };
+
+        const compensationBreakdown: SalaryExtraInformations = {
+            label: '#Compensation Breakdown',
+            infos: yearSalary.salaryBreakdown.map(pm => (
+                {
+                    label: pm.label['pt'],
+                    value: pm.value,
+                    currency: currency,
+                    percentualValue: pm.percentage
+                }
+            ))
+        };
+
+        this.salaryExtraInformations = [paymentMethods, compensationBreakdown];
+    }
+
+    private buildCharts(years: YearSalary[]) {
+
+        // build year salary chart data
+        this.yearlyChartData = years.map(y => ({
+            label: `${y.year}`,
+            grossValue: y.grossTotal.value,
+            netValue: y.netTotal.value,
+            source: y
+        }));
     }
 }
 
