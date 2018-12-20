@@ -1,5 +1,6 @@
-import { Component, ViewChild, ElementRef, OnInit, Input } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Chart } from 'chart.js';
+import { MonthSalary, YearSalary } from '../../models';
 
 @Component({
     selector: 'hr-salary-chart',
@@ -9,36 +10,60 @@ import { Chart } from 'chart.js';
 
 export class SalaryChartComponent {
 
+    private readonly grossValueAccentColor = '#B8B8B8';
+    private readonly netValueAccentColor = '#FF7651';
+    private readonly grossValueHighlightAccentColor = '#8A8A8A';
+    private readonly netValueHighlightAccentColor = '#BF583D';
+
     private chart: any;
+    private chartData: { label: string, grossValue: number, netValue: number, source: YearSalary | MonthSalary }[];
 
     @ViewChild('chartCanvas') chartCanvas: ElementRef;
 
-    @Input() set data(data: {labels: string[], grossValues: number[], netValues: number[] }) {
+    @Input() set data(data: { label: string, grossValue: number, netValue: number, source: YearSalary | MonthSalary }[]) {
         if (data) {
+            this.chartData = data;
             this.buildChart(data);
         }
     }
 
-    private buildChart(data: {labels: string[], grossValues: number[], netValues: number[] }) {
+    @Output() selected = new EventEmitter();
 
-        // remove the net value to the gross value becouse the chart bars are stacked not over
-        const grossValues: number[] = [];
-        for (let i = 0; i < data.grossValues.length; i++) {
-            grossValues.push(data.grossValues[i] - data.netValues[i]);
+    private buildChart(data: { label: string, grossValue: number, netValue: number, source: YearSalary | MonthSalary }[]) {
+
+        // break the data into the correct arrays to build the datasets
+        const labels = data.map(d => d.label);
+        const netValues = data.map(d => d.netValue);
+        const grossValues = data.map(d => d.grossValue - d.netValue);
+
+        // create arrays with colors for each value
+        const grossValuesBackgrounds: string[] = [];
+        for (let i = 0; i < grossValues.length; i++) {
+            grossValuesBackgrounds.push(this.grossValueAccentColor);
         }
 
+        const netValuesBackgrounds: string[] = [];
+        for (let i = 0; i < netValues.length; i++) {
+            netValuesBackgrounds.push(this.netValueAccentColor);
+        }
+
+        // highlight the last one
+        grossValuesBackgrounds[grossValuesBackgrounds.length - 1] = this.grossValueHighlightAccentColor;
+        netValuesBackgrounds[netValuesBackgrounds.length - 1] = this.netValueHighlightAccentColor;
+
+        // create the chart
         this.chart = new Chart(this.chartCanvas.nativeElement, {
             type: 'bar',
             data: {
-                labels: data.labels,
+                labels: labels,
                 datasets: [
                     {
-                        data: data.netValues,
-                        backgroundColor: 'rgb(255, 118, 80)'
+                        data: netValues,
+                        backgroundColor: netValuesBackgrounds
                     },
                     {
                         data: grossValues,
-                        backgroundColor: 'rgb(184, 184, 184)'
+                        backgroundColor: grossValuesBackgrounds
                     }
                 ],
             },
@@ -66,6 +91,36 @@ export class SalaryChartComponent {
                             display: true
                         }
                     }]
+                },
+                onClick: (ev) => {
+
+                    const element = this.chart.getElementAtEvent(ev);
+                    if (!element || element.length === 0) {
+                        return;
+                    }
+
+                    // get the index of the clicked bar
+                    const index = element[0]._index;
+
+                    // get the colors arrays from the dataset
+                    const nvBackgrounds = this.chart.data.datasets[0].backgroundColor;
+                    const gvBackgrounds = this.chart.data.datasets[1].backgroundColor;
+
+                    // update the bar color based on the clicked bar index
+                    for (let i = 0; i < nvBackgrounds.length; i++) {
+                        nvBackgrounds[i] = i === index ? this.netValueHighlightAccentColor : this.netValueAccentColor;
+                    }
+
+                    for (let i = 0; i < gvBackgrounds.length; i++) {
+                        gvBackgrounds[i] = i === index ? this.grossValueHighlightAccentColor : this.grossValueAccentColor;
+                    }
+
+                    // update the chart to apply the new color
+                    this.chart.update();
+
+                    // select the correct source and fire the select event
+                    const selectedSource = this.chartData[index].source;
+                    this.selected.emit(selectedSource);
                 }
             }
         });
