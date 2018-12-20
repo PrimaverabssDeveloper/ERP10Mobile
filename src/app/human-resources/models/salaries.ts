@@ -7,10 +7,9 @@ export interface Salaries {
 }
 
 export interface BaseSalary {
-    paymentDistribution: LocalizedValue[];
+    deductions: LocalizedValue[];
+    salaryBreakdown: LocalizedValue[];
     paymentMethods: LocalizedValue[];
-    documents: LocalizedValue[];
-    discounts: LocalizedValue[];
 }
 
 export interface YearSalary extends BaseSalary {
@@ -30,7 +29,7 @@ export interface MonthSalary extends BaseSalary {
 
 export interface Value {
     value: number;
-    precentage: number;
+    percentage: number;
 }
 
 export interface LocalizedValue extends Value {
