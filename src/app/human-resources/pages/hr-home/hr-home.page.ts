@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Slides, LoadingController } from '@ionic/angular';
 import { PageBase } from '../../../shared/pages';
 import { HumanResourcesServiceProvider, HumanResourcesService } from '../../services';
-import { Salaries, YearSalary, MonthSalary } from '../../models';
+import { Salaries, YearSalary, MonthSalary, BaseSalary, Value } from '../../models';
 
 @Component({
     templateUrl: './hr-home.page.html',
@@ -24,8 +24,22 @@ export class HrHomePage extends PageBase implements OnInit {
     salaryPortions: MoneyValue[];
     salaryExtraInformations: SalaryExtraInformations[];
 
-    yearlyChartData: { label: string, grossValue: number, netValue: number, source: YearSalary | MonthSalary }[];
-    monthlyChartsData: ChartData[];
+    yearlyChartData: {
+        label: string,
+        grossValue: number,
+        netValue: number,
+        source: YearSalary | MonthSalary
+    }[];
+
+    monthlyChartsData: {
+        year: number,
+        months: {
+            label: string,
+            grossValue: number,
+            netValue: number,
+            source: YearSalary | MonthSalary
+        }[]
+    }[];
 
     currentYearSalary: YearSalary;
     currentMonthSalary: MonthSalary;
@@ -40,54 +54,6 @@ export class HrHomePage extends PageBase implements OnInit {
         this.chartsDrawerState = 'open';
         this.salaryValuesState = 'money';
         this.salaryPeriodState = 'monthly';
-
-        this.monthlyChartsData = [
-            {
-                labels: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
-                lastYearValues: [
-                    1107.71, 1107.71, 1107.71, 1107.71, 1107.71, 1107.71,
-                    1107.71, 1607.71, 1107.71, 1207.71, 1207.71, 1207.71],
-                currentYearValues: [
-                    1207.71, 1207.71, 1207.71, 1207.71, 1207.71, 1207.71,
-                    1207.71, 1807.71, 1207.71, 1207.71, 1207.71, 1207.71]
-            },
-            {
-                labels: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
-                lastYearValues: [
-                    1107.71, 1107.71, 1107.71, 1107.71, 1107.71, 1107.71,
-                    1107.71, 1607.71, 1107.71, 1207.71, 1207.71, 1207.71],
-                currentYearValues: [
-                    1207.71, 1207.71, 1207.71, 1207.71, 1207.71, 1207.71,
-                    1207.71, 1807.71, 1207.71, 1207.71, 1207.71, 1207.71]
-            },
-            {
-                labels: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
-                lastYearValues: [
-                    1107.71, 1107.71, 1107.71, 1107.71, 1107.71, 1107.71,
-                    1107.71, 1607.71, 1107.71, 1207.71, 1207.71, 1207.71],
-                currentYearValues: [
-                    1207.71, 1207.71, 1207.71, 1207.71, 1207.71, 1207.71,
-                    1207.71, 1807.71, 1207.71, 1207.71, 1207.71, 1207.71]
-            },
-            {
-                labels: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
-                lastYearValues: [
-                    1107.71, 1107.71, 1107.71, 1107.71, 1107.71, 1107.71,
-                    1107.71, 1607.71, 1107.71, 1207.71, 1207.71, 1207.71],
-                currentYearValues: [
-                    1207.71, 1207.71, 1207.71, 1207.71, 1207.71, 1207.71,
-                    1207.71, 1807.71, 1207.71, 1207.71, 1207.71, 1207.71]
-            },
-            {
-                labels: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
-                lastYearValues: [
-                    1107.71, 1107.71, 1107.71, 1107.71, 1107.71, 1107.71,
-                    1107.71, 1607.71, 1107.71, 1207.71, 1207.71, 1207.71],
-                currentYearValues: [
-                    1207.71, 1207.71, 1207.71, 1207.71, 1207.71, 1207.71,
-                    1207.71, 1807.71, 1207.71, 1207.71, 1207.71, 1207.71]
-            },
-        ];
     }
 
     /**
@@ -106,7 +72,9 @@ export class HrHomePage extends PageBase implements OnInit {
 
         this.buildCharts(this.salaries.data);
 
-        this.currentYearSalary = this.salaries.data[0];
+        this.currentYearSalary = this.salaries.data[this.salaries.data.length - 1];
+        this.currentMonthSalary = this.currentYearSalary.months[this.currentYearSalary.months.length - 1];
+
         this.updateView();
         this.hideLoading();
     }
@@ -121,10 +89,12 @@ export class HrHomePage extends PageBase implements OnInit {
 
     changeSalaryPeriodToMonthlyAction() {
         this.salaryPeriodState = 'monthly';
+        this.updateView();
     }
 
     changeSalaryPeriodToYearlyAction() {
         this.salaryPeriodState = 'yearly';
+        this.updateView();
     }
 
     onSelectedYearSalaryChange(yearSalary: YearSalary) {
@@ -132,22 +102,41 @@ export class HrHomePage extends PageBase implements OnInit {
         this.updateView();
     }
 
+    onSelectedMonthSalaryChange(monthSalary: MonthSalary) {
+        this.currentMonthSalary = monthSalary;
+        this.updateView();
+    }
+
     private updateView() {
 
         const currency = this.salaries.currency;
-        const yearSalary = this.currentYearSalary;
-
-        this.salaryDate = `${yearSalary.year}`;
+        let salary: BaseSalary;
+        let netValue: Value;
+        let grossValue: Value;
 
         this.salaryPortions = [];
+
+        if (this.salaryPeriodState === 'yearly') {
+
+            salary = this.currentYearSalary;
+            netValue = this.currentYearSalary.netTotal;
+            grossValue = this.currentYearSalary.grossTotal;
+            this.salaryDate = `${this.currentYearSalary.year}`;
+        } else {
+
+            salary = this.currentMonthSalary;
+            netValue = this.currentMonthSalary.netValue;
+            grossValue = this.currentMonthSalary.grossValue;
+            this.salaryDate = `${this.currentMonthSalary.month} - ${this.currentMonthSalary.year}`;
+        }
 
         // net earnings
         this.salaryPortions.push(
             {
                 label: '#Net Earnings',
-                value: yearSalary.netTotal.value,
+                value: netValue.value,
                 currency: currency,
-                percentualValue: yearSalary.netTotal.percentage
+                percentualValue: netValue.percentage
             }
         );
 
@@ -165,14 +154,14 @@ export class HrHomePage extends PageBase implements OnInit {
         this.salaryPortions.push(
             {
                 label: '#Gross Earnings',
-                value: yearSalary.grossTotal.value,
+                value: grossValue.value,
                 currency: currency,
-                percentualValue: yearSalary.grossTotal.percentage
+                percentualValue: grossValue.percentage
             }
         );
 
         // deductions, p.e., Income Tax, Social Security and Others
-        for (const deduction of yearSalary.deductions) {
+        for (const deduction of salary.deductions) {
             this.salaryPortions.push(
                 {
                     label: deduction.label['pt'],
@@ -185,7 +174,7 @@ export class HrHomePage extends PageBase implements OnInit {
 
         const paymentMethods: SalaryExtraInformations = {
             label: '#Payment Method',
-            infos: yearSalary.paymentMethods.map(pm => (
+            infos: salary.paymentMethods.map(pm => (
                 {
                     label: pm.label['pt'],
                     value: pm.value,
@@ -197,7 +186,7 @@ export class HrHomePage extends PageBase implements OnInit {
 
         const compensationBreakdown: SalaryExtraInformations = {
             label: '#Compensation Breakdown',
-            infos: yearSalary.salaryBreakdown.map(pm => (
+            infos: salary.salaryBreakdown.map(pm => (
                 {
                     label: pm.label['pt'],
                     value: pm.value,
@@ -218,6 +207,37 @@ export class HrHomePage extends PageBase implements OnInit {
             grossValue: y.grossTotal.value,
             netValue: y.netTotal.value,
             source: y
+        }));
+
+        // build monthly salary chart data
+        const monthsExtractor = (months: MonthSalary[]) => {
+            const monthdsData = [];
+
+            for (let i = 0; i < 12; i++) {
+                const month = months.find(m => m.month === i + 1);
+                if (month) {
+                    monthdsData.push({
+                        label: `${month.month}`,
+                        grossValue: month.grossValue.value,
+                        netValue: month.netValue.value,
+                        source: month
+                    });
+                } else {
+                    monthdsData.push({
+                        label: `${i + 1}`,
+                        grossValue: 0,
+                        netValue: 0,
+                        source: null
+                    });
+                }
+            }
+
+            return monthdsData;
+        };
+
+        this.monthlyChartsData = years.map(y => ({
+            year: y.year,
+            months: monthsExtractor(y.months)
         }));
     }
 }

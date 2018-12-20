@@ -1,8 +1,8 @@
 <div class="monthly-charts" [ngClass]="{dragging: hasDragStarted}">
     <div #chartsWrapper class="charts-wrapper">
         <div class="charts" [ngStyle]="getChartsStyle()">
-            <div class="chart" *ngFor="let year of years" [ngStyle]="getChartStyle()">
-                {{year}}
+            <div class="chart" *ngFor="let monthData of monthsData" [ngStyle]="getChartStyle()">
+                <hr-salary-chart [data]="monthData.months" (selected)="onSelectedMonthSalaryChange($event)" ></hr-salary-chart>
             </div>
         </div>
     </div>

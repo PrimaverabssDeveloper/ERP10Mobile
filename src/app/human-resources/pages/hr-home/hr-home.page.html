@@ -78,17 +78,9 @@
             <div class="chart" *ngIf="yearlyChartData" [ngClass]="{'visible' : salaryPeriodState === 'yearly' }">
                 <hr-salary-chart [data]="yearlyChartData" (selected)="onSelectedYearSalaryChange($event)" ></hr-salary-chart>
             </div>
-
             <!-- monthly chart -->
             <div class="chart" [ngClass]="{'visible' : salaryPeriodState === 'monthly' }">
-                <!-- <ion-slides #monthlyChartsSlide>
-                    <ion-slide *ngFor="let dataChart of monthlyChartsData">
-                        <hr-salary-chart [labels]="dataChart.labels" [lastYearValues]="dataChart.lastYearValues"
-                            [currentYearValues]="dataChart.currentYearValues"></hr-salary-chart>
-                    </ion-slide>
-                </ion-slides>
-                <hr-year-selector></hr-year-selector> -->
-                <!-- <hr-monthly-charts></hr-monthly-charts> -->
+                <hr-monthly-charts [data]="monthlyChartsData" (selected)="onSelectedMonthSalaryChange($event)"></hr-monthly-charts>
             </div>
         </div>
     </div>

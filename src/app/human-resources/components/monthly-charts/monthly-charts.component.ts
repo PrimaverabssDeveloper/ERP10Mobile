@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, HostListener, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, HostListener, ElementRef, ViewChild, OnDestroy, EventEmitter, Output } from '@angular/core';
+import { YearSalary, MonthSalary } from '../../models';
 
 @Component({
     selector: 'hr-monthly-charts',
@@ -17,11 +18,37 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
 
     years: string[];
 
+    private monthsData: {
+        year: number,
+        months: {
+            label: string,
+            grossValue: number,
+            netValue: number,
+            source: YearSalary | MonthSalary
+        }[]
+    }[];
+
     @ViewChild('chartsWrapper') chartsElem: ElementRef;
     @ViewChild('yearsWrapper') yearsElem: ElementRef;
 
+    @Input() set data(data: {
+        year: number,
+        months: {
+            label: string,
+            grossValue: number,
+            netValue: number,
+            source: YearSalary | MonthSalary
+        }[]
+    }[]) {
+        if (data) {
+            this.monthsData = data;
+            this.buildYears();
+        }
+    }
+
+    @Output() selected = new EventEmitter();
+
     constructor(private element: ElementRef) {
-        this.years = ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019'];
         this.translationOffset = 0;
     }
 
@@ -60,6 +87,10 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
 
+    }
+
+    onSelectedMonthSalaryChange(monthSalary: MonthSalary) {
+        this.selected.emit(monthSalary);
     }
 
     getChartsStyle(): any {
@@ -144,6 +175,10 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
         this.lastTouchPointX = null;
         const index = Math.round(this.translationOffset / this.chartsWrapperSize.width);
         this.translationOffset = index * this.chartsWrapperSize.width;
+    }
+
+    private buildYears() {
+        this.years = this.monthsData.map(m => `${m.year}`);
     }
 
 

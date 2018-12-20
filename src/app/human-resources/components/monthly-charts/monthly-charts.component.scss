@@ -34,6 +34,7 @@
     .chart {
         float: left;
         height: 100%;
+        position: relative;
         
         &:nth-child(even) {
             background: transparent;
