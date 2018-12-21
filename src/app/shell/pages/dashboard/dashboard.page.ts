@@ -114,11 +114,10 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
             await this.showLoading();
 
             // get modules and show the modules icons on interface
-            this.modules = await this.getModules();
+            this.modules = this.instancesService.currentInstance.modules;
             this.updateModulesAvailability(this.modules);
 
             // get modules summaries and update the interface
-            // this.modulesSummaries = await this.getModulesSummaries(this.modules);
             const moduleTickers = await this.modulesSummariesService.getAllModulesSummariesTickers();
             for (const moduleTicker of moduleTickers) {
                 for (const ticker of moduleTicker.tickers) {
@@ -158,17 +157,17 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
 
     // #region 'Private Methods'
 
-    private async getModules(): Promise<Module[]> {
+    // private async getModules(): Promise<Module[]> {
 
-        return new Promise<Module[]>((resolve, reject) => {
-            this.instancesService
-                .getInstanceModules()
-                .subscribe(
-                    res => resolve(res),
-                    err => reject(err)
-                );
-        });
-    }
+    //     return new Promise<Module[]>((resolve, reject) => {
+    //         this.instancesService
+    //             .getInstanceModules()
+    //             .subscribe(
+    //                 res => resolve(res),
+    //                 err => reject(err)
+    //             );
+    //     });
+    // }
 
     private updateModulesAvailability(modules: Module[]) {
         if (!modules) {
@@ -192,51 +191,5 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
         }
     }
 
-    private async getModulesSummaries(modules: Module[]): Promise<ModuleSummary[]> {
-
-        return new Promise<ModuleSummary[]>((resolve, reject) => {
-
-            // no data to get
-            if (modules.length === 0) {
-                resolve([]);
-                return;
-            }
-
-            const modulesSummaries: ModuleSummary[] = [];
-            let remainRequestModules = modules.length;
-
-            const onModuleSummaryDataReady = (module: Module, data: any) => {
-
-                // decrease the remain modules to be handled
-                remainRequestModules--;
-
-                if (data) {
-                    modulesSummaries.push({
-                        module: module,
-                        data: data
-                    });
-                }
-
-                // all the modules summaries have been requested.
-                // call 'resolve' to return the values
-                if (remainRequestModules === 0) {
-                    resolve(modulesSummaries);
-                }
-            };
-
-            // request summaries to all modules.
-            // not all modules has summaries.
-            // To simplify, in this case if there is an error requesting the data
-            // it will be handled as if the module don't have summary data
-            for (const m of modules) {
-                this.instancesService
-                    .getModuleSummary(m)
-                    .subscribe(
-                        data => onModuleSummaryDataReady(m, data),
-                        err => onModuleSummaryDataReady(m, null)
-                    );
-            }
-        });
-    }
     // #endregion
 }

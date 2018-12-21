@@ -1,7 +1,7 @@
 import { Provider } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CustomersDemoService } from './customers.demo.service';
-import { AuthenticationService, InstancesService } from '../../core/services';
+import { AuthenticationService, InstancesService, InstanceHttpRequestService } from '../../core/services';
 import { CustomersService } from './customers.service';
 import { CustomersStorageService } from './customers-storage.service';
 import { DocumentValueService } from './document-value.service';
@@ -22,14 +22,15 @@ export const CustomersServiceProvider: Provider = {
     useFactory: (
         http: HttpClient,
         authService: AuthenticationService,
-        storageService: CustomersStorageService
+        storageService: CustomersStorageService,
+        instanceHttpRequestService: InstanceHttpRequestService
     ) => {
         if (authService.isAuthenticateAsDemo) {
-            return new CustomersDemoService(http, storageService);
+            return new CustomersDemoService(http, storageService, instanceHttpRequestService);
         } else {
-            return new CustomersService(storageService);
+            return new CustomersService(storageService, instanceHttpRequestService);
         }
     },
-    deps: [HttpClient, AuthenticationService, CustomersStorageService, InstancesService],
+    deps: [HttpClient, AuthenticationService, CustomersStorageService, InstanceHttpRequestService],
 };
 

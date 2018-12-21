@@ -52,6 +52,7 @@ export class CustomersListPage extends PageBase implements OnInit {
         await this.updateRecentCustomersList();
         this.hideLoading();
 
+        // perform customers search after 500ms
         this.searchUpdated
             .pipe(debounceTime(500), distinctUntilChanged())
             .subscribe(st => this.searchCustomers(st));
@@ -90,13 +91,16 @@ export class CustomersListPage extends PageBase implements OnInit {
     }
 
     private async searchCustomers(searchTerm: string) {
-        await this.showLoading();
-        this.customersService
-            .searchCustomers(searchTerm)
-            .then(result => {
-                this.searchedCustomers = result.customers;
-                this.hideLoading();
-            });
+        // await this.showLoading();
+
+        const result = await this.customersService
+                                 .searchCustomers(searchTerm);
+
+        if (result) {
+            this.searchedCustomers = result.customers;
+        }
+
+        // this.hideLoading();
     }
 
     private async addCustomerToRecentList(customer: Customer) {

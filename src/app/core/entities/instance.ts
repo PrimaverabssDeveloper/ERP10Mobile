@@ -1,3 +1,4 @@
+import { Module } from './module';
 
 /**
  * An instance representes each ERP Instance that the user has access.
@@ -14,12 +15,20 @@ export interface Instance {
     id: string;
 
     /**
-     * Defines the Instance Key;
+     * The account key.
      *
      * @type {string}
      * @memberof Instance
      */
-    key: string;
+    accountKey: string;
+
+    /**
+     * The subscription alias.
+     *
+     * @type {string}
+     * @memberof Instance
+     */
+    subscriptionAlias: string;
 
     /**
      * Defines the Instance Description;
@@ -28,4 +37,12 @@ export interface Instance {
      * @memberof Instance
      */
     description: string;
+
+    /**
+     * Instance available modules.
+     *
+     * @type {Module[]}
+     * @memberof Instance
+     */
+    modules: Module[];
 }

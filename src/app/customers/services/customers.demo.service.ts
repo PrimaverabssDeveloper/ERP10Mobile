@@ -3,12 +3,16 @@ import { Injectable } from '@angular/core';
 import { Customer, CustomersSearchResult, PendingOrders, RecentActivity, CurrentAccount } from '../entities';
 import { HttpClient } from '@angular/common/http';
 import { CustomersStorageService } from './customers-storage.service';
+import { InstanceHttpRequestService } from '../../core/services';
 
 @Injectable()
 export class CustomersDemoService extends CustomersService {
 
-    constructor(private http: HttpClient, protected storageService: CustomersStorageService) {
-        super(storageService);
+    constructor(
+        private http: HttpClient,
+        protected storageService: CustomersStorageService,
+        protected instanceHttpRequestService: InstanceHttpRequestService) {
+        super(storageService, instanceHttpRequestService);
     }
 
     searchCustomers(searchTerm: string): Promise<CustomersSearchResult> {

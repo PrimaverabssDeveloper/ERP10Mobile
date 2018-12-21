@@ -48,14 +48,11 @@ export class InstancesPage extends PageBase implements OnInit {
     async ngOnInit() {
         await this.showLoading();
 
-        this.instancesService
-            .getInstances()
-            .subscribe((instances) => {
-                this.hideLoading()
-                    .then(() => {
-                        this.handleInstances(instances);
-                    });
-            });
+        const instances = await this.instancesService.getInstancesAsync();
+
+        this.handleInstancesAsync(instances);
+
+        this.hideLoading();
     }
 
     /**
@@ -70,14 +67,14 @@ export class InstancesPage extends PageBase implements OnInit {
             return;
         }
 
-        this.selectInstance(instance);
+        this.selectInstanceAsync(instance);
     }
 
     // #endregion
 
     // #region 'Private Methods'
 
-    private handleInstances(instances: Instance[]) {
+    private async handleInstancesAsync(instances: Instance[]) {
         if (!instances || instances.length === 0) {
             // TODO: show message that there is not instances
 
@@ -87,20 +84,20 @@ export class InstancesPage extends PageBase implements OnInit {
         // Only one instance.
         // Select automaticaly.
         if (instances.length === 1) {
-            this.selectInstance(instances[0]);
+            await this.selectInstanceAsync(instances[0]);
             return;
         }
 
         this.instances = instances;
     }
 
-    private selectInstance(instance: Instance) {
+    private async selectInstanceAsync(instance: Instance) {
         if (!instance) {
             console.log('the instance to select can not be null');
             return;
         }
 
-        this.instancesService.currentInstance = instance;
+        await this.instancesService.setCurrentInstanceAsync(instance);
 
         this.router.navigate(['/shell/dashboard'], { replaceUrl: true});
     }

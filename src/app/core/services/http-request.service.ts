@@ -55,9 +55,9 @@ export class HttpRequestService {
      * @param {string} partialUrl
      * @returns {Observable<T>}
      */
-    public get<T>(partialUrl: string): Observable<T> {
+    public get<T>(partialUrl: string): Promise<T> {
         const finalUrl = this.buildFinalUrl(partialUrl);
-        return this.http.get<T>(finalUrl);
+        return this.http.get<T>(finalUrl).toPromise<T>();
     }
 
     /**
@@ -68,9 +68,9 @@ export class HttpRequestService {
      * @param {*} [body]
      * @returns {Observable<T>}
      */
-    public post<T>(partialUrl: string, body?: any): Observable<T> {
+    public post<T>(partialUrl: string, body?: any): Promise<T> {
         const finalUrl = this.buildFinalUrl(partialUrl);
-        return this.http.post<T>(finalUrl, body);
+        return this.http.post<T>(finalUrl, body).toPromise<T>();
     }
 
     /**
@@ -81,9 +81,9 @@ export class HttpRequestService {
      * @param {*} [body]
      * @returns {Observable<T>}
      */
-    public put<T>(partialUrl: string, body?: any): Observable<T> {
+    public put<T>(partialUrl: string, body?: any): Promise<T> {
         const finalUrl = this.buildFinalUrl(partialUrl);
-        return this.http.put<T>(finalUrl, body);
+        return this.http.put<T>(finalUrl, body).toPromise();
     }
 
     /**
@@ -93,9 +93,9 @@ export class HttpRequestService {
      * @returns {Observable<any>}
      * @memberof HttpRequestBaseService
      */
-    public delete(partialUrl: string): Observable<any> {
+    public delete(partialUrl: string): Promise<any> {
         const finalUrl = this.buildFinalUrl(partialUrl);
-        return this.http.delete(finalUrl);
+        return this.http.delete(finalUrl).toPromise();
     }
 
     // #endregion

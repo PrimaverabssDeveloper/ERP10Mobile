@@ -1,19 +1,39 @@
 import { Injectable } from '@angular/core';
 import { CustomersSearchResult, Customer, PendingOrders, RecentActivity, CurrentAccount } from '../entities';
 import { CustomersStorageService } from './customers-storage.service';
+import { InstanceHttpRequestService } from '../../core/services';
 
 @Injectable()
 export class CustomersService {
 
     private static readonly RECENT_VIEWED_CUSTOMERS_STORAGE_KEY = 'RECENT_VIEWD_CUSTOMERS_STORAGE_KEY';
 
-    constructor(protected storageService: CustomersStorageService) {
+    private static readonly SEARCH_CUSTOMERS = (searchTerm) => `customers?searchSrt=${searchTerm}`;
+
+    constructor(
+        protected storageService: CustomersStorageService,
+        protected instanceHttpRequestService: InstanceHttpRequestService) {
     }
 
-    searchCustomers(searchTerm: string): Promise<CustomersSearchResult> {
-        return new Promise<CustomersSearchResult>(result => {
-            result(null);
-        });
+    /**
+     * Perform a customers search request.
+     *
+     * @param {string} searchTerm
+     * @returns {Promise<CustomersSearchResult>}
+     * @memberof CustomersService
+     */
+    async searchCustomers(searchTerm: string): Promise<CustomersSearchResult> {
+
+        let result: CustomersSearchResult = null;
+
+        try {
+            result = await this.instanceHttpRequestService
+                               .get<CustomersSearchResult>(CustomersService.SEARCH_CUSTOMERS(searchTerm));
+        } catch (error) {
+            console.log(error);
+        }
+
+        return result;
     }
 
     getCustomer(companyKey: string, customerKey: string): Promise<Customer> {
@@ -23,13 +43,17 @@ export class CustomersService {
     }
 
     async getRecentViewedCustomers(): Promise<Customer[]> {
-        const result = await this.storageService
-                                 .getData<Customer[]>(CustomersService.RECENT_VIEWED_CUSTOMERS_STORAGE_KEY, true);
-        if (result) {
-            return result;
-        } else {
-            return [];
+
+        let customers: Customer[];
+
+        try {
+            customers = await this.storageService
+                                  .getData<Customer[]>(CustomersService.RECENT_VIEWED_CUSTOMERS_STORAGE_KEY, true);
+        } catch (error) {
+            console.error(error);
         }
+
+        return customers;
     }
 
     async addToRecentViewedCustomers(customer: Customer): Promise<any> {

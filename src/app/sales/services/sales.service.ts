@@ -74,8 +74,7 @@ export class SalesService {
 
         try {
             salesSummary = await this.instanceHttpRequestService
-                .get<SalesSummary>(SALES_SUMMARY)
-                .toPromise();
+                                     .get<SalesSummary>(SALES_SUMMARY);
         } catch (error) {
             console.log(error);
             return null;

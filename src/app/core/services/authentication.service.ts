@@ -33,7 +33,7 @@ export class AuthenticationService {
 
     private authenticationResolve: (value?: boolean | PromiseLike<boolean>) => void;
 
-    public isAuthenticateAsDemo: boolean = true;
+    public isAuthenticateAsDemo: boolean;
 
     public sessionData: AuthenticationData;
 

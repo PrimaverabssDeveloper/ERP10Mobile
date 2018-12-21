@@ -17,14 +17,6 @@ import { AppSettings } from '../app-settings';
 })
 export class InstanceHttpRequestService extends HttpRequestService {
 
-    // #region 'Private Properties'
-
-    private get instanceKey(): string {
-        return this.instanceService.currentInstance.key;
-    }
-
-    // #endregion
-
     // #region 'Constructor'
 
     /**
@@ -37,12 +29,13 @@ export class InstanceHttpRequestService extends HttpRequestService {
     constructor(protected http: HttpClient, protected appSettings: AppSettings, private instanceService: InstancesService) {
         super(http, appSettings);
     }
+
     // #endregion
 
     // #region 'Protected Methods'
 
     /**
-     * Create the final url with the correct format, instance key and server endpoint.
+     * Create the final url with the correct format, 'account key', 'subscription alias' and server endpoint.
      *
      * @protected
      * @param {string} partialUrl
@@ -50,8 +43,12 @@ export class InstanceHttpRequestService extends HttpRequestService {
      * @memberof InstanceHttpRequestService
      */
     protected buildFinalUrl(partialUrl: string): string {
+
+        const subsAlias = this.instanceService.currentInstance.subscriptionAlias;
+        const accountKey = this.instanceService.currentInstance.accountKey;
+
         let finalPartialUrl = this.addHeadSlashToUrl(partialUrl);
-        finalPartialUrl = `${this.instanceKey}${finalPartialUrl}`;
+        finalPartialUrl = `${accountKey}/${subsAlias}${finalPartialUrl}`;
 
         // build the remain endpoint with the.
         const finalUrl = super.buildFinalUrl(finalPartialUrl);
