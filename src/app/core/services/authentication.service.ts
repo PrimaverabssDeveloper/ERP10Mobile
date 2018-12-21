@@ -53,7 +53,7 @@ export class AuthenticationService {
     ) {
 
         this.clientId = authenticationSettings.clientId;
-        this.redirectUri = 'com.primavera.v10://stg-identity.primaverabss.com/connect/cordova/com.primavera.v10/callback';
+        this.redirectUri = 'com.primavera.v10://identity.primaverabss.com/connect/cordova/com.primavera.v10/callback';
         this.scope = ['openid', 'profile', 'email', 'lithium-mobile', 'offline_access'];
         this.responseType = 'code';
         this.codeChallengeMethod = 'S256';

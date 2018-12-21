@@ -39,7 +39,7 @@
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-inappbrowser": "^3.0.0",
     "cordova-plugin-ionic-keyboard": "^2.1.3",
-    "cordova-plugin-ionic-webview": "^2.2.0",
+    "cordova-plugin-ionic-webview": "^2.3.1",
     "cordova-plugin-nativestorage": "^2.3.2",
     "cordova-plugin-safariviewcontroller": "^1.5.4",
     "cordova-plugin-splashscreen": "^5.0.2",
@@ -91,7 +91,7 @@
       "cordova-plugin-customurlscheme": {
         "URL_SCHEME": "com.primavera.v10",
         "ANDROID_SCHEME": "com.primavera.v10",
-        "ANDROID_HOST": "stg-identity.primaverabss.com",
+        "ANDROID_HOST": "identity.primaverabss.com",
         "ANDROID_PATHPREFIX": "/cordova/com.primavera.v10/callback"
       },
       "cordova-plugin-safariviewcontroller": {},
