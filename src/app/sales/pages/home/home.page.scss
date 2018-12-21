@@ -122,11 +122,12 @@ $chart-content-height: calc(100% - #{$sales-header-height + $chart-controllers-h
 }
 
 .extra-info {
+    font-family: 'Open Sans';
     width: 100%;
     height: $extra-info-height;
     background: #fff;
     text-align: center;
-    font-size: 10pt;
+    font-size: 12pt;
     padding: 10px;
 }
 
