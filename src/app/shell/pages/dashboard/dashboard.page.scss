@@ -17,10 +17,10 @@ $tickers-height: calc(100% - #{$modules-drawer-height});
     bottom: 0;
     width: 100%;
     height: $modules-drawer-height;
-    padding: 10px 30px;
+    padding: 10px 15%;
 
     .module-icon {
-        width: 30%;
+        width: calc(100% / 3);
         padding: 10px;
         text-align: center;
         text-decoration: none;
