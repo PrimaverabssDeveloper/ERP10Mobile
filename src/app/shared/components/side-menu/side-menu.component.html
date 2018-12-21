@@ -47,6 +47,13 @@
                     {{ 'SHARED.SIDE_MENU_COMPONENT.MENU_SESSION_TITLE' | translate }}
                 </div>
                 <ion-menu-toggle>
+                    <button class="settings-group-item" (click)="changeInstancesAction()">
+                        <div class="settings-group-item-label">
+                            #Change Instances
+                        </div>
+                    </button>
+                </ion-menu-toggle>
+                <ion-menu-toggle>
                     <button class="settings-group-item" (click)="logoutAction()">
                         <div class="settings-group-item-label">
                             {{ 'SHARED.SIDE_MENU_COMPONENT.MENU_SESSION_LOGOUT' | translate }}

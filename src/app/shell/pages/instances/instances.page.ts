@@ -102,7 +102,7 @@ export class InstancesPage extends PageBase implements OnInit {
 
         this.instancesService.currentInstance = instance;
 
-        this.router.navigate(['/shell/dashboard']);
+        this.router.navigate(['/shell/dashboard'], { replaceUrl: true});
     }
 
     // #endregion

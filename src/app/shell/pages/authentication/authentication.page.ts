@@ -35,7 +35,7 @@ export class AuthenticationPage implements OnInit {
         const isAuthenticated = await this.authenticationService.isAuthenticate();
 
         if (isAuthenticated) {
-            this.router.navigate(['/shell/instances']);
+            this.goToInstanceSelectorPage();
         }
     }
 
@@ -44,7 +44,7 @@ export class AuthenticationPage implements OnInit {
         if (this.appSettings.isMobilePlatform) {
             const isAuthenticated = await this.authenticationService.authenticate();
             if (isAuthenticated) {
-                this.router.navigate(['/shell/instances']);
+                this.goToInstanceSelectorPage();
             }
         } else {
             const alert = await this.alertController.create({
@@ -64,6 +64,10 @@ export class AuthenticationPage implements OnInit {
 
     async demoAction() {
         this.authenticationService.authenticateAsDemo();
-        this.router.navigate(['/shell/instances']);
+        this.goToInstanceSelectorPage();
+    }
+
+    private goToInstanceSelectorPage() {
+        this.router.navigate(['/shell/instances'], { replaceUrl: true});
     }
 }

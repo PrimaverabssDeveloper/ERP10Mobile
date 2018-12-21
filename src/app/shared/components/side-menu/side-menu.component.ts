@@ -47,8 +47,21 @@ export class SideMenuComponent {
         await alert.present();
     }
 
+    changeInstancesAction() {
+        this.router.navigate(['/shell/instances']);
+    }
+
     private async logout() {
-        // If the router was used to navigate, the app page stack was not clean
-        window.location.href = '/shell/authentication?logout=true';
+        // // If the router was used to navigate, the app page stack was not clean
+        // window.location.href = '/shell/authentication?logout=true';
+        this.router.navigate(
+            ['/authentication'],
+            {
+                replaceUrl: true,
+                queryParams: {
+                    'logout': true
+                }
+            }
+        );
     }
 }
