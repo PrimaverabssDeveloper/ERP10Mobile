@@ -4,7 +4,7 @@ import { HttpRequestService } from './http-request.service';
 import { InstanceHttpRequestService } from './instance-http-requests.service';
 import { CoreStorageService } from './core-storage.service';
 import { DomService } from './dom.service';
-import { ModulesSummariesService } from './modules-summaries.service';
+import { ModulesService } from './modules.service';
 import { LocaleService } from './locale.service';
 import { StorageService } from './storage/storage.service';
 import { TokenInterceptorService } from './token-interceptor.service';
@@ -15,7 +15,7 @@ export * from './http-request.service';
 export * from './instance-http-requests.service';
 export * from './core-storage.service';
 export * from './dom.service';
-export * from './modules-summaries.service';
+export * from './modules.service';
 export * from './locale.service';
 export * from './storage/module-storage.service.base';
 export * from './storage/storage.service';
@@ -28,7 +28,7 @@ export const SERVICES = [
     InstanceHttpRequestService,
     CoreStorageService,
     DomService,
-    ModulesSummariesService,
+    ModulesService,
     LocaleService,
     StorageService,
     TokenInterceptorService

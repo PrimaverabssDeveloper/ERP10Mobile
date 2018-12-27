@@ -3,7 +3,7 @@ import { MenuController, LoadingController, Menu, AlertController } from '@ionic
 import { Subscription } from 'rxjs';
 
 import { Module, Ticker } from '../../../core/entities';
-import { InstancesService, ModulesSummariesService, AuthenticationService } from '../../../core/services';
+import { InstancesService, ModulesService, AuthenticationService } from '../../../core/services';
 
 import { PageBase } from '../../../shared/pages';
 import { ModuleSummary } from '../../entities';
@@ -82,7 +82,7 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
 
     constructor(
         private instancesService: InstancesService,
-        private modulesSummariesService: ModulesSummariesService,
+        private modulesService: ModulesService,
         public menuController: MenuController,
         public loadingController: LoadingController,
         public alertController: AlertController
@@ -118,7 +118,7 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
             this.updateModulesAvailability(this.modules);
 
             // get modules summaries and update the interface
-            const moduleTickers = await this.modulesSummariesService.getAllModulesSummariesTickers();
+            const moduleTickers = await this.modulesService.getAllModulesSummariesTickers();
             for (const moduleTicker of moduleTickers) {
                 for (const ticker of moduleTicker.tickers) {
                     this.tickers.push(ticker);

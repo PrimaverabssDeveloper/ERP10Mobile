@@ -7,7 +7,7 @@ import { PAGES } from './pages';
 import { SALES_ROUTING } from './sales.routes';
 import { ENTRY_COMPONENTS, COMPONENTS } from './components';
 import { SalesService, SalesServiceProvider } from './services';
-import { ModulesSummariesService } from '../core/services';
+import { ModulesService } from '../core/services';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -24,9 +24,9 @@ import { SharedModule } from '../shared/shared.module';
 })
 export class SalesModule {
     constructor(
-        private modulesSummariesService: ModulesSummariesService,
+        private modulesService: ModulesService,
         private salesService: SalesService
     ) {
-        this.modulesSummariesService.addModuleSummariesHandler('sales', () => this.salesService.createSalesSummaryTickers());
+        this.modulesService.addModuleSummariesHandler('sales', () => this.salesService.createSalesSummaryTickers());
     }
 }

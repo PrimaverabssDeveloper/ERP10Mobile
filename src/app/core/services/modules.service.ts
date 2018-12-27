@@ -1,10 +1,10 @@
-import { Injectable, EmbeddedViewRef, ApplicationRef, Injector, ComponentFactoryResolver } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Ticker } from '../entities';
 
 @Injectable({
     providedIn: 'root',
 })
-export class ModulesSummariesService {
+export class ModulesService {
 
     private modulesSummariesHandlers: {[moduleKey: string]: () => Promise<HTMLElement[]>} ;
 
