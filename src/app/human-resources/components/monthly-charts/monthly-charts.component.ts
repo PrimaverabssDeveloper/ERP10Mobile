@@ -18,7 +18,7 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
 
     years: string[];
 
-    private monthsData: {
+    monthsData: {
         year: number,
         months: {
             label: string,
