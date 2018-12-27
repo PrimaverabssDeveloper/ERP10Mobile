@@ -176,9 +176,10 @@ export class AuthenticationService {
 
         this.http
             .post(this.requestTokenEndpoint, body.toString(), options)
-            .subscribe(res => {
-                this.endAuthenticationProcess(res);
-            });
+            .subscribe(
+                res => this.endAuthenticationProcess(res),
+                err => console.log(err)
+            );
     }
 
     private openBrowser(url: string) {
