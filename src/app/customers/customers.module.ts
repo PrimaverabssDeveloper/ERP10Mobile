@@ -43,7 +43,7 @@ export class CustomersModule {
                 hasSummaries: false
             },
             settings: {
-                hasSettings: true
+                hasSettings: false
             }
         };
 
