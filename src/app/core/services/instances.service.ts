@@ -88,21 +88,21 @@ export class InstancesService {
     //     return this.httpRequestService.get<Module[]>(partialUrl);
     // }
 
-    async getModuleSummary(module: Module): Promise<any> {
-        const accountKey = this.currentInstance.accountKey;
-        const subsAlias = this.currentInstance.subscriptionAlias;
+    // async getModuleSummary(module: Module): Promise<any> {
+    //     const accountKey = this.currentInstance.accountKey;
+    //     const subsAlias = this.currentInstance.subscriptionAlias;
 
-        const partialUrl = `${accountKey}/${subsAlias}/${module.name}`;
-        let summary: any = null;
+    //     const partialUrl = `${accountKey}/${subsAlias}/${module.name}`;
+    //     let summary: any = null;
 
-        try {
-            summary = await this.httpRequestService.get<any>(partialUrl);
-        } catch (error) {
-            console.log(error);
-        }
+    //     try {
+    //         summary = await this.httpRequestService.get<any>(partialUrl);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
 
-        return summary;
-    }
+    //     return summary;
+    // }
 
     /**
      * Defines the current instance.
