@@ -1,21 +1,24 @@
 import { RouterModule, Routes } from '@angular/router';
-import { HomePage } from './pages';
+import { HomePage, SettingsPage } from './pages';
 
 const salesRoutes: Routes = [
     {
       path: '',
-      component: HomePage
-    //   children: [
-    //         {
-    //             path: '',
-    //             redirectTo: 'home',
-    //             pathMatch: 'full'
-    //         },
-    //         {
-    //             path: 'home',
-    //             component: HomePage
-    //         }
-    //     ]
+      children: [
+          {
+              path: '',
+              redirectTo: 'home',
+              pathMatch: 'full'
+          },
+          {
+              path: 'home',
+              component: HomePage
+          },
+          {
+              path: 'settings',
+              component: SettingsPage
+          }
+        ]
     }
 ];
 
