@@ -6,11 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { PAGES } from './pages';
 import { SALES_ROUTING } from './sales.routes';
 import { ENTRY_COMPONENTS, COMPONENTS } from './components';
-import { SalesService, SalesServiceProvider } from './services';
-import { ModulesService } from '../core/services';
+import { SalesService, SalesServiceProvider, SalesStorageService } from './services';
+import { ModulesService, AuthenticationService, InstanceHttpRequestService, DomService } from '../core/services';
 import { SharedModule } from '../shared/shared.module';
 import { ModuleDefinition } from '../core/entities';
 import { TranslateModule } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
     imports: [
@@ -23,12 +24,16 @@ import { TranslateModule } from '@ngx-translate/core';
     ],
     declarations: [PAGES, COMPONENTS],
     entryComponents: [ENTRY_COMPONENTS],
-    providers: [SalesServiceProvider]
+    providers: []
 })
 export class SalesModule {
     constructor(
         private modulesService: ModulesService,
-        private salesService: SalesService
+        private http: HttpClient,
+        private authService: AuthenticationService,
+        private instanceHttpRequestService: InstanceHttpRequestService,
+        private domService: DomService,
+        private storageService: SalesStorageService
     ) {
 
         const moduleDef: ModuleDefinition = {
@@ -38,7 +43,16 @@ export class SalesModule {
             localizedNameKey: '#SALES',
             summaries: {
                 hasSummaries: true,
-                summariesHandler: () => this.salesService.createSalesSummaryTickers()
+                summariesHandler: () => {
+                    const ss: SalesService = SalesServiceProvider.useFactory(
+                        this.http,
+                        this.authService,
+                        this.instanceHttpRequestService,
+                        this.domService,
+                        this.storageService);
+
+                    return ss.createSalesSummaryTickers();
+                }
             },
             settings: {
                 hasSettings: true,

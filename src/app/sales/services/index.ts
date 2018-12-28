@@ -1,5 +1,5 @@
 import { SalesService } from './sales.service';
-import { Provider } from '@angular/core';
+import { Provider, FactoryProvider } from '@angular/core';
 import { AuthenticationService, InstanceService, InstanceHttpRequestService, DomService, StorageService } from '../../core/services';
 import { HttpClient } from '@angular/common/http';
 import { SalesDemoService } from './sales.demo.service';
@@ -11,7 +11,7 @@ export * from './sales-storage.service';
 export const SERVICES = [
 ];
 
-export const SalesServiceProvider: Provider = {
+export const SalesServiceProvider: FactoryProvider = {
     provide: SalesService,
     useFactory: (
         http: HttpClient,

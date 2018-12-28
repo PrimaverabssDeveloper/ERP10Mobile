@@ -23,10 +23,6 @@ export class ModulesService {
     }
 
     addModuleDefinition(moduleDefinition: ModuleDefinition) {
-        if (this.modulesDefinitions.hasOwnProperty(moduleDefinition.key)) {
-            return;
-        }
-
         this.modulesDefinitions[moduleDefinition.key] = moduleDefinition;
     }
 
