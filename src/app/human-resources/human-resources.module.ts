@@ -28,7 +28,7 @@ export class HumanResourcesModule {
         const moduleDef: ModuleDefinition = {
             key: 'HumanResources',
             moduleRoutePath: '/humanresources',
-            iconPath: '../../assets/human-resources/human_resources_logo.svg',
+            iconPath: '/assets/human-resources/human_resources_logo.svg',
             localizedNameKey: '#HR',
             summaries: {
                 hasSummaries: false

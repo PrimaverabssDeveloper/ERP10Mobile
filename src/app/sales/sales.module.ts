@@ -32,7 +32,7 @@ export class SalesModule {
         const moduleDef: ModuleDefinition = {
             key: 'Sales',
             moduleRoutePath: '/sales',
-            iconPath: '../../assets/sales/sales_logo.svg',
+            iconPath: '/assets/sales/sales_logo.svg',
             localizedNameKey: '#SALES',
             summaries: {
                 hasSummaries: true,

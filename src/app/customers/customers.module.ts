@@ -37,7 +37,7 @@ export class CustomersModule {
         const moduleDef: ModuleDefinition = {
             key: 'Customers',
             moduleRoutePath: '/customers',
-            iconPath: '../../assets/customers/customers_logo.svg',
+            iconPath: '/assets/customers/customers_logo.svg',
             localizedNameKey: '#CUSTOMERS',
             summaries: {
                 hasSummaries: false
