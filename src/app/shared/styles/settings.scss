@@ -43,6 +43,11 @@
                 top: 50%;
                 right: 15px;
                 transform: translateY(-50%);
+
+                ion-toggle {
+                    top: 3px;
+                    transform: scale(.9);
+                }
             }
         }
 
