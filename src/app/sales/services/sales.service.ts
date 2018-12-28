@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { SalesSummary, Company, CompanySalesSummary, SalesCharts } from '../entities';
+import { SalesSummary, Company, SalesCharts } from '../entities';
 import { InstanceHttpRequestService, DomService } from '../../core/services';
 import { SalesTickerComponent } from '../components';
+import { SalesStorageService } from './sales-storage.service';
 
 const SALES_SUMMARY = '/sales';
 
@@ -19,14 +18,18 @@ export class SalesService {
     // #region 'Constructor'
 
     /**
-     *Creates an instance of SalesService.
+     * Creates an instance of SalesService.
      * @param {InstanceHttpRequestService} instanceHttpRequestService
      * @param {DomService} domService
      * @memberof SalesService
      */
-    constructor(protected instanceHttpRequestService: InstanceHttpRequestService, protected domService: DomService) {
-
+    constructor(
+        protected instanceHttpRequestService: InstanceHttpRequestService,
+        protected domService: DomService,
+        protected storage: SalesStorageService
+        ) {
     }
+
     // #endregion
 
     // #region 'Public Methods'

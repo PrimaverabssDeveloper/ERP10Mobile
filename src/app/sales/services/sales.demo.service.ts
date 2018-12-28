@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { SalesSummary, Company, CompanySalesSummary, SalesCharts } from '../entities';
+import { SalesSummary, SalesCharts } from '../entities';
 import { InstanceHttpRequestService, DomService } from '../../core/services';
-import { SalesTickerComponent } from '../components';
 import { SalesService } from './sales.service';
 import { HttpClient } from '@angular/common/http';
+import { SalesStorageService } from './sales-storage.service';
 
 /**
  * The Sales Service provide all data needed to the Sales Module.
@@ -27,9 +25,10 @@ export class SalesDemoService extends SalesService {
     constructor(
         protected instanceHttpRequestService: InstanceHttpRequestService,
         protected domService: DomService,
-        private http: HttpClient
+        protected storageService: SalesStorageService,
+        private http: HttpClient,
     ) {
-        super(instanceHttpRequestService, domService);
+        super(instanceHttpRequestService, domService, storageService);
     }
     // #endregion
 
