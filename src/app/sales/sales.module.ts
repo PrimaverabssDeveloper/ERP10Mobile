@@ -10,12 +10,14 @@ import { SalesService, SalesServiceProvider } from './services';
 import { ModulesService } from '../core/services';
 import { SharedModule } from '../shared/shared.module';
 import { ModuleDefinition } from '../core/entities';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
+        TranslateModule,
         SharedModule,
         SALES_ROUTING
     ],
