@@ -24,7 +24,7 @@
                     {{ 'SHARED.SIDE_MENU_COMPONENT.MENU_MODULES_TITLE' | translate }}
                 </div>
                 <ion-menu-toggle *ngFor="let moduleDef of modulesDefsWithSettings">
-                    <button class="settings-group-item settings-group-item-with-image">
+                    <button class="settings-group-item settings-group-item-with-image" [routerLink]="[moduleDef.settings.settingsRoutePath]"> 
                         <img class="settings-group-item-image" [attr.src]="moduleDef.iconPath" />
                         <div class="settings-group-item-label">
                             {{moduleDef.localizedNameKey}}
