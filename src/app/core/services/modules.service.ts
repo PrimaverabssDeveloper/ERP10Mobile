@@ -24,7 +24,7 @@ export class ModulesService {
 
     addModuleDefinition(moduleDefinition: ModuleDefinition) {
         if (this.modulesDefinitions.hasOwnProperty(moduleDefinition.key)) {
-            throw new Error(`Module with key "${moduleDefinition.key}" alredy defined`);
+            return;
         }
 
         this.modulesDefinitions[moduleDefinition.key] = moduleDefinition;

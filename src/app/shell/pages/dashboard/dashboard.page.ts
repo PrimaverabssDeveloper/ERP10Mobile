@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MenuController, LoadingController, Menu, AlertController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
-import { Module, Ticker } from '../../../core/entities';
+import { Module, Ticker, ModuleDefinition } from '../../../core/entities';
 import { InstancesService, ModulesService, AuthenticationService } from '../../../core/services';
 
 import { PageBase } from '../../../shared/pages';
@@ -28,12 +28,12 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
     @ViewChild('menu') menu: Menu;
 
     /**
-     * The collection of modules available to the user.
+     * The collection of modules definitions available to the user.
      *
-     * @type {Module[]}
+     * @type {ModuleDefinition[]}
      * @memberof DashboardPage
      */
-    modules: Module[];
+    modulesDefinitions: ModuleDefinition[];
 
     /**
      * The collection do summaries from the modules that the user has access
@@ -89,7 +89,7 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
     ) {
         super(loadingController);
 
-        this.modules = [];
+        this.modulesDefinitions = [];
         this.modulesSummaries = [];
         this.tickers = [];
     }
@@ -106,16 +106,14 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
     */
     async ngOnInit() {
 
-        if (this.modules && this.modules.length > 0) {
+        if (this.modulesDefinitions && this.modulesDefinitions.length > 0) {
             return;
         }
 
+        this.modulesDefinitions = this.modulesService.getAvailabeModulesDefinitions();
+
         try {
             await this.showLoading();
-
-            // get modules and show the modules icons on interface
-            this.modules = this.instancesService.currentInstance.modules;
-            this.updateModulesAvailability(this.modules);
 
             // get modules summaries and update the interface
             const moduleTickers = await this.modulesService.getAllAvailableModulesSummariesTickers();
@@ -137,7 +135,7 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
     * @memberof DashboardPage
     */
     ngOnDestroy(): void {
-        this.modules = null;
+        this.modulesDefinitions = null;
 
         // unsubscrive all subscriptions made.
         // this will prevent 'zombie' subscriptions.
