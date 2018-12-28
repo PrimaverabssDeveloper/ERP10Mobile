@@ -66,5 +66,13 @@
         "FINANTIAL_DOCUMENT_PAGE" : {
             "PAGE_TITLE": "Documento"
         }
+    },
+    "SALES": {
+        "SALES_SETTINGS_PAGE": {
+            "PAGE_TITLE": "Vendas",
+            "USE_REFERENCE_CURRENCY_TOGGLE": "Utilizar a moeda de referência",
+            "SHOW_AGGREGATE_DATA_TOGGLE": "Mostrar total agregado",
+            "SHOW_DAILY_SALES_TOGGLE": "Mostrar vendas diárias"
+        }
     }
 }
