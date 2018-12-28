@@ -1,6 +1,3 @@
-<!-- SIDE MENU -->
-<side-menu contentId="content"></side-menu>
-
 <!-- PAGE -->
 <ion-header>
     <ion-toolbar>
@@ -8,13 +5,28 @@
             <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title>
-            # SALES SETTINGS
+            {{ 'SALES.SALES_SETTINGS_PAGE.PAGE_TITLE' | translate }}
         </ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content id="content" scrollY='false'>
-    <div class="settings-content">
-        
+<ion-content scrollY='false'>
+    <div class="settings sales-settings">
+        <div class="settings-group">
+            <div class="setting-row">
+                <div class="setting-row-label">{{ 'SALES.SALES_SETTINGS_PAGE.USE_REFERENCE_CURRENCY_TOGGLE' | translate }}</div>
+                <div class="setting-row-right-container"><ion-toggle [(ngModel)]="useReferenceCurrency"></ion-toggle></div>
+            </div>
+        </div>
+        <div class="settings-group">
+            <div class="setting-row">
+                <div class="setting-row-label">{{ 'SALES.SALES_SETTINGS_PAGE.SHOW_AGGREGATE_DATA_TOGGLE' | translate }}</div>
+                <div class="setting-row-right-container"><ion-toggle [(ngModel)]="showAggregateData"></ion-toggle></div>
+            </div>
+            <div class="setting-row">
+                <div class="setting-row-label">{{ 'SALES.SALES_SETTINGS_PAGE.SHOW_DAILY_SALES_TOGGLE' | translate }}</div>
+                <div class="setting-row-right-container"><ion-toggle [(ngModel)]="showDailySales"></ion-toggle></div>
+            </div>
+        </div>
     </div>
 </ion-content>
