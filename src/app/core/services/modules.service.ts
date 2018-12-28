@@ -1,52 +1,81 @@
 import { Injectable } from '@angular/core';
 import { Ticker } from '../entities';
+import { ModuleDefinition } from '../entities/module-definition';
 
+/**
+ * Provides access to all available modules definitions.
+ *
+ * @export
+ * @class ModulesService
+ */
 @Injectable({
     providedIn: 'root',
 })
 export class ModulesService {
 
-    private modulesSummariesHandlers: {[moduleKey: string]: () => Promise<HTMLElement[]>} ;
+    private modulesDefinitions: { [moduleKey: string]: ModuleDefinition };
+
+    // private modulesSummariesHandlers: {[moduleKey: string]: () => Promise<HTMLElement[]>} ;
 
     constructor() {
-        this.modulesSummariesHandlers = {};
+        // this.modulesSummariesHandlers = {};
+        this.modulesDefinitions = {};
     }
 
-    addModuleSummariesHandler(moduleKey: string, summariesHandler: () => Promise<HTMLElement[]>) {
-        this.modulesSummariesHandlers[moduleKey] = summariesHandler;
+    addModuleDefinition(moduleDefinition: ModuleDefinition) {
+        if (this.modulesDefinitions.hasOwnProperty(moduleDefinition.key)) {
+            throw new Error(`Module with key "${moduleDefinition.key}" alredy defined`);
+        }
+
+        this.modulesDefinitions[moduleDefinition.key] = moduleDefinition;
     }
 
-    async getAllModulesSummariesTickers(): Promise<{moduleKey: string, tickers: Ticker[]}[]> {
-        const summariesTickers: {moduleKey: string, tickers: Ticker[]}[] = [];
+    // addModuleSummariesHandler(moduleKey: string, summariesHandler: () => Promise<HTMLElement[]>) {
+    //     this.modulesSummariesHandlers[moduleKey] = summariesHandler;
+    // }
+
+    async getAllModulesSummariesTickers(): Promise<{ moduleKey: string, tickers: Ticker[] }[]> {
+        const summariesTickers: { moduleKey: string, tickers: Ticker[] }[] = [];
         let error: any;
 
         try {
-            for (const moduleKey in this.modulesSummariesHandlers) {
+            for (const moduleKey in this.modulesDefinitions) {
 
-                if (this.modulesSummariesHandlers.hasOwnProperty(moduleKey)) {
-                    const handler = this.modulesSummariesHandlers[moduleKey];
-                    const htmlElements = await handler();
+                // verify if the modulesDefinitions realy has the module definition.
+                if (!this.modulesDefinitions.hasOwnProperty(moduleKey)) {
+                    continue;
+                }
 
-                    const tickers: Ticker[] = [];
+                const moduleDefinition = this.modulesDefinitions[moduleKey];
 
-                    for (const htmlElement of htmlElements) {
-                        tickers.push({
-                            title: moduleKey,
-                            content: htmlElement
-                        });
-                    }
+                // verify if the module has summaries
+                if (!moduleDefinition.summaries ||
+                    !moduleDefinition.summaries.hasSummaries ||
+                    !moduleDefinition.summaries.summariesHandler) {
+                    continue;
+                }
 
-                    summariesTickers.push({
-                        moduleKey: moduleKey,
-                        tickers: tickers
+                const htmlElements = await moduleDefinition.summaries.summariesHandler();
+
+                const tickers: Ticker[] = [];
+
+                for (const htmlElement of htmlElements) {
+                    tickers.push({
+                        title: moduleKey,
+                        content: htmlElement
                     });
                 }
+
+                summariesTickers.push({
+                    moduleKey: moduleKey,
+                    tickers: tickers
+                });
             }
         } catch (err) {
             error = err;
         }
 
-        return new Promise<{moduleKey: string, tickers: Ticker[]}[]>((resolve, reject) => {
+        return new Promise<{ moduleKey: string, tickers: Ticker[] }[]>((resolve, reject) => {
             if (error) {
                 reject(error);
             } else {
