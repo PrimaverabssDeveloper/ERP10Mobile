@@ -1,23 +1,38 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../../core/services';
+import { AuthenticationService, ModulesService } from '../../../core/services';
+import { ModuleDefinition } from '../../../core/entities';
 
 @Component({
     selector: 'side-menu',
     templateUrl: './side-menu.component.html',
     styleUrls: ['./side-menu.component.scss']
 })
-export class SideMenuComponent {
+export class SideMenuComponent implements OnInit {
 
     @Input() contentId: string;
+
+    modulesDefsWithSettings: ModuleDefinition[];
 
     constructor(
         private translateService: TranslateService,
         private router: Router,
-        private alertController: AlertController
+        private alertController: AlertController,
+        private modulesService: ModulesService
     ) {}
+
+    /**
+    * Execute on page initialization.
+    *
+    * @memberof SideMenuComponent
+    */
+    ngOnInit(): void {
+        this.modulesDefsWithSettings = this.modulesService
+                                           .getAvailabeModulesDefinitions()
+                                           .filter(m => m.settings && m.settings.hasSettings);
+    }
 
 
     /**
@@ -47,7 +62,7 @@ export class SideMenuComponent {
         await alert.present();
     }
 
-    changeInstancesAction() {
+    async changeInstancesAction() {
         this.router.navigate(['/shell/instances']);
     }
 

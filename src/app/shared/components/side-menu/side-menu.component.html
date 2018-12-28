@@ -19,24 +19,15 @@
                     </button>
                 </ion-menu-toggle>
             </div>
-            <div class="settings-group">
+            <div class="settings-group" *ngIf="modulesDefsWithSettings">
                 <div class="settings-group-title">
                     {{ 'SHARED.SIDE_MENU_COMPONENT.MENU_MODULES_TITLE' | translate }}
                 </div>
-                <ion-menu-toggle>
+                <ion-menu-toggle *ngFor="let moduleDef of modulesDefsWithSettings">
                     <button class="settings-group-item settings-group-item-with-image">
-                        <img class="settings-group-item-image" src="../../../../assets/sales/sales_logo.svg" />
+                        <img class="settings-group-item-image" [attr.src]="moduleDef.iconPath" />
                         <div class="settings-group-item-label">
-                            Sales
-                        </div>
-                        <img class="settings-group-item-arrow" src="../../../../assets/shell/forward_arrow.png" />
-                    </button>
-                </ion-menu-toggle>
-                <ion-menu-toggle>
-                    <button class="settings-group-item settings-group-item-with-image">
-                        <img class="settings-group-item-image" src="../../../../assets/human-resources/human_resources_logo.svg" />
-                        <div class="settings-group-item-label">
-                            Human Resources
+                            {{moduleDef.localizedNameKey}}
                         </div>
                         <img class="settings-group-item-arrow" src="../../../../assets/shell/forward_arrow.png" />
                     </button>
