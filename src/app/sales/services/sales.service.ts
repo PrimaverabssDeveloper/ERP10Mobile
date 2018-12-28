@@ -1,4 +1,4 @@
-import { SalesSummary, Company, SalesCharts } from '../entities';
+import { SalesSummary, Company, SalesCharts, SalesSettings } from '../entities';
 import { InstanceHttpRequestService, DomService } from '../../core/services';
 import { SalesTickerComponent } from '../components';
 import { SalesStorageService } from './sales-storage.service';
@@ -102,6 +102,38 @@ export class SalesService {
         // return salesSummary;
         return null;
     }
+
+    /**
+     * Provide the sales setting.
+     *
+     * @returns {Promise<SalesSettings>}
+     * @memberof SalesService
+     */
+    async getSettingsAsync(): Promise<SalesSettings> {
+        let settings: SalesSettings = await this.storage.getData<SalesSettings>('SETTINGS', true);
+
+        // create the default settings state
+        if (!settings) {
+            settings = {
+                useReferenceCurrency: false,
+                showAggregateData: true,
+                showDailySales: true
+            };
+        }
+
+        return settings;
+    }
+
+    /**
+     * Stores the sales settings.
+     *
+     * @param {SalesSettings} settings
+     * @memberof SalesService
+     */
+    async updateSettingsAsync(settings: SalesSettings) {
+        await this.storage.setData('SETTINGS', settings, true);
+    }
+
 
     // #endregion
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { LoadingController } from '@ionic/angular';
 import { PageBase } from '../../../shared/pages';
@@ -36,6 +36,7 @@ export class SalesSettingsPage extends PageBase implements OnInit {
 
     set useReferenceCurrency(value: boolean) {
         this._useReferenceCurrency = value;
+        this.storeSettings();
     }
 
     get showAggregateData(): boolean {
@@ -44,6 +45,7 @@ export class SalesSettingsPage extends PageBase implements OnInit {
 
     set showAggregateData(value: boolean) {
         this._showAggregateData = value;
+        this.storeSettings();
     }
 
     get showDailySales(): boolean {
@@ -52,6 +54,7 @@ export class SalesSettingsPage extends PageBase implements OnInit {
 
     set showDailySales(value: boolean) {
         this._showDailySales = value;
+        this.storeSettings();
     }
     // #endregion
 
@@ -62,7 +65,28 @@ export class SalesSettingsPage extends PageBase implements OnInit {
         super(loadingController);
     }
 
+    /**
+    * Execute on page initialization.
+    *
+    * @memberof SalesSettingsPage
+    */
     async ngOnInit() {
+        try {
+            const settings = await this.salesService.getSettingsAsync();
 
+            this._useReferenceCurrency = settings.useReferenceCurrency;
+            this._showDailySales = settings.showDailySales;
+            this._showAggregateData = settings.showAggregateData;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    private storeSettings() {
+        this.salesService.updateSettingsAsync({
+            useReferenceCurrency: this._useReferenceCurrency,
+            showAggregateData: this._showAggregateData,
+            showDailySales: this._showDailySales
+        });
     }
 }
