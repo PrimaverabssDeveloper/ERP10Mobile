@@ -4,17 +4,19 @@ import { Observable } from 'rxjs';
 import { Instance, Module } from '../entities';
 import { HttpRequestService } from './http-request.service';
 import { StorageService } from './storage/storage.service';
+import { HttpClient } from '@angular/common/http';
+import { AuthenticationService } from './authentication.service';
 
 /**
- * This service provides the available instances to the current user and the current instance selected by the user.
+ * This service provides the current instance selected by the user.
  *
  * @export
- * @class InstancesService
+ * @class InstanceService
  */
 @Injectable({
     providedIn: 'root',
 })
-export class InstancesService {
+export class InstanceService {
 
     // #region 'Private Fields'
     private _currentInstance: Instance;
@@ -56,7 +58,11 @@ export class InstancesService {
 
     // #region 'Constructor'
 
-    constructor(private httpRequestService: HttpRequestService, private storage: StorageService) {
+    constructor(
+        private httpRequestService: HttpRequestService,
+        private storage: StorageService,
+        private http: HttpClient
+        ) {
     }
 
     // #endregion
@@ -70,39 +76,6 @@ export class InstancesService {
             console.log('No session storage');
         }
     }
-
-    async getInstancesAsync(): Promise<Instance[]> {
-        let instances: Instance[] = null;
-
-        try {
-            instances = await this.httpRequestService.get<Instance[]>('app/instances');
-        } catch (error) {
-            console.log(error);
-        }
-
-        return instances;
-    }
-
-    // getInstanceModules(): Observable<Module[]> {
-    //     const partialUrl = `app/instances/${this.currentInstance.subscriptionAlias}/modules`;
-    //     return this.httpRequestService.get<Module[]>(partialUrl);
-    // }
-
-    // async getModuleSummary(module: Module): Promise<any> {
-    //     const accountKey = this.currentInstance.accountKey;
-    //     const subsAlias = this.currentInstance.subscriptionAlias;
-
-    //     const partialUrl = `${accountKey}/${subsAlias}/${module.name}`;
-    //     let summary: any = null;
-
-    //     try {
-    //         summary = await this.httpRequestService.get<any>(partialUrl);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-
-    //     return summary;
-    // }
 
     /**
      * Defines the current instance.
@@ -126,6 +99,18 @@ export class InstancesService {
     private async retrieveCurrentInstanceFromStorageAsync(): Promise<Instance> {
         const instance = await this.storage.getData<Instance>('CURRENT_INSTANCE');
         return instance;
+    }
+
+    private async getInstancesFromServerAsync(): Promise<Instance[]> {
+        let instances: Instance[] = null;
+
+        try {
+            instances = await this.httpRequestService.get<Instance[]>('app/instances');
+        } catch (error) {
+            console.log(error);
+        }
+
+        return instances;
     }
 
     // #endregion

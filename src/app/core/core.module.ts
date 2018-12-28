@@ -6,7 +6,7 @@ import { IonicModule, Platform } from '@ionic/angular';
 import { SafariViewController } from '@ionic-native/safari-view-controller/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
-import { SERVICES, StorageService, AuthenticationService, TokenInterceptorService, InstancesService } from './services';
+import { SERVICES, StorageService, AuthenticationService, TokenInterceptorService, InstanceService } from './services';
 import { NativeStorageService } from './services/storage/native-storage.service';
 import { LocalStorageService } from './services/storage/local-storage.service';
 import { AppSettings } from './app-settings';
@@ -18,7 +18,7 @@ export function initAuthentication(authentication: AuthenticationService): () =>
     };
 }
 
-export function initInstance(instanceService: InstancesService): () => Promise<any> {
+export function initInstance(instanceService: InstanceService): () => Promise<any> {
     return (): Promise<any> => {
         return instanceService.init();
     };
@@ -58,7 +58,7 @@ export function initInstance(instanceService: InstancesService): () => Promise<a
             provide: APP_INITIALIZER,
             useFactory: initInstance,
             multi: true,
-            deps: [InstancesService]
+            deps: [InstanceService]
         },
         {
             provide: HTTP_INTERCEPTORS,

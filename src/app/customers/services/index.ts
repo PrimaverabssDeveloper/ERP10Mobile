@@ -1,7 +1,7 @@
 import { Provider } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CustomersDemoService } from './customers.demo.service';
-import { AuthenticationService, InstancesService, InstanceHttpRequestService } from '../../core/services';
+import { AuthenticationService, InstanceService, InstanceHttpRequestService } from '../../core/services';
 import { CustomersService } from './customers.service';
 import { CustomersStorageService } from './customers-storage.service';
 import { DocumentValueService } from './document-value.service';

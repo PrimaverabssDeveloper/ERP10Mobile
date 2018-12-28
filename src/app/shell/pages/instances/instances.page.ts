@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { InstancesService } from '../../../core/services';
 import { Instance } from '../../../core/entities';
 import { Router } from '@angular/router';
 
 import { PageBase } from '../../../shared/pages';
 import { LoadingController } from '@ionic/angular';
+import { InstancesServiceProvider, InstancesService } from '../../services';
+import { InstanceService } from '../../../core/services';
 
 @Component({
     templateUrl: 'instances.page.html',
     styleUrls: ['instances.page.scss'],
+    providers: [InstancesServiceProvider]
 })
 export class InstancesPage extends PageBase implements OnInit {
 
@@ -28,11 +30,15 @@ export class InstancesPage extends PageBase implements OnInit {
 
     /**
      * Creates an instance of InstancesPage.
-     * @param {InstancesService} instancesService
+     * @param {InstanceService} instancesService
      * @param {Router} router
      * @memberof InstancesPage
      */
-    constructor(private instancesService: InstancesService, private router: Router, public loadingController: LoadingController) {
+    constructor(
+        private instanceService: InstanceService,
+        private instancesService: InstancesService,
+        private router: Router,
+        public loadingController: LoadingController) {
         super(loadingController);
     }
 
@@ -97,7 +103,7 @@ export class InstancesPage extends PageBase implements OnInit {
             return;
         }
 
-        await this.instancesService.setCurrentInstanceAsync(instance);
+        await this.instanceService.setCurrentInstanceAsync(instance);
 
         this.router.navigate(['/shell/dashboard'], { replaceUrl: true});
     }

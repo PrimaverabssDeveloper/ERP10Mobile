@@ -1,0 +1,71 @@
+[
+    {
+      "accountKey": "10003",
+      "description": "Primavera",
+      "id": "1",
+      "modules": [
+        {
+          "description": "Recursos Humanos",
+          "id": "1",
+          "name": "HumanResources"
+        },
+        {
+          "description": "Clientes",
+          "id": "2",
+          "name": "Customers"
+        },
+        {
+          "description": "Vendas",
+          "id": "3",
+          "name": "Sales"
+        }
+      ],
+      "subscriptionAlias": "10003-0009"
+    },
+    {
+      "accountKey": "10002",
+      "description": "Sofrio",
+      "id": "2",
+      "modules": [
+        {
+          "description": "Recursos Humanos",
+          "id": "1",
+          "name": "HumanResources"
+        },
+        {
+          "description": "Clientes",
+          "id": "2",
+          "name": "Customers"
+        },
+        {
+          "description": "Vendas",
+          "id": "3",
+          "name": "Sales"
+        }
+      ],
+      "subscriptionAlias": "10002-001"
+    },
+    {
+      "accountKey": "10003",
+      "description": "Alcad",
+      "id": "3",
+      "modules": [
+        {
+          "description": "Recursos Humanos",
+          "id": "1",
+          "name": "HumanResources"
+        },
+        {
+          "description": "Clientes",
+          "id": "2",
+          "name": "Customers"
+        },
+        {
+          "description": "Vendas",
+          "id": "3",
+          "name": "Sales"
+        }
+      ],
+      "subscriptionAlias": "10003-001"
+    }
+  ]

@@ -3,7 +3,7 @@ import { MenuController, LoadingController, Menu, AlertController } from '@ionic
 import { Subscription } from 'rxjs';
 
 import { Module, Ticker, ModuleDefinition } from '../../../core/entities';
-import { InstancesService, ModulesService, AuthenticationService } from '../../../core/services';
+import { InstanceService, ModulesService, AuthenticationService } from '../../../core/services';
 
 import { PageBase } from '../../../shared/pages';
 import { ModuleSummary } from '../../entities';
@@ -81,7 +81,7 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
     // #region 'Constructor'
 
     constructor(
-        private instancesService: InstancesService,
+        private instancesService: InstanceService,
         private modulesService: ModulesService,
         public menuController: MenuController,
         public loadingController: LoadingController,

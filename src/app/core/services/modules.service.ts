@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Ticker, ModuleDefinition } from '../entities';
-import { InstancesService } from './instances.service';
+import { InstanceService } from './instance.service';
 
 /**
  * Provides access to all available modules definitions.
@@ -17,7 +17,7 @@ export class ModulesService {
 
     // private modulesSummariesHandlers: {[moduleKey: string]: () => Promise<HTMLElement[]>} ;
 
-    constructor(private instanceService: InstancesService) {
+    constructor(private instanceService: InstanceService) {
         // this.modulesSummariesHandlers = {};
         this.modulesDefinitions = {};
     }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ModuleStorageServiceBase } from './storage/module-storage.service.base';
 import { StorageService } from './storage/storage.service';
-import { InstancesService } from './instances.service';
+import { InstanceService } from './instance.service';
 
 
 /**
@@ -18,8 +18,8 @@ export class CoreStorageService extends ModuleStorageServiceBase {
 
     // #region 'Constructor'
 
-    constructor(protected storage: StorageService, protected instancesService: InstancesService) {
-        super(storage, instancesService);
+    constructor(protected storage: StorageService, protected instanceService: InstanceService) {
+        super(storage, instanceService);
     }
     // #endregion
 

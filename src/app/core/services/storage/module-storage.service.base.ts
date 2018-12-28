@@ -1,7 +1,7 @@
 
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { StorageService } from './storage.service';
-import { InstancesService } from '../instances.service';
+import { InstanceService } from '../instance.service';
 
 /**
  * Base service to store data from modules.
@@ -17,7 +17,7 @@ export abstract class ModuleStorageServiceBase {
 
     // #region 'Constructor'
 
-    constructor(protected storage: StorageService, protected instancesService: InstancesService) {
+    constructor(protected storage: StorageService, protected instanceService: InstanceService) {
     }
 
     // #endregion
@@ -83,7 +83,7 @@ export abstract class ModuleStorageServiceBase {
         }
 
         if (instanceDependent) {
-            const subscriptionAlias = this.instancesService.currentInstance.subscriptionAlias;
+            const subscriptionAlias = this.instanceService.currentInstance.subscriptionAlias;
             return `${subscriptionAlias}_${moduleKey}_${dataKey}`;
         } else {
             return `${moduleKey}_${dataKey}`;

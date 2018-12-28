@@ -1,6 +1,6 @@
 
 import { Provider } from '@angular/core';
-import { AuthenticationService, InstancesService, InstanceHttpRequestService, DomService } from '../../core/services';
+import { AuthenticationService, InstanceHttpRequestService, DomService } from '../../core/services';
 import { HttpClient } from '@angular/common/http';
 import { HumanResourcesService } from './human-resources.service';
 import { HumanResourcesDemoService } from './human-resources.demo.service';

@@ -1,6 +1,6 @@
 import { SalesService } from './sales.service';
 import { Provider } from '@angular/core';
-import { AuthenticationService, InstancesService, InstanceHttpRequestService, DomService, StorageService } from '../../core/services';
+import { AuthenticationService, InstanceService, InstanceHttpRequestService, DomService, StorageService } from '../../core/services';
 import { HttpClient } from '@angular/common/http';
 import { SalesDemoService } from './sales.demo.service';
 import { SalesStorageService } from './sales-storage.service';
