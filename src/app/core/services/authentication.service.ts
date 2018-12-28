@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { SafariViewController } from '@ionic-native/safari-view-controller/ngx';
 import { CoreStorageService } from './core-storage.service';
 import { AppSettings } from '../app-settings';
+import { HTTP } from '@ionic-native/http/ngx';
 
 const authenticationSettings = require('../../../authentication-settings.json');
 const crypto = require('crypto');
@@ -48,7 +49,7 @@ export class AuthenticationService {
     }
 
     constructor(
-        private http: HttpClient,
+        private http: HTTP,
         private safariViewController: SafariViewController,
         private coreStorageService: CoreStorageService,
         private appSettings: AppSettings
@@ -180,19 +181,33 @@ export class AuthenticationService {
         body.set('code_verifier', this.proofKey.codeVerifier);
         body.set('grant_type', this.grantType);
 
-        const options = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Accept': 'application/json',
-            }
+        // const options = {
+        //     headers: {
+        //         'Content-Type': 'application/x-www-form-urlencoded',
+        //         'Accept': 'application/json',
+        //     }
+        // };
+
+        const body2 = {
+            client_id: this.clientId,
+            redirect_uri: this.redirectUri,
+            code: code,
+            code_verifier: this.proofKey.codeVerifier,
+            grant_type: this.grantType
         };
 
+        const headers = {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json'
+                };
+
         this.http
-            .post(this.requestTokenEndpoint, body.toString(), options)
-            .subscribe(
-                res => this.endAuthenticationProcess(res),
-                err => console.log(err)
-            );
+            .post(this.requestTokenEndpoint, body2, headers)
+            .then(res => {
+                const data = JSON.parse(res.data);
+                this.endAuthenticationProcess(data);
+            })
+            .catch(err => console.log(err));
     }
 
     private openBrowser(url: string) {

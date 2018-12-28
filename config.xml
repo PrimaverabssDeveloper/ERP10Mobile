@@ -96,5 +96,6 @@
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <allow-navigation href="http://192.168.1.131:8100" sessionid="757c47cb" />
     <plugin name="cordova-plugin-nativestorage" spec="^2.3.2" />
+    <plugin name="cordova-plugin-advanced-http" spec="~2.0.2" />
     <engine name="android" spec="7.1.1" />
 </widget>

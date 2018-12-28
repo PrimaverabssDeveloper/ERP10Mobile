@@ -25,6 +25,7 @@
     "@angular/router": "~6.1.1",
     "@auth0/cordova": "^0.3.0",
     "@ionic-native/core": "5.0.0-beta.21",
+    "@ionic-native/http": "^5.0.0-beta.21",
     "@ionic-native/native-storage": "^5.0.0-beta.21",
     "@ionic-native/safari-view-controller": "^5.0.0-beta.21",
     "@ionic-native/splash-screen": "5.0.0-beta.21",
@@ -96,7 +97,8 @@
       },
       "cordova-plugin-safariviewcontroller": {},
       "cordova-plugin-inappbrowser": {},
-      "cordova-plugin-nativestorage": {}
+      "cordova-plugin-nativestorage": {},
+      "cordova-plugin-advanced-http": {}
     },
     "platforms": [
       "android"
