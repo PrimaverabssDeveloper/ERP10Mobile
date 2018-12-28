@@ -31,6 +31,14 @@ export interface ModuleDefinition {
     iconPath: string;
 
     /**
+     * Module route path.
+     *
+     * @type {string}
+     * @memberof ModuleDefinition
+     */
+    moduleRoutePath: string;
+
+    /**
      * Define if the module has settings and provides the path to the settings page.
      *
      * @type {{
