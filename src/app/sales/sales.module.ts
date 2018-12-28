@@ -40,7 +40,7 @@ export class SalesModule {
             },
             settings: {
                 hasSettings: true,
-                settingsRoutePath: ''
+                settingsRoutePath: '/sales/settings'
             }
         };
 
