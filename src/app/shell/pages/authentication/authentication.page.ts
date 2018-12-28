@@ -63,11 +63,13 @@ export class AuthenticationPage implements OnInit {
     }
 
     async demoAction() {
-        this.authenticationService.authenticateAsDemo();
+        await this.authenticationService.authenticateAsDemoAsync();
         this.goToInstanceSelectorPage();
     }
 
     private goToInstanceSelectorPage() {
-        this.router.navigate(['/shell/instances'], { replaceUrl: true});
+        (window as any).location = '/shell/instances';
+
+        // this.router.navigate(['/shell/instances'], { replaceUrl: true});
     }
 }

@@ -20,6 +20,7 @@ export const SalesServiceProvider: Provider = {
         domService: DomService,
         storageService: SalesStorageService
     ) => {
+        console.log('====>' + authService.isAuthenticateAsDemo);
         if (authService.isAuthenticateAsDemo) {
             return new SalesDemoService(instanceHttpRequestService, domService, storageService, http);
         } else {

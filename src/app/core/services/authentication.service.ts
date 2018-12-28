@@ -33,11 +33,13 @@ export class AuthenticationService {
 
     private authenticationResolve: (value?: boolean | PromiseLike<boolean>) => void;
 
-    public isAuthenticateAsDemo: boolean;
+    sessionData: AuthenticationData;
 
-    public sessionData: AuthenticationData;
+    get isAuthenticateAsDemo(): boolean {
+        return this.sessionData && this.sessionData.isDemo;
+    }
 
-    public get accessToken(): string {
+    get accessToken(): string {
         if (this.sessionData) {
             return this.sessionData.accessToken;
         } else {
@@ -66,8 +68,10 @@ export class AuthenticationService {
         try {
             const sessionData = await this.coreStorageService.getData<AuthenticationData>(AuthenticationService.STORAGE_SESSION_DATA_KEY);
             this.sessionData = sessionData;
+
         } catch (error) {
             console.log('No session storage');
+            this.sessionData = null;
         }
     }
 
@@ -96,8 +100,17 @@ export class AuthenticationService {
         });
     }
 
-    authenticateAsDemo() {
-        this.isAuthenticateAsDemo = true;
+    async authenticateAsDemoAsync(): Promise<any> {
+        const authenticationData = {
+            isDemo: true,
+            accessToken: null,
+            idToken: null,
+            refreshToken: null,
+            tokenType: null,
+            expirationDate: null
+        };
+
+        await this.coreStorageService.setData<AuthenticationData>(AuthenticationService.STORAGE_SESSION_DATA_KEY, authenticationData);
     }
 
     async isAuthenticate(): Promise<boolean> {
@@ -143,7 +156,7 @@ export class AuthenticationService {
     // }
 
     async endSession() {
-        this.isAuthenticateAsDemo = false;
+        this.sessionData = null;
 
         // remove regular authentication session data
         await this.coreStorageService.removeData(AuthenticationService.STORAGE_SESSION_DATA_KEY);
@@ -217,6 +230,7 @@ export class AuthenticationService {
         expirationData.setSeconds(expirationData.getSeconds() + data.expires_in);
 
         authenticationData = {
+            isDemo: false,
             accessToken: data.access_token,
             idToken: data.id_token,
             refreshToken: data.refresh_token,
@@ -290,6 +304,7 @@ interface ProofKey {
 }
 
 interface AuthenticationData {
+    isDemo: boolean;
     expirationDate: Date;
     accessToken: string;
     idToken: string;
