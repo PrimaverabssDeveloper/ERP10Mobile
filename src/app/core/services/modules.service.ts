@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Ticker } from '../entities';
-import { ModuleDefinition } from '../entities/module-definition';
+import { Ticker, ModuleDefinition } from '../entities';
 
 /**
  * Provides access to all available modules definitions.

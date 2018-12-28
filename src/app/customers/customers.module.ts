@@ -10,6 +10,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../shared/shared.module';
 import { COMPONENTS } from './components';
 import { PIPES } from './pipes';
+import { ModulesService } from '../core/services';
+import { ModuleDefinition } from '../core/entities';
 
 @NgModule({
     imports: [
@@ -29,10 +31,22 @@ import { PIPES } from './pipes';
     ]
 })
 export class CustomersModule {
-    // constructor(
-    //     private modulesSummariesService: ModulesSummariesService,
-    //     private salesService: SalesService
-    // ) {
-    //     this.modulesSummariesService.addModuleSummariesHandler('sales', () => this.salesService.createSalesSummaryTickers());
-    // }
+    constructor(
+        private modulesService: ModulesService,
+    ) {
+        const moduleDef: ModuleDefinition = {
+            key: 'CUSTOMERS',
+            moduleRoutePath: '/customers',
+            iconPath: '../../assets/customers/customers_logo.svg',
+            localizedNameKey: '#CUSTOMERS',
+            summaries: {
+                hasSummaries: false
+            },
+            settings: {
+                hasSettings: true
+            }
+        };
+
+        this.modulesService.addModuleDefinition(moduleDef);
+    }
 }

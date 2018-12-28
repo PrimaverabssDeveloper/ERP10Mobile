@@ -9,7 +9,7 @@ import { ENTRY_COMPONENTS, COMPONENTS } from './components';
 import { SalesService, SalesServiceProvider } from './services';
 import { ModulesService } from '../core/services';
 import { SharedModule } from '../shared/shared.module';
-import { ModuleDefinition } from '../core/entities/module-definition';
+import { ModuleDefinition } from '../core/entities';
 
 @NgModule({
     imports: [
@@ -31,8 +31,9 @@ export class SalesModule {
 
         const moduleDef: ModuleDefinition = {
             key: 'SALES',
-            iconPath: '',
-            localizedNameKey: '',
+            moduleRoutePath: '/sales',
+            iconPath: '../../assets/sales/sales_logo.svg',
+            localizedNameKey: '#SALES',
             summaries: {
                 hasSummaries: true,
                 summariesHandler: () => this.salesService.createSalesSummaryTickers()
