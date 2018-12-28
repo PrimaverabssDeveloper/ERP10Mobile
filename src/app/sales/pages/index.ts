@@ -1,10 +1,10 @@
 import { HomePage } from './home/home.page';
-import { SettingsPage } from '../../shell/pages';
+import { SalesSettingsPage } from './sales-settings/sales-settings.page';
 
 export * from './home/home.page';
-export * from './settings/settings.page';
+export * from './sales-settings/sales-settings.page';
 
 export const PAGES = [
     HomePage,
-    SettingsPage
+    SalesSettingsPage
 ];

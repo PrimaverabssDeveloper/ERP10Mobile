@@ -1,5 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
-import { HomePage, SettingsPage } from './pages';
+import { HomePage, SalesSettingsPage } from './pages';
 
 const salesRoutes: Routes = [
     {
@@ -16,7 +16,7 @@ const salesRoutes: Routes = [
           },
           {
               path: 'settings',
-              component: SettingsPage
+              component: SalesSettingsPage
           }
         ]
     }
