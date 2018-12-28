@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Ticker, ModuleDefinition } from '../entities';
+import { InstancesService } from './instances.service';
 
 /**
  * Provides access to all available modules definitions.
@@ -16,7 +17,7 @@ export class ModulesService {
 
     // private modulesSummariesHandlers: {[moduleKey: string]: () => Promise<HTMLElement[]>} ;
 
-    constructor() {
+    constructor(private instanceService: InstancesService) {
         // this.modulesSummariesHandlers = {};
         this.modulesDefinitions = {};
     }
@@ -33,19 +34,33 @@ export class ModulesService {
     //     this.modulesSummariesHandlers[moduleKey] = summariesHandler;
     // }
 
-    async getAllModulesSummariesTickers(): Promise<{ moduleKey: string, tickers: Ticker[] }[]> {
+    /**
+     * Provides the definitions to the availble modules for the current user.
+     *
+     * @returns {ModuleDefinition[]}
+     * @memberof ModulesService
+     */
+    getAvailabeModulesDefinitions(): ModuleDefinition[] {
+        const availableModules = this.instanceService.currentInstance.modules;
+        const availableModulesDefinitions: ModuleDefinition[] = [];
+
+        for (const m of availableModules) {
+            const moduleDef = this.modulesDefinitions[m.name];
+            if (moduleDef) {
+                availableModulesDefinitions.push(moduleDef);
+            }
+        }
+
+        return availableModulesDefinitions;
+    }
+
+    async getAllAvailableModulesSummariesTickers(): Promise<{ moduleKey: string, tickers: Ticker[] }[]> {
         const summariesTickers: { moduleKey: string, tickers: Ticker[] }[] = [];
         let error: any;
 
         try {
-            for (const moduleKey in this.modulesDefinitions) {
-
-                // verify if the modulesDefinitions realy has the module definition.
-                if (!this.modulesDefinitions.hasOwnProperty(moduleKey)) {
-                    continue;
-                }
-
-                const moduleDefinition = this.modulesDefinitions[moduleKey];
+            const availableModulesDefs = this.getAvailabeModulesDefinitions();
+            for (const moduleDefinition of availableModulesDefs) {
 
                 // verify if the module has summaries
                 if (!moduleDefinition.summaries ||
@@ -60,13 +75,13 @@ export class ModulesService {
 
                 for (const htmlElement of htmlElements) {
                     tickers.push({
-                        title: moduleKey,
+                        title: moduleDefinition.localizedNameKey,
                         content: htmlElement
                     });
                 }
 
                 summariesTickers.push({
-                    moduleKey: moduleKey,
+                    moduleKey: moduleDefinition.key,
                     tickers: tickers
                 });
             }

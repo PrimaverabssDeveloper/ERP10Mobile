@@ -118,7 +118,7 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
             this.updateModulesAvailability(this.modules);
 
             // get modules summaries and update the interface
-            const moduleTickers = await this.modulesService.getAllModulesSummariesTickers();
+            const moduleTickers = await this.modulesService.getAllAvailableModulesSummariesTickers();
             for (const moduleTicker of moduleTickers) {
                 for (const ticker of moduleTicker.tickers) {
                     this.tickers.push(ticker);

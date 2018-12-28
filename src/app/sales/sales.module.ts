@@ -30,7 +30,7 @@ export class SalesModule {
     ) {
 
         const moduleDef: ModuleDefinition = {
-            key: 'SALES',
+            key: 'Sales',
             moduleRoutePath: '/sales',
             iconPath: '../../assets/sales/sales_logo.svg',
             localizedNameKey: '#SALES',

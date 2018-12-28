@@ -26,7 +26,7 @@ export class HumanResourcesModule {
         private modulesService: ModulesService,
     ) {
         const moduleDef: ModuleDefinition = {
-            key: 'HUMANRESOURCES',
+            key: 'HumanResources',
             moduleRoutePath: '/humanresources',
             iconPath: '../../assets/human-resources/human_resources_logo.svg',
             localizedNameKey: '#HR',

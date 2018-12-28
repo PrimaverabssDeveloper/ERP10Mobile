@@ -35,7 +35,7 @@ export class CustomersModule {
         private modulesService: ModulesService,
     ) {
         const moduleDef: ModuleDefinition = {
-            key: 'CUSTOMERS',
+            key: 'Customers',
             moduleRoutePath: '/customers',
             iconPath: '../../assets/customers/customers_logo.svg',
             localizedNameKey: '#CUSTOMERS',
