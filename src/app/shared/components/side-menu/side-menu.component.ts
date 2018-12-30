@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthenticationService, ModulesService } from '../../../core/services';
 import { ModuleDefinition } from '../../../core/entities';
@@ -20,6 +20,7 @@ export class SideMenuComponent implements OnInit {
         private translateService: TranslateService,
         private router: Router,
         private alertController: AlertController,
+        private navController: NavController,
         private modulesService: ModulesService
     ) {}
 
@@ -63,7 +64,7 @@ export class SideMenuComponent implements OnInit {
     }
 
     async changeInstancesAction() {
-        this.router.navigate(['/shell/instances']);
+        this.navController.navigateBack('/shell/instances', true, { replaceUrl: true});
     }
 
     private async logout() {

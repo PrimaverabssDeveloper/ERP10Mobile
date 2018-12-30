@@ -3,7 +3,7 @@ import { Instance } from '../../../core/entities';
 import { Router } from '@angular/router';
 
 import { PageBase } from '../../../shared/pages';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { InstancesServiceProvider, InstancesService } from '../../services';
 import { InstanceService } from '../../../core/services';
 
@@ -38,6 +38,7 @@ export class InstancesPage extends PageBase implements OnInit {
         private instanceService: InstanceService,
         private instancesService: InstancesService,
         private router: Router,
+        private navController: NavController,
         public loadingController: LoadingController) {
         super(loadingController);
     }
@@ -104,8 +105,7 @@ export class InstancesPage extends PageBase implements OnInit {
         }
 
         await this.instanceService.setCurrentInstanceAsync(instance);
-
-        this.router.navigate(['/shell/dashboard'], { replaceUrl: true});
+        this.navController.navigateForward('/shell/dashboard', true, { replaceUrl: true});
     }
 
     // #endregion

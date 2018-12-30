@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { AuthenticationService, StorageService } from '../../../core/services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppSettings } from '../../../core/app-settings';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
     templateUrl: './authentication.page.html',
@@ -17,7 +17,9 @@ export class AuthenticationPage implements OnInit {
         private router: Router,
         private appSettings: AppSettings,
         private alertController: AlertController,
-        private storageService: StorageService
+        private storageService: StorageService,
+        private zone: NgZone,
+        private navController: NavController
     ) {
     }
 
@@ -72,6 +74,6 @@ export class AuthenticationPage implements OnInit {
     private goToInstanceSelectorPage() {
         // (window as any).location = '/shell/instances';
 
-        this.router.navigate(['/shell/instances'], { replaceUrl: true});
+        this.zone.run(() => this.navController.navigateForward(['/shell/instances'], true, { replaceUrl: true}));
     }
 }
