@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, HostListener, ElementRef, ViewChild, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { YearSalary, MonthSalary } from '../../models';
+import { SalaryChartColumnData } from '../salary-chart/salary-chart.component';
 
 @Component({
     selector: 'hr-monthly-charts',
@@ -20,12 +21,7 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
 
     monthsData: {
         year: number,
-        months: {
-            label: string,
-            grossValue: number,
-            netValue: number,
-            source: YearSalary | MonthSalary
-        }[]
+        months: SalaryChartColumnData[]
     }[];
 
     @ViewChild('chartsWrapper') chartsElem: ElementRef;

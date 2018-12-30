@@ -16,11 +16,11 @@ export class SalaryChartComponent {
     private readonly netValueHighlightAccentColor = '#BF583D';
 
     private chart: any;
-    private chartData: { label: string, grossValue: number, netValue: number, source: YearSalary | MonthSalary }[];
+    private chartData: SalaryChartColumnData[];
 
     @ViewChild('chartCanvas') chartCanvas: ElementRef;
 
-    @Input() set data(data: { label: string, grossValue: number, netValue: number, source: YearSalary | MonthSalary }[]) {
+    @Input() set data(data: SalaryChartColumnData[]) {
         if (data) {
             this.chartData = data;
             this.buildChart(data);
@@ -29,7 +29,7 @@ export class SalaryChartComponent {
 
     @Output() selected = new EventEmitter();
 
-    private buildChart(data: { label: string, grossValue: number, netValue: number, source: YearSalary | MonthSalary }[]) {
+    private buildChart(data: SalaryChartColumnData[]) {
 
         // break the data into the correct arrays to build the datasets
         const labels = data.map(d => d.label);
@@ -125,4 +125,45 @@ export class SalaryChartComponent {
             }
         });
     }
+}
+
+/**
+ * Defines the dataset for each salary chart column.
+ *
+ * @export
+ * @interface SalaryChartColumnData
+ */
+export interface SalaryChartColumnData {
+
+    /**
+     * The column label.
+     *
+     * @type {string}
+     * @memberof SalaryChartDataSet
+     */
+    label: string;
+
+    /**
+     * The column gross value.
+     *
+     * @type {number}
+     * @memberof SalaryChartDataSet
+     */
+    grossValue: number;
+
+    /**
+     * The column net value.
+     *
+     * @type {number}
+     * @memberof SalaryChartDataSet
+     */
+    netValue: number;
+
+    /**
+     * Defines the column values source. The value be from a YearSalary or a MonthSalary.
+     *
+     * @type {(YearSalary | MonthSalary)}
+     * @memberof SalaryChartDataSet
+     */
+    source: YearSalary | MonthSalary;
 }

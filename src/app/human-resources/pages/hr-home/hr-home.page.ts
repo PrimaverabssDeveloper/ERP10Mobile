@@ -3,6 +3,7 @@ import { Slides, LoadingController } from '@ionic/angular';
 import { PageBase } from '../../../shared/pages';
 import { HumanResourcesServiceProvider, HumanResourcesService } from '../../services';
 import { Salaries, YearSalary, MonthSalary, BaseSalary, Value } from '../../models';
+import { SalaryChartColumnData } from '../../components';
 
 @Component({
     templateUrl: './hr-home.page.html',
@@ -24,21 +25,11 @@ export class HrHomePage extends PageBase implements OnInit {
     salaryPortions: MoneyValue[];
     salaryExtraInformations: SalaryExtraInformations[];
 
-    yearlyChartData: {
-        label: string,
-        grossValue: number,
-        netValue: number,
-        source: YearSalary | MonthSalary
-    }[];
+    yearlyChartData: SalaryChartColumnData[];
 
     monthlyChartsData: {
         year: number,
-        months: {
-            label: string,
-            grossValue: number,
-            netValue: number,
-            source: YearSalary | MonthSalary
-        }[]
+        months: SalaryChartColumnData[]
     }[];
 
     currentYearSalary: YearSalary;
