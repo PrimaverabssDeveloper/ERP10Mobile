@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, NgZone } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -18,7 +18,7 @@ export class SideMenuComponent implements OnInit {
 
     constructor(
         private translateService: TranslateService,
-        private router: Router,
+        private zone: NgZone,
         private alertController: AlertController,
         private navController: NavController,
         private modulesService: ModulesService
@@ -55,7 +55,7 @@ export class SideMenuComponent implements OnInit {
                 },
                 {
                     text: 'Ok',
-                    handler: () => this.logout()
+                    handler: () => this.zone.run(() => this.logout())
                 }
             ]
         });
@@ -68,7 +68,6 @@ export class SideMenuComponent implements OnInit {
     }
 
     private async logout() {
-        // // If the router was used to navigate, the app page stack was not clean
         this.navController.navigateBack(
             ['/authentication'],
             true,
