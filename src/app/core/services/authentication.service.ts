@@ -111,6 +111,7 @@ export class AuthenticationService {
             expirationDate: null
         };
 
+        this.sessionData = authenticationData;
         await this.coreStorageService.setData<AuthenticationData>(AuthenticationService.STORAGE_SESSION_DATA_KEY, authenticationData);
     }
 
