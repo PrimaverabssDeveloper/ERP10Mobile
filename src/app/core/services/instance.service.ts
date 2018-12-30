@@ -71,7 +71,8 @@ export class InstanceService {
 
     async init(): Promise<any> {
         try {
-            this._currentInstance = await this.retrieveCurrentInstanceFromStorageAsync();
+            const currentInstance = await this.retrieveCurrentInstanceFromStorageAsync();
+            this._currentInstance = currentInstance;
         } catch (error) {
             console.log('No session storage');
         }

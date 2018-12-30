@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../../core/services';
+import { AuthenticationService, StorageService } from '../../../core/services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppSettings } from '../../../core/app-settings';
 import { AlertController } from '@ionic/angular';
@@ -16,7 +16,8 @@ export class AuthenticationPage implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private appSettings: AppSettings,
-        private alertController: AlertController
+        private alertController: AlertController,
+        private storageService: StorageService
     ) {
     }
 
@@ -29,6 +30,7 @@ export class AuthenticationPage implements OnInit {
 
         const logout = this.route.snapshot.queryParams['logout'];
         if (logout) {
+            await this.storageService.clear();
             await this.authenticationService.endSession();
         }
 
@@ -68,8 +70,8 @@ export class AuthenticationPage implements OnInit {
     }
 
     private goToInstanceSelectorPage() {
-        (window as any).location = '/shell/instances';
+        // (window as any).location = '/shell/instances';
 
-        // this.router.navigate(['/shell/instances'], { replaceUrl: true});
+        this.router.navigate(['/shell/instances'], { replaceUrl: true});
     }
 }

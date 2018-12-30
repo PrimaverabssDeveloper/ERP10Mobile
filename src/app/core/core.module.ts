@@ -50,18 +50,18 @@ export function initInstance(instanceService: InstanceService): () => Promise<an
             },
             deps: [NativeStorage, Platform]
         },
-        {
-            provide: APP_INITIALIZER,
-            useFactory: initAuthentication,
-            multi: true,
-            deps: [AuthenticationService]
-        },
-        {
-            provide: APP_INITIALIZER,
-            useFactory: initInstance,
-            multi: true,
-            deps: [InstanceService]
-        },
+        // {
+        //     provide: APP_INITIALIZER,
+        //     useFactory: initAuthentication,
+        //     multi: true,
+        //     deps: [AuthenticationService]
+        // },
+        // {
+        //     provide: APP_INITIALIZER,
+        //     useFactory: initInstance,
+        //     multi: true,
+        //     deps: [InstanceService]
+        // },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptorService,
