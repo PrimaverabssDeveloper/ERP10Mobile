@@ -75,5 +75,16 @@ export class NativeStorageService implements StorageService {
         await this.nativeStorage.remove(key);
     }
 
+    /**
+     * Clear all stored values.
+     *
+     * @abstract
+     * @returns {Promise<any>}
+     * @memberof StorageService
+     */
+    public async clear(): Promise<any> {
+        await this.nativeStorage.clear();
+    }
+
     // #endregion
 }

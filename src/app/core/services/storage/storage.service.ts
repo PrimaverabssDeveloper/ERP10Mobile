@@ -42,4 +42,13 @@ export abstract class StorageService {
      * @memberof StorageService
      */
     public abstract async removeData(key: string, instanceDependent?: boolean): Promise<any>;
+
+    /**
+     * Clear all stored values.
+     *
+     * @abstract
+     * @returns {Promise<any>}
+     * @memberof StorageService
+     */
+    public abstract async clear(): Promise<any>;
 }

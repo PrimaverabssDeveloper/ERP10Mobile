@@ -94,5 +94,21 @@ export class LocalStorageService implements StorageService {
         });
     }
 
+    /**
+     * Clear all stored values.
+     *
+     * @abstract
+     * @returns {Promise<any>}
+     * @memberof StorageService
+     */
+    public async clear(): Promise<any> {
+        return new Promise((result, reject) => {
+
+            localStorage.clear();
+
+            result();
+        });
+    }
+
     // #endregion
 }
