@@ -8,7 +8,7 @@ export class CustomersService {
 
     private static readonly RECENT_VIEWED_CUSTOMERS_STORAGE_KEY = 'RECENT_VIEWD_CUSTOMERS_STORAGE_KEY';
 
-    private static readonly SEARCH_CUSTOMERS = (searchTerm) => `customers?searchSrt=${searchTerm}`;
+    private static readonly SEARCH_CUSTOMERS = (searchTerm) => `customers?searchStr=${searchTerm}`;
 
     constructor(
         protected storageService: CustomersStorageService,
