@@ -192,17 +192,47 @@ export class HrHomePage extends PageBase implements OnInit {
 
     private buildCharts(years: YearSalary[]) {
 
+        // build years chart data
+        const yearRes = this.buildYearsSalariesChartData(years);
+        this.yearlyChartData = yearRes.chartData;
+        this.currentYearSalary = yearRes.currentYearSalary;
+
+        // build monthly salary chart data
+        const monthlyRes = this.buildMonthlySalariesChartData(years);
+        this.monthlyChartsData = monthlyRes.chartData;
+        this.currentMonthSalary = monthlyRes.currentMonthSalary;
+    }
+
+    private buildYearsSalariesChartData(years: YearSalary[]): { chartData: SalaryChartColumnData[], currentYearSalary: YearSalary } {
         // build year salary chart data
-        this.yearlyChartData = years.map(y => ({
+        const yearlyChartData = years.map(y => ({
             label: `${y.year}`,
             grossValue: y.grossTotal.value,
             netValue: y.netTotal.value,
-            source: y
+            source: y,
+            selected: false
         }));
 
-        // build monthly salary chart data
+        // make the current year selected
+        const currentYearSalary = yearlyChartData[yearlyChartData.length - 1];
+        currentYearSalary.selected = true;
+
+        return {
+            chartData: yearlyChartData,
+            currentYearSalary: currentYearSalary.source as YearSalary
+        };
+    }
+
+    private buildMonthlySalariesChartData(years: YearSalary[]): {
+        chartData: {
+            year: number;
+            months: any[];
+        }[],
+        currentMonthSalary: MonthSalary
+    } {
+
         const monthsExtractor = (months: MonthSalary[]) => {
-            const monthdsData = [];
+            const monthdsData: SalaryChartColumnData[] = [];
 
             for (let i = 0; i < 12; i++) {
                 const month = months.find(m => m.month === i + 1);
@@ -226,10 +256,21 @@ export class HrHomePage extends PageBase implements OnInit {
             return monthdsData;
         };
 
-        this.monthlyChartsData = years.map(y => ({
+        const monthlyChartsData = years.map(y => ({
             year: y.year,
             months: monthsExtractor(y.months)
         }));
+
+        // make the last month, with value, of the last year selected
+        const currentYear = monthlyChartsData[monthlyChartsData.length - 1];
+        const monthsWithValue = currentYear.months.filter(m => m.source);
+        const currentMonth = monthsWithValue[monthsWithValue.length - 1];
+        currentMonth.selected = true;
+
+        return {
+            chartData: monthlyChartsData,
+            currentMonthSalary: currentMonth.source as MonthSalary
+        };
     }
 }
 

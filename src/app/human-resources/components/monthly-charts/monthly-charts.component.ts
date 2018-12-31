@@ -29,12 +29,7 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
 
     @Input() set data(data: {
         year: number,
-        months: {
-            label: string,
-            grossValue: number,
-            netValue: number,
-            source: YearSalary | MonthSalary
-        }[]
+        months: SalaryChartColumnData[]
     }[]) {
         if (data) {
             this.monthsData = data;

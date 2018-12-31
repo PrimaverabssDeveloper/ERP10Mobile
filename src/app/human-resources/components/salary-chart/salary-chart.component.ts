@@ -35,6 +35,7 @@ export class SalaryChartComponent {
         const labels = data.map(d => d.label);
         const netValues = data.map(d => d.netValue);
         const grossValues = data.map(d => d.grossValue - d.netValue);
+        const selectedColumnIndex = data.indexOf(data.find(d => d.selected));
 
         // create arrays with colors for each value
         const grossValuesBackgrounds: string[] = [];
@@ -48,8 +49,10 @@ export class SalaryChartComponent {
         }
 
         // highlight the last one
-        grossValuesBackgrounds[grossValuesBackgrounds.length - 1] = this.grossValueHighlightAccentColor;
-        netValuesBackgrounds[netValuesBackgrounds.length - 1] = this.netValueHighlightAccentColor;
+        if (selectedColumnIndex >= 0) {
+            grossValuesBackgrounds[selectedColumnIndex] = this.grossValueHighlightAccentColor;
+            netValuesBackgrounds[selectedColumnIndex] = this.netValueHighlightAccentColor;
+        }
 
         // create the chart
         this.chart = new Chart(this.chartCanvas.nativeElement, {
@@ -166,4 +169,12 @@ export interface SalaryChartColumnData {
      * @memberof SalaryChartDataSet
      */
     source: YearSalary | MonthSalary;
+
+    /**
+     * Define if the column is selected.
+     *
+     * @type {boolean}
+     * @memberof SalaryChartColumnData
+     */
+    selected?: boolean;
 }
