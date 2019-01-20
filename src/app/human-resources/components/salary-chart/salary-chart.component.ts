@@ -9,18 +9,18 @@ import { MonthSalary, YearSalary } from '../../models';
 })
 
 export class SalaryChartComponent {
-
+    private readonly yAxisNumberOfSteps = 4;
     private readonly grossValueAccentColor = '#B8B8B8';
     private readonly netValueAccentColor = '#FF7651';
     private readonly grossValueHighlightAccentColor = '#8A8A8A';
     private readonly netValueHighlightAccentColor = '#BF583D';
 
     private chart: any;
-    private chartData: SalaryChartColumnData[];
+    private chartData: SalaryChartData;
 
     @ViewChild('chartCanvas') chartCanvas: ElementRef;
 
-    @Input() set data(data: SalaryChartColumnData[]) {
+    @Input() set data(data: SalaryChartData) {
         if (data) {
             this.chartData = data;
             this.buildChart(data);
@@ -29,13 +29,16 @@ export class SalaryChartComponent {
 
     @Output() selected = new EventEmitter();
 
-    private buildChart(data: SalaryChartColumnData[]) {
+    constructor() {
+    }
+
+    private buildChart(data: SalaryChartData) {
 
         // break the data into the correct arrays to build the datasets
-        const labels = data.map(d => d.label);
-        const netValues = data.map(d => d.netValue);
-        const grossValues = data.map(d => d.grossValue - d.netValue);
-        const selectedColumnIndex = data.indexOf(data.find(d => d.selected));
+        const labels = data.columns.map(c => c.label);
+        const netValues = data.columns.map(c => c.netValue);
+        const grossValues = data.columns.map(c => c.grossValue - c.netValue);
+        const selectedColumnIndex = data.columns.indexOf(data.columns.find(d => d.selected));
 
         // create arrays with colors for each value
         const grossValuesBackgrounds: string[] = [];
@@ -89,54 +92,79 @@ export class SalaryChartComponent {
                     }],
                     yAxes: [{
                         stacked: true,
-                        display: true,
+                        display: false,
                         gridLines: {
                             display: true
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            maxTicksLimit: 4,
+                            max: this.chartData.verticalAxisData.maxValue
                         }
                     }]
                 },
-                onClick: (ev) => {
-
-                    const element = this.chart.getElementAtEvent(ev);
-                    if (!element || element.length === 0) {
-                        return;
-                    }
-
-                    // get the index of the clicked bar
-                    const index = element[0]._index;
-
-                    // get the colors arrays from the dataset
-                    const nvBackgrounds = this.chart.data.datasets[0].backgroundColor;
-                    const gvBackgrounds = this.chart.data.datasets[1].backgroundColor;
-
-                    // update the bar color based on the clicked bar index
-                    for (let i = 0; i < nvBackgrounds.length; i++) {
-                        nvBackgrounds[i] = i === index ? this.netValueHighlightAccentColor : this.netValueAccentColor;
-                    }
-
-                    for (let i = 0; i < gvBackgrounds.length; i++) {
-                        gvBackgrounds[i] = i === index ? this.grossValueHighlightAccentColor : this.grossValueAccentColor;
-                    }
-
-                    // update the chart to apply the new color
-                    this.chart.update();
-
-                    // select the correct source and fire the select event
-                    const selectedSource = this.chartData[index].source;
-                    this.selected.emit(selectedSource);
-                }
+                onClick: (ev) => this.onChartClicked(ev)
             }
         });
     }
+
+    onChartClicked(ev: any) {
+
+        const element = this.chart.getElementAtEvent(ev);
+        if (!element || element.length === 0) {
+            return;
+        }
+
+        // get the index of the clicked bar
+        const index = element[0]._index;
+
+        // get the colors arrays from the dataset
+        const nvBackgrounds = this.chart.data.datasets[0].backgroundColor;
+        const gvBackgrounds = this.chart.data.datasets[1].backgroundColor;
+
+        // update the bar color based on the clicked bar index
+        for (let i = 0; i < nvBackgrounds.length; i++) {
+            nvBackgrounds[i] = i === index ? this.netValueHighlightAccentColor : this.netValueAccentColor;
+        }
+
+        for (let i = 0; i < gvBackgrounds.length; i++) {
+            gvBackgrounds[i] = i === index ? this.grossValueHighlightAccentColor : this.grossValueAccentColor;
+        }
+
+        // update the chart to apply the new color
+        this.chart.update();
+
+        // select the correct source and fire the select event
+        const selectedSource = this.chartData.columns[index].source;
+        this.selected.emit(selectedSource);
+    }
+}
+
+/**
+ * Data to build a salary chart.
+ *
+ * @export
+ * @interface SalaryChartData
+ */
+export interface SalaryChartData {
+    verticalAxisData: SalaryChartVerticalAxis;
+    columns: SalaryChartDataColumn[];
+}
+
+export interface SalaryChartVerticalAxis {
+    scaleStep: number;
+    scaleUnitPrefix: string;
+    currency: string;
+    maxValue: number;
 }
 
 /**
  * Defines the dataset for each salary chart column.
  *
  * @export
- * @interface SalaryChartColumnData
+ * @interface SalaryChartDataColumn
  */
-export interface SalaryChartColumnData {
+export interface SalaryChartDataColumn {
 
     /**
      * The column label.

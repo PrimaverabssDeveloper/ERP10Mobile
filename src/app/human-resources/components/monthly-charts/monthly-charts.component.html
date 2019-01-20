@@ -1,11 +1,15 @@
 <div class="monthly-charts" [ngClass]="{dragging: hasDragStarted}">
     <div #chartsWrapper class="charts-wrapper">
+        <div class="chart-scale">
+            <hr-chart-vertical-axis [data]="currentChartVerticalAxisData"></hr-chart-vertical-axis>
+        </div>
         <div class="charts" [ngStyle]="getChartsStyle()">
             <div class="chart" *ngFor="let monthData of monthsData" [ngStyle]="getChartStyle()">
-                <hr-salary-chart [data]="monthData.months" (selected)="onSelectedMonthSalaryChange($event)" ></hr-salary-chart>
+                <hr-salary-chart [data]="monthData.monthsChartData" (selected)="onSelectedMonthSalaryChange($event)" ></hr-salary-chart>
             </div>
         </div>
     </div>
+
     <div #yearsWrapper class="years-wrapper">
         <div class="years" [ngStyle]="getYearsStyle()">
             <div class="year" *ngFor="let year of years; let i = index" [ngStyle]="getYearStyle(i)" (click)="jumpToYearAction(i)">

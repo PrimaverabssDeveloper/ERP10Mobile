@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, HostListener, ElementRef, ViewChild, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { YearSalary, MonthSalary } from '../../models';
-import { SalaryChartColumnData } from '../salary-chart/salary-chart.component';
+import { SalaryChartDataColumn, SalaryChartData, SalaryChartVerticalAxis } from '../salary-chart/salary-chart.component';
 
 @Component({
     selector: 'hr-monthly-charts',
@@ -17,22 +17,33 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
     private lastTouchPointX: number;
     private translationOffset: number;
 
+    private currentYear: {
+        year: number,
+        monthsChartData: SalaryChartData
+    };
+
     years: string[];
 
     monthsData: {
         year: number,
-        months: SalaryChartColumnData[]
+        monthsChartData: SalaryChartData
     }[];
+
+    get currentChartVerticalAxisData(): SalaryChartVerticalAxis {
+        return this.currentYear ? this.currentYear.monthsChartData.verticalAxisData : null;
+    }
 
     @ViewChild('chartsWrapper') chartsElem: ElementRef;
     @ViewChild('yearsWrapper') yearsElem: ElementRef;
 
     @Input() set data(data: {
         year: number,
-        months: SalaryChartColumnData[]
+        monthsChartData: SalaryChartData
     }[]) {
         if (data) {
             this.monthsData = data;
+            this.currentYear = data[data.length - 1];
+            // this.currentChartVerticalAxisData = this.currentYear.monthsChartData.verticalAxisData;
             this.buildYears();
         }
     }
@@ -112,13 +123,14 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
         const diff = Math.abs(yearOffset - this.translationOffset);
 
         if (diff < this.chartsWrapperSize.width * .5) {
-            console.log(diff + '>' + yearOffset + ' > ' + ((diff / this.chartsWrapperSize.width * .2)));
             return {
+                'opacity': `${1 - .5 * (diff / (this.chartsWrapperSize.width * .5))}`,
                 'transform': `scale(${1.3 - .3 * (diff / (this.chartsWrapperSize.width * .5))})`,
                 'width': `${this.chartsWrapperSize ? this.chartsWrapperSize.width * .2 : 0}px`
             };
         } else {
             return {
+                'opacity': '.5',
                 'width': `${this.chartsWrapperSize ? this.chartsWrapperSize.width * .2 : 0}px`
             };
         }
@@ -126,6 +138,7 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
 
     jumpToYearAction(yearIndex: number) {
         this.translationOffset = (this.years.length - 1 - yearIndex)  * this.chartsWrapperSize.width;
+        this.currentYear = this.monthsData[yearIndex];
     }
 
     onChartsTouchStart(e: TouchEvent) {
@@ -144,8 +157,9 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
     onChartsTouchEnd(e: TouchEvent) {
         this.hasDragStarted = false;
         this.lastTouchPointX = null;
-        const index = Math.round(this.translationOffset / this.chartsWrapperSize.width);
-        this.translationOffset = index * this.chartsWrapperSize.width;
+        const yearIndex = Math.round(this.translationOffset / this.chartsWrapperSize.width);
+        this.translationOffset = yearIndex * this.chartsWrapperSize.width;
+        this.currentYear = this.monthsData[yearIndex];
     }
 
     onYearsTouchStart(e: TouchEvent) {
@@ -171,7 +185,6 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
     private buildYears() {
         this.years = this.monthsData.map(m => `${m.year}`);
     }
-
 
     // @HostListener('touchmove', ['$event'])
     // onMouseMove(e: TouchEvent) {

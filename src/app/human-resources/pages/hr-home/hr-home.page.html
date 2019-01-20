@@ -76,7 +76,7 @@
         <div class="chart-container">
             <!-- yearly chart -->
             <div class="chart" *ngIf="yearlyChartData" [ngClass]="{'visible' : salaryPeriodState === 'yearly' }">
-                <hr-salary-chart [data]="yearlyChartData" (selected)="onSelectedYearSalaryChange($event)" ></hr-salary-chart>
+                <hr-yearly-chart [data]="yearlyChartData" (selected)="onSelectedYearSalaryChange($event)" ></hr-yearly-chart>
             </div>
             <!-- monthly chart -->
             <div class="chart" [ngClass]="{'visible' : salaryPeriodState === 'monthly' }">

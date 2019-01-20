@@ -9,6 +9,22 @@
             "MENU_SESSION_LOGOUT" : "Logout",
             "ALERT_LOGOUT_HEADER": "Logout",
             "ALERT_LOGOUT_MESSAGE": "Are you sure you want to log out?"
+        },
+        "DATES": {
+            "MONTHS": {
+                "1": "January",
+                "2": "February",
+                "3": "March",
+                "4": "April",
+                "5": "May",
+                "6": "June",
+                "7": "July",
+                "8": "August",
+                "9": "September",
+                "10": "October",
+                "11": "November",
+                "12": "December"
+            }
         }
     },
     "SHELL": {

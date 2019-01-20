@@ -1,0 +1,17 @@
+<div class="chart-scale" [ngClass]="{'active': isScaleVisible}">
+    <div class="scale-unit">
+        {{scaleUnitPrefix}} ({{currency | currencySymbol}})
+    </div>
+    <div class="scale-line scale-line-one">
+        <span>{{scaleValue(scaleStep, 3)}}</span>
+    </div>
+    <div class="scale-line scale-line-two">
+        <span>{{scaleValue(scaleStep, 2)}}</span>
+    </div>
+    <div class="scale-line scale-line-three">
+        <span>{{scaleValue(scaleStep, 1)}}</span>
+    </div>
+    <div class="scale-line scale-line-four">
+        <span>{{scaleValue(scaleStep, 0)}}</span>
+    </div>
+</div>

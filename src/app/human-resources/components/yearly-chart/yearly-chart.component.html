@@ -1,0 +1,7 @@
+
+<div class="yearly-charts">
+    <div class="chart" *ngIf="data">
+        <hr-chart-vertical-axis [data]="data.verticalAxisData"></hr-chart-vertical-axis>
+        <hr-salary-chart [data]="data" (selected)="onSelectedYearChange($event)"></hr-salary-chart>
+    </div>
+</div>

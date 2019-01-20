@@ -18,8 +18,8 @@ $hr-charts-drawer-height: 400px;
 $hr-charts-drawer-handle-background-color: rgb(246, 247, 249);
 $hr-charts-drawer-handle-height: 40px;
 $hr-charts-drawer-handle-box-shadow: 0 -3px 3px -3px black;
-$hr-salary-chart-period-selector-height: 30px;
-$hr-chart-conteiner-height: $hr-charts-drawer-height - $hr-charts-drawer-handle-height - $hr-salary-chart-period-selector-height - 30px;
+$hr-salary-chart-period-selector-height: 50px;
+$hr-chart-conteiner-height: $hr-charts-drawer-height - $hr-charts-drawer-handle-height - $hr-salary-chart-period-selector-height;
 
 
 .navbar-title {
@@ -88,6 +88,7 @@ $hr-chart-conteiner-height: $hr-charts-drawer-height - $hr-charts-drawer-handle-
     }
 
     .salary-extra-information-section {
+        padding: 10px;
         border-top: $hr-salary-extra-information-section-border-top;
 
         .section-label {
@@ -95,7 +96,7 @@ $hr-chart-conteiner-height: $hr-charts-drawer-height - $hr-charts-drawer-handle-
         }
 
         .extra-information {
-            padding-left: 20px;
+            padding-left: 10px;
             margin: 0;
 
             .extra-information-label {
@@ -128,7 +129,7 @@ $hr-chart-conteiner-height: $hr-charts-drawer-height - $hr-charts-drawer-handle-
     }
 
     .salary-charts-drawer-handle {
-        height: 40px;
+        height: $hr-charts-drawer-handle-height;
         background: $hr-charts-drawer-handle-background-color;
         box-shadow: $hr-charts-drawer-handle-box-shadow;
         width: 100%;
@@ -147,8 +148,8 @@ $hr-chart-conteiner-height: $hr-charts-drawer-height - $hr-charts-drawer-handle-
 
         .period {
             float: right;
-            font-size: 11pt;
-            margin: 10px 15px 10px 0;
+            font-size: 10pt;
+            margin: 10px 15px 10px 5px;
             font-weight: bold;
             color: rgb(184, 184, 184);  
 

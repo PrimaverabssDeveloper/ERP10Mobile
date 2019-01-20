@@ -3,7 +3,8 @@ import { Slides, LoadingController } from '@ionic/angular';
 import { PageBase } from '../../../shared/pages';
 import { HumanResourcesServiceProvider, HumanResourcesService } from '../../services';
 import { Salaries, YearSalary, MonthSalary, BaseSalary, Value } from '../../models';
-import { SalaryChartColumnData } from '../../components';
+import { SalaryChartDataColumn, SalaryChartData, SalaryChartVerticalAxis } from '../../components';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     templateUrl: './hr-home.page.html',
@@ -12,6 +13,8 @@ import { SalaryChartColumnData } from '../../components';
 })
 
 export class HrHomePage extends PageBase implements OnInit {
+
+    private localizedMonthsNames: string[] = [];
 
     @ViewChild('monthlyChartsSlide') monthlyChartsSlide: Slides;
 
@@ -25,11 +28,11 @@ export class HrHomePage extends PageBase implements OnInit {
     salaryPortions: MoneyValue[];
     salaryExtraInformations: SalaryExtraInformations[];
 
-    yearlyChartData: SalaryChartColumnData[];
+    yearlyChartData: SalaryChartData;
 
     monthlyChartsData: {
         year: number,
-        months: SalaryChartColumnData[]
+        monthsChartData: SalaryChartData
     }[];
 
     currentYearSalary: YearSalary;
@@ -37,7 +40,8 @@ export class HrHomePage extends PageBase implements OnInit {
 
     constructor(
         public loadingController: LoadingController,
-        private humanResourcesService: HumanResourcesService
+        private humanResourcesService: HumanResourcesService,
+        private translate: TranslateService
     ) {
 
         super(loadingController);
@@ -55,18 +59,20 @@ export class HrHomePage extends PageBase implements OnInit {
     async ngOnInit() {
         await this.showLoading();
 
-        try {
-            this.salaries = await this.humanResourcesService.getSalaries();
-        } catch (error) {
-            alert(error);
+        this.localizedMonthsNames = await this.getAllLocalizedMonthsNamesAsync();
+
+        this.salaries = await this.getSalariesAsync();
+        if (!this.salaries) {
+            alert('TBD: Nao foi possivel obter os salários. tente mais tarde');
         }
 
-        this.buildCharts(this.salaries.data);
+        this.buildCharts(this.salaries, this.localizedMonthsNames);
 
         this.currentYearSalary = this.salaries.data[this.salaries.data.length - 1];
         this.currentMonthSalary = this.currentYearSalary.months[this.currentYearSalary.months.length - 1];
 
-        this.updateView();
+        this.updateView(this.salaries, this.localizedMonthsNames);
+
         this.hideLoading();
     }
 
@@ -80,27 +86,27 @@ export class HrHomePage extends PageBase implements OnInit {
 
     changeSalaryPeriodToMonthlyAction() {
         this.salaryPeriodState = 'monthly';
-        this.updateView();
+        this.updateView(this.salaries, this.localizedMonthsNames);
     }
 
     changeSalaryPeriodToYearlyAction() {
         this.salaryPeriodState = 'yearly';
-        this.updateView();
+        this.updateView(this.salaries, this.localizedMonthsNames);
     }
 
     onSelectedYearSalaryChange(yearSalary: YearSalary) {
         this.currentYearSalary = yearSalary;
-        this.updateView();
+        this.updateView(this.salaries, this.localizedMonthsNames);
     }
 
     onSelectedMonthSalaryChange(monthSalary: MonthSalary) {
         this.currentMonthSalary = monthSalary;
-        this.updateView();
+        this.updateView(this.salaries, this.localizedMonthsNames);
     }
 
-    private updateView() {
+    private updateView(salaries: Salaries, localizedMonthsNames: string[]) {
 
-        const currency = this.salaries.currency;
+        const currency = salaries.currency;
         let salary: BaseSalary;
         let netValue: Value;
         let grossValue: Value;
@@ -118,7 +124,8 @@ export class HrHomePage extends PageBase implements OnInit {
             salary = this.currentMonthSalary;
             netValue = this.currentMonthSalary.netValue;
             grossValue = this.currentMonthSalary.grossValue;
-            this.salaryDate = `${this.currentMonthSalary.month} - ${this.currentMonthSalary.year}`;
+            const localizedMonthName = localizedMonthsNames[this.currentMonthSalary.month - 1]; // months start at 1 but arrais start at 0
+            this.salaryDate = `${localizedMonthName} ${this.currentMonthSalary.year}`;
         }
 
         // net earnings
@@ -190,22 +197,23 @@ export class HrHomePage extends PageBase implements OnInit {
         this.salaryExtraInformations = [paymentMethods, compensationBreakdown];
     }
 
-    private buildCharts(years: YearSalary[]) {
+    private buildCharts(salaries: Salaries, localizedMonthsNames: string[]) {
 
         // build years chart data
-        const yearRes = this.buildYearsSalariesChartData(years);
+        const yearRes = this.buildYearsSalariesChartData(salaries);
         this.yearlyChartData = yearRes.chartData;
         this.currentYearSalary = yearRes.currentYearSalary;
 
         // build monthly salary chart data
-        const monthlyRes = this.buildMonthlySalariesChartData(years);
+        const monthlyRes = this.buildMonthlySalariesChartData(salaries, localizedMonthsNames);
         this.monthlyChartsData = monthlyRes.chartData;
         this.currentMonthSalary = monthlyRes.currentMonthSalary;
     }
 
-    private buildYearsSalariesChartData(years: YearSalary[]): { chartData: SalaryChartColumnData[], currentYearSalary: YearSalary } {
+    private buildYearsSalariesChartData(salaries: Salaries): { chartData: SalaryChartData, currentYearSalary: YearSalary } {
+
         // build year salary chart data
-        const yearlyChartData = years.map(y => ({
+        const columns = salaries.data.map(y => ({
             label: `${y.year}`,
             grossValue: y.grossTotal.value,
             netValue: y.netTotal.value,
@@ -214,38 +222,44 @@ export class HrHomePage extends PageBase implements OnInit {
         }));
 
         // make the current year selected
-        const currentYearSalary = yearlyChartData[yearlyChartData.length - 1];
+        const currentYearSalary = columns[columns.length - 1];
         currentYearSalary.selected = true;
 
         return {
-            chartData: yearlyChartData,
+            chartData: {
+                columns: columns,
+                verticalAxisData: this.buildSalaryChartVerticalAxis(salaries.currency, columns)
+            },
             currentYearSalary: currentYearSalary.source as YearSalary
         };
     }
 
-    private buildMonthlySalariesChartData(years: YearSalary[]): {
+    private buildMonthlySalariesChartData(salaries: Salaries, localizedMonthsNames: string[]): {
         chartData: {
             year: number;
-            months: any[];
+            monthsChartData: SalaryChartData;
         }[],
         currentMonthSalary: MonthSalary
     } {
 
-        const monthsExtractor = (months: MonthSalary[]) => {
-            const monthdsData: SalaryChartColumnData[] = [];
+        const monthsExtractor = (months: MonthSalary[], year: number): SalaryChartData => {
+            const columns: SalaryChartDataColumn[] = [];
 
             for (let i = 0; i < 12; i++) {
                 const month = months.find(m => m.month === i + 1);
+                const localizedMonthName = localizedMonthsNames[i].toLocaleLowerCase().substring(0, 3);
+
                 if (month) {
-                    monthdsData.push({
-                        label: `${month.month}`,
+                    month.year = year;
+                    columns.push({
+                        label: localizedMonthName,
                         grossValue: month.grossValue.value,
                         netValue: month.netValue.value,
                         source: month
                     });
                 } else {
-                    monthdsData.push({
-                        label: `${i + 1}`,
+                    columns.push({
+                        label: localizedMonthName,
                         grossValue: 0,
                         netValue: 0,
                         source: null
@@ -253,17 +267,20 @@ export class HrHomePage extends PageBase implements OnInit {
                 }
             }
 
-            return monthdsData;
+            return {
+                columns: columns,
+                verticalAxisData: this.buildSalaryChartVerticalAxis(salaries.currency, columns)
+            };
         };
 
-        const monthlyChartsData = years.map(y => ({
+        const monthlyChartsData = salaries.data.map(y => ({
             year: y.year,
-            months: monthsExtractor(y.months)
+            monthsChartData: monthsExtractor(y.months, y.year)
         }));
 
         // make the last month, with value, of the last year selected
         const currentYear = monthlyChartsData[monthlyChartsData.length - 1];
-        const monthsWithValue = currentYear.months.filter(m => m.source);
+        const monthsWithValue = currentYear.monthsChartData.columns.filter(m => m.source);
         const currentMonth = monthsWithValue[monthsWithValue.length - 1];
         currentMonth.selected = true;
 
@@ -271,6 +288,176 @@ export class HrHomePage extends PageBase implements OnInit {
             chartData: monthlyChartsData,
             currentMonthSalary: currentMonth.source as MonthSalary
         };
+    }
+
+
+    private buildSalaryChartVerticalAxis(currency: string, columns: SalaryChartDataColumn[]): SalaryChartVerticalAxis {
+
+        // get the max value for the current chart
+        const maxValue = columns.map(x => x.grossValue).sort().reverse()[0];
+
+        const yAxisNumberOfSteps = 4;
+        const yAxisMaxValues = this.getPossibleMaximumYValues(yAxisNumberOfSteps);
+        const yAxisMaxValueStepAndUnit = this.calcYAxisMaxValueStepAndUnit(maxValue, yAxisNumberOfSteps, yAxisMaxValues);
+        const yAxisScaleStep = yAxisMaxValueStepAndUnit.yAxisScaleStep;
+        const yAxisScaleUnitPrefix = yAxisMaxValueStepAndUnit.yAxisScaleUnitPrefix;
+        const yAxisMaxValue = yAxisMaxValueStepAndUnit.yAxisMaxValue;
+
+        return {
+            scaleStep: yAxisScaleStep,
+            scaleUnitPrefix: yAxisScaleUnitPrefix,
+            maxValue: yAxisMaxValue,
+            currency: currency
+        };
+    }
+
+    private getPossibleMaximumYValues(yAxisNumberOfSteps: number): number[] {
+
+        let baseTicks = yAxisNumberOfSteps;
+        let baseLcm = this.lcm(yAxisNumberOfSteps, 10);
+
+        while (baseTicks > 10) {
+            baseTicks /= 10;
+            baseLcm /= 10;
+        }
+
+        let limitTicks = baseTicks * 10;
+
+        let limitLcm = 1;
+        while (limitLcm < limitTicks) {
+            limitLcm *= 10;
+        }
+
+
+        let mode = true;
+        let value = baseTicks;
+        const values: number[] = [];
+
+        while (value < 10000) {
+
+            if (value < 10 && value + baseTicks < 10) {
+                value += baseTicks;
+                continue;
+            }
+
+            if (mode) {
+
+                value += baseTicks;
+                if (value >= limitTicks) {
+                    mode = false;
+                    baseTicks *= 10;
+                    limitTicks *= 10;
+                }
+
+            } else {
+
+                value += baseLcm;
+                if (value >= limitLcm && (value % baseTicks === 0)) {
+                    mode = true;
+                    baseLcm *= 10;
+                    limitLcm *= 10;
+                }
+
+            }
+
+            if (value < 10000) {
+                const dividend = value;
+                const divisor = 10;
+                values.push(dividend / divisor);
+            }
+        }
+
+        return values;
+    }
+
+    private calcYAxisMaxValueStepAndUnit(maximumValue: number, yAxisNumberOfSteps: number, yAxisMaxValues: number[])
+        : { yAxisMaxValue: number, yAxisScaleStep: number, yAxisScaleUnitPrefix: string } {
+
+        let divider = 1;
+        const thousandDecimal = 1000;
+
+        while (!((maximumValue / divider) < thousandDecimal)) {
+            divider *= 1000;
+        }
+
+        const baseMaximum = maximumValue / divider;
+
+        let scaleMaximum: number = null;
+
+        for (const possibleMaximum of yAxisMaxValues) {
+            if (baseMaximum < possibleMaximum) {
+                scaleMaximum = possibleMaximum;
+                break;
+            }
+        }
+
+        if (!scaleMaximum) {
+            scaleMaximum = yAxisMaxValues[0];
+            divider *= 1000;
+        }
+
+        let prefix = 'T';
+
+        switch (divider) {
+            case 1: prefix = ''; break;
+            case 1000: prefix = 'K'; break;
+            case 1000000: prefix = 'M'; break;
+            case 1000000000: prefix = 'B'; break;
+        }
+
+        const yMaximumValue = scaleMaximum * divider;
+        const yScaleStep = scaleMaximum / yAxisNumberOfSteps;
+
+        return {
+            yAxisMaxValue: yMaximumValue,
+            yAxisScaleStep: yScaleStep,
+            yAxisScaleUnitPrefix: prefix
+        };
+    }
+
+    private lcm(x: number, y: number) {
+        const l = Math.min(x, y);
+        const h = Math.max(x, y);
+        const m = l * h;
+
+        for (let i = h; i < m; i += h) {
+            if (i % l === 0) {
+                return i;
+            }
+        }
+
+        return m;
+    }
+
+    private async getSalariesAsync(): Promise<Salaries> {
+        let salaries: Salaries;
+
+        try {
+            salaries = await this.humanResourcesService.getSalaries();
+        } catch (error) {
+            console.log(error);
+        }
+
+        return salaries;
+    }
+
+    private async getAllLocalizedMonthsNamesAsync(): Promise<string[]> {
+
+        const localizedMonthsNames: string[] = [];
+
+        for (let i = 1; i <= 12; i++) {
+            let monthResource = '';
+
+            try {
+                monthResource = await this.translate.get(`SHARED.DATES.MONTHS.${i}`).toPromise();
+            } catch (error) {
+                console.log(error);
+            }
+
+            localizedMonthsNames.push(monthResource);
+        }
+
+        return localizedMonthsNames;
     }
 }
 

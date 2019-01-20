@@ -1,7 +1,10 @@
+
+$margin-left: 20px;
+
 .salary-chart {
-    width: 100%;
+    width: calc(100% - #{$margin-left});
     height: 100%;
     position: absolute;
     top:0;
-    left: 0;
+    left: $margin-left;
 }

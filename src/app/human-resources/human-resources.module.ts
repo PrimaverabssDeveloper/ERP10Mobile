@@ -10,12 +10,14 @@ import { HR_ROUTING } from './human-resources.routing';
 import { SharedModule } from '../shared/shared.module';
 import { ModulesService } from '../core/services';
 import { ModuleDefinition } from '../core/entities';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
+        TranslateModule,
         SharedModule,
         HR_ROUTING
     ],

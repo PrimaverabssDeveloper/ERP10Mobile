@@ -9,6 +9,22 @@
             "MENU_SESSION_LOGOUT" : "Logout",
             "ALERT_LOGOUT_HEADER": "Logout",
             "ALERT_LOGOUT_MESSAGE": "Pretende mesmo sair da aplicação?"
+        },
+        "DATES": {
+            "MONTHS": {
+                "1": "Janeiro",
+                "2": "Fevreiro",
+                "3": "Março",
+                "4": "Abril",
+                "5": "Maio",
+                "6": "Junho",
+                "7": "Julho",
+                "8": "Agosto",
+                "9": "Setembro",
+                "10": "Outubro",
+                "11": "Novembro",
+                "12": "Dezembro"
+            }
         }
     },
     "SHELL": {
