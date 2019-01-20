@@ -25,6 +25,13 @@
                 </div>
             </ion-col>
         </ion-row>
+        <ion-row>
+            <ion-col>
+                <div class="salary-status">
+                    {{salaryStatus}}
+                </div>
+            </ion-col>
+        </ion-row>
         <!-- Salary Portions -->
         <ion-row>
             <ion-col class="salary-portion" *ngFor="let salaryPortion of salaryPortions" size="6" [ngClass]="{'show-money': salaryValuesState === 'money', 'show-percentage': salaryValuesState === 'percentage'}">

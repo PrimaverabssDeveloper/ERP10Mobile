@@ -5,6 +5,7 @@ import { HumanResourcesServiceProvider, HumanResourcesService } from '../../serv
 import { Salaries, YearSalary, MonthSalary, BaseSalary, Value } from '../../models';
 import { SalaryChartDataColumn, SalaryChartData, SalaryChartVerticalAxis } from '../../components';
 import { TranslateService } from '@ngx-translate/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
     templateUrl: './hr-home.page.html',
@@ -25,6 +26,7 @@ export class HrHomePage extends PageBase implements OnInit {
     salaries: Salaries;
 
     salaryDate: string;
+    salaryStatus: string;
     salaryPortions: MoneyValue[];
     salaryExtraInformations: SalaryExtraInformations[];
 
@@ -41,7 +43,8 @@ export class HrHomePage extends PageBase implements OnInit {
     constructor(
         public loadingController: LoadingController,
         private humanResourcesService: HumanResourcesService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private datePipe: DatePipe
     ) {
 
         super(loadingController);
@@ -119,13 +122,38 @@ export class HrHomePage extends PageBase implements OnInit {
             netValue = this.currentYearSalary.netTotal;
             grossValue = this.currentYearSalary.grossTotal;
             this.salaryDate = `${this.currentYearSalary.year}`;
-        } else {
 
+            // update the status
+            this.translate
+                .get('HUMAN_RESOURCES.HR_PAGE.YEAR_STATUS')
+                .toPromise()
+                .then(res => {
+                    this.salaryStatus = res.replace('{year}', `${this.currentYearSalary.year}`);
+                });
+
+        } else {
             salary = this.currentMonthSalary;
             netValue = this.currentMonthSalary.netValue;
             grossValue = this.currentMonthSalary.grossValue;
             const localizedMonthName = localizedMonthsNames[this.currentMonthSalary.month - 1]; // months start at 1 but arrais start at 0
             this.salaryDate = `${localizedMonthName} ${this.currentMonthSalary.year}`;
+
+            // the salary payment has been issued
+            if (this.currentMonthSalary.paymentMethods && this.currentMonthSalary.paymentMethods.length > 0) {
+                this.translate
+                    .get('HUMAN_RESOURCES.HR_PAGE.MONTH_STATUS_PAYMENT_ISSUED')
+                    .toPromise()
+                    .then(res => {
+                        this.salaryStatus = res;
+                    });
+            } else {
+                this.translate
+                    .get('HUMAN_RESOURCES.HR_PAGE.MONTH_STATUS_SALARY_PROCESSED')
+                    .toPromise()
+                    .then(res => {
+                        this.salaryStatus = res.replace('{date}', this.datePipe.transform(this.currentMonthSalary.paymentEmitDate));
+                    });
+            }
         }
 
         // net earnings
