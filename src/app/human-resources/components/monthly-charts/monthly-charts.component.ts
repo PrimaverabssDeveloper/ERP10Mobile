@@ -157,7 +157,13 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
     onChartsTouchEnd(e: TouchEvent) {
         this.hasDragStarted = false;
         this.lastTouchPointX = null;
-        const yearIndex = Math.round(this.translationOffset / this.chartsWrapperSize.width);
+        let yearIndex = Math.round(this.translationOffset / this.chartsWrapperSize.width);
+
+        // verify is it has scrolled more than it was suposed
+        if (yearIndex >= this.monthsData.length) {
+            yearIndex = this.monthsData.length - 1;
+        }
+
         this.translationOffset = yearIndex * this.chartsWrapperSize.width;
         this.currentYear = this.monthsData[yearIndex];
     }
