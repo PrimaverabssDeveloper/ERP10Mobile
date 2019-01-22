@@ -1,7 +1,8 @@
 import { InstanceHttpRequestService, DomService } from '../../core/services';
 import { HumanResourcesService } from './human-resources.service';
 import { HttpClient } from '@angular/common/http';
-import { Salaries } from '../models';
+import { Salaries, SalaryDocument } from '../models';
+import { ResponseContentType } from '@angular/http';
 
 /**
  * The Human Resources Service provide all data needed to the Human Resources Module.
@@ -40,6 +41,20 @@ export class HumanResourcesDemoService extends HumanResourcesService {
      */
     async getSalaries(): Promise<Salaries> {
         return this.getDemoDataWithFileName<Salaries>('salaries.json');
+    }
+
+    /**
+     * Get the demo pdf file for the provided document.
+     *
+     * @param {SalaryDocument} document
+     * @returns {Promise<Blob>}
+     * @memberof HumanResourcesService
+     */
+    async getPdfFromDocument(document: SalaryDocument): Promise<Blob> {
+        const path = `../assets/human-resources/demo-data/hr_demo_pdf.pdf`;
+
+        return this.http.get(path, { responseType: 'blob'})
+                        .toPromise();
     }
 
     // #endregion

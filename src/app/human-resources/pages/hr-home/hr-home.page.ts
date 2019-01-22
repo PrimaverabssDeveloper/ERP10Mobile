@@ -540,6 +540,16 @@ export class HrHomePage extends PageBase implements OnInit {
     }
 
     private async showDocument(document: SalaryDocument) {
+        // show loading
+        await this.showLoading();
+
+        // download pdf blob
+        const pdfBlob = await this.humanResourcesService.getPdfFromDocument(document);
+
+        // hide loading
+        await this.hideLoading();
+
+
         alert('show document');
     }
 

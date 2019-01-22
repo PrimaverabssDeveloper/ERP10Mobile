@@ -1,5 +1,5 @@
 import { InstanceHttpRequestService, DomService } from '../../core/services';
-import { Salaries } from '../models';
+import { Salaries, SalaryDocument } from '../models';
 
 /**
  * The Human Resources Service provide all data needed to the Human Resources Module.
@@ -34,6 +34,17 @@ export class HumanResourcesService {
      */
     async getSalaries(): Promise<Salaries> {
 
+        return null;
+    }
+
+    /**
+     * Get the pdf file for the provided document.
+     *
+     * @param {SalaryDocument} document
+     * @returns {Promise<Blob>}
+     * @memberof HumanResourcesService
+     */
+    async getPdfFromDocument(document: SalaryDocument): Promise<Blob> {
         return null;
     }
 
