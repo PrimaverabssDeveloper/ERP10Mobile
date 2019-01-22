@@ -14,7 +14,7 @@ export class LocalizedStringsPipe implements PipeTransform {
     constructor(private localeService: LocaleService) {
     }
 
-    transform(value: { [key: string]: string }): string {
+    transform(value: { [key: string]: string } | string): string {
         if (!value) {
             return '';
         }
@@ -22,7 +22,7 @@ export class LocalizedStringsPipe implements PipeTransform {
         const currentLanguage = this.localeService.language;
 
         if (!value[currentLanguage]) {
-            return '';
+            return value as string;
         }
 
         return value[currentLanguage];
