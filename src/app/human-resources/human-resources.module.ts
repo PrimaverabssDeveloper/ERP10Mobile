@@ -4,7 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 
 import { PAGES } from './pages';
-import { COMPONENTS } from './components';
+import { COMPONENTS, ENTRY_COMPONENTS } from './components';
 
 import { HR_ROUTING } from './human-resources.routing';
 import { SharedModule } from '../shared/shared.module';
@@ -21,7 +21,8 @@ import { TranslateModule } from '@ngx-translate/core';
         SharedModule,
         HR_ROUTING
     ],
-    declarations: [PAGES, COMPONENTS]
+    declarations: [PAGES, COMPONENTS],
+    entryComponents: [ENTRY_COMPONENTS]
 })
 export class HumanResourcesModule {
     constructor(

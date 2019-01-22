@@ -1,0 +1,51 @@
+.documents-list {
+    width: 300px;
+    min-height: 20px;
+    .row {
+        width: calc(100% - 20px);
+        margin: 20px 10px 10px 10px;
+        padding-bottom: 10px;
+        border-bottom: .55px solid #eee;
+        float: left;
+
+        .label {
+            font-weight: bold;
+            width: 70%;
+            float: left;
+            font-size: 10pt;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .actions {
+            width: 30%;
+            float: left;
+
+            .action-btn {
+                width: 20px;
+                height: 20px;
+                background-size: 20px;
+                background-repeat: no-repeat;
+                margin-left: 15px;
+                float: right;
+            }
+
+            .view-action-btn {
+                background-image: url('../../../../assets/human-resources/images/receipt_view.png');
+
+                &:hover {
+                    background-image: url('../../../../assets/human-resources/images/receipt_view_active.png');
+                }
+            }
+
+            .share-action-btn {
+                background-image: url('../../../../assets/human-resources/images/receipt_share.png');
+
+                &:hover {
+                    background-image: url('../../../../assets/human-resources/images/receipt_share_active.png');
+                }
+            }
+        }
+    }
+}

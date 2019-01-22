@@ -75,6 +75,20 @@ $hr-chart-conteiner-height: $hr-charts-drawer-height - $hr-charts-drawer-handle-
         font-size: 10pt;
     }
 
+    .show-documents-action-btn {
+        width: 20px;
+        height: 20px;
+        background-size: 20px;
+        background-repeat: no-repeat;
+        margin-left: 15px;
+        float: right;
+        background-image: url('../../../../assets/human-resources/images/receipt_menu.png');
+
+        &.active {
+            background-image: url('../../../../assets/human-resources/images/receipt_menu_active.png');
+        }
+    }
+
     .salary-portion {
         border-top:$hr-salary-portion-border-top;
         padding: 20px 10px;

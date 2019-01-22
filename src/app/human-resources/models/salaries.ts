@@ -10,6 +10,7 @@ export interface BaseSalary {
     deductions: LocalizedValue[];
     salaryBreakdown: LocalizedValue[];
     paymentMethods: LocalizedValue[];
+    documents: SalaryDocument[];
 }
 
 export interface YearSalary extends BaseSalary {
@@ -25,6 +26,13 @@ export interface MonthSalary extends BaseSalary {
     paymentEmitDate: string;
     grossValue: Value;
     netValue: Value;
+}
+
+export interface SalaryDocument {
+    id: string;
+    docType: string;
+    docSubtype: string;
+    label: LocalizedValue;
 }
 
 export interface Value {

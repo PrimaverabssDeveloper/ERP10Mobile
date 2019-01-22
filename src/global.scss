@@ -83,3 +83,11 @@ input {
         outline: 0;
     }
 }
+
+// popovers
+
+.popover-width-80-percent-of-screen {
+    .popover-content {
+        width: 300px;
+    }
+}

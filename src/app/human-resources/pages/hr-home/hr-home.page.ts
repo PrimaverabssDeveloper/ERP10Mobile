@@ -1,9 +1,9 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { Slides, LoadingController } from '@ionic/angular';
+import { Slides, LoadingController, PopoverController } from '@ionic/angular';
 import { PageBase } from '../../../shared/pages';
 import { HumanResourcesServiceProvider, HumanResourcesService } from '../../services';
-import { Salaries, YearSalary, MonthSalary, BaseSalary, Value } from '../../models';
-import { SalaryChartDataColumn, SalaryChartData, SalaryChartVerticalAxis } from '../../components';
+import { Salaries, YearSalary, MonthSalary, BaseSalary, Value, SalaryDocument } from '../../models';
+import { SalaryChartDataColumn, SalaryChartData, SalaryChartVerticalAxis, DocumentsListComponent } from '../../components';
 import { TranslateService } from '@ngx-translate/core';
 import { DatePipe } from '@angular/common';
 
@@ -16,32 +16,36 @@ import { DatePipe } from '@angular/common';
 export class HrHomePage extends PageBase implements OnInit {
 
     private localizedMonthsNames: string[] = [];
+    private salaries: Salaries;
 
     @ViewChild('monthlyChartsSlide') monthlyChartsSlide: Slides;
 
-    salaryPeriodState: 'yearly' | 'monthly';
-    salaryValuesState: 'money' | 'percentage';
-    chartsDrawerState: 'open' | 'close';
-
-    salaries: Salaries;
-
+    // html template variables
+    isDocumentsPopoverVisible: boolean;
     salaryDate: string;
     salaryStatus: string;
     salaryPortions: MoneyValue[];
     salaryExtraInformations: SalaryExtraInformations[];
 
-    yearlyChartData: SalaryChartData;
+    // view states
+    salaryPeriodState: 'yearly' | 'monthly';
+    salaryValuesState: 'money' | 'percentage';
+    chartsDrawerState: 'open' | 'close';
 
+    // data for charts
+    yearlyChartData: SalaryChartData;
     monthlyChartsData: {
         year: number,
         monthsChartData: SalaryChartData
     }[];
 
+    // current salaries selected for year and month
     currentYearSalary: YearSalary;
     currentMonthSalary: MonthSalary;
 
     constructor(
         public loadingController: LoadingController,
+        public popoverController: PopoverController,
         private humanResourcesService: HumanResourcesService,
         private translate: TranslateService,
         private datePipe: DatePipe
@@ -105,6 +109,52 @@ export class HrHomePage extends PageBase implements OnInit {
     onSelectedMonthSalaryChange(monthSalary: MonthSalary) {
         this.currentMonthSalary = monthSalary;
         this.updateView(this.salaries, this.localizedMonthsNames);
+    }
+
+    async showDocumentsPopoverAction(event: any) {
+
+        let documents: SalaryDocument[];
+
+        // select the right documents for the current view state
+        if (this.salaryPeriodState === 'yearly') {
+            documents = this.currentYearSalary.documents;
+        } else {
+            documents = this.currentMonthSalary.documents;
+        }
+
+        // create the documents popover
+        const popover = await this.popoverController.create({
+            component: DocumentsListComponent,
+            componentProps: {
+                documents: documents
+            },
+            cssClass: 'popover-width-80-percent-of-screen',
+            event: event,
+            translucent: true
+        });
+
+        // set this variable 'true' to make the documents popover button visualy 'active'
+        this.isDocumentsPopoverVisible = true;
+
+        popover.onWillDismiss().then(result => {
+
+            // if is dismissed without any action selected, the result.data will be undefined
+            if (result.data) {
+                switch (result.data.action) {
+                    case 'share':
+                        this.shareDocument(result.data.document);
+                        break;
+                    case 'view':
+                        this.showDocument(result.data.document);
+                        break;
+                }
+            }
+
+            // this will make the documents popover button transition to inactive state
+            this.isDocumentsPopoverVisible = false;
+        });
+
+        return await popover.present();
     }
 
     private updateView(salaries: Salaries, localizedMonthsNames: string[]) {
@@ -487,6 +537,18 @@ export class HrHomePage extends PageBase implements OnInit {
         }
 
         return localizedMonthsNames;
+    }
+
+    private async showDocument(document: SalaryDocument) {
+        alert('show document');
+    }
+
+    private async shareDocument(document: SalaryDocument) {
+        alert('share document');
+    }
+
+    private async getDocumentPdf(document: SalaryDocument) {
+
     }
 }
 

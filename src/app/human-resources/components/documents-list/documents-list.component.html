@@ -1,0 +1,9 @@
+<div class="documents-list">
+    <div class="row" *ngFor="let doc of documents">
+        <div class="label">{{doc.label | localizedStrings}}</div>
+        <div class="actions">
+            <div class="action-btn share-action-btn" (click)="shareAction(doc)"></div>
+            <div class="action-btn view-action-btn" (click)="viewAction(doc)"></div>
+        </div>
+    </div>
+</div>
