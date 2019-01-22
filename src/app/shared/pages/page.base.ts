@@ -51,19 +51,26 @@ export abstract class PageBase {
      */
     protected async hideLoading(): Promise<void> {
 
-        return await new Promise<void>((resolve) => {
-            if (!this.loading) {
-                resolve();
-                return;
-            }
+        if (!this.loading) {
+            return;
+        }
 
-            this.loading
-                .dismiss()
-                .then(() => {
-                    this.loading = null;
-                    resolve();
-                });
-        });
+        await this.loading.dismiss();
+        this.loading = null;
+
+        // return await new Promise<void>((resolve) => {
+        //     if (!this.loading) {
+        //         resolve();
+        //         return;
+        //     }
+
+        //     this.loading
+        //         .dismiss()
+        //         .then(() => {
+        //             this.loading = null;
+        //             resolve();
+        //         });
+        // });
     }
 
     // #endregion
