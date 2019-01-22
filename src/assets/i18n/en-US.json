@@ -95,7 +95,13 @@
             "PAGE_TITLE": "Salary slip",
             "MONTH_STATUS_SALARY_PROCESSED": "Salary processed on {date}",
             "MONTH_STATUS_PAYMENT_ISSUED":"Payment issued",
-            "YEAR_STATUS":"Earnings Statement {year}"
+            "YEAR_STATUS":"Earnings Statement {year}",
+            "YEARLY_SELECTOR": "Yearly",
+            "MONTHLY_SELECTOR": "Monthly",
+            "GROSS_EARNING_SECTION_TITLE": "Gross Earnings",
+            "NET_EARNING_SECTION_TITLE": "Net Earnings",
+            "PAYMENT_METHOD_SECTION_TITLE": "Payment method",
+            "COMPENSATION_BREAKDOWN_SECTION_TITLE": "Compensation breakdown"
         }
     }
 }

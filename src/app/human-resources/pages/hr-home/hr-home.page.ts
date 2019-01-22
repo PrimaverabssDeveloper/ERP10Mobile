@@ -116,6 +116,7 @@ export class HrHomePage extends PageBase implements OnInit {
 
         this.salaryPortions = [];
 
+        // create salary status
         if (this.salaryPeriodState === 'yearly') {
 
             salary = this.currentYearSalary;
@@ -159,7 +160,7 @@ export class HrHomePage extends PageBase implements OnInit {
         // net earnings
         this.salaryPortions.push(
             {
-                label: '#Net Earnings',
+                label: 'HUMAN_RESOURCES.HR_PAGE.NET_EARNING_SECTION_TITLE',
                 value: netValue.value,
                 currency: currency,
                 percentualValue: netValue.percentage
@@ -179,7 +180,7 @@ export class HrHomePage extends PageBase implements OnInit {
         // gross earnings
         this.salaryPortions.push(
             {
-                label: '#Gross Earnings',
+                label: 'HUMAN_RESOURCES.HR_PAGE.GROSS_EARNING_SECTION_TITLE',
                 value: grossValue.value,
                 currency: currency,
                 percentualValue: grossValue.percentage
@@ -190,7 +191,7 @@ export class HrHomePage extends PageBase implements OnInit {
         for (const deduction of salary.deductions) {
             this.salaryPortions.push(
                 {
-                    label: deduction.label['pt'],
+                    label: deduction.label,
                     value: deduction.value,
                     currency: currency,
                     percentualValue: deduction.percentage
@@ -199,10 +200,10 @@ export class HrHomePage extends PageBase implements OnInit {
         }
 
         const paymentMethods: SalaryExtraInformations = {
-            label: '#Payment Method',
+            label: 'HUMAN_RESOURCES.HR_PAGE.PAYMENT_METHOD_SECTION_TITLE',
             infos: salary.paymentMethods.map(pm => (
                 {
-                    label: pm.label['pt'],
+                    label: pm.label,
                     value: pm.value,
                     currency: currency,
                     percentualValue: pm.percentage
@@ -211,10 +212,10 @@ export class HrHomePage extends PageBase implements OnInit {
         };
 
         const compensationBreakdown: SalaryExtraInformations = {
-            label: '#Compensation Breakdown',
+            label: 'HUMAN_RESOURCES.HR_PAGE.COMPENSATION_BREAKDOWN_SECTION_TITLE',
             infos: salary.salaryBreakdown.map(pm => (
                 {
-                    label: pm.label['pt'],
+                    label: pm.label,
                     value: pm.value,
                     currency: currency,
                     percentualValue: pm.percentage
@@ -490,7 +491,7 @@ export class HrHomePage extends PageBase implements OnInit {
 }
 
 interface MoneyValue {
-    label: string;
+    label: string | { [key: string]: string };
     value: number;
     percentualValue: number;
     currency: string;

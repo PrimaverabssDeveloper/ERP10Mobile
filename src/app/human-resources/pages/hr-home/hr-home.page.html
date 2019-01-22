@@ -9,7 +9,7 @@
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title><span class="navbar-title">Salary Slips</span></ion-title>
+        <ion-title><span class="navbar-title">{{'HUMAN_RESOURCES.HR_PAGE.PAGE_TITLE' | translate}}</span></ion-title>
         <ion-buttons slot="end">
             <ion-menu-button autoHide="false"></ion-menu-button>
         </ion-buttons>
@@ -35,7 +35,7 @@
         <!-- Salary Portions -->
         <ion-row>
             <ion-col class="salary-portion" *ngFor="let salaryPortion of salaryPortions" size="6" [ngClass]="{'show-money': salaryValuesState === 'money', 'show-percentage': salaryValuesState === 'percentage'}">
-                <div class="label">{{ salaryPortion.label }}</div>
+                <div class="label">{{ salaryPortion.label | localizedStrings | translate}}</div>
                 <div class="value">
                     <span class="money">{{ salaryPortion.value | currency: salaryPortion.currency }}</span>
                     <span class="percentage" *ngIf="salaryPortion.percentualValue">{{ salaryPortion.percentualValue }}
@@ -48,12 +48,12 @@
             <ion-col>
                 <ion-row>
                     <ion-col class="section-label">
-                        {{ salaryExtraInfo.label }}
+                        {{ salaryExtraInfo.label | translate}}
                     </ion-col>
                 </ion-row>
                 <ion-row class="extra-information" *ngFor="let info of salaryExtraInfo.infos" [ngClass]="{'show-money': salaryValuesState === 'money', 'show-percentage': salaryValuesState === 'percentage'}">
                     <ion-col class="extra-information-label" size="6">
-                        {{ info.label }}
+                        {{ info.label | localizedStrings }}
                     </ion-col>
                     <ion-col class="extra-information-value" size="6">
                         <span class="money">
@@ -74,10 +74,10 @@
         </div>
         <div class="salary-chart-period-selector">
             <div class="period" [ngClass]="{'active': salaryPeriodState === 'yearly'}" (click)="changeSalaryPeriodToYearlyAction()">
-                Yearly
+                {{'HUMAN_RESOURCES.HR_PAGE.YEARLY_SELECTOR' | translate}}
             </div>
             <div class="period" [ngClass]="{'active': salaryPeriodState === 'monthly'}" (click)="changeSalaryPeriodToMonthlyAction()">
-                Monthly
+                {{'HUMAN_RESOURCES.HR_PAGE.MONTHLY_SELECTOR' | translate}}
             </div>
         </div>
         <div class="chart-container">

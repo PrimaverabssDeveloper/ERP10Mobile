@@ -93,10 +93,16 @@
     },
     "HUMAN_RESOURCES": {
         "HR_PAGE": {
-            "PAGE_TITLE": "Salary slip",
+            "PAGE_TITLE": "Recibos",
             "MONTH_STATUS_SALARY_PROCESSED": "Vencimento processado em {date}",
             "MONTH_STATUS_PAYMENT_ISSUED":"Pagamento emitido",
-            "YEAR_STATUS":"Declaração de Rendimentos {year}"
+            "YEAR_STATUS":"Declaração de Rendimentos {year}",
+            "YEARLY_SELECTOR": "Anuais",
+            "MONTHLY_SELECTOR": "Mensais",
+            "GROSS_EARNING_SECTION_TITLE": "Remuneração Bruta",
+            "NET_EARNING_SECTION_TITLE": "Remuneração Líquida",
+            "PAYMENT_METHOD_SECTION_TITLE": "Forma de pagamento",
+            "COMPENSATION_BREAKDOWN_SECTION_TITLE": "Distribuição dos processamentos"
         }
     }
 }
