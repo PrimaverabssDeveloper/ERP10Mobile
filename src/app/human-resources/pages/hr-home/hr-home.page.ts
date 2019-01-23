@@ -6,6 +6,9 @@ import { Salaries, YearSalary, MonthSalary, BaseSalary, Value, SalaryDocument } 
 import { SalaryChartDataColumn, SalaryChartData, SalaryChartVerticalAxis, DocumentsListComponent } from '../../components';
 import { TranslateService } from '@ngx-translate/core';
 import { DatePipe } from '@angular/common';
+import { LocaleService } from '../../../core/services';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 @Component({
     templateUrl: './hr-home.page.html',
@@ -48,7 +51,9 @@ export class HrHomePage extends PageBase implements OnInit {
         public popoverController: PopoverController,
         private humanResourcesService: HumanResourcesService,
         private translate: TranslateService,
-        private datePipe: DatePipe
+        private datePipe: DatePipe,
+        private fileOpener: FileOpener,
+        private file: File
     ) {
 
         super(loadingController);
@@ -546,11 +551,14 @@ export class HrHomePage extends PageBase implements OnInit {
         // download pdf blob
         const pdfBlob = await this.humanResourcesService.getPdfFromDocument(document);
 
+        // store the pdf localy
+        const path = await this.storeDocumentPdfAsync(pdfBlob);
+
+        // try to open the pdf on the available app
+        await this.fileOpener.open(path, 'application/pdf');
+
         // hide loading
         await this.hideLoading();
-
-
-        alert('show document');
     }
 
     private async shareDocument(document: SalaryDocument) {
@@ -559,6 +567,22 @@ export class HrHomePage extends PageBase implements OnInit {
 
     private async getDocumentPdf(document: SalaryDocument) {
 
+    }
+
+    private async storeDocumentPdfAsync(pdfBlob: Blob): Promise<string> {
+        const fileName = 'temp_hr_document.pdf';
+        let filepath = this.file.externalApplicationStorageDirectory;
+        if (!filepath) {
+            filepath = this.file.documentsDirectory;
+        }
+
+        try {
+            await this.file.writeFile(filepath, fileName, pdfBlob, { replace: true  });
+        } catch (error) {
+            console.log(error);
+        }
+
+        return filepath.concat(fileName);
     }
 }
 

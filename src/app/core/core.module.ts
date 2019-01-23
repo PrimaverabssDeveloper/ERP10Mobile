@@ -5,7 +5,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IonicModule, Platform } from '@ionic/angular';
 import { SafariViewController } from '@ionic-native/safari-view-controller/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { File } from '@ionic-native/file/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
 
 import { SERVICES, StorageService, AuthenticationService, TokenInterceptorService, InstanceService } from './services';
 import { NativeStorageService } from './services/storage/native-storage.service';
@@ -39,6 +41,8 @@ export function initInstance(instanceService: InstanceService): () => Promise<an
         SafariViewController,
         NativeStorage,
         HTTP,
+        File,
+        FileOpener,
         {
             provide: StorageService,
             useFactory: (nativeStorage: NativeStorage, platform: Platform) => {
