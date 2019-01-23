@@ -9,6 +9,7 @@ import { DatePipe } from '@angular/common';
 import { LocaleService } from '../../../core/services';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 @Component({
     templateUrl: './hr-home.page.html',
@@ -53,7 +54,8 @@ export class HrHomePage extends PageBase implements OnInit {
         private translate: TranslateService,
         private datePipe: DatePipe,
         private fileOpener: FileOpener,
-        private file: File
+        private file: File,
+        private emailComposer: EmailComposer
     ) {
 
         super(loadingController);
@@ -552,7 +554,7 @@ export class HrHomePage extends PageBase implements OnInit {
         const pdfBlob = await this.humanResourcesService.getPdfFromDocument(document);
 
         // store the pdf localy
-        const path = await this.storeDocumentPdfAsync(pdfBlob);
+        const path = await this.storeDocumentPdfAsync(document, pdfBlob);
 
         // try to open the pdf on the available app
         await this.fileOpener.open(path, 'application/pdf');
@@ -562,15 +564,28 @@ export class HrHomePage extends PageBase implements OnInit {
     }
 
     private async shareDocument(document: SalaryDocument) {
-        alert('share document');
+        // show loading
+        await this.showLoading();
+
+        // download pdf blob
+        const pdfBlob = await this.humanResourcesService.getPdfFromDocument(document);
+
+        // store the pdf localy
+        const pdfFilePath = await this.storeDocumentPdfAsync(document, pdfBlob);
+
+        // open the default email app
+        try {
+            await this.emailComposer.open({attachments: [pdfFilePath]});
+        } catch (error) {
+            console.log(error);
+        }
+
+        // hide loading
+        await this.hideLoading();
     }
 
-    private async getDocumentPdf(document: SalaryDocument) {
-
-    }
-
-    private async storeDocumentPdfAsync(pdfBlob: Blob): Promise<string> {
-        const fileName = 'temp_hr_document.pdf';
+    private async storeDocumentPdfAsync(document: SalaryDocument, pdfBlob: Blob): Promise<string> {
+        const fileName = document.label['en'].toLocaleLowerCase().concat('.pdf');
         let filepath = this.file.externalApplicationStorageDirectory;
         if (!filepath) {
             filepath = this.file.documentsDirectory;
