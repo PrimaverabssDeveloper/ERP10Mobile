@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
+import { FooterTabMenu, FooterMenuItemSelectedEvent, FooterTabMenuItem } from './entities';
 
 @Component({
     selector: 'footer-tab-menus',
@@ -149,22 +150,4 @@ export class FooterTabMenuComponent {
     private toogleCloseOpenMenu() {
         this.menuClosed = !this.menuClosed;
     }
-}
-
-export interface FooterTabMenu {
-    key: string;
-    icon: string;
-    disabledIcon?: string;
-    items: FooterTabMenuItem[];
-}
-
-export interface FooterTabMenuItem {
-    key: string;
-    label: string;
-    selected?: () => boolean;
-}
-
-export interface FooterMenuItemSelectedEvent {
-    menu: FooterTabMenu;
-    menuItem: FooterTabMenuItem;
 }
