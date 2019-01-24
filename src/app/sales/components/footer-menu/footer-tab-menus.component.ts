@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
 
 @Component({
     selector: 'footer-tab-menus',
@@ -17,10 +17,44 @@ export class FooterTabMenuComponent {
     /**
      *
      */
-    constructor() {
+    constructor(private element: ElementRef) {
         this.menuClosed = true;
     }
 
+    /**
+     * This event will close the menu if the touch is outside the menu.
+     *
+     * @param {TouchEvent} e
+     * @returns
+     * @memberof FooterTabMenuComponent
+     */
+    @HostListener('document:touchstart', ['$event'])
+    onTouchStart(e: TouchEvent) {
+
+        if (this.menuClosed) {
+            return;
+        }
+
+        let target = e.touches[0].target as any;
+
+        while (target) {
+            if (target === this.element.nativeElement) {
+                // touched inside drawer. Do nothing.
+                return;
+            }
+
+            target = target.parentElement;
+        }
+
+        this.closeMenu();
+    }
+
+    /**
+     * Provide the style for the menu tabs.
+     *
+     * @returns {*}
+     * @memberof FooterTabMenuComponent
+     */
     getMenuItemComputedStyle(): any {
         if (!this.menus || this.menus.length === 0) {
             return {};
@@ -33,6 +67,13 @@ export class FooterTabMenuComponent {
         };
     }
 
+    /**
+     * Provides the style for the menu arrow with the correct position
+     * based on the current selected menu tab.
+     *
+     * @returns {*}
+     * @memberof FooterTabMenuComponent
+     */
     getMenuArrowComputedStyle(): any {
 
         if (!this.menus || this.menus.length === 0) {
@@ -49,7 +90,31 @@ export class FooterTabMenuComponent {
         };
     }
 
+    /**
+     * Provides the menu tab icon.
+     * If the menu has no items, the disabled icon must be provided.
+     *
+     * @param {FooterTabMenu} menu
+     * @returns
+     * @memberof FooterTabMenuComponent
+     */
+    getMenuIcon(menu: FooterTabMenu) {
+        return menu.items && menu.items.length > 0 ? menu.icon : menu.disabledIcon;
+    }
+
+    /**
+     * The action fired when an tab menu is touched.
+     * This will change the current selected menu if the menu has items to display.
+     *
+     * @param {FooterTabMenu} menu
+     * @returns
+     * @memberof FooterTabMenuComponent
+     */
     menuSelectedAction(menu: FooterTabMenu) {
+        // if the menu has no items, is has nothing to show, so it has no action
+        if (!menu.items || menu.items.length === 0) {
+            return;
+        }
 
         if (this.selectedMenu === menu) {
             this.toogleCloseOpenMenu();
@@ -60,6 +125,13 @@ export class FooterTabMenuComponent {
         this.selectedMenu = menu;
     }
 
+    /**
+     * The action fired when an menu row is touched.
+     *
+     * @param {FooterTabMenu} menu
+     * @param {FooterTabMenuItem} menuItem
+     * @memberof FooterTabMenuComponent
+     */
     menuItemSelectedAction(menu: FooterTabMenu, menuItem: FooterTabMenuItem) {
         this.selectedMenu = menu;
         this.closeMenu();
@@ -82,6 +154,7 @@ export class FooterTabMenuComponent {
 export interface FooterTabMenu {
     key: string;
     icon: string;
+    disabledIcon?: string;
     items: FooterTabMenuItem[];
 }
 
