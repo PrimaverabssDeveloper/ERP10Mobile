@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 
 import { PopoverController, LoadingController } from '@ionic/angular';
-import { CompanySelectorComponent, FooterTabMenu, FooterMenuItemSelectedEvent } from '../../components';
+import { CompanySelectorComponent, FooterTabMenu, FooterMenuItemSelectedEvent, FooterTabMenuItem } from '../../components';
 import { PageBase } from '../../../shared/pages';
 import { SalesService, SalesServiceProvider } from '../../services';
 import { Company, SalesCharts, CompanySales, ChartBundle, ChartData, Serie } from '../../entities';
@@ -243,6 +243,19 @@ export class HomePage extends PageBase implements OnInit {
             selected: () => cb.key === this.selectedChartBundleKey
         }));
 
+        // const salesPersonItems: FooterTabMenuItem[] = [
+        //     {
+        //         key: 'sp1',
+        //         label: 'Sales Person 1'
+        //     },
+        //     {
+        //         key: 'sp2',
+        //         label: 'Sales Person 2'
+        //     }
+        // ];
+
+        const salesPersonItems: FooterTabMenuItem[] = null;
+
         this.footerTabMenus = [
             {
                 key: 'charts',
@@ -252,16 +265,8 @@ export class HomePage extends PageBase implements OnInit {
             {
                 key: 'salesperson',
                 icon: '../../../../assets/sales/footer-menu-salesperson.png',
-                items: [
-                    {
-                        key: 'sp1',
-                        label: 'Sales Person 1'
-                    },
-                    {
-                        key: 'sp2',
-                        label: 'Sales Person 2'
-                    }
-                ]
+                disabledIcon: '../../../../assets/sales/footer-menu-salesperson-disabled.png',
+                items: salesPersonItems
             },
             {
                 key: 'share',
