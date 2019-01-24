@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="list" *ngIf="selectedMenu">
-        <div class="list-row" *ngFor="let item of selectedMenu.items" [ngClass]="{'selected': item.selected}" (click)="menuItemSelectedAction(selectedMenu, item)">
+        <div class="list-row" *ngFor="let item of selectedMenu.items" [ngClass]="{'selected': item.selected()}" (click)="menuItemSelectedAction(selectedMenu, item)">
             <span>{{item.label}}</span>
         </div>
     </div>
