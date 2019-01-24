@@ -143,9 +143,7 @@ export class HomePage extends PageBase implements OnInit {
     onFooterMenuItemSelected(event: FooterMenuItemSelectedEvent) {
         // select the option
         if (event.menu.key === 'share') {
-            // for (const menuItem of event.menu.items) {
-            //     menuItem.selected = menuItem === event.menuItem;
-            // }
+            this.shareChart(event.menuItem.key);
         } else {
             this.selectedChartBundleKey = event.menuItem.key;
             this.updateView();
@@ -309,5 +307,34 @@ export class HomePage extends PageBase implements OnInit {
         }
 
         return series.find(s => s.key === key);
+    }
+
+    private shareChart(key: string) {
+
+        switch (key) {
+            case 'send_chart_by_email':
+                this.shareChartImageByEmail();
+                break;
+            case 'send_pdf_chart_by_email':
+                this.shareChartPdfByEmail();
+                break;
+            case 'save_image_in_the_gallery':
+                this.storeImageInGallery();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private shareChartImageByEmail() {
+
+    }
+
+    private shareChartPdfByEmail() {
+
+    }
+
+    private storeImageInGallery() {
+
     }
 }
