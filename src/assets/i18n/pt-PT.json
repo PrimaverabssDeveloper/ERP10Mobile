@@ -98,6 +98,9 @@
             "USE_REFERENCE_CURRENCY_TOGGLE": "Utilizar a moeda de referência",
             "SHOW_AGGREGATE_DATA_TOGGLE": "Mostrar total agregado",
             "SHOW_DAILY_SALES_TOGGLE": "Mostrar vendas diárias"
+        },
+        "DAILY_SALES_TICKER_COMPONENT" : {
+            "DAILY_SALES": "Vendas do dia"
         }
     },
     "HUMAN_RESOURCES": {

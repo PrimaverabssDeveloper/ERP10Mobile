@@ -97,6 +97,9 @@
             "USE_REFERENCE_CURRENCY_TOGGLE": "Use reference currency",
             "SHOW_AGGREGATE_DATA_TOGGLE": "Show aggregate data",
             "SHOW_DAILY_SALES_TOGGLE": "Show daily sales"
+        },
+        "DAILY_SALES_TICKER_COMPONENT" : {
+            "DAILY_SALES": "Daily Sales"
         }
     },
     "HUMAN_RESOURCES": {
