@@ -1,0 +1,184 @@
+
+$sales-delta-height: 25px;
+$week-day-height: 25px;
+$bars-height: calc( 100% - (#{$sales-delta-height} + #{$week-day-height}));
+$bar-legend-height: 25px;
+
+.daily-sales-ticker {
+    width: 100%;
+    height: 100%;
+
+    .chart {
+        left: 50%;
+        transform: translateX(-50%);
+        height: 50%;
+        width: 50%;
+        position: absolute;
+        float: left;
+
+        .today-bar {
+            .bar-bar {
+                div {
+                    background: #1D317D;
+                }
+            }
+
+            .bar-legend {
+                background: #101A42;
+            }
+        }
+
+        .last-week-bar {
+            .bar-bar {
+                div {
+                    background: #DBE0EB;
+                }
+            }
+
+            .bar-legend {
+                background: #6D6D6D;
+            }
+        }
+
+        .bars {
+            height: $bars-height;
+
+            .bar {
+                position: relative;
+                height: 100%;
+                width: calc(50% - 5px);
+                overflow: hidden;
+                padding: 0 5px;
+                float: left;
+                
+                .bar-bar {  
+                    height: calc(100% - #{$bar-legend-height});
+                    width: 100%;
+                    position: absolute;
+                    bottom: $bar-legend-height;
+                    overflow: hidden;
+
+                    div {
+                        height: 100%;
+                        width: 100%;
+                        top: 0%;
+                        position: absolute;
+                    }
+                }
+
+                .bar-legend {
+                    height: $bar-legend-height;
+                    bottom: 0;
+                    position: absolute;
+                    width: 100%;
+                    text-align: center;
+                    color: #fff;                
+                }
+            }
+        }
+
+        .week-day {
+            height: $week-day-height;
+            color: #596278;
+            text-transform: uppercase;
+        }
+
+        .sales-delta-wrapper {
+            height: $sales-delta-height;
+            border-bottom: .55px solid #dbe0eb;
+            margin: 0 10px;
+
+            .sales-delta {
+                height: $sales-delta-height;
+                color: rgb(32, 184, 99);    
+                position: absolute;
+                transform: translateX(-50%);
+                left: 50%;
+                font-size: 12pt;
+                font-weight: bold;
+            
+                &:after {
+                    content: ' ';
+                    top: 0;
+                    border-width: 5px;
+                    border-style: solid;
+                    border-top-color: transparent;
+                    border-right-color: transparent;
+                    border-bottom-color: rgb(32, 184, 99);
+                    border-left-color: transparent;
+                    width: 0;
+                    height: 0;
+                    position: absolute;
+                    right: -15px;
+                }
+    
+                &.negative {
+                    color: rgb(229, 57, 55);
+    
+                    &:after {
+                        top: 12px;
+                        border-top-color: rgb(229, 57, 55);
+                        border-right-color: transparent;
+                        border-bottom-color: transparent;
+                        border-left-color: transparent;
+                    }
+                }
+            }
+        }
+    }
+
+    .data {
+        height: 50%;
+        position: absolute;
+        float: left;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 18pt;
+        
+        .data-wrapper {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+
+        .date {
+            float: left;
+            width:100%;
+            text-align: left;
+            color: #596278;
+        }
+
+        .company {
+            float: left;
+            width:100%;
+            text-align: left;
+            font-weight: bold;
+            color: #1d317d;
+        }
+
+        .total-sales {
+            float: left;
+            width:100%;
+            text-align: left;
+            margin-top: 20px;
+
+            .label {
+                padding-bottom: 2px;
+                color: #596278;
+            }
+
+            .line {
+                width: 120%;
+                margin: 5px -10%;
+                height: .55px;
+                background: #dbe0eb;
+            }
+
+            .value {
+                color: #1d317d;
+            }
+        }
+    }
+}

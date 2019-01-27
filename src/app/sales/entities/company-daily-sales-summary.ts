@@ -23,43 +23,43 @@ export interface CompanyDailySalesSummary {
     name: string;
 
     /**
-     * The company total sales for the current year.
+     * The company sales for today.
      *
      * @type {number}
-     * @memberof CompanySalesSummary
+     * @memberof CompanyDailySalesSummary
      */
-    totalSales: number;
+    sales: number;
 
     /**
-     * The company total sales for the current year on the reporting currency.
+     * The company sales for today on the reporting currency.
      *
      * @type {number}
-     * @memberof CompanySalesSummary
+     * @memberof CompanyDailySalesSummary
      */
-    totalSalesReporting: number;
+    salesReporting: number;
 
     /**
-     * The company total sales for the previous year.
+     * The company sales from last week day.
      *
      * @type {number}
-     * @memberof CompanySalesSummary
+     * @memberof CompanyDailySalesSummary
      */
-    totalSalesPrevious: number;
+    salesPrevious: number;
 
     /**
-     * The company total sales fot the previous year on the reporting currency.
+     * The company sales from last week day on the reporting currency.
      *
      * @type {number}
-     * @memberof CompanySalesSummary
+     * @memberof CompanyDailySalesSummary
      */
-    totalSalesPreviousReporting: number;
+    salesPreviousReporting: number;
 
     /**
      * The current company currency. All money values are on this currency,
      * except the 'reporting values'.
      *
      * @type {string}
-     * @memberof CompanySalesSummary
+     * @memberof CompanyDailySalesSummary
      */
     currency: string;
 
@@ -68,25 +68,33 @@ export interface CompanyDailySalesSummary {
      * Non 'reporting values' are on the currency defined by the property 'currency'.
      *
      * @type {string}
-     * @memberof CompanySalesSummary
+     * @memberof CompanyDailySalesSummary
      */
     reportingCurrency: string;
 
     /**
      * The legend to be used when the total sales values
-     * for the current year are shown.
+     * for today.
      *
      * @type {string}
-     * @memberof CompanySalesSummary
+     * @memberof CompanyDailySalesSummary
      */
-    totalSalesLegend: string;
+    salesLegend: string;
 
     /**
      * The legend to be used when the total sales value
-     * for the previous year are shown.
+     * for the last week day.
      *
      * @type {string}
+     * @memberof CompanyDailySalesSummary
+     */
+    salesPreviousLegend: string;
+
+    /**
+     * The date when the sales values were processed.
+     *
+     * @type {String}
      * @memberof CompanySalesSummary
      */
-    totalSalesPreviousLegend: string;
+    dataTimestamp: string;
 }

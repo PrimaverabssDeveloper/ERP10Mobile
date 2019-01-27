@@ -1,0 +1,47 @@
+<div class="daily-sales-ticker">
+    <div class="chart" [ngStyle]="dataStyle">
+        <div class="sales-delta-wrapper">
+            <div class="sales-delta" [ngClass]="{negative: salesDelta < 0}">{{salesDelta | round }}%</div>
+        </div>
+        <div class="bars">
+            <div class="bar last-week-bar">
+                <div class="bar-bar">
+                    <div [ngStyle]="lastWeekBarStyle"></div>
+                </div>
+                <div class="bar-legend">
+                    {{lastWeekDayLegend}}
+                </div>
+            </div>
+            <div class="bar today-bar">
+                <div class="bar-bar">
+                    <div [ngStyle]="todayBarStyle"></div>
+                </div>
+                <div class="bar-legend">
+                    {{todayLegend}}
+                </div>
+            </div>
+        </div>
+        <div class="week-day">
+            {{ 'SHARED.DATES.WEEK_DAYS_NUMBER_TO_NAME.' + weekDay | translate}}
+        </div>
+    </div>
+    <div class="data" [ngStyle]="dataStyle">
+        <div class="data-wrapper">
+            <div class="date">
+                {{companyDailySalesSummary.dataTimestamp | date:'mediumDate'}}
+            </div>
+            <div class="company">
+                {{companyDailySalesSummary.name}}
+            </div>
+            <div class="total-sales">
+                <div class="label">
+                    {{ 'SALES.DAILY_SALES_TICKER_COMPONENT.DAILY_SALES' | translate}}
+                </div>
+                <div class="line"></div>
+                <div class="value">
+                    {{companyDailySalesSummary.sales | currency:companyDailySalesSummary.currency}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
