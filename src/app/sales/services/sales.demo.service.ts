@@ -43,6 +43,13 @@ export class SalesDemoService extends SalesService {
 
         const salesSummary = await this.getDemoDataWithFileName<SalesSummary>('sales_summary.json');
 
+        // replace all dates to today's date
+        const todayDate = (new Date()).toISOString();
+        salesSummary.companies.map(c => {
+            c.dataTimestamp = todayDate;
+            c.dailySales.dataTimestamp = todayDate;
+        });
+
         return salesSummary;
     }
 
