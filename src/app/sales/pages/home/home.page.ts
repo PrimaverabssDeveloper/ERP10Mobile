@@ -1,12 +1,14 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 
 import { PopoverController, LoadingController } from '@ionic/angular';
-import { CompanySelectorComponent, FooterTabMenu, FooterMenuItemSelectedEvent, FooterTabMenuItem } from '../../components';
+import { CompanySelectorComponent, FooterTabMenu, FooterMenuItemSelectedEvent, FooterTabMenuItem, SalesChartComponent, SalesTableComponent } from '../../components';
 import { PageBase } from '../../../shared/pages';
 import { SalesService, SalesServiceProvider } from '../../services';
 import { Company, SalesCharts, CompanySales, ChartBundle, ChartData, Serie } from '../../entities';
-import { LocaleService } from '../../../core/services';
+import { LocaleService, DomService } from '../../../core/services';
 import { CurrencyPipe } from '@angular/common';
+
+
 
 @Component({
     templateUrl: 'home.page.html',
@@ -77,7 +79,8 @@ export class HomePage extends PageBase implements OnInit {
         public loadingController: LoadingController,
         private salesService: SalesService,
         private localeService: LocaleService,
-        private currencyPipe: CurrencyPipe
+        private currencyPipe: CurrencyPipe,
+        private domService: DomService
     ) {
 
         super(loadingController);
@@ -326,8 +329,27 @@ export class HomePage extends PageBase implements OnInit {
         }
     }
 
+    // tslint:disable-next-line:member-ordering
+    private body: any;
     private shareChartImageByEmail() {
+        // https://stackoverflow.com/questions/10721884/render-html-to-an-image
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = canvas.height = 100;
 
+        const tempImg = document.createElement('img');
+        tempImg.addEventListener('load', onTempImageLoad);
+
+        const html = this.domService.createComponent(SalesTableComponent, {data: this.tableData }).innerHTML;
+
+        // tslint:disable-next-line:max-line-length
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000"><foreignObject width="100%" height="100%">${html}</foreignObject></svg>`;
+        tempImg.src = 'data:image/svg+xml,' + encodeURIComponent(svg);
+
+        function onTempImageLoad(e) {
+            ctx.drawImage(e.target, 0, 0);
+            const base64 = canvas.toDataURL();
+        }
     }
 
     private shareChartPdfByEmail() {
