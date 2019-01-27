@@ -5,11 +5,11 @@ import { CompanySalesSummary } from '../../entities';
 
 @Component({
     selector: 'sales-ticker',
-    templateUrl: './sales-ticker.component.html',
-    styleUrls: ['./sales-ticker.component.scss']
+    templateUrl: './total-sales-ticker.component.html',
+    styleUrls: ['./total-sales-ticker.component.scss']
 })
 
-export class SalesTickerComponent implements OnInit {
+export class TotalSalesTickerComponent implements OnInit {
 
     private chart: any;
 

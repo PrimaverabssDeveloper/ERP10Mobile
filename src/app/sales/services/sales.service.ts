@@ -1,6 +1,6 @@
 import { SalesSummary, Company, SalesCharts, SalesSettings } from '../entities';
 import { InstanceHttpRequestService, DomService } from '../../core/services';
-import { SalesTickerComponent } from '../components';
+import { TotalSalesTickerComponent } from '../components';
 import { SalesStorageService } from './sales-storage.service';
 
 const SALES_SUMMARY = '/sales';
@@ -41,8 +41,9 @@ export class SalesService {
 
         const htmlTickers: HTMLElement[] = [];
         for (const company of salesSummary.companies) {
-            const htmlTicker = this.domService.createComponent(SalesTickerComponent, { companySalesSummary: company });
-            htmlTickers.push(htmlTicker);
+            // total sales ticker
+            const totalSalesTickerHtml = this.domService.createComponent(TotalSalesTickerComponent, { companySalesSummary: company });
+            htmlTickers.push(totalSalesTickerHtml);
         }
 
         return htmlTickers;
