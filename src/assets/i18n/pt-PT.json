@@ -24,6 +24,15 @@
                 "10": "Outubro",
                 "11": "Novembro",
                 "12": "Dezembro"
+            },
+            "WEEK_DAYS_NUMBER_TO_NAME": {
+                "1": "Domingo",
+                "2": "Segunda-Feira",
+                "3": "Terça-Feira",
+                "4": "Quarta-Feira",
+                "5": "Quinta-Feira",
+                "6": "Sexta-Feita",
+                "7": "Sábado"
             }
         }
     },
