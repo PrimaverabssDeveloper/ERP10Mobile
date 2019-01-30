@@ -23,7 +23,7 @@
                 <div class="settings-group-title">
                     {{ 'SHARED.SIDE_MENU_COMPONENT.MENU_MODULES_TITLE' | translate }}
                 </div>
-                <ion-menu-toggle *ngFor="let moduleDef of modulesDefsWithSettings">
+                <ion-menu-toggle *ngFor="let moduleDef of modulesDefsWithSettings | orderBy:'displayRelevance'">
                     <button class="settings-group-item settings-group-item-with-image" [routerLink]="[moduleDef.settings.settingsRoutePath]"> 
                         <img class="settings-group-item-image" [attr.src]="moduleDef.iconPath" />
                         <div class="settings-group-item-label">
