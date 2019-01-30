@@ -20,7 +20,7 @@
     
     <!-- Modules -->
     <div class="modules-drawer">
-        <a *ngFor="let moduleDef of modulesDefinitions" class="module-icon" [routerLink]="moduleDef.moduleRoutePath">
+        <a *ngFor="let moduleDef of modulesDefinitions | orderBy:'displayRelevance'" class="module-icon" [routerLink]="moduleDef.moduleRoutePath">
             <img [attr.src]="moduleDef.iconPath">
             <div class="name">{{moduleDef.localizedNameKey}}</div>
         </a>

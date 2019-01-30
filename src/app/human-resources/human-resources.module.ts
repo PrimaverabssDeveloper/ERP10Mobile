@@ -30,6 +30,7 @@ export class HumanResourcesModule {
     ) {
         const moduleDef: ModuleDefinition = {
             key: 'HumanResources',
+            displayRelevance: 1,
             moduleRoutePath: '/humanresources',
             iconPath: '/assets/human-resources/human_resources_logo.svg',
             localizedNameKey: '#HR',

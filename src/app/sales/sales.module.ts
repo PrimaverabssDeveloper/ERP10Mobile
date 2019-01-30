@@ -38,6 +38,7 @@ export class SalesModule {
 
         const moduleDef: ModuleDefinition = {
             key: 'Sales',
+            displayRelevance: 0,
             moduleRoutePath: '/sales',
             iconPath: '/assets/sales/sales_logo.svg',
             localizedNameKey: '#SALES',

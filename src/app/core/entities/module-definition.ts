@@ -22,6 +22,15 @@ export interface ModuleDefinition {
      */
     localizedNameKey: string;
 
+
+    /**
+     * The relevance betwheen modules when displayed side-by-side.
+     *
+     * @type {number}
+     * @memberof ModuleDefinition
+     */
+    displayRelevance: number;
+
     /**
      * The module icon path.
      *
