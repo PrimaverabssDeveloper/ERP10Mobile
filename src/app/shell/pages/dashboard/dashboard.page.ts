@@ -116,17 +116,19 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
             await this.showLoading();
 
             // get modules summaries and update the interface
-            const moduleTickers = await this.modulesService.getAllAvailableModulesSummariesTickers();
-            for (const moduleTicker of moduleTickers) {
-                for (const ticker of moduleTicker.tickers) {
-                    this.tickers.push(ticker);
-                }
-            }
+            await this.updateTickers();
 
             await this.hideLoading();
         } catch (error) {
             console.log(error);
         }
+
+        // update tickers when summaries visibility changes changes
+        this.modulesService
+            .onModulesSummariesVisibilityChanges
+            .subscribe(() => {
+                this.updateTickers();
+            });
     }
 
     /**
@@ -185,6 +187,16 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
                     break;
                 default:
                     break;
+            }
+        }
+    }
+
+    private async updateTickers(): Promise<any> {
+        const moduleTickers = await this.modulesService.getAllAvailableModulesSummariesTickers();
+        this.tickers.splice(0, this.tickers.length);
+        for (const moduleTicker of moduleTickers) {
+            for (const ticker of moduleTicker.tickers) {
+                this.tickers.push(ticker);
             }
         }
     }

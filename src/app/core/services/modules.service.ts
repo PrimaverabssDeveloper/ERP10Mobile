@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Ticker, ModuleDefinition } from '../entities';
 import { InstanceService } from './instance.service';
 import { CoreStorageService } from './core-storage.service';
+import { Observable } from 'rxjs';
 
 /**
  * Provides access to all available modules definitions.
@@ -15,14 +16,17 @@ import { CoreStorageService } from './core-storage.service';
 export class ModulesService {
 
     private readonly MODULES_SUMMARIES_VISIBILITY_STATE_STORAGE_KEY = 'MODULES_SUMMARIES_VISIBILITY_STATE';
-
+    private _onModulesSummariesVisibilityChanges: EventEmitter<any>;
     private modulesDefinitions: { [moduleKey: string]: ModuleDefinition };
 
-    // private modulesSummariesHandlers: {[moduleKey: string]: () => Promise<HTMLElement[]>} ;
+    get onModulesSummariesVisibilityChanges(): Observable<any> {
+        return this._onModulesSummariesVisibilityChanges.asObservable();
+    }
 
     constructor(private instanceService: InstanceService, private coreStorageService: CoreStorageService) {
         // this.modulesSummariesHandlers = {};
         this.modulesDefinitions = {};
+        this._onModulesSummariesVisibilityChanges = new EventEmitter();
     }
 
     addModuleDefinition(moduleDefinition: ModuleDefinition) {
@@ -113,5 +117,7 @@ export class ModulesService {
 
         await this.coreStorageService
                   .setData<{[key: string]: boolean}>(this.MODULES_SUMMARIES_VISIBILITY_STATE_STORAGE_KEY, visibilityState, true);
+
+        this._onModulesSummariesVisibilityChanges.emit();
     }
 }
