@@ -27,7 +27,7 @@
                     <button class="settings-group-item settings-group-item-with-image" [routerLink]="[moduleDef.settings.settingsRoutePath]"> 
                         <img class="settings-group-item-image" [attr.src]="moduleDef.iconPath" />
                         <div class="settings-group-item-label">
-                            {{moduleDef.localizedNameKey}}
+                            {{moduleDef.localizedNameKey | translate}}
                         </div>
                         <img class="settings-group-item-arrow" src="../../../../assets/shell/forward_arrow.png" />
                     </button>
