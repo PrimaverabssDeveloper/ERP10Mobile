@@ -53,6 +53,7 @@
         }
     },
     "CUSTOMERS" : {
+        "MODULE_NAME": "Clientes",
         "CUSTOMERS_LIST_PAGE": {
             "PAGE_TITLE": "Clientes",
             "TOOGLE_MENU_RECENT": "Recentes",
@@ -93,6 +94,7 @@
         }
     },
     "SALES": {
+        "MODULE_NAME": "Vendas",
         "SALES_SETTINGS_PAGE": {
             "PAGE_TITLE": "Vendas",
             "USE_REFERENCE_CURRENCY_TOGGLE": "Utilizar a moeda de referência",
@@ -104,6 +106,7 @@
         }
     },
     "HUMAN_RESOURCES": {
+        "MODULE_NAME": "Recursos Humanos",
         "HR_PAGE": {
             "PAGE_TITLE": "Recibos",
             "MONTH_STATUS_SALARY_PROCESSED": "Vencimento processado em {date}",

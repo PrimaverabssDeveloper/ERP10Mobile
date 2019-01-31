@@ -53,6 +53,7 @@
         }
     },
     "CUSTOMERS" : {
+        "MODULE_NAME": "Customers",
         "CUSTOMERS_LIST_PAGE": {
             "PAGE_TITLE": "Customers",
             "TOOGLE_MENU_RECENT": "Recent",
@@ -92,6 +93,7 @@
         }
     },
     "SALES": {
+        "MODULE_NAME": "Sales",
         "SALES_SETTINGS_PAGE": {
             "PAGE_TITLE": "Sales",
             "USE_REFERENCE_CURRENCY_TOGGLE": "Use reference currency",
@@ -103,6 +105,7 @@
         }
     },
     "HUMAN_RESOURCES": {
+        "MODULE_NAME": "Human Resources",
         "HR_PAGE": {
             "PAGE_TITLE": "Salary slip",
             "MONTH_STATUS_SALARY_PROCESSED": "Salary processed on {date}",
