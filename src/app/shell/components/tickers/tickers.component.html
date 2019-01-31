@@ -4,7 +4,7 @@
             <ion-slide *ngFor="let ticker of tickers">
                 <div class="ticker">
                     <div class="ticker-header">
-                        <div class="ticker-title">{{ticker.title}}</div>
+                        <div class="ticker-title">{{ticker.title | translate}}</div>
                         <button class="ticker-settings" [routerLink]="['/shell/ticker-settings']"></button>
                     </div>
                     <div class="ticker-content">
