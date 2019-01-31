@@ -7,5 +7,15 @@
     </ion-toolbar>
 </ion-header>
 <ion-content scrollY='false'>
-    
+    <div class="ticker-settings settings">
+        <div class="settings-group">
+            <div class="setting-row" *ngFor="let moduleDefinition of modulesDefinitionsWithTicker | orderBy: 'displayRelevance'">
+                <img class="module-icon" [attr.src]="moduleDefinition.iconPath" />
+                <div class="setting-row-label">{{ moduleDefinition.localizedNameKey | translate }}</div>
+                <div class="setting-row-right-container">
+                    <ion-toggle [attr.checked]="moduleDefinition.summaries.visible" (ionChange)="onChangeAction(moduleDefinition)"></ion-toggle>
+                </div>
+            </div>
+        </div>
+    </div>
 </ion-content>

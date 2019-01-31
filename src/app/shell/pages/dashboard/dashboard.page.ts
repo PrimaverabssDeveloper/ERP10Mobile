@@ -110,7 +110,7 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
             return;
         }
 
-        this.modulesDefinitions = this.modulesService.getAvailabeModulesDefinitions();
+        this.modulesDefinitions = await this.modulesService.getAvailabeModulesDefinitions();
 
         try {
             await this.showLoading();

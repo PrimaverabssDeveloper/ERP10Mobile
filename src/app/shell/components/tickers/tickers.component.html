@@ -1,5 +1,17 @@
 <div class="tickers">
     <div class="tickers-slides">
+        <div class="no-tickers ticker" *ngIf="totalTickers === 0">
+            <div class="ticker-header">
+                <div class="ticker-title">{{'SHELL.TICKERS_COMPONENT.NO_TICKERS_TITLE' | translate}}</div>
+            </div>
+            <div class="ticker-content" [routerLink]="['/shell/ticker-settings']">
+                <div class="no-tickers-open-settings">
+                    <div class="icon"></div>
+                    <div class="label">{{'SHELL.TICKERS_COMPONENT.NO_TICKERS_OPEN_SETTIONS_BTN' | translate}}</div>
+                </div>
+            </div>
+        </div>
+
         <ion-slides #slide>
             <ion-slide *ngFor="let ticker of tickers">
                 <div class="ticker">
@@ -14,5 +26,5 @@
             </ion-slide>
         </ion-slides>
     </div>
-    <div class="tickers-pager">{{currentTickerIndex}}/{{totalTickers}}</div>
+    <div class="tickers-pager" *ngIf="totalTickers !== 0">{{currentTickerIndex}}/{{totalTickers}}</div>
 </div>

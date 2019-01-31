@@ -1,0 +1,14 @@
+
+.ticker-settings {
+    .module-icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 5px;
+        height: 30px;
+    }
+    
+    .settings-group .setting-row .setting-row-label {
+        left: 45px;
+    }
+}

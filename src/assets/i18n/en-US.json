@@ -50,6 +50,10 @@
         },
         "TICKER_SETTINGS_PAGE": {
             "PAGE_TITLE" : "Ticker data"
+        },
+        "TICKERS_COMPONENT": {
+            "NO_TICKERS_TITLE": "No active pages",
+            "NO_TICKERS_OPEN_SETTIONS_BTN": "Configure ticker"
         }
     },
     "CUSTOMERS" : {

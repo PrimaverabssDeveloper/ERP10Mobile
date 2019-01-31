@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Ticker, ModuleDefinition } from '../entities';
 import { InstanceService } from './instance.service';
+import { CoreStorageService } from './core-storage.service';
 
 /**
  * Provides access to all available modules definitions.
@@ -13,11 +14,13 @@ import { InstanceService } from './instance.service';
 })
 export class ModulesService {
 
+    private readonly MODULES_SUMMARIES_VISIBILITY_STATE_STORAGE_KEY = 'MODULES_SUMMARIES_VISIBILITY_STATE';
+
     private modulesDefinitions: { [moduleKey: string]: ModuleDefinition };
 
     // private modulesSummariesHandlers: {[moduleKey: string]: () => Promise<HTMLElement[]>} ;
 
-    constructor(private instanceService: InstanceService) {
+    constructor(private instanceService: InstanceService, private coreStorageService: CoreStorageService) {
         // this.modulesSummariesHandlers = {};
         this.modulesDefinitions = {};
     }
@@ -26,23 +29,25 @@ export class ModulesService {
         this.modulesDefinitions[moduleDefinition.key] = moduleDefinition;
     }
 
-    // addModuleSummariesHandler(moduleKey: string, summariesHandler: () => Promise<HTMLElement[]>) {
-    //     this.modulesSummariesHandlers[moduleKey] = summariesHandler;
-    // }
-
     /**
      * Provides the definitions to the availble modules for the current user.
      *
      * @returns {ModuleDefinition[]}
      * @memberof ModulesService
      */
-    getAvailabeModulesDefinitions(): ModuleDefinition[] {
+    async getAvailabeModulesDefinitions(): Promise<ModuleDefinition[]> {
         const availableModules = this.instanceService.currentInstance.modules;
         const availableModulesDefinitions: ModuleDefinition[] = [];
+
+        const visibilityState = await this.coreStorageService
+            .getData<{ [key: string]: boolean }>(this.MODULES_SUMMARIES_VISIBILITY_STATE_STORAGE_KEY, true);
 
         for (const m of availableModules) {
             const moduleDef = this.modulesDefinitions[m.name];
             if (moduleDef) {
+                if (moduleDef.summaries.hasSummaries) {
+                    moduleDef.summaries.visible = visibilityState ? visibilityState[moduleDef.key] !== false : true;
+                }
                 availableModulesDefinitions.push(moduleDef);
             }
         }
@@ -55,15 +60,17 @@ export class ModulesService {
         let error: any;
 
         try {
-            const availableModulesDefs = this.getAvailabeModulesDefinitions();
-            for (const moduleDefinition of availableModulesDefs) {
+            // get modules with summaries
+            const availableModulesDefs = await this.getAvailabeModulesDefinitions();
 
-                // verify if the module has summaries
-                if (!moduleDefinition.summaries ||
-                    !moduleDefinition.summaries.hasSummaries ||
-                    !moduleDefinition.summaries.summariesHandler) {
-                    continue;
-                }
+            // filter the modules with enabled summaries
+            const modulesWithVisibleSummaries = availableModulesDefs.filter(m =>
+                m.summaries &&
+                m.summaries.hasSummaries &&
+                m.summaries.summariesHandler &&
+                m.summaries.visible);
+
+            for (const moduleDefinition of modulesWithVisibleSummaries) {
 
                 const htmlElements = await moduleDefinition.summaries.summariesHandler();
 
@@ -92,5 +99,19 @@ export class ModulesService {
                 resolve(summariesTickers);
             }
         });
+    }
+
+    async setModuleSummariesVisibilityState(moduleDefinition: ModuleDefinition, visible: boolean) {
+        let visibilityState = await this.coreStorageService
+            .getData<{[key: string]: boolean }>(this.MODULES_SUMMARIES_VISIBILITY_STATE_STORAGE_KEY, true);
+
+        if (!visibilityState) {
+            visibilityState = {};
+        }
+
+        visibilityState[moduleDefinition.key] = visible;
+
+        await this.coreStorageService
+                  .setData<{[key: string]: boolean}>(this.MODULES_SUMMARIES_VISIBILITY_STATE_STORAGE_KEY, visibilityState, true);
     }
 }

@@ -29,10 +29,9 @@ export class SideMenuComponent implements OnInit {
     *
     * @memberof SideMenuComponent
     */
-    ngOnInit(): void {
-        this.modulesDefsWithSettings = this.modulesService
-                                           .getAvailabeModulesDefinitions()
-                                           .filter(m => m.settings && m.settings.hasSettings);
+    async ngOnInit() {
+        const modulesDefinitions = await this.modulesService.getAvailabeModulesDefinitions();
+        this.modulesDefsWithSettings = modulesDefinitions.filter(m => m.settings && m.settings.hasSettings);
     }
 
 
