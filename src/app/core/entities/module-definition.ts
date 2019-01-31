@@ -68,6 +68,7 @@ export interface ModuleDefinition {
      */
     summaries: {
         hasSummaries: boolean;
+        visible?: boolean;
         summariesHandler?: () => Promise<HTMLElement[]>;
     };
 }
