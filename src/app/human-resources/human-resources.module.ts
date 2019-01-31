@@ -33,7 +33,7 @@ export class HumanResourcesModule {
             displayRelevance: 1,
             moduleRoutePath: '/humanresources',
             iconPath: '/assets/human-resources/human_resources_logo.svg',
-            localizedNameKey: '#HR',
+            localizedNameKey: 'HUMAN_RESOURCES.MODULE_NAME',
             summaries: {
                 hasSummaries: false
             },

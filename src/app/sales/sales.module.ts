@@ -41,7 +41,7 @@ export class SalesModule {
             displayRelevance: 0,
             moduleRoutePath: '/sales',
             iconPath: '/assets/sales/sales_logo.svg',
-            localizedNameKey: '#SALES',
+            localizedNameKey: 'SALES.MODULE_NAME',
             summaries: {
                 hasSummaries: true,
                 summariesHandler: () => {

@@ -39,7 +39,7 @@ export class CustomersModule {
             displayRelevance: 2,
             moduleRoutePath: '/customers',
             iconPath: '/assets/customers/customers_logo.svg',
-            localizedNameKey: '#CUSTOMERS',
+            localizedNameKey: 'CUSTOMERS.MODULE_NAME',
             summaries: {
                 hasSummaries: false
             },
