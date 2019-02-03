@@ -12,7 +12,7 @@
             </div>
         </div>
 
-        <ion-slides #slide>
+        <ion-slides #slide *ngIf="totalTickers !== 0">
             <ion-slide *ngFor="let ticker of tickers">
                 <div class="ticker">
                     <div class="ticker-header">

@@ -42,6 +42,8 @@ export class TickersComponent implements OnInit {
             setTimeout(() => {
                 this.slide.update();
             }, 1000);
+        } else {
+            return;
         }
 
         this.slide
