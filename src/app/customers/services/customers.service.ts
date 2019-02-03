@@ -53,6 +53,10 @@ export class CustomersService {
             console.error(error);
         }
 
+        if (!customers) {
+            customers = [];
+        }
+
         return customers;
     }
 
