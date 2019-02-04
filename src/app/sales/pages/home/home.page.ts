@@ -357,6 +357,6 @@ export class HomePage extends PageBase implements OnInit {
     }
 
     private storeImageInGallery() {
-
+        
     }
 }
