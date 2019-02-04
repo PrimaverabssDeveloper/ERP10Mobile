@@ -47,7 +47,7 @@ export interface CustomerOtherAddress {
 
             <div class="contact" *ngIf="address.fax">
                 <img class="contact-icon" src="../../../../assets/customers/images/address.png">
-                <a class="contact-value" >Build address</a>
+                <a class="contact-value" >{{buildAddress(address)}}</a>
             </div>
         </div>
     </div>

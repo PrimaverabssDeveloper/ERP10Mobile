@@ -31,4 +31,31 @@ export class OtherAddressesPage extends PageBase implements OnInit {
 
         this.customerName = this.route.snapshot.queryParams['customerName'];
     }
+
+    /**
+     * Create the address based on the provided address parts.
+     *
+     * @param {CustomerOtherAddress} otherAddress
+     * @returns {string}
+     * @memberof OtherAddressesPage
+     */
+    buildAddress(otherAddress: CustomerOtherAddress): string {
+
+        let address = `${otherAddress.address}
+                        ${otherAddress.address2},
+                        ${otherAddress.postalCode}
+                        ${otherAddress.postalLocation},
+                        ${otherAddress.location},
+                        ${otherAddress.country}`;
+
+        // Removes the leading and trailing white space
+        address = address.trim();
+
+        // In case of the last chart is a ',', removes it
+        if (address[address.length - 1] === ',') {
+            address = address.slice(0, address.length - 1);
+        }
+
+        return address;
+    }
 }
