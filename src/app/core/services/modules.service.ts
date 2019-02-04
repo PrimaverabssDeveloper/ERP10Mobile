@@ -43,8 +43,7 @@ export class ModulesService {
         const availableModules = this.instanceService.currentInstance.modules;
         const availableModulesDefinitions: ModuleDefinition[] = [];
 
-        const visibilityState = await this.coreStorageService
-            .getData<{ [key: string]: boolean }>(this.MODULES_SUMMARIES_VISIBILITY_STATE_STORAGE_KEY, true);
+        const visibilityState = await this.getModulesVisibilityStateAsync();
 
         for (const m of availableModules) {
             const moduleDef = this.modulesDefinitions[m.name];
@@ -106,8 +105,7 @@ export class ModulesService {
     }
 
     async setModuleSummariesVisibilityState(moduleDefinition: ModuleDefinition, visible: boolean) {
-        let visibilityState = await this.coreStorageService
-            .getData<{[key: string]: boolean }>(this.MODULES_SUMMARIES_VISIBILITY_STATE_STORAGE_KEY, true);
+        let visibilityState = await this.getModulesVisibilityStateAsync();
 
         if (!visibilityState) {
             visibilityState = {};
@@ -119,5 +117,17 @@ export class ModulesService {
                   .setData<{[key: string]: boolean}>(this.MODULES_SUMMARIES_VISIBILITY_STATE_STORAGE_KEY, visibilityState, true);
 
         this._onModulesSummariesVisibilityChanges.emit();
+    }
+
+    private async getModulesVisibilityStateAsync(): Promise<{ [key: string]: boolean }> {
+        let visibilityState: { [key: string]: boolean } = null;
+        try {
+            visibilityState = await this.coreStorageService
+                .getData<{ [key: string]: boolean }>(this.MODULES_SUMMARIES_VISIBILITY_STATE_STORAGE_KEY, true);
+        } catch (error) {
+            console.log(error);
+        }
+
+        return visibilityState;
     }
 }
