@@ -52,14 +52,20 @@
         <div class="sales">
             <div class="sales-header">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_TITLE' | translate }}</div>
             <div class="sales-row">
-                <div class="col-6">
+                <div class="col-5">
                     <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_CURRENT_YEAR_TOTAL_SALES_LABEL'
                         | translate }} {{currentYear}}</div>
                     <div class="sales-row-value left">{{customer.sales.totalSales.currentSales |
                         currency:customer.sales.currency}}</div>
                 </div>
-
-                <div class="col-6">
+                <div class="col-2">
+                    <div class="sales-value" [ngClass]="{'positive': salesPercentageVariation > 0, 'negative': salesPercentageVariation < 0}">
+                        <div class="top-arrow"></div>
+                        <div class="value">{{salesPercentageVariation}}%</div>
+                        <div class="bottom-arrow"></div>
+                    </div>
+                </div>
+                <div class="col-5">
                     <div class="sales-row-label right">{{
                         'CUSTOMERS.CUSTOMER_PAGE.SALES_PREVIOUS_YEAR_TOTAL_SALES_LABEL' | translate }} {{previousYear}}</div>
                     <div class="sales-row-value right">{{customer.sales.totalSales.previousSales |

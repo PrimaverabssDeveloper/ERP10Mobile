@@ -1,9 +1,10 @@
 import { PageBase } from '../../../shared/pages';
 import { LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { Customer } from '../../entities';
+import { Customer, CustomerSales } from '../../entities';
 import { CustomersService, CustomersServiceProvider } from '../../services';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MathTools } from '../../../shared/tools';
 
 @Component({
     templateUrl: './customer.page.html',
@@ -15,6 +16,7 @@ export class CustomerPage extends PageBase implements OnInit {
     customer: Customer;
     currentYear: number;
     previousYear: number;
+    salesPercentageVariation: number;
 
     constructor(
         public loadingController: LoadingController,
@@ -41,6 +43,13 @@ export class CustomerPage extends PageBase implements OnInit {
 
         try {
             this.customer = await this.customersService.getCustomer(companyKey, customerKey);
+
+            // calc the variation between previouse and current sales
+            this.salesPercentageVariation = MathTools.variationBetweenTwoNumbers(
+                this.customer.sales.totalSales.previousSales,
+                this.customer.sales.totalSales.currentSales,
+                true);
+
         } catch (error) {
             console.log(error);
         }

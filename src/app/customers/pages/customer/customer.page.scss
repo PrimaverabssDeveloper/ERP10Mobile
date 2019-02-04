@@ -65,6 +65,16 @@ $row-border: 1px solid rgb(213, 213, 213);
         float: left;
     }
 
+    .col-5 {
+        width: calc((100% / 12) * 5);
+        float: left;
+    }
+
+    .col-2 {
+        width: calc((100% / 12) * 2);
+        float: left;
+    }
+
     .sales {
         float: left;
         width: 100%;
@@ -111,6 +121,68 @@ $row-border: 1px solid rgb(213, 213, 213);
             .right {
                 float: right;
                 text-align: right;
+            }
+
+            .sales-value {
+                --sales-neutral-state-color: #E0E0E0;
+                --sales-negative-state-color: #E53935;
+                --sales-positive-state-color: rgb(5, 173, 5);
+
+                &.negative {
+                    
+                    .value {
+                        color: var(--sales-negative-state-color);
+                    }
+
+                    .bottom-arrow {
+                        border-top-color: var(--sales-negative-state-color);
+                    }
+                }
+
+                &.positive {
+                    
+                    .top-arrow {
+                        border-bottom-color: var(--sales-positive-state-color);
+                    }
+
+                    .value {
+                        color: var(--sales-positive-state-color);
+                    }
+                }
+
+
+                .top-arrow {
+                    width: 0;
+                    height: 0;
+                    margin-left: auto;
+                    margin-right: auto;
+                    position: relative;
+                    border-top: 5px solid transparent;
+                    border-right: 5px solid transparent;
+                    border-bottom: 5px solid var(--sales-neutral-state-color);
+                    border-left: 5px solid transparent;
+                }
+
+                .value {
+                    text-align: center;
+                    position: relative;
+                    font-size: 8pt;
+                    font-weight: bold;
+                    margin: 3px;
+                    color: var(--sales-neutral-state-color);
+                }
+
+                .bottom-arrow {
+                    width: 0;
+                    height: 0;
+                    margin-left: auto;
+                    margin-right: auto;
+                    position: relative;
+                    border-top: 5px solid var(--sales-neutral-state-color);
+                    border-right: 5px solid transparent;
+                    border-bottom: 5px solid transparent;
+                    border-left: 5px solid transparent;
+                }
             }
         }
     }
