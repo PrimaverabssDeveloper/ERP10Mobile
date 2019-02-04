@@ -43,13 +43,13 @@ export class ModulesService {
         const availableModules = this.instanceService.currentInstance.modules;
         const availableModulesDefinitions: ModuleDefinition[] = [];
 
-        const visibilityState = await this.getModulesVisibilityStateAsync();
+        const summariesVisibilityState = await this.getModulesSummariesVisibilityStateAsync();
 
         for (const m of availableModules) {
             const moduleDef = this.modulesDefinitions[m.name];
             if (moduleDef) {
                 if (moduleDef.summaries.hasSummaries) {
-                    moduleDef.summaries.visible = visibilityState ? visibilityState[moduleDef.key] !== false : true;
+                    moduleDef.summaries.visible = summariesVisibilityState ? summariesVisibilityState[moduleDef.key] !== false : true;
                 }
                 availableModulesDefinitions.push(moduleDef);
             }
@@ -105,21 +105,21 @@ export class ModulesService {
     }
 
     async setModuleSummariesVisibilityState(moduleDefinition: ModuleDefinition, visible: boolean) {
-        let visibilityState = await this.getModulesVisibilityStateAsync();
+        let summariesVisibilityState = await this.getModulesSummariesVisibilityStateAsync();
 
-        if (!visibilityState) {
-            visibilityState = {};
+        if (!summariesVisibilityState) {
+            summariesVisibilityState = {};
         }
 
-        visibilityState[moduleDefinition.key] = visible;
+        summariesVisibilityState[moduleDefinition.key] = visible;
 
         await this.coreStorageService
-                  .setData<{[key: string]: boolean}>(this.MODULES_SUMMARIES_VISIBILITY_STATE_STORAGE_KEY, visibilityState, true);
+                  .setData<{[key: string]: boolean}>(this.MODULES_SUMMARIES_VISIBILITY_STATE_STORAGE_KEY, summariesVisibilityState, true);
 
         this._onModulesSummariesVisibilityChanges.emit();
     }
 
-    private async getModulesVisibilityStateAsync(): Promise<{ [key: string]: boolean }> {
+    private async getModulesSummariesVisibilityStateAsync(): Promise<{ [key: string]: boolean }> {
         let visibilityState: { [key: string]: boolean } = null;
         try {
             visibilityState = await this.coreStorageService
