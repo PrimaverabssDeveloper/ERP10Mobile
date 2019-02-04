@@ -10,6 +10,7 @@ export * from './absolute.pipe';
 export * from './safe-url.pipe';
 export * from './currency-symbol.pipe';
 export * from './order-by.pipe';
+export * from './localized-strings.pipe';
 
 export const PIPES = [
     RoundPipe,
