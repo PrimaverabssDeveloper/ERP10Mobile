@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Company, Serie, ChartData, ChartBundle } from '../../entities';
+import { MathTools } from '../../../shared/tools';
 
 
 @Component({
@@ -126,7 +127,7 @@ export class SalesTableComponent {
                 label: label,
                 currentYearValue: currentYearFinalValue,
                 previousYearValue: previousYearFinalValue,
-                deltaPercentageValue: this.calcPercentageDeltaBetweenTwoNumbers(previousYearFinalValue, currentYearFinalValue),
+                deltaPercentageValue: MathTools.variationBetweenTwoNumbers(previousYearFinalValue, currentYearFinalValue),
                 isTotal: dataPoint.isTotal
             });
         }
@@ -160,7 +161,7 @@ export class SalesTableComponent {
                         return {
                             currentYearValue: currentYearValue,
                             previousYearValue: previousYearValue,
-                            deltaPercentageValue: this.calcPercentageDeltaBetweenTwoNumbers(previousYearValue, currentYearValue),
+                            deltaPercentageValue: MathTools.variationBetweenTwoNumbers(previousYearValue, currentYearValue),
                             label: `Q${i + 1}`,
                             isTotal: false
                         };
@@ -251,7 +252,7 @@ export class SalesTableComponent {
                 label: label,
                 currentYearValue: currentYearFinalValue,
                 previousYearValue: previousYearFinalValue,
-                deltaPercentageValue: this.calcPercentageDeltaBetweenTwoNumbers(previousYearFinalValue, currentYearFinalValue),
+                deltaPercentageValue: MathTools.variationBetweenTwoNumbers(previousYearFinalValue, currentYearFinalValue),
                 isTotal: dataPoint.isTotal
             });
         }
@@ -261,25 +262,5 @@ export class SalesTableComponent {
 
     private getCorrectValue(value: { seriesKey: string, value: number, reportingValue: number }, useReportingValue: boolean): number {
         return useReportingValue ? value.reportingValue : value.value;
-    }
-
-    private calcPercentageDeltaBetweenTwoNumbers(valueA: number, valueB: number, roundValue?: boolean) {
-        if (!valueA || valueA === 0) {
-            return 0;
-        }
-
-        let delta = ((valueB - valueA) / Math.abs(valueA)) * 100;
-        delta = roundValue ? Math.round(delta) : delta;
-        return delta;
-    }
-
-    private calcPercentageRatioBetweenTwoNumbers(valueA: number, valueB: number, roundValue?: boolean) {
-        if (!valueB || valueB === 0) {
-            return 0;
-        }
-
-        let ratio = (valueA / valueB) * 100;
-        ratio = roundValue ? Math.round(ratio) : ratio;
-        return ratio;
     }
 }
