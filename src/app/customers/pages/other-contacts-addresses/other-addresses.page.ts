@@ -33,6 +33,18 @@ export class OtherAddressesPage extends PageBase implements OnInit {
     }
 
     /**
+     * Show the address on the default map provider
+     *
+     * @param {CustomerOtherAddress} otherAddress
+     * @memberof OtherAddressesPage
+     */
+    async showAddressOnMapAction(otherAddress: CustomerOtherAddress ) {
+        const address = `${otherAddress.address}+${otherAddress.address2}+${otherAddress.location}`;
+        const url = `https://www.google.com/maps/search/?api=1&query=${escape(address)}`;
+        window.open(url, '_system');
+    }
+
+    /**
      * Create the address based on the provided address parts.
      *
      * @param {CustomerOtherAddress} otherAddress
