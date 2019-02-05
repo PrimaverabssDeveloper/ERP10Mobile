@@ -1,12 +1,50 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import {
+    Component,
+    ViewChild,
+    OnInit
+} from '@angular/core';
 
-import { PopoverController, LoadingController } from '@ionic/angular';
-import { CompanySelectorComponent, FooterTabMenu, FooterMenuItemSelectedEvent, FooterTabMenuItem, SalesChartComponent, SalesTableComponent } from '../../components';
-import { PageBase } from '../../../shared/pages';
-import { SalesService, SalesServiceProvider } from '../../services';
-import { Company, SalesCharts, CompanySales, ChartBundle, ChartData, Serie } from '../../entities';
-import { LocaleService, DomService } from '../../../core/services';
-import { CurrencyPipe } from '@angular/common';
+import {
+    CurrencyPipe, DatePipe
+} from '@angular/common';
+
+import {
+    PopoverController,
+    LoadingController
+} from '@ionic/angular';
+
+import {
+    CompanySelectorComponent,
+    FooterTabMenu,
+    FooterMenuItemSelectedEvent,
+    FooterTabMenuItem,
+    SalesTableComponent
+} from '../../components';
+
+import {
+    PageBase
+} from '../../../shared/pages';
+
+import {
+    SalesService,
+    SalesServiceProvider
+} from '../../services';
+
+import {
+    Company,
+    SalesCharts,
+    CompanySales,
+    ChartBundle,
+    ChartData,
+    Serie
+} from '../../entities';
+
+import {
+    LocaleService,
+    DomService
+} from '../../../core/services';
+
+import { LocalizedStringsPipe } from '../../../shared/pipes';
 
 
 
@@ -80,6 +118,7 @@ export class HomePage extends PageBase implements OnInit {
         private salesService: SalesService,
         private localeService: LocaleService,
         private currencyPipe: CurrencyPipe,
+        private datePipe: DatePipe,
         private domService: DomService
     ) {
 
@@ -113,6 +152,8 @@ export class HomePage extends PageBase implements OnInit {
         this.updateView();
 
         this.hideLoading();
+
+        // setTimeout(() => this.storeImageInGallery(), 1000);
     }
 
     async companySelectorAction(event: any) {
@@ -340,7 +381,7 @@ export class HomePage extends PageBase implements OnInit {
         const tempImg = document.createElement('img');
         tempImg.addEventListener('load', onTempImageLoad);
 
-        const html = this.domService.createComponent(SalesTableComponent, {data: this.tableData }).innerHTML;
+        const html = this.domService.createComponent(SalesTableComponent, { data: this.tableData }).innerHTML;
 
         // tslint:disable-next-line:max-line-length
         const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000"><foreignObject width="100%" height="100%">${html}</foreignObject></svg>`;
@@ -356,7 +397,261 @@ export class HomePage extends PageBase implements OnInit {
 
     }
 
+    // tslint:disable-next-line:member-ordering
+    imgSrc: string;
+
     private storeImageInGallery() {
-        
+        const canvas = document.createElement('canvas');
+        canvas.width = 2500;
+        canvas.height = 2500;
+        const ctx = canvas.getContext('2d');
+
+        // default definitions
+        ctx.textBaseline = 'top';
+
+        // reference lines
+        ctx.strokeRect(80, 80, 2500 - 80 * 2, 2500 - 80 * 2);
+        ctx.strokeRect(2500 * .5, 0, 1, 2500);
+
+        // title
+        const title = this.selectedChartBundleLocalizedTitles['pt'].toUpperCase();
+        ctx.font = 'bold 50px Open Sans Condensed';
+        ctx.fillStyle = '#000';
+        ctx.fillText(title, 100, 100);
+
+        // COMPANY
+        const companyKey = this.selectedCompanySales.key;
+        ctx.font = '50px Open Sans Condensed';
+        ctx.fillStyle = '#1C307D';
+        ctx.fillText(companyKey, 100, 180);
+
+        // DATE
+        const date = this.datePipe.transform(this.dataDate, 'medium');
+        ctx.font = '50px Open Sans Condensed';
+        ctx.fillStyle = '#000';
+        ctx.fillText(date, 100, 260);
+
+
+
+
+
+
+        // CHARTS
+        // CHART SERIES LEGEND
+
+        // current year
+        ctx.fillStyle = '#000';
+        ctx.fillText('0000', 890, 400);
+        ctx.fillStyle = '#1C307D';
+        ctx.fillRect(980, 400, 40, 40);
+
+        // previouse year
+        ctx.fillStyle = '#000';
+        ctx.fillText('0000', 1060, 400);
+        ctx.fillStyle = '#DBE0EB';
+        ctx.fillRect(1150, 400, 40, 40);
+
+        // draw chart
+        const charCanvas = document.getElementsByTagName('canvas')[0];
+        charCanvas.getContext('2d').strokeRect(0, 0, charCanvas.width - 1, charCanvas.height - 1 );
+        const chartPosX = 170;
+        const chartPosY = 500;
+        const chartHeight = (charCanvas.height * 1020) / charCanvas.width;
+        ctx.drawImage(charCanvas, chartPosX, chartPosY, 1020, chartHeight);
+
+        // draw scale
+        // 0.0682 => percentual height of legend + top chart margin
+        const stepDelta = (chartHeight - chartHeight * 0.0682) / 4;
+
+        // 0.0124 => percentual height of top chart margin
+        const stepCompensation = chartHeight * 0.0124;
+
+        ctx.fillStyle = '#000';
+        ctx.fillRect(chartPosX, chartPosY + stepDelta * 0 + stepCompensation, 1020, 1);
+        ctx.fillRect(chartPosX, chartPosY + stepDelta * 1 + stepCompensation, 1020, 1);
+        ctx.fillRect(chartPosX, chartPosY + stepDelta * 2 + stepCompensation, 1020, 1);
+        ctx.fillRect(chartPosX, chartPosY + stepDelta * 3 + stepCompensation, 1020, 1);
+        ctx.fillRect(chartPosX, chartPosY + stepDelta * 4 + stepCompensation, 1020, 1);
+
+        ctx.font = 'bold 30px Open Sans Condensed';
+        ctx.textAlign = 'right';
+        ctx.fillText('00', chartPosX - 20, chartPosY + stepDelta * 0 + stepCompensation - 5);
+        ctx.fillText('0',  chartPosX - 20, chartPosY + stepDelta * 1 + stepCompensation - 5);
+        ctx.fillText('00', chartPosX - 20, chartPosY + stepDelta * 2 + stepCompensation - 5);
+        ctx.fillText('0',  chartPosX - 20, chartPosY + stepDelta * 3 + stepCompensation - 5);
+
+        // rotate 90deg
+        ctx.save();
+        ctx.translate(chartPosX - 50, chartPosY - 70);
+        ctx.rotate(-Math.PI / 2);
+        ctx.textAlign = 'center';
+        ctx.fillText('M(_$)', 0, 0);
+        ctx.restore();
+
+        // chart extra  info
+        ctx.font = '50px Open Sans Condensed';
+        ctx.textAlign = 'center';
+        ctx.fillText('#Total Sales xxxxx', 625, chartPosY + chartHeight + 100);
+
+
+        // TABLE
+        // TABLE SERIES LEGEND
+
+        const padding = 1180;
+        ctx.textAlign = 'left';
+        // current year
+        ctx.fillStyle = '#000';
+        ctx.fillText('1000', 2080, 400);
+        ctx.fillStyle = '#1C307D';
+        ctx.fillRect(2166, 400, 40, 40);
+
+        // previouse year
+        ctx.fillStyle = '#000';
+        ctx.fillText('0000', 2240, 400);
+        ctx.fillStyle = '#DBE0EB';
+        ctx.fillRect(2330, 400, 40, 40);
+
+        // DRAW TABLE
+        ctx.fillStyle = '#000';
+        const rowHeight = 70;
+        for (let row = 0; row < 12; row++) {
+            ctx.fillStyle = 'gray';
+            ctx.fillRect(1350, 450 + rowHeight + rowHeight * row - 5, 1020, 1);
+
+            // legend
+            ctx.textAlign = 'left';
+            ctx.fillText(`${row}`, 1350, 450 + rowHeight * row);
+
+            // prev
+            ctx.textAlign = 'right';
+            ctx.fillStyle = 'blue';
+            ctx.fillText(`00000${row}`, 1850, 450 + rowHeight * row);
+            // current
+            ctx.fillStyle = 'gray';
+            ctx.fillText(`00000${row}`, 2200, 450 + rowHeight * row);
+            // delta
+            ctx.fillStyle = 'green';
+            ctx.fillText(`${row}%`, 2370, 450 + rowHeight * row);
+        }
+
+        this.imgSrc = canvas.toDataURL();
+    }
+
+    private calcYAxisMaxValueStepAndUnit(maximumValue: number, yAxisNumberOfSteps: number, yAxisMaxValues: number[])
+        : { yAxisMaxValue: number, yAxisScaleStep: number, yAxisScaleUnitPrefix: string } {
+
+        let divider = 1;
+        const thousandDecimal = 1000;
+
+        while (!((maximumValue / divider) < thousandDecimal)) {
+            divider *= 1000;
+        }
+
+        const baseMaximum = maximumValue / divider;
+
+        let scaleMaximum: number = null;
+
+        for (const possibleMaximum of yAxisMaxValues) {
+            if (baseMaximum < possibleMaximum) {
+                scaleMaximum = possibleMaximum;
+                break;
+            }
+        }
+
+        if (!scaleMaximum) {
+            scaleMaximum = yAxisMaxValues[0];
+            divider *= 1000;
+        }
+
+        let prefix = 'T';
+
+        switch (divider) {
+            case 1: prefix = ''; break;
+            case 1000: prefix = 'K'; break;
+            case 1000000: prefix = 'M'; break;
+            case 1000000000: prefix = 'B'; break;
+        }
+
+        const yMaximumValue = scaleMaximum * divider;
+        const yScaleStep = scaleMaximum / yAxisNumberOfSteps;
+
+        return {
+            yAxisMaxValue: yMaximumValue,
+            yAxisScaleStep: yScaleStep,
+            yAxisScaleUnitPrefix: prefix
+        };
+    }
+
+    private lcm(x: number, y: number) {
+        const l = Math.min(x, y);
+        const h = Math.max(x, y);
+        const m = l * h;
+
+        for (let i = h; i < m; i += h) {
+            if (i % l === 0) {
+                return i;
+            }
+        }
+
+        return m;
+    }
+
+    private getPossibleMaximumYValues(yAxisNumberOfSteps: number): number[] {
+
+        let baseTicks = yAxisNumberOfSteps;
+        let baseLcm = this.lcm(yAxisNumberOfSteps, 10);
+
+        while (baseTicks > 10) {
+            baseTicks /= 10;
+            baseLcm /= 10;
+        }
+
+        let limitTicks = baseTicks * 10;
+
+        let limitLcm = 1;
+        while (limitLcm < limitTicks) {
+            limitLcm *= 10;
+        }
+
+
+        let mode = true;
+        let value = baseTicks;
+        const values: number[] = [];
+
+        while (value < 10000) {
+
+            if (value < 10 && value + baseTicks < 10) {
+                value += baseTicks;
+                continue;
+            }
+
+            if (mode) {
+
+                value += baseTicks;
+                if (value >= limitTicks) {
+                    mode = false;
+                    baseTicks *= 10;
+                    limitTicks *= 10;
+                }
+
+            } else {
+
+                value += baseLcm;
+                if (value >= limitLcm && (value % baseTicks === 0)) {
+                    mode = true;
+                    baseLcm *= 10;
+                    limitLcm *= 10;
+                }
+
+            }
+
+            if (value < 10000) {
+                const dividend = value;
+                const divisor = 10;
+                values.push(dividend / divisor);
+            }
+        }
+
+        return values;
     }
 }
