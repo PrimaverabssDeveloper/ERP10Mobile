@@ -106,6 +106,14 @@
         },
         "DAILY_SALES_TICKER_COMPONENT" : {
             "DAILY_SALES": "Daily Sales"
+        },
+        "SHARE_CHARTS" : {
+            "ABSOLUTE": "Absolute",
+            "ACCUMULATED": "Accumulated"
+        },
+        "CHARTS" : {
+            "TOTAL_SALES": "Total sales",
+            "OTHERS": "Others"
         }
     },
     "HUMAN_RESOURCES": {
