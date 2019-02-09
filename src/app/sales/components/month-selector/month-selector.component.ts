@@ -53,7 +53,7 @@ export class MonthSelectorComponent {
 
     constructor() {
         this.currentMonthSelected = 1;
-        this.months = Array.apply(null, {length: 12}).map(Number.call, x => `${x + 1}`);
+        this.months = Array.apply(null, {length: 12}).map(Number.call, (x: number) => `${x + 1}`);
     }
 
     // #endregion
