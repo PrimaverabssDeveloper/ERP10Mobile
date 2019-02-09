@@ -47,8 +47,8 @@
                 (click)="changeValueType('abs')"></div>
         </div>
         <div class="chart-content">
-            <sales-chart [hidden]="viewType !== 'chart'" [data]="chartData"></sales-chart>
-            <sales-table [hidden]="viewType !== 'table'" [data]="tableData"></sales-table>
+            <sales-chart [hidden]="viewType !== 'chart'" [data]="chartData" (chartUpdated)="onChartUpdated($event)"></sales-chart>
+            <sales-table [hidden]="viewType !== 'table'" [data]="tableData" (tableUpdated)="onTableUpdated($event)"></sales-table>
         </div>
         <div class="extra-info">{{extraInfoValue}}</div>
         <div class="month-selector-wrapper" *ngIf="!selectedChartBundleIsTimeChart">

@@ -44,14 +44,18 @@ import {
     DomService
 } from '../../../core/services';
 
-import { LocalizedStringsPipe } from '../../../shared/pipes';
+import { LocalizedStringsPipe, CurrencySymbolPipe } from '../../../shared/pipes';
+import { SalesTableUpdatedEvent, SalesTableData } from '../../components/sales-table/entities';
+import { SalesChartData } from '../../components/sales-chart/entities';
+import { SalesChartUpdatedEvent } from '../../components/sales-chart/entities/sales-chart-updated-event';
+import { TranslateService } from '@ngx-translate/core';
 
 
 
 @Component({
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
-    providers: [SalesServiceProvider]
+    providers: [SalesServiceProvider, CurrencySymbolPipe, LocalizedStringsPipe]
 })
 export class HomePage extends PageBase implements OnInit {
 
@@ -64,6 +68,9 @@ export class HomePage extends PageBase implements OnInit {
 
     private companies: Company[];
     private salesCharts: SalesCharts;
+
+    private salesTableCurrentData: SalesTableData;
+    private salesChartCurrentData: SalesChartData;
 
     tableData: {
         chartBundle: ChartBundle,
@@ -119,6 +126,9 @@ export class HomePage extends PageBase implements OnInit {
         private localeService: LocaleService,
         private currencyPipe: CurrencyPipe,
         private datePipe: DatePipe,
+        private translate: TranslateService,
+        private currencySymbolPipe: CurrencySymbolPipe,
+        private localizedStringsPipe: LocalizedStringsPipe,
         private domService: DomService
     ) {
 
@@ -146,14 +156,14 @@ export class HomePage extends PageBase implements OnInit {
         this.selectedCompanySales = this.salesCharts.data[0];
 
         // by default, select the first chart bundle key
-        this.selectedChartBundleKey = this.selectedCompanySales.chartBundle[0].key;
+        this.selectedChartBundleKey = this.selectedCompanySales.chartBundle[1].key;
 
         // update view
         this.updateView();
 
         this.hideLoading();
 
-        // setTimeout(() => this.storeImageInGallery(), 1000);
+        //setTimeout(() => this.storeImageInGallery(), 500);
     }
 
     async companySelectorAction(event: any) {
@@ -199,7 +209,19 @@ export class HomePage extends PageBase implements OnInit {
         this.updateView();
     }
 
-    private updateView() {
+    onTableUpdated(event: SalesTableUpdatedEvent) {
+        if (event) {
+            this.salesTableCurrentData = event.tableData;
+        }
+    }
+
+    onChartUpdated(event: SalesChartUpdatedEvent) {
+        if (event) {
+            this.salesChartCurrentData = event.chartData;
+        }
+    }
+
+    private async updateView() {
 
         this.updateFooterMenu(this.selectedCompanySales);
 
@@ -215,33 +237,33 @@ export class HomePage extends PageBase implements OnInit {
         const currentYearSerie = this.getSerieWithKey(chartBundle.series, this.currentYearSeriesKey);
         const previousYearSerie = this.getSerieWithKey(chartBundle.series, this.previousYearSeriesKey);
 
-        if (this.viewType === 'chart') {
-            this.chartData = {
-                chart: chart,
-                chartBundle: chartBundle,
-                timeFrame: this.timeFrame,
-                period: this.selectedPeriod,
-                currency: currency,
-                useReportingValue: useReportingValue,
-                previousYearSerie: previousYearSerie,
-                currentYearSerie: currentYearSerie,
-                currentYearAccentColor: this.currentYearAccentColor,
-                currentYearAccentColorWithTransparency: this.currentYearAccentColorWithTransparency,
-                previouseYearAccentColor: this.previouseYearAccentColor,
-                previouseYearAccentColorWithTransparency: this.previouseYearAccentColorWithTransparency
-            };
-        } else {
-            this.tableData = {
-                chartBundle: chartBundle,
-                chart: chart,
-                timeFrame: this.timeFrame,
-                period: this.selectedPeriod,
-                previousYearSerie: previousYearSerie,
-                currentYearSerie: currentYearSerie,
-                useReportingValue: useReportingValue,
-                currency: currency
-            };
-        }
+        // chart data
+        this.chartData = {
+            chart: chart,
+            chartBundle: chartBundle,
+            timeFrame: this.timeFrame,
+            period: this.selectedPeriod,
+            currency: currency,
+            useReportingValue: useReportingValue,
+            previousYearSerie: previousYearSerie,
+            currentYearSerie: currentYearSerie,
+            currentYearAccentColor: this.currentYearAccentColor,
+            currentYearAccentColorWithTransparency: this.currentYearAccentColorWithTransparency,
+            previouseYearAccentColor: this.previouseYearAccentColor,
+            previouseYearAccentColorWithTransparency: this.previouseYearAccentColorWithTransparency
+        };
+
+        // table data
+        this.tableData = {
+            chartBundle: chartBundle,
+            chart: chart,
+            timeFrame: this.timeFrame,
+            period: this.selectedPeriod,
+            previousYearSerie: previousYearSerie,
+            currentYearSerie: currentYearSerie,
+            useReportingValue: useReportingValue,
+            currency: currency
+        };
 
         this.showTimeFrameSelector = chartBundle.isTimeChart && chartBundle.periodType === 'M';
 
@@ -255,7 +277,8 @@ export class HomePage extends PageBase implements OnInit {
                 if (totalDataPoint) {
                     const value = this.getCorrectValue(totalDataPoint.values[1], useReportingValue);
                     const moneyValue = this.currencyPipe.transform(value, currency);
-                    this.extraInfoValue = `#Total sales: ${moneyValue}`;
+                    const totalSalesResource = await this.translate.get('SALES.CHARTS.TOTAL_SALES').toPromise();
+                    this.extraInfoValue = `${totalSalesResource}: ${moneyValue}`;
                 }
             }
         } else {
@@ -269,7 +292,8 @@ export class HomePage extends PageBase implements OnInit {
                     const moneyValue = this.currencyPipe.transform(otherValue, currency);
                     const ratioPercentage = this.calcPercentageRatioBetweenTwoNumbers(otherValue, otherValue + totalValue, true);
                     const rationString = ratioPercentage === 0 ? 'N/A' : `${ratioPercentage}%`;
-                    this.extraInfoValue = `#Others: ${moneyValue} // ${rationString}`;
+                    const othersResource = await this.translate.get('SALES.CHARTS.OTHERS').toPromise();
+                    this.extraInfoValue = `${othersResource}: ${moneyValue} // ${rationString}`;
                 }
             }
         }
@@ -400,7 +424,7 @@ export class HomePage extends PageBase implements OnInit {
     // tslint:disable-next-line:member-ordering
     imgSrc: string;
 
-    private storeImageInGallery() {
+    private async storeImageInGallery() {
         const canvas = document.createElement('canvas');
         canvas.width = 2500;
         canvas.height = 2500;
@@ -414,7 +438,17 @@ export class HomePage extends PageBase implements OnInit {
         ctx.strokeRect(2500 * .5, 0, 1, 2500);
 
         // title
-        const title = this.selectedChartBundleLocalizedTitles['pt'].toUpperCase();
+        const chartName = this.localizedStringsPipe.transform(this.selectedChartBundleLocalizedTitles).toUpperCase();
+        const aggregationResourceKey = this.valueType === 'abs' ? 'SALES.SHARE_CHARTS.ABSOLUTE' : 'SALES.SHARE_CHARTS.ACCUMULATED';
+        const aggregation = await this.translate.get(aggregationResourceKey).toPromise();
+        let period: string;
+
+        if (!this.selectedChartBundleIsTimeChart) {
+            period = await this.translate.get(`SHARED.DATES.MONTHS.${this.selectedPeriod}`).toPromise();
+            period = `(${period.slice(0, 3).toLocaleLowerCase()}) `;
+        }
+
+        const title = `${chartName} ${period}- ${aggregation}`;
         ctx.font = 'bold 50px Open Sans Condensed';
         ctx.fillStyle = '#000';
         ctx.fillText(title, 100, 100);
@@ -437,221 +471,162 @@ export class HomePage extends PageBase implements OnInit {
 
 
         // CHARTS
-        // CHART SERIES LEGEND
-
-        // current year
-        ctx.fillStyle = '#000';
-        ctx.fillText('0000', 890, 400);
-        ctx.fillStyle = '#1C307D';
-        ctx.fillRect(980, 400, 40, 40);
-
-        // previouse year
-        ctx.fillStyle = '#000';
-        ctx.fillText('0000', 1060, 400);
-        ctx.fillStyle = '#DBE0EB';
-        ctx.fillRect(1150, 400, 40, 40);
-
-        // draw chart
-        const charCanvas = document.getElementsByTagName('canvas')[0];
-        charCanvas.getContext('2d').strokeRect(0, 0, charCanvas.width - 1, charCanvas.height - 1 );
         const chartPosX = 170;
         const chartPosY = 500;
-        const chartHeight = (charCanvas.height * 1020) / charCanvas.width;
-        ctx.drawImage(charCanvas, chartPosX, chartPosY, 1020, chartHeight);
+        let chartHeight: number;
+        const charCanvas = document.getElementsByTagName('canvas')[0];
+        charCanvas.getContext('2d').strokeRect(0, 0, charCanvas.width - 1, charCanvas.height - 1);
 
-        // draw scale
-        // 0.0682 => percentual height of legend + top chart margin
-        const stepDelta = (chartHeight - chartHeight * 0.0682) / 4;
+        if (this.selectedChartBundlePeriodType === 'W') {
+            chartHeight = charCanvas.width;
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.height = (charCanvas.width * 1020) / charCanvas.height;
+            tempCanvas.width = 1020;
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCtx.translate(charCanvas.width * .5, charCanvas.height * .5);
+            tempCtx.rotate(90 * Math.PI / 180);
+            tempCtx.drawImage(charCanvas, 0, 0, -tempCanvas.height, -tempCanvas.width);
 
-        // 0.0124 => percentual height of top chart margin
-        const stepCompensation = chartHeight * 0.0124;
+            this.imgSrc = tempCanvas.toDataURL();
+            return;
+        } else {
+            ctx.rotate(-Math.PI / 2);
+            // CHART SERIES LEGEND
+            ctx.font = '40px Open Sans Condensed';
+            // current year
+            ctx.fillStyle = '#000';
+            ctx.fillText(this.salesChartCurrentData.currentYearLegend, 935, 400);
+            ctx.fillStyle = '#1C307D';
+            ctx.fillRect(1010, 400, 30, 30);
 
-        ctx.fillStyle = '#000';
-        ctx.fillRect(chartPosX, chartPosY + stepDelta * 0 + stepCompensation, 1020, 1);
-        ctx.fillRect(chartPosX, chartPosY + stepDelta * 1 + stepCompensation, 1020, 1);
-        ctx.fillRect(chartPosX, chartPosY + stepDelta * 2 + stepCompensation, 1020, 1);
-        ctx.fillRect(chartPosX, chartPosY + stepDelta * 3 + stepCompensation, 1020, 1);
-        ctx.fillRect(chartPosX, chartPosY + stepDelta * 4 + stepCompensation, 1020, 1);
+            // previouse year
+            ctx.fillStyle = '#000';
+            ctx.fillText(this.salesChartCurrentData.previousYearLegend, 1070, 400);
+            ctx.fillStyle = '#DBE0EB';
+            ctx.fillRect(1150, 400, 30, 30);
 
-        ctx.font = 'bold 30px Open Sans Condensed';
-        ctx.textAlign = 'right';
-        ctx.fillText('00', chartPosX - 20, chartPosY + stepDelta * 0 + stepCompensation - 5);
-        ctx.fillText('0',  chartPosX - 20, chartPosY + stepDelta * 1 + stepCompensation - 5);
-        ctx.fillText('00', chartPosX - 20, chartPosY + stepDelta * 2 + stepCompensation - 5);
-        ctx.fillText('0',  chartPosX - 20, chartPosY + stepDelta * 3 + stepCompensation - 5);
+            // draw chart
+            chartHeight = (charCanvas.height * 1020) / charCanvas.width;
+            ctx.drawImage(charCanvas, chartPosX, chartPosY, 1020, chartHeight);
 
-        // rotate 90deg
-        ctx.save();
-        ctx.translate(chartPosX - 50, chartPosY - 70);
-        ctx.rotate(-Math.PI / 2);
-        ctx.textAlign = 'center';
-        ctx.fillText('M(_$)', 0, 0);
-        ctx.restore();
+            // draw scale
+            // 0.0682 => percentual height of legend + top chart margin
+            const stepDelta = (chartHeight - chartHeight * 0.0682) / 4;
+
+            // 0.0124 => percentual height of top chart margin
+            const stepCompensation = chartHeight * 0.0124;
+
+            ctx.fillStyle = '#000';
+            ctx.fillRect(chartPosX, chartPosY + stepDelta * 0 + stepCompensation, 1020, 1);
+            ctx.fillRect(chartPosX, chartPosY + stepDelta * 1 + stepCompensation, 1020, 1);
+            ctx.fillRect(chartPosX, chartPosY + stepDelta * 2 + stepCompensation, 1020, 1);
+            ctx.fillRect(chartPosX, chartPosY + stepDelta * 3 + stepCompensation, 1020, 1);
+            ctx.fillRect(chartPosX, chartPosY + stepDelta * 4 + stepCompensation, 1020, 1);
+
+            ctx.font = 'bold 30px Open Sans Condensed';
+            ctx.textAlign = 'right';
+            const yAxisScaleYConstant =  chartPosY + stepCompensation - 5;
+            ctx.fillText(`${this.salesChartCurrentData.yAxisScaleStep * 4}`, chartPosX - 20, yAxisScaleYConstant + stepDelta * 0);
+            ctx.fillText(`${this.salesChartCurrentData.yAxisScaleStep * 3}`, chartPosX - 20, yAxisScaleYConstant + stepDelta * 1);
+            ctx.fillText(`${this.salesChartCurrentData.yAxisScaleStep * 2}`, chartPosX - 20, yAxisScaleYConstant + stepDelta * 2);
+            ctx.fillText(`${this.salesChartCurrentData.yAxisScaleStep * 1}`, chartPosX - 20, yAxisScaleYConstant + stepDelta * 3);
+
+            // y axis units
+            // rotate 90deg
+            ctx.save();
+            ctx.translate(chartPosX - 50, chartPosY - 70);
+            ctx.rotate(-Math.PI / 2);
+            ctx.textAlign = 'center';
+            const currencySymbol = this.currencySymbolPipe.transform(this.salesChartCurrentData.currentCurrency);
+            ctx.fillText(`${this.salesChartCurrentData.yAxisScaleUnitPrefix}(${currencySymbol})`, 0, 0);
+            ctx.restore();
+        }
 
         // chart extra  info
-        ctx.font = '50px Open Sans Condensed';
+        ctx.font = '40px Open Sans Condensed';
         ctx.textAlign = 'center';
-        ctx.fillText('#Total Sales xxxxx', 625, chartPosY + chartHeight + 100);
+        ctx.fillText(this.extraInfoValue, 625, chartPosY + chartHeight + 100);
 
 
         // TABLE
         // TABLE SERIES LEGEND
 
         const padding = 1180;
+        ctx.font = '40px Open Sans Condensed';
         ctx.textAlign = 'left';
         // current year
         ctx.fillStyle = '#000';
-        ctx.fillText('1000', 2080, 400);
+        ctx.fillText(this.salesTableCurrentData.currentYearLabel, 2120, 400);
         ctx.fillStyle = '#1C307D';
-        ctx.fillRect(2166, 400, 40, 40);
+        ctx.fillRect(2196, 400, 30, 30);
 
         // previouse year
         ctx.fillStyle = '#000';
-        ctx.fillText('0000', 2240, 400);
+        ctx.fillText(this.salesTableCurrentData.previouseYearLabel, 2250, 400);
         ctx.fillStyle = '#DBE0EB';
-        ctx.fillRect(2330, 400, 40, 40);
+        ctx.fillRect(2330, 400, 30, 30);
 
         // DRAW TABLE
         ctx.fillStyle = '#000';
-        const rowHeight = 70;
-        for (let row = 0; row < 12; row++) {
-            ctx.fillStyle = 'gray';
-            ctx.fillRect(1350, 450 + rowHeight + rowHeight * row - 5, 1020, 1);
+        ctx.font = '30px Open Sans Condensed';
+        const rowHeight = 50;
+        const tableInitialPosition = 500;
+        let tableRowYPosition = tableInitialPosition;
+
+        let isFirstRow = true;
+        for (const rowData of this.salesTableCurrentData.rows) {
+            if (rowData.isTotal) {
+                ctx.font = 'bold 30px Open Sans Condensed';
+            }
+
+            // bottom line
+            if (!isFirstRow) {
+                ctx.fillStyle = '#000';
+                ctx.fillRect(1350, tableRowYPosition - 15, 1020, 1);
+            }
+            isFirstRow = false;
 
             // legend
+            ctx.fillStyle = 'gray';
             ctx.textAlign = 'left';
-            ctx.fillText(`${row}`, 1350, 450 + rowHeight * row);
+            ctx.fillText(rowData.label, 1350, tableRowYPosition);
 
-            // prev
+            // curre
+            const currentValue = this.currencyPipe.transform(rowData.currentYearValue, this.salesTableCurrentData.currency);
             ctx.textAlign = 'right';
             ctx.fillStyle = 'blue';
-            ctx.fillText(`00000${row}`, 1850, 450 + rowHeight * row);
-            // current
+            ctx.fillText(currentValue, 1850, tableRowYPosition);
+            // prev
+            const prevValue = this.currencyPipe.transform(rowData.previousYearValue, this.salesTableCurrentData.currency);
             ctx.fillStyle = 'gray';
-            ctx.fillText(`00000${row}`, 2200, 450 + rowHeight * row);
+            ctx.fillText(prevValue, 2250, tableRowYPosition);
             // delta
-            ctx.fillStyle = 'green';
-            ctx.fillText(`${row}%`, 2370, 450 + rowHeight * row);
+            ctx.fillStyle = rowData.deltaPercentageValue >= 0 ? 'green' : 'red';
+            ctx.fillText(`${Math.round(rowData.deltaPercentageValue)}%`, 2370, tableRowYPosition);
+
+            tableRowYPosition += rowHeight;
+        }
+
+        // table extra info
+        ctx.fillStyle = '#000';
+        ctx.font = '40px Open Sans Condensed';
+        ctx.textAlign = 'center';
+        ctx.fillText(this.extraInfoValue, 1875, tableRowYPosition + 100);
+
+        // LEGEND
+        if (!this.selectedChartBundleIsTimeChart) {
+            ctx.fillStyle = '#000';
+            ctx.font = '40px Open Sans Condensed';
+            ctx.textAlign = 'left';
+            let legendYPosition = chartPosY + chartHeight + 200;
+            for (const rowData of this.salesTableCurrentData.rows) {
+                if (!rowData.isTotal) {
+                    ctx.fillText(`${rowData.label} - ${rowData.description}`, 100, legendYPosition);
+                    legendYPosition += 45;
+                }
+            }
         }
 
         this.imgSrc = canvas.toDataURL();
-    }
-
-    private calcYAxisMaxValueStepAndUnit(maximumValue: number, yAxisNumberOfSteps: number, yAxisMaxValues: number[])
-        : { yAxisMaxValue: number, yAxisScaleStep: number, yAxisScaleUnitPrefix: string } {
-
-        let divider = 1;
-        const thousandDecimal = 1000;
-
-        while (!((maximumValue / divider) < thousandDecimal)) {
-            divider *= 1000;
-        }
-
-        const baseMaximum = maximumValue / divider;
-
-        let scaleMaximum: number = null;
-
-        for (const possibleMaximum of yAxisMaxValues) {
-            if (baseMaximum < possibleMaximum) {
-                scaleMaximum = possibleMaximum;
-                break;
-            }
-        }
-
-        if (!scaleMaximum) {
-            scaleMaximum = yAxisMaxValues[0];
-            divider *= 1000;
-        }
-
-        let prefix = 'T';
-
-        switch (divider) {
-            case 1: prefix = ''; break;
-            case 1000: prefix = 'K'; break;
-            case 1000000: prefix = 'M'; break;
-            case 1000000000: prefix = 'B'; break;
-        }
-
-        const yMaximumValue = scaleMaximum * divider;
-        const yScaleStep = scaleMaximum / yAxisNumberOfSteps;
-
-        return {
-            yAxisMaxValue: yMaximumValue,
-            yAxisScaleStep: yScaleStep,
-            yAxisScaleUnitPrefix: prefix
-        };
-    }
-
-    private lcm(x: number, y: number) {
-        const l = Math.min(x, y);
-        const h = Math.max(x, y);
-        const m = l * h;
-
-        for (let i = h; i < m; i += h) {
-            if (i % l === 0) {
-                return i;
-            }
-        }
-
-        return m;
-    }
-
-    private getPossibleMaximumYValues(yAxisNumberOfSteps: number): number[] {
-
-        let baseTicks = yAxisNumberOfSteps;
-        let baseLcm = this.lcm(yAxisNumberOfSteps, 10);
-
-        while (baseTicks > 10) {
-            baseTicks /= 10;
-            baseLcm /= 10;
-        }
-
-        let limitTicks = baseTicks * 10;
-
-        let limitLcm = 1;
-        while (limitLcm < limitTicks) {
-            limitLcm *= 10;
-        }
-
-
-        let mode = true;
-        let value = baseTicks;
-        const values: number[] = [];
-
-        while (value < 10000) {
-
-            if (value < 10 && value + baseTicks < 10) {
-                value += baseTicks;
-                continue;
-            }
-
-            if (mode) {
-
-                value += baseTicks;
-                if (value >= limitTicks) {
-                    mode = false;
-                    baseTicks *= 10;
-                    limitTicks *= 10;
-                }
-
-            } else {
-
-                value += baseLcm;
-                if (value >= limitLcm && (value % baseTicks === 0)) {
-                    mode = true;
-                    baseLcm *= 10;
-                    limitLcm *= 10;
-                }
-
-            }
-
-            if (value < 10000) {
-                const dividend = value;
-                const divisor = 10;
-                values.push(dividend / divisor);
-            }
-        }
-
-        return values;
     }
 }
