@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Company, Serie, ChartData, ChartBundle } from '../../entities';
 import { MathTools } from '../../../shared/tools';
+import { SalesTableRowData } from './entities/sales-table-row-data';
+import { SalesTableUpdatedEvent } from './entities';
 
 
 @Component({
@@ -11,13 +13,7 @@ import { MathTools } from '../../../shared/tools';
 
 export class SalesTableComponent {
 
-    rows: {
-        label: string,
-        currentYearValue: number,
-        previousYearValue: number,
-        deltaPercentageValue: number,
-        isTotal: boolean
-    }[] = [];
+    rows: SalesTableRowData[] = [];
 
     currentYearLabel: string;
     previousYearLabel: string;
@@ -47,6 +43,13 @@ export class SalesTableComponent {
         }
     }
 
+    /**
+     * Fires an event every time that  the table is updated with new values.
+     *
+     * @memberof SalesTableComponent
+     */
+    @Output() tableUpdated = new EventEmitter<SalesTableUpdatedEvent>();
+
     private updateTable(
         chartBundle: ChartBundle,
         chart: ChartData,
@@ -67,6 +70,15 @@ export class SalesTableComponent {
         } else {
             this.rows = this.buildTopChartData(chart, period, previousYearSerie, currentYearSerie, useReportingValue);
         }
+
+        this.tableUpdated.emit({
+            tableData: {
+                currency: currency,
+                previouseYearLabel: previousYearSerie.legend,
+                currentYearLabel: currentYearSerie.legend,
+                rows: this.rows
+            }
+        });
     }
 
     private buildTimeChartData(
@@ -75,20 +87,9 @@ export class SalesTableComponent {
         previousYearSerie: Serie,
         currentYearSerie: Serie,
         useReportingValue: boolean,
-    ): {
-        label: string,
-        currentYearValue: number,
-        previousYearValue: number,
-        deltaPercentageValue: number,
-        isTotal: boolean
-    }[] {
-        let data: {
-            label: string,
-            currentYearValue: number,
-            previousYearValue: number,
-            deltaPercentageValue: number,
-            isTotal: boolean
-        }[] = [];
+    ): SalesTableRowData[] {
+
+        let data: SalesTableRowData[] = [];
 
         for (const dataSet of chart.dataSet) {
             const dataPoint = dataSet.dataPoints[0];
@@ -96,6 +97,7 @@ export class SalesTableComponent {
             if (!dataPoint) {
                 data.push({
                     label: 'N/A',
+                    description: 'N/A',
                     currentYearValue: 0,
                     previousYearValue: 0,
                     deltaPercentageValue: 0,
@@ -108,6 +110,7 @@ export class SalesTableComponent {
             if (!dataPoint.values) {
                 data.push({
                     label: dataPoint.label ? dataPoint.label : 'N/A',
+                    description: dataPoint.description ? dataPoint.description : 'N/A',
                     currentYearValue: 0,
                     previousYearValue: 0,
                     deltaPercentageValue: 0,
@@ -118,6 +121,7 @@ export class SalesTableComponent {
             }
 
             const label = dataPoint.label ? dataPoint.label : 'N/A';
+            const description = dataPoint.description ? dataPoint.description : 'N/A';
             const currentYearValue = dataPoint.values.find(v => v.seriesKey === currentYearSerie.key);
             const previousYearValue = dataSet.dataPoints[0].values.find(v => v.seriesKey === previousYearSerie.key);
             const currentYearFinalValue = this.getCorrectValue(currentYearValue, useReportingValue);
@@ -125,6 +129,7 @@ export class SalesTableComponent {
 
             data.push({
                 label: label,
+                description: description,
                 currentYearValue: currentYearFinalValue,
                 previousYearValue: previousYearFinalValue,
                 deltaPercentageValue: MathTools.variationBetweenTwoNumbers(previousYearFinalValue, currentYearFinalValue),
@@ -134,24 +139,12 @@ export class SalesTableComponent {
 
         if (timeFrame === 'quarter') {
 
-            const quartersData: {
-                label: string,
-                currentYearValue: number,
-                previousYearValue: number,
-                deltaPercentageValue: number,
-                isTotal: boolean
-            }[] = [];
+            const quartersData: SalesTableRowData[] = [];
 
             for (let i = 0; i < 4; i++) {
                 const quarterData = data.splice(0, 3);
 
-                let finalQuarterData: {
-                    label: string,
-                    currentYearValue: number,
-                    previousYearValue: number,
-                    deltaPercentageValue: number,
-                    isTotal: boolean
-                };
+                let finalQuarterData: SalesTableRowData;
 
                 if (chart.valueType === 'abs') {
                     finalQuarterData = quarterData.reduce((a, b) => {
@@ -163,6 +156,7 @@ export class SalesTableComponent {
                             previousYearValue: previousYearValue,
                             deltaPercentageValue: MathTools.variationBetweenTwoNumbers(previousYearValue, currentYearValue),
                             label: `Q${i + 1}`,
+                            description: `Q${i + 1}`,
                             isTotal: false
                         };
                     });
@@ -191,20 +185,8 @@ export class SalesTableComponent {
         previousYearSerie: Serie,
         currentYearSerie: Serie,
         useReportingValue: boolean,
-    ): {
-        label: string,
-        currentYearValue: number,
-        previousYearValue: number,
-        deltaPercentageValue: number,
-        isTotal: boolean
-    }[] {
-        const data: {
-            label: string,
-            currentYearValue: number,
-            previousYearValue: number,
-            deltaPercentageValue: number,
-            isTotal: boolean
-        }[] = [];
+    ): SalesTableRowData[] {
+        const data: SalesTableRowData[] = [];
 
         const dataSet = chart.dataSet.find(ds => ds.period === period);
 
@@ -216,6 +198,7 @@ export class SalesTableComponent {
             if (!dataPoint) {
                 data.push({
                     label: 'N/A',
+                    description: 'N/A',
                     currentYearValue: 0,
                     previousYearValue: 0,
                     deltaPercentageValue: 0,
@@ -228,6 +211,7 @@ export class SalesTableComponent {
             if (!dataPoint.values) {
                 data.push({
                     label: dataPoint.label ? dataPoint.label : 'N/A',
+                    description: dataPoint.description ? dataPoint.description : 'N/A',
                     currentYearValue: 0,
                     previousYearValue: 0,
                     deltaPercentageValue: 0,
@@ -243,6 +227,7 @@ export class SalesTableComponent {
             }
 
             const label = dataPoint.label ? dataPoint.label : 'N/A';
+            const description = dataPoint.description ? dataPoint.description : 'N/A';
             const currentYearValue = dataPoint.values.find(v => v.seriesKey === currentYearSerie.key);
             const previousYearValue = dataSet.dataPoints[0].values.find(v => v.seriesKey === previousYearSerie.key);
             const currentYearFinalValue = this.getCorrectValue(currentYearValue, useReportingValue);
@@ -250,6 +235,7 @@ export class SalesTableComponent {
 
             data.push({
                 label: label,
+                description: description,
                 currentYearValue: currentYearFinalValue,
                 previousYearValue: previousYearFinalValue,
                 deltaPercentageValue: MathTools.variationBetweenTwoNumbers(previousYearFinalValue, currentYearFinalValue),

@@ -1,7 +1,8 @@
 import { Chart } from 'chart.js';
-import { Component, Input, ViewChild, HostListener, OnInit } from '@angular/core';
+import { Component, Input, ViewChild, HostListener, OnInit, Output, EventEmitter } from '@angular/core';
 import { Company, Serie, ChartData, ChartBundle } from '../../entities';
 import { CurrencyPipe } from '@angular/common';
+import { SalesChartUpdateEvent } from './entities';
 
 
 @Component({
@@ -57,6 +58,13 @@ export class SalesChartComponent {
             );
         }
     }
+
+    /**
+     * Fires an event every time that the chart is updated with new values.
+     *
+     * @memberof SalesTableComponent
+     */
+    @Output() chartUpdated = new EventEmitter<SalesChartUpdateEvent>();
 
     /**
      *
@@ -134,6 +142,16 @@ export class SalesChartComponent {
 
             this.drawChart(chart.valueType, chartBundle.isTimeChart, currency, data);
         }
+
+        this.chartUpdated.emit({
+            chartData: {
+                currentYearLegend: this.currentYearLegend,
+                previousYearLegend: this.previousYearLegend,
+                yAxisScaleStep: this.yAxisScaleStep,
+                yAxisScaleUnitPrefix: this.yAxisScaleUnitPrefix,
+                currentCurrency: this.currentCurrency
+            }
+        });
     }
 
     private drawChart(
