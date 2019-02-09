@@ -53,7 +53,7 @@ export class MonthSelectorComponent {
 
     constructor() {
         this.currentMonthSelected = 1;
-        this.months = ['jan', 'fev', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+        this.months = Array.apply(null, {length: 12}).map(Number.call, x => `${x + 1}`);
     }
 
     // #endregion

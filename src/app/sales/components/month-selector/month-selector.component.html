@@ -2,5 +2,7 @@
     <div class="magnified-selected-month" *ngIf="isTouchDown" [ngStyle]="magnifiedSelectedMonthStyle">
         {{months[currentMonthSelected - 1]}}
     </div>
-    <div class="month" *ngFor="let month of months; let i = index" [ngClass]="{selected: currentMonthSelected === i + 1}">{{month}}</div>
+    <div class="month" *ngFor="let month of months; let i = index" [ngClass]="{selected: currentMonthSelected === i + 1}">
+        {{'SHARED.DATES.MONTHS.' + month | translate | slice:0:3 | lowercase}}
+    </div>
 </div>
