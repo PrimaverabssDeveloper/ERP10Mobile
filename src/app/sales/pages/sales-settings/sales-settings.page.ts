@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { LoadingController } from '@ionic/angular';
 import { PageBase } from '../../../shared/pages';
-import { SalesService, SalesServiceProvider } from '../../services';
+import { SalesService, SalesServiceProvider, SalesSettingsService } from '../../services';
 
 /**
  * Settings for the sales module.
@@ -60,7 +60,8 @@ export class SalesSettingsPage extends PageBase implements OnInit {
 
     constructor(
         public loadingController: LoadingController,
-        private salesService: SalesService
+        private salesService: SalesService,
+        private salesSettingsService: SalesSettingsService
     ) {
         super(loadingController);
     }
@@ -72,7 +73,7 @@ export class SalesSettingsPage extends PageBase implements OnInit {
     */
     async ngOnInit() {
         try {
-            const settings = await this.salesService.getSettingsAsync();
+            const settings = await this.salesSettingsService.getSettingsAsync();
 
             this._useReferenceCurrency = settings.useReferenceCurrency;
             this._showDailySales = settings.showDailySales;
@@ -83,7 +84,7 @@ export class SalesSettingsPage extends PageBase implements OnInit {
     }
 
     private storeSettings() {
-        this.salesService.updateSettingsAsync({
+        this.salesSettingsService.updateSettingsAsync({
             useReferenceCurrency: this._useReferenceCurrency,
             showAggregateData: this._showAggregateData,
             showDailySales: this._showDailySales
