@@ -2,6 +2,8 @@ import { SalesSummary, Company, SalesCharts, SalesSettings } from '../entities';
 import { InstanceHttpRequestService, DomService } from '../../core/services';
 import { TotalSalesTickerComponent, DailySalesTickerComponent } from '../components';
 import { SalesStorageService } from './sales-storage.service';
+import { EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
 
 const SALES_SUMMARY = '/sales';
 
@@ -14,6 +16,27 @@ const SALES_SUMMARY = '/sales';
  * @class SalesService
  */
 export class SalesService {
+
+    // #region 'Private Properteis'
+
+    private _useReferenceCurrencySettingChanged: EventEmitter<any>;
+
+    // #endregion
+
+    // #region 'Public Properteis'
+
+    /**
+     * Event that notifies when the 'useReferenceCurrency' setting value is changed.
+     *
+     * @readonly
+     * @type {Observable<any>}
+     * @memberof SalesService
+     */
+    get useReferenceCurrencySettingChanged(): Observable<any> {
+        return this._useReferenceCurrencySettingChanged.asObservable();
+    }
+
+    // #endregion
 
     // #region 'Constructor'
 
@@ -28,6 +51,7 @@ export class SalesService {
         protected domService: DomService,
         protected storage: SalesStorageService
         ) {
+            this._useReferenceCurrencySettingChanged = new EventEmitter();
     }
 
     // #endregion
@@ -150,6 +174,13 @@ export class SalesService {
      * @memberof SalesService
      */
     async updateSettingsAsync(settings: SalesSettings) {
+        const currentSettings = await this.getSettingsAsync();
+
+        // if the useReferenceCurrency setting changed, emit an event
+        if (currentSettings.useReferenceCurrency !== settings.useReferenceCurrency) {
+            this._useReferenceCurrencySettingChanged.emit();
+        }
+
         await this.storage.setData('SETTINGS', settings, true);
     }
 
