@@ -42,7 +42,7 @@
             <ion-col class="salary-portion" *ngFor="let salaryPortion of salaryPortions" size="6" [ngClass]="{'show-money': salaryValuesState === 'money', 'show-percentage': salaryValuesState === 'percentage'}">
                 <div class="label">{{ salaryPortion.label | localizedStrings | translate}}</div>
                 <div class="value">
-                    <span class="money">{{ salaryPortion.value | currency: salaryPortion.currency }}</span>
+                    <span class="money">{{ salaryPortion.value | localeCurrency: salaryPortion.currency }}</span>
                     <span class="percentage" *ngIf="salaryPortion.percentualValue">{{ salaryPortion.percentualValue }}
                         %</span>
                 </div>
@@ -62,7 +62,7 @@
                     </ion-col>
                     <ion-col class="extra-information-value" size="6">
                         <span class="money">
-                            {{ info.value | currency: info.currency }}
+                            {{ info.value | localeCurrency: info.currency }}
                         </span>
                         <span class="percentage">
                             {{ info.percentualValue }} %
