@@ -56,7 +56,7 @@
                     <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_CURRENT_YEAR_TOTAL_SALES_LABEL'
                         | translate }} {{currentYear}}</div>
                     <div class="sales-row-value left">{{customer.sales.totalSales.currentSales |
-                        currency:customer.sales.currency}}</div>
+                            localeCurrency:customer.sales.currency}}</div>
                 </div>
                 <div class="col-2">
                     <div class="sales-value" [ngClass]="{'positive': salesPercentageVariation > 0, 'negative': salesPercentageVariation < 0}">
@@ -69,19 +69,19 @@
                     <div class="sales-row-label right">{{
                         'CUSTOMERS.CUSTOMER_PAGE.SALES_PREVIOUS_YEAR_TOTAL_SALES_LABEL' | translate }} {{previousYear}}</div>
                     <div class="sales-row-value right">{{customer.sales.totalSales.previousSales |
-                        currency:customer.sales.currency}}</div>
+                            localeCurrency:customer.sales.currency}}</div>
                 </div>
             </div>
             <div class="sales-row" (click)="pendingOrdersAction()">
                 <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_PENDING_ORDERS_LABEL' | translate
                     }}</div>
-                <div class="sales-row-value left">{{customer.sales.pendingOrders | currency:customer.sales.currency}}</div>
+                <div class="sales-row-value left">{{customer.sales.pendingOrders | localeCurrency:customer.sales.currency}}</div>
             </div>
             <div class="sales-row" (click)="currentAccountAction()">
                 <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_CURRENT_ACCOUNT_VALUE_LABEL' |
                     translate }}</div>
                 <div class="sales-row-value left">{{customer.sales.valueCurrentAccount |
-                    currency:customer.sales.currency}}</div>
+                    localeCurrency:customer.sales.currency}}</div>
             </div>
             <div class="sales-row">
                 <div class="col-6">
@@ -107,7 +107,7 @@
                 </div>
 
                 <div class="col-6">
-                    <div class="sales-row-sub-label right">{{customer.sales.recentActivity.date | date:'shortDate'}}</div>
+                    <div class="sales-row-sub-label right">{{customer.sales.recentActivity.date | localeDate:'shortDate'}}</div>
                 </div>
             </div>
         </div>

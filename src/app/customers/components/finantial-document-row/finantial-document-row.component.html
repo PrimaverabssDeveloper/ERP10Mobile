@@ -3,17 +3,17 @@
 
     <div class="values">
         <div class="value" *ngIf="value">
-            {{ value.value | currency: value.currency }}
+            {{ value.value | localeCurrency: value.currency }}
         </div>
         <div class="second-value" *ngIf="secondValue">
-            {{ secondValue.value | currency: secondValue.currency }}
+            {{ secondValue.value | localeCurrency: secondValue.currency }}
         </div>
     </div>
 
     <div class="dates">
-        <div class="date" *ngIf="date">{{ date | date: "shortDate" }}</div>
+        <div class="date" *ngIf="date">{{ date | localeDate: "shortDate" }}</div>
         <div class="second-date" *ngIf="secondDate">
-            {{ secondDate | date: "shortDate" }}
+            {{ secondDate | localeDate: "shortDate" }}
         </div>
     </div>
 </div>
