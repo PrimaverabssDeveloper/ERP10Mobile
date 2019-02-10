@@ -22,7 +22,7 @@
     <div class="sales-content">
         <div class="sales-header">
             <div class="chart-name">{{selectedChartBundleLocalizedTitles | localizedStrings}}</div>
-            <div class="data-date">{{dataDate | date:'medium'}}</div>
+            <div class="data-date">{{dataDate | localeDate:'medium'}}</div>
         </div>
         <div class="chart-controllers">
             <div class="selected chart-ctrl-btn chart-ctrl-btn-month" *ngIf="showTimeFrameSelector" [ngClass]="{'selected': timeFrame === 'monthly'}"

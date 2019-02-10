@@ -1,8 +1,8 @@
 import { Chart } from 'chart.js';
-import { Component, Input, ViewChild, HostListener, OnInit, Output, EventEmitter } from '@angular/core';
-import { Company, Serie, ChartData, ChartBundle } from '../../entities';
-import { CurrencyPipe } from '@angular/common';
+import { Component, Input, ViewChild, HostListener, Output, EventEmitter } from '@angular/core';
+import { Serie, ChartData, ChartBundle } from '../../entities';
 import { SalesChartUpdateEvent } from './entities';
+import { LocaleCurrencyPipe } from '../../../shared/pipes';
 
 
 @Component({
@@ -69,7 +69,7 @@ export class SalesChartComponent {
     /**
      *
      */
-    constructor(private currencyPipe: CurrencyPipe) {
+    constructor(private localeCurrencyPipe: LocaleCurrencyPipe) {
         this.yAxisMaxValues = this.getPossibleMaximumYValues(this.yAxisNumberOfSteps);
     }
 
@@ -231,7 +231,7 @@ export class SalesChartComponent {
                         margin-right:3px;
                         background-color:#1D317D;
                         float:left"></div>
-                    <div style="float:left">${this.currencyPipe.transform(currentYearValue, currency)}</div>
+                    <div style="float:left">${this.localeCurrencyPipe.transform(currentYearValue, currency)}</div>
                 </div>
                 <div style="float:left; width:200px">
                     <div style="
@@ -241,7 +241,7 @@ export class SalesChartComponent {
                         margin-right:3px;
                         background-color:#DBE0EB;
                         float:left"></div>
-                    <div style="float:left">${this.currencyPipe.transform(previousYearValue, currency)}</div>
+                    <div style="float:left">${this.localeCurrencyPipe.transform(previousYearValue, currency)}</div>
                 </div>
                 <div style="float:left; width:100%; color:${accentColor}">Delta = ${deltaValue}%</div>
                 <div style="border-left:${isLeftTooltip ? 1 : 0}px solid ${accentColor};
