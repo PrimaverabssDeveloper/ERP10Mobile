@@ -118,7 +118,13 @@ export class SalesSettingsService {
      * @memberof SalesService
      */
     async getSettingsAsync(): Promise<SalesSettings> {
-        let settings: SalesSettings = await this.storage.getData<SalesSettings>('SETTINGS', true);
+        let settings: SalesSettings;
+
+        try {
+            settings = await this.storage.getData<SalesSettings>('SETTINGS', true);
+        } catch (error) {
+            console.log('no settings stored yet');
+        }
 
         // create the default settings state
         if (!settings) {
