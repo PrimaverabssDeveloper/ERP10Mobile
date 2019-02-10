@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
 
 /**
  * Manage the app locale.
@@ -19,6 +20,7 @@ export class LocaleService {
     private _locale: string;
     private _defaultLocale: string;
     private _supportedLocales: string[];
+    private _localeChanged: EventEmitter<any> = new EventEmitter();
     // #endregion
 
 
@@ -57,6 +59,18 @@ export class LocaleService {
     get supportedLocales(): string[] {
         return this._supportedLocales;
     }
+
+    /**
+     * Event that notifies when the locale is changed.
+     *
+     * @readonly
+     * @type {Observable<any>}
+     * @memberof LocaleService
+     */
+    get localeChanged(): Observable<any> {
+        return this._localeChanged.asObservable();
+    }
+
     // #endregion
 
 
@@ -103,6 +117,7 @@ export class LocaleService {
 
         this._locale = locale;
         this.translate.use(locale);
+        this._localeChanged.emit();
     }
 
     /**
