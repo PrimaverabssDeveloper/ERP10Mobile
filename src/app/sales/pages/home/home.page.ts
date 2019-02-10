@@ -28,7 +28,8 @@ import {
 import {
     SalesService,
     SalesServiceProvider,
-    ChartShareService
+    ChartShareService,
+    SalesSettingsService
 } from '../../services';
 
 import {
@@ -127,6 +128,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
         public popoverController: PopoverController,
         public loadingController: LoadingController,
         private salesService: SalesService,
+        private salesSettingsService: SalesSettingsService,
         private localeService: LocaleService,
         private localeCurrencyPipe: LocaleCurrencyPipe,
         private translate: TranslateService,
@@ -174,7 +176,8 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
         // when the reference currency setting changes, refresh the view
         // so the monetary values use the right value
         this.useReferenceCurrencySettingChangedSubscription =
-            this.salesService.useReferenceCurrencySettingChanged
+            this.salesSettingsService
+                .useReferenceCurrencySettingChanged
                 .subscribe(() => {
                     this.updateView();
                 });
@@ -258,7 +261,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
         this.selectedChartBundleIsTimeChart = chartBundle.isTimeChart;
         this.selectedChartBundlePeriodType = chartBundle.periodType;
 
-        const useReportingValue = await this.salesService.useReferenceCurrencyAsync();
+        const useReportingValue = await this.salesSettingsService.getUseReferenceCurrencySettingValueAsync();
         const currency = useReportingValue ? chartBundle.reportingCurrency : chartBundle.currency;
         const chart = chartBundle.charts.find(c => c.valueType === this.valueType);
 
