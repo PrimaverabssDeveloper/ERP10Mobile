@@ -74,6 +74,6 @@ export class AuthenticationPage implements OnInit {
     private goToInstanceSelectorPage() {
         // (window as any).location = '/shell/instances';
 
-        this.zone.run(() => this.navController.navigateForward(['/shell/instances'], true, { replaceUrl: true}));
+        this.zone.run(() => this.navController.navigateForward(['/shell/instances'], { replaceUrl: true}));
     }
 }

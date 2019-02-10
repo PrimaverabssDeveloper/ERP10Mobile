@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild, OnInit } from '@angular/core';
 import { ModuleSummary } from '../../entities';
-import { Slides } from '@ionic/angular';
 import { Ticker } from '../../../core/entities';
+import { IonSlides } from '@ionic/angular';
 
 
 /**
@@ -24,7 +24,7 @@ export class TickersComponent implements OnInit {
 
     @Input() tickers: Ticker[];
 
-    @ViewChild('slide') slide: Slides;
+    @ViewChild('slide') slide: IonSlides;
 
     constructor() {
 

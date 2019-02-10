@@ -105,7 +105,7 @@ export class InstancesPage extends PageBase implements OnInit {
         }
 
         await this.instanceService.setCurrentInstanceAsync(instance);
-        this.navController.navigateForward('/shell/dashboard', true, { replaceUrl: true});
+        this.navController.navigateForward('/shell/dashboard', { replaceUrl: true});
     }
 
     // #endregion

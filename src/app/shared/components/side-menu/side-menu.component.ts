@@ -63,13 +63,12 @@ export class SideMenuComponent implements OnInit {
     }
 
     async changeInstancesAction() {
-        this.navController.navigateBack('/shell/instances', true, { replaceUrl: true});
+        this.navController.navigateBack('/shell/instances', { replaceUrl: true});
     }
 
     private async logout() {
         this.navController.navigateBack(
             ['/authentication'],
-            true,
             {
                 replaceUrl: true,
                 queryParams: {

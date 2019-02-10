@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { Slides, LoadingController, PopoverController } from '@ionic/angular';
+import { LoadingController, PopoverController, IonSlides } from '@ionic/angular';
 import { PageBase } from '../../../shared/pages';
 import { HumanResourcesServiceProvider, HumanResourcesService } from '../../services';
 import { Salaries, YearSalary, MonthSalary, BaseSalary, Value, SalaryDocument } from '../../models';
@@ -22,7 +22,7 @@ export class HrHomePage extends PageBase implements OnInit {
     private localizedMonthsNames: string[] = [];
     private salaries: Salaries;
 
-    @ViewChild('monthlyChartsSlide') monthlyChartsSlide: Slides;
+    @ViewChild('monthlyChartsSlide') monthlyChartsSlide: IonSlides;
 
     // html template variables
     isDocumentsPopoverVisible: boolean;
