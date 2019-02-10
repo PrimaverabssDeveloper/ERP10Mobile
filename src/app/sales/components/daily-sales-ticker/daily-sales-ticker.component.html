@@ -28,7 +28,7 @@
     <div class="data" [ngStyle]="dataStyle">
         <div class="data-wrapper">
             <div class="date">
-                {{companyDailySalesSummary.dataTimestamp | date:'mediumDate'}}
+                {{companyDailySalesSummary.dataTimestamp | localeDate:'mediumDate'}}
             </div>
             <div class="company">
                 {{companyDailySalesSummary.name}}
@@ -39,7 +39,7 @@
                 </div>
                 <div class="line"></div>
                 <div class="value">
-                    {{companyDailySalesSummary.sales | currency:companyDailySalesSummary.currency}}
+                    {{companyDailySalesSummary.sales | localeCurrency:companyDailySalesSummary.currency}}
                 </div>
             </div>
         </div>
