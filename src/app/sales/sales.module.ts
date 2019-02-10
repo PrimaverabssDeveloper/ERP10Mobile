@@ -12,7 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ModuleDefinition } from '../core/entities';
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
-import { LocalizedStringsPipe, CurrencySymbolPipe, LocaleCurrencyPipe } from '../shared/pipes';
+import { LocalizedStringsPipe, CurrencySymbolPipe, LocaleCurrencyPipe, LocaleDatePipe } from '../shared/pipes';
 
 @NgModule({
     imports: [
@@ -29,6 +29,7 @@ import { LocalizedStringsPipe, CurrencySymbolPipe, LocaleCurrencyPipe } from '..
         SERVICES,
         LocalizedStringsPipe,
         LocaleCurrencyPipe,
+        LocaleDatePipe,
         CurrencySymbolPipe,
     ]
 })
