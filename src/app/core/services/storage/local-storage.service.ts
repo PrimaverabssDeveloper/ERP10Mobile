@@ -64,6 +64,11 @@ export class LocalStorageService implements StorageService {
             }
 
             const data = localStorage.getItem(key);
+
+            if (!data) {
+                reject('Data from key not found');
+            }
+
             let dataObj: T = null;
 
             if (data) {
