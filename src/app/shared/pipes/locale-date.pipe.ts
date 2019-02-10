@@ -9,6 +9,6 @@ export class LocaleDatePipe implements PipeTransform {
     }
 
     transform(value: any, format?: string, timezone?: string): string | null {
-        return '##_' + this.datePipe.transform(value, format, timezone, this.localeService.locale);
+        return this.datePipe.transform(value, format, timezone, this.localeService.locale);
     }
 }

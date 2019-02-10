@@ -15,6 +15,6 @@ export class LocaleCurrencyPipe implements PipeTransform {
         digitsInfo?: string)
         : string | null {
 
-        return '##_' + this.currencyPipe.transform(value, currencyCode, display, digitsInfo, this.localeService.locale);
+        return this.currencyPipe.transform(value, currencyCode, display, digitsInfo, this.localeService.locale);
     }
 }
