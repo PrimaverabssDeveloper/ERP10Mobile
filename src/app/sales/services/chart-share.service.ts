@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { LocalizedStringsPipe, CurrencySymbolPipe } from '../../shared/pipes';
+import { LocalizedStringsPipe, CurrencySymbolPipe, LocaleCurrencyPipe, LocaleDatePipe } from '../../shared/pipes';
 import { TranslateService } from '@ngx-translate/core';
-import { DatePipe, CurrencyPipe } from '@angular/common';
 import { SalesChartData } from '../components/sales-chart/entities';
 import { SalesTableData } from '../components/sales-table/entities';
 
@@ -21,8 +20,8 @@ export class ChartShareService {
      */
     constructor(
         private translate: TranslateService,
-        private datePipe: DatePipe,
-        private currencyPipe: CurrencyPipe,
+        private localeDatePipe: LocaleDatePipe,
+        private localeCurrencyPipe: LocaleCurrencyPipe,
         private localizedStringsPipe: LocalizedStringsPipe,
         private currencySymbolPipe: CurrencySymbolPipe
         ) {
@@ -170,7 +169,7 @@ export class ChartShareService {
         ctx.fillText(chartCompanyKey, 100, 180);
 
         // DATE
-        const date = this.datePipe.transform(chartDataDate, 'medium');
+        const date = this.localeDatePipe.transform(chartDataDate, 'medium');
         ctx.font = '50px Open Sans Condensed';
         ctx.fillStyle = '#000';
         ctx.fillText(date, 100, 260);
@@ -361,12 +360,12 @@ export class ChartShareService {
             ctx.fillText(rowData.label, 1350, tableRowYPosition);
 
             // curre
-            const currentValue = this.currencyPipe.transform(rowData.currentYearValue, salesTableData.currency);
+            const currentValue = this.localeCurrencyPipe.transform(rowData.currentYearValue, salesTableData.currency);
             ctx.textAlign = 'right';
             ctx.fillStyle = 'blue';
             ctx.fillText(currentValue, 1850, tableRowYPosition);
             // prev
-            const prevValue = this.currencyPipe.transform(rowData.previousYearValue, salesTableData.currency);
+            const prevValue = this.localeCurrencyPipe.transform(rowData.previousYearValue, salesTableData.currency);
             ctx.fillStyle = 'gray';
             ctx.fillText(prevValue, 2250, tableRowYPosition);
             // delta
