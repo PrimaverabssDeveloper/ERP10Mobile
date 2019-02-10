@@ -17,27 +17,6 @@ const SALES_SUMMARY = '/sales';
  */
 export class SalesService {
 
-    // #region 'Private Properteis'
-
-    private _useReferenceCurrencySettingChanged: EventEmitter<any>;
-
-    // #endregion
-
-    // #region 'Public Properteis'
-
-    /**
-     * Event that notifies when the 'useReferenceCurrency' setting value is changed.
-     *
-     * @readonly
-     * @type {Observable<any>}
-     * @memberof SalesService
-     */
-    get useReferenceCurrencySettingChanged(): Observable<any> {
-        return this._useReferenceCurrencySettingChanged.asObservable();
-    }
-
-    // #endregion
-
     // #region 'Constructor'
 
     /**
@@ -51,7 +30,6 @@ export class SalesService {
         protected domService: DomService,
         protected storage: SalesStorageService
         ) {
-            this._useReferenceCurrencySettingChanged = new EventEmitter();
     }
 
     // #endregion
@@ -133,57 +111,6 @@ export class SalesService {
         // return salesSummary;
         return null;
     }
-
-    /**
-     * Return if the reference currency must be used instead of the default currency.
-     * The reference currency is also known as 'reporting currency'.
-     *
-     * @returns {Promise<boolean>}
-     * @memberof SalesService
-     */
-    async useReferenceCurrencyAsync(): Promise<boolean> {
-        const settings = await this.getSettingsAsync();
-        return settings.useReferenceCurrency;
-    }
-
-    /**
-     * Provide the sales setting.
-     *
-     * @returns {Promise<SalesSettings>}
-     * @memberof SalesService
-     */
-    async getSettingsAsync(): Promise<SalesSettings> {
-        let settings: SalesSettings = await this.storage.getData<SalesSettings>('SETTINGS', true);
-
-        // create the default settings state
-        if (!settings) {
-            settings = {
-                useReferenceCurrency: false,
-                showAggregateData: true,
-                showDailySales: true
-            };
-        }
-
-        return settings;
-    }
-
-    /**
-     * Stores the sales settings.
-     *
-     * @param {SalesSettings} settings
-     * @memberof SalesService
-     */
-    async updateSettingsAsync(settings: SalesSettings) {
-        const currentSettings = await this.getSettingsAsync();
-
-        // if the useReferenceCurrency setting changed, emit an event
-        if (currentSettings.useReferenceCurrency !== settings.useReferenceCurrency) {
-            this._useReferenceCurrencySettingChanged.emit();
-        }
-
-        await this.storage.setData('SETTINGS', settings, true);
-    }
-
 
     // #endregion
 
