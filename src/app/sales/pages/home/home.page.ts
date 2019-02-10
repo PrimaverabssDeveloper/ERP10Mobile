@@ -6,7 +6,8 @@ import {
 } from '@angular/core';
 
 import {
-    CurrencyPipe} from '@angular/common';
+    CurrencyPipe
+} from '@angular/common';
 
 import {
     PopoverController,
@@ -17,7 +18,8 @@ import {
     CompanySelectorComponent,
     FooterTabMenu,
     FooterMenuItemSelectedEvent,
-    FooterTabMenuItem} from '../../components';
+    FooterTabMenuItem
+} from '../../components';
 
 import {
     PageBase
@@ -39,7 +41,8 @@ import {
 } from '../../entities';
 
 import {
-    LocaleService} from '../../../core/services';
+    LocaleService
+} from '../../../core/services';
 
 import { LocalizedStringsPipe, CurrencySymbolPipe, LocaleCurrencyPipe } from '../../../shared/pipes';
 import { SalesTableUpdatedEvent, SalesTableData } from '../../components/sales-table/entities';
@@ -71,6 +74,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
     private salesChartCurrentData: SalesChartData;
 
     private localeChangedSubscription: Subscription;
+    private useReferenceCurrencySettingChangedSubscription: Subscription;
 
     tableData: {
         chartBundle: ChartBundle,
@@ -153,26 +157,40 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
         this.selectedCompanySales = this.salesCharts.data[0];
 
         // by default, select the first chart bundle key
-        this.selectedChartBundleKey = this.selectedCompanySales.chartBundle[3].key;
+        this.selectedChartBundleKey = this.selectedCompanySales.chartBundle[0].key;
 
         // update view
         this.updateView();
 
+        // when the locale change, refresh the view
+        // so the currencies and date format take the new locale
+        this.localeChangedSubscription =
+            this.localeService
+                .localeChanged
+                .subscribe(() => {
+                    this.updateView();
+                });
+
+        // when the reference currency setting changes, refresh the view
+        // so the monetary values use the right value
+        this.useReferenceCurrencySettingChangedSubscription =
+            this.salesService.useReferenceCurrencySettingChanged
+                .subscribe(() => {
+                    this.updateView();
+                });
+
         this.hideLoading();
-
-        // setTimeout(() => this.storeImageInGallery(), 500);
-
-        this.localeChangedSubscription = this.localeService
-                                             .localeChanged
-                                             .subscribe(() => {
-                                                    this.updateView();
-                                             });
     }
 
     async ngOnDestroy() {
         if (this.localeChangedSubscription) {
             this.localeChangedSubscription.unsubscribe();
             this.localeChangedSubscription = null;
+        }
+
+        if (this.useReferenceCurrencySettingChangedSubscription) {
+            this.useReferenceCurrencySettingChangedSubscription.unsubscribe();
+            this.useReferenceCurrencySettingChangedSubscription = null;
         }
     }
 
@@ -240,7 +258,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
         this.selectedChartBundleIsTimeChart = chartBundle.isTimeChart;
         this.selectedChartBundlePeriodType = chartBundle.periodType;
 
-        const useReportingValue = false;
+        const useReportingValue = await this.salesService.useReferenceCurrencyAsync();
         const currency = useReportingValue ? chartBundle.reportingCurrency : chartBundle.currency;
         const chart = chartBundle.charts.find(c => c.valueType === this.valueType);
 
