@@ -5,13 +5,17 @@ import { HttpClient } from '@angular/common/http';
 import { SalesDemoService } from './sales.demo.service';
 import { SalesStorageService } from './sales-storage.service';
 import { ChartShareService } from './chart-share.service';
+import { SalesSettingsService } from './sales-settings.service';
 
 export * from './sales.service';
 export * from './sales-storage.service';
 export * from './chart-share.service';
+export * from './sales-settings.service';
 
 export const SERVICES = [
-    ChartShareService
+    SalesStorageService,
+    ChartShareService,
+    SalesSettingsService
 ];
 
 export const SalesServiceProvider: FactoryProvider = {
@@ -23,7 +27,6 @@ export const SalesServiceProvider: FactoryProvider = {
         domService: DomService,
         storageService: SalesStorageService
     ) => {
-        console.log('====>' + authService.isAuthenticateAsDemo);
         if (authService.isAuthenticateAsDemo) {
             return new SalesDemoService(instanceHttpRequestService, domService, storageService, http);
         } else {
