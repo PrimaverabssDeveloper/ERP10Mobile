@@ -1,7 +1,8 @@
 import {
     Component,
     ViewChild,
-    OnInit
+    OnInit,
+    OnDestroy
 } from '@angular/core';
 
 import {
@@ -40,11 +41,12 @@ import {
 import {
     LocaleService} from '../../../core/services';
 
-import { LocalizedStringsPipe, CurrencySymbolPipe } from '../../../shared/pipes';
+import { LocalizedStringsPipe, CurrencySymbolPipe, LocaleCurrencyPipe } from '../../../shared/pipes';
 import { SalesTableUpdatedEvent, SalesTableData } from '../../components/sales-table/entities';
 import { SalesChartData } from '../../components/sales-chart/entities';
 import { SalesChartUpdatedEvent } from '../../components/sales-chart/entities/sales-chart-updated-event';
 import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 
 
@@ -53,7 +55,7 @@ import { TranslateService } from '@ngx-translate/core';
     styleUrls: ['home.page.scss'],
     providers: [SalesServiceProvider, CurrencySymbolPipe, LocalizedStringsPipe]
 })
-export class HomePage extends PageBase implements OnInit {
+export class HomePage extends PageBase implements OnInit, OnDestroy {
 
     private readonly currentYearAccentColor = 'rgb(29, 49, 125)';
     private readonly previouseYearAccentColor = 'rgb(219, 224, 235)';
@@ -67,6 +69,8 @@ export class HomePage extends PageBase implements OnInit {
 
     private salesTableCurrentData: SalesTableData;
     private salesChartCurrentData: SalesChartData;
+
+    private localeChangedSubscription: Subscription;
 
     tableData: {
         chartBundle: ChartBundle,
@@ -120,7 +124,7 @@ export class HomePage extends PageBase implements OnInit {
         public loadingController: LoadingController,
         private salesService: SalesService,
         private localeService: LocaleService,
-        private currencyPipe: CurrencyPipe,
+        private localeCurrencyPipe: LocaleCurrencyPipe,
         private translate: TranslateService,
         private chartShareService: ChartShareService
     ) {
@@ -156,7 +160,20 @@ export class HomePage extends PageBase implements OnInit {
 
         this.hideLoading();
 
-        setTimeout(() => this.storeImageInGallery(), 500);
+        // setTimeout(() => this.storeImageInGallery(), 500);
+
+        this.localeChangedSubscription = this.localeService
+                                             .localeChanged
+                                             .subscribe(() => {
+                                                    this.updateView();
+                                             });
+    }
+
+    async ngOnDestroy() {
+        if (this.localeChangedSubscription) {
+            this.localeChangedSubscription.unsubscribe();
+            this.localeChangedSubscription = null;
+        }
     }
 
     async companySelectorAction(event: any) {
@@ -269,7 +286,7 @@ export class HomePage extends PageBase implements OnInit {
 
                 if (totalDataPoint) {
                     const value = this.getCorrectValue(totalDataPoint.values[1], useReportingValue);
-                    const moneyValue = this.currencyPipe.transform(value, currency);
+                    const moneyValue = this.localeCurrencyPipe.transform(value, currency);
                     const totalSalesResource = await this.translate.get('SALES.CHARTS.TOTAL_SALES').toPromise();
                     this.extraInfoValue = `${totalSalesResource}: ${moneyValue}`;
                 }
@@ -282,7 +299,7 @@ export class HomePage extends PageBase implements OnInit {
                 if (othersDataPoint && totalsDataPoint) {
                     const otherValue = this.getCorrectValue(othersDataPoint.values[1], useReportingValue);
                     const totalValue = this.getCorrectValue(totalsDataPoint.values[1], useReportingValue);
-                    const moneyValue = this.currencyPipe.transform(otherValue, currency);
+                    const moneyValue = this.localeCurrencyPipe.transform(otherValue, currency);
                     const ratioPercentage = this.calcPercentageRatioBetweenTwoNumbers(otherValue, otherValue + totalValue, true);
                     const rationString = ratioPercentage === 0 ? 'N/A' : `${ratioPercentage}%`;
                     const othersResource = await this.translate.get('SALES.CHARTS.OTHERS').toPromise();

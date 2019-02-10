@@ -12,7 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ModuleDefinition } from '../core/entities';
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
-import { LocalizedStringsPipe, CurrencySymbolPipe } from '../shared/pipes';
+import { LocalizedStringsPipe, CurrencySymbolPipe, LocaleCurrencyPipe } from '../shared/pipes';
 
 @NgModule({
     imports: [
@@ -25,7 +25,12 @@ import { LocalizedStringsPipe, CurrencySymbolPipe } from '../shared/pipes';
     ],
     declarations: [PAGES, COMPONENTS],
     entryComponents: [ENTRY_COMPONENTS],
-    providers: [SERVICES, LocalizedStringsPipe, CurrencySymbolPipe]
+    providers: [
+        SERVICES,
+        LocalizedStringsPipe,
+        LocaleCurrencyPipe,
+        CurrencySymbolPipe,
+    ]
 })
 export class SalesModule {
     constructor(
