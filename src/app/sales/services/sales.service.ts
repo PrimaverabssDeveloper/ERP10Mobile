@@ -111,6 +111,18 @@ export class SalesService {
     }
 
     /**
+     * Return if the reference currency must be used instead of the default currency.
+     * The reference currency is also known as 'reporting currency'.
+     *
+     * @returns {Promise<boolean>}
+     * @memberof SalesService
+     */
+    async useReferenceCurrencyAsync(): Promise<boolean> {
+        const settings = await this.getSettingsAsync();
+        return settings.useReferenceCurrency;
+    }
+
+    /**
      * Provide the sales setting.
      *
      * @returns {Promise<SalesSettings>}
