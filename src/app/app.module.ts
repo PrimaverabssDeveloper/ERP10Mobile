@@ -20,6 +20,14 @@ import { SalesModule } from './sales/sales.module';
 import { HumanResourcesModule } from './human-resources/human-resources.module';
 import { CustomersModule } from './customers/customers.module';
 
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+import localeEs from '@angular/common/locales/es';
+
+// add locales
+registerLocaleData(localePt);
+registerLocaleData(localeEs);
+
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
