@@ -3,6 +3,9 @@ import { LocalizedStringsPipe, CurrencySymbolPipe, LocaleCurrencyPipe, LocaleDat
 import { TranslateService } from '@ngx-translate/core';
 import { SalesChartData } from '../components/sales-chart/entities';
 import { SalesTableData } from '../components/sales-table/entities';
+import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { AlertController } from '@ionic/angular';
 
 /**
  * Provide tools to share charts in image and pdf format.
@@ -20,6 +23,9 @@ export class ChartShareService {
      */
     constructor(
         private translate: TranslateService,
+        private base64ToGallery: Base64ToGallery,
+        private androidPermissions: AndroidPermissions,
+        private alertController: AlertController,
         private localeDatePipe: LocaleDatePipe,
         private localeCurrencyPipe: LocaleCurrencyPipe,
         private localizedStringsPipe: LocalizedStringsPipe,
@@ -42,7 +48,7 @@ export class ChartShareService {
         salesTableData: SalesTableData,
         ) {
 
-        const image = await this.buildBase64Image(
+        const base64Image = await this.buildBase64Image(
             chartCanvas,
             chartLocalizedTitle,
             chartCompanyKey,
@@ -55,6 +61,51 @@ export class ChartShareService {
             salesChartData,
             salesTableData
         );
+
+        let hasStoragePermission = false;
+
+        try {
+            const res = await this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE);
+            hasStoragePermission = res.hasPermission;
+        } catch (error) {
+            console.log(error);
+        }
+
+        if (!hasStoragePermission) {
+            try {
+                // no store permission
+                // request it
+                const res = await this.androidPermissions
+                                      .requestPermissions([this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE]);
+
+                hasStoragePermission = res.hasPermission;
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        if (hasStoragePermission) {
+            try {
+                const res = await this.base64ToGallery.base64ToGallery(base64Image, { prefix: 'sales_chart', mediaScanner: false });
+                const alert = await this.alertController.create({
+                    header: '',
+                    message: '# image stored on gallery',
+                    buttons: ['OK']
+                });
+
+                await alert.present();
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            const alert = await this.alertController.create({
+                header: '',
+                message: '# not possible to store the image',
+                buttons: ['OK']
+            });
+
+            await alert.present();
+        }
     }
 
     async shareChartImageByEmail(
@@ -143,6 +194,9 @@ export class ChartShareService {
         }
 
         const ctx = canvas.getContext('2d');
+        // fill with white
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         // default definitions
         ctx.textBaseline = 'top';

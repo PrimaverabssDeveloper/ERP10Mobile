@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "^7.2.2",
     "@angular/router": "^7.2.2",
     "@auth0/cordova": "^0.3.0",
+    "@ionic-native/android-permissions": "^5.0.0",
     "@ionic-native/base64-to-gallery": "^5.0.0",
     "@ionic-native/core": "5.0.0",
     "@ionic-native/email-composer": "5.0.0",
@@ -42,6 +43,7 @@
     "cordova-android": "7.1.1",
     "cordova-base64-to-gallery": "4.1.3",
     "cordova-plugin-advanced-http": "^2.0.4",
+    "cordova-plugin-android-permissions": "1.0.0",
     "cordova-plugin-customurlscheme": "^4.3.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-email-composer": "^0.9.1",
@@ -112,7 +114,8 @@
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
       "cordova-plugin-email-composer": {},
-      "cordova-base64-to-gallery": {}
+      "cordova-base64-to-gallery": {},
+      "cordova-plugin-android-permissions": {}
     },
     "platforms": [
       "android"
