@@ -2,7 +2,8 @@ import {
     Component,
     ViewChild,
     OnInit,
-    OnDestroy
+    OnDestroy,
+    ElementRef
 } from '@angular/core';
 
 import {
@@ -18,7 +19,8 @@ import {
     CompanySelectorComponent,
     FooterTabMenu,
     FooterMenuItemSelectedEvent,
-    FooterTabMenuItem
+    FooterTabMenuItem,
+    SalesChartComponent
 } from '../../components';
 
 import {
@@ -114,7 +116,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
 
     showTimeFrameSelector: boolean;
 
-    @ViewChild('chartCanvas') chartCanvas;
+    @ViewChild('saleschart') saleschartcomponent: SalesChartComponent;
 
     timeFrame: 'monthly' | 'quarter';
     valueType: 'abs' | 'accum';
@@ -426,7 +428,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
     }
 
     private async shareChartImageByEmail() {
-        const chartCanvas = document.getElementsByTagName('canvas')[0];
+        const chartCanvas = this.saleschartcomponent.chartCanvas.nativeElement;
 
         await this.chartShareService.shareChartImageByEmail(
             chartCanvas,
@@ -444,7 +446,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
     }
 
     private async shareChartPdfByEmail() {
-        const chartCanvas = document.getElementsByTagName('canvas')[0];
+        const chartCanvas = this.saleschartcomponent.chartCanvas.nativeElement;
 
         await this.chartShareService.shareChartPdfByEmail(
             chartCanvas,
@@ -463,7 +465,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
 
     private async storeImageInGallery() {
 
-        const chartCanvas = document.getElementsByTagName('canvas')[0];
+        const chartCanvas = this.saleschartcomponent.chartCanvas.nativeElement;
 
         await this.chartShareService.storeChartImageOnDeviceGallery(
             chartCanvas,

@@ -39,7 +39,7 @@
                 (click)="changeValueType('abs')"></div>
         </div>
         <div class="chart-content">
-            <sales-chart [hidden]="viewType !== 'chart'" [data]="chartData" (chartUpdated)="onChartUpdated($event)"></sales-chart>
+            <sales-chart #saleschart [hidden]="viewType !== 'chart'" [data]="chartData" (chartUpdated)="onChartUpdated($event)"></sales-chart>
             <sales-table [hidden]="viewType !== 'table'" [data]="tableData" (tableUpdated)="onTableUpdated($event)"></sales-table>
         </div>
         <div class="extra-info">{{extraInfoValue}}</div>
