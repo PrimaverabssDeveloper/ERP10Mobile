@@ -5,7 +5,7 @@ import { SalesChartData } from '../components/sales-chart/entities';
 import { SalesTableData } from '../components/sales-table/entities';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-import { AlertController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 
 /**
  * Provide tools to share charts in image and pdf format.
@@ -19,13 +19,22 @@ import { AlertController } from '@ionic/angular';
 export class ChartShareService {
 
     /**
-     *
+     * Creates an instance of ChartShareService.
+     * @param {TranslateService} translate
+     * @param {Platform} platform
+     * @param {Base64ToGallery} base64ToGallery
+     * @param {AndroidPermissions} androidPermissions
+     * @param {LocaleDatePipe} localeDatePipe
+     * @param {LocaleCurrencyPipe} localeCurrencyPipe
+     * @param {LocalizedStringsPipe} localizedStringsPipe
+     * @param {CurrencySymbolPipe} currencySymbolPipe
+     * @memberof ChartShareService
      */
     constructor(
         private translate: TranslateService,
+        private platform: Platform,
         private base64ToGallery: Base64ToGallery,
         private androidPermissions: AndroidPermissions,
-        private alertController: AlertController,
         private localeDatePipe: LocaleDatePipe,
         private localeCurrencyPipe: LocaleCurrencyPipe,
         private localizedStringsPipe: LocalizedStringsPipe,
@@ -34,6 +43,23 @@ export class ChartShareService {
 
     }
 
+    /**
+     * Store the chart image on the device photo gallery
+     *
+     * @param {HTMLCanvasElement} chartCanvas
+     * @param {{ [key: string]: string }} chartLocalizedTitle
+     * @param {string} chartCompanyKey
+     * @param {Date} chartDataDate
+     * @param {('M'|'W')} chartPeriodType
+     * @param {('abs'|'accum')} chartValueType
+     * @param {boolean} chartIsTimeChart
+     * @param {string} chartSelectedPeriod
+     * @param {string} chartExtraInfoValue
+     * @param {SalesChartData} salesChartData
+     * @param {SalesTableData} salesTableData
+     * @returns {Promise<boolean>}
+     * @memberof ChartShareService
+     */
     async storeChartImageOnDeviceGallery(
         chartCanvas: HTMLCanvasElement,
         chartLocalizedTitle: { [key: string]: string },
@@ -46,7 +72,7 @@ export class ChartShareService {
         chartExtraInfoValue: string,
         salesChartData: SalesChartData,
         salesTableData: SalesTableData,
-        ) {
+        ): Promise<boolean> {
 
         const base64Image = await this.buildBase64Image(
             chartCanvas,
@@ -62,50 +88,20 @@ export class ChartShareService {
             salesTableData
         );
 
-        let hasStoragePermission = false;
-
-        try {
-            const res = await this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE);
-            hasStoragePermission = res.hasPermission;
-        } catch (error) {
-            console.log(error);
-        }
-
-        if (!hasStoragePermission) {
-            try {
-                // no store permission
-                // request it
-                const res = await this.androidPermissions
-                                      .requestPermissions([this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE]);
-
-                hasStoragePermission = res.hasPermission;
-            } catch (error) {
-                console.log(error);
-            }
-        }
+        const hasStoragePermission = await this.hasStoragePermission();
 
         if (hasStoragePermission) {
             try {
-                const res = await this.base64ToGallery.base64ToGallery(base64Image, { prefix: 'sales_chart', mediaScanner: false });
-                const alert = await this.alertController.create({
-                    header: '',
-                    message: '# image stored on gallery',
-                    buttons: ['OK']
-                });
-
-                await alert.present();
+                await this.base64ToGallery.base64ToGallery(base64Image, { prefix: 'sales_chart', mediaScanner: false });
             } catch (error) {
                 console.log(error);
+                return false;
             }
         } else {
-            const alert = await this.alertController.create({
-                header: '',
-                message: '# not possible to store the image',
-                buttons: ['OK']
-            });
-
-            await alert.present();
+            return false;
         }
+
+        return true;
     }
 
     async shareChartImageByEmail(
@@ -166,6 +162,33 @@ export class ChartShareService {
         );
     }
 
+    private async hasStoragePermission(): Promise<boolean> {
+
+        if (!this.platform.is('android')) {
+            return true;
+        }
+
+        try {
+            const checkPermissionResult = await this.androidPermissions
+                                                    .checkPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE);
+
+
+            // request permissions
+            if (!checkPermissionResult.hasPermission) {
+                const res = await this.androidPermissions
+                                      .requestPermissions([this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE]);
+
+                return res.hasPermission;
+            }
+
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+
+        return true;
+    }
+
     private async buildBase64Image(
         chartCanvas: HTMLCanvasElement,
         chartLocalizedTitle: { [key: string]: string },
@@ -185,12 +208,12 @@ export class ChartShareService {
 
         if (chartPeriodType === 'M') {
             if (chartIsTimeChart) {
-                canvas.height = 1500; // monthly chart
+                canvas.height = chartCanvas.height + 750; // monthly chart
             } else {
-                canvas.height = 1800; // top 5 charts
+                canvas.height = chartCanvas.height + 1000; // top 5 charts
             }
         } else {
-            canvas.height = 7600; // weekly chart
+            canvas.height = chartCanvas.width + 550; // weekly chart
         }
 
         const ctx = canvas.getContext('2d');
