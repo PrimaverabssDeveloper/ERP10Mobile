@@ -5,7 +5,9 @@ import { SalesChartData } from '../components/sales-chart/entities';
 import { SalesTableData } from '../components/sales-table/entities';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { File } from '@ionic-native/file/ngx';
 import { Platform } from '@ionic/angular';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 /**
  * Provide tools to share charts in image and pdf format.
@@ -35,11 +37,13 @@ export class ChartShareService {
         private platform: Platform,
         private base64ToGallery: Base64ToGallery,
         private androidPermissions: AndroidPermissions,
+        private file: File,
+        private emailComposer: EmailComposer,
         private localeDatePipe: LocaleDatePipe,
         private localeCurrencyPipe: LocaleCurrencyPipe,
         private localizedStringsPipe: LocalizedStringsPipe,
         private currencySymbolPipe: CurrencySymbolPipe
-        ) {
+    ) {
 
     }
 
@@ -65,14 +69,14 @@ export class ChartShareService {
         chartLocalizedTitle: { [key: string]: string },
         chartCompanyKey: string,
         chartDataDate: Date,
-        chartPeriodType: 'M'|'W',
-        chartValueType: 'abs'|'accum',
+        chartPeriodType: 'M' | 'W',
+        chartValueType: 'abs' | 'accum',
         chartIsTimeChart: boolean,
         chartSelectedPeriod: string,
         chartExtraInfoValue: string,
         salesChartData: SalesChartData,
         salesTableData: SalesTableData,
-        ): Promise<boolean> {
+    ): Promise<boolean> {
 
         const base64Image = await this.buildBase64Image(
             chartCanvas,
@@ -104,19 +108,90 @@ export class ChartShareService {
         return true;
     }
 
+    /**
+     * Send the image chart by email.
+     *
+     * @param {HTMLCanvasElement} chartCanvas
+     * @param {{ [key: string]: string }} chartLocalizedTitle
+     * @param {string} chartCompanyKey
+     * @param {Date} chartDataDate
+     * @param {('M' | 'W')} chartPeriodType
+     * @param {('abs' | 'accum')} chartValueType
+     * @param {boolean} chartIsTimeChart
+     * @param {string} chartSelectedPeriod
+     * @param {string} chartExtraInfoValue
+     * @param {SalesChartData} salesChartData
+     * @param {SalesTableData} salesTableData
+     * @returns {Promise<boolean>}
+     * @memberof ChartShareService
+     */
     async shareChartImageByEmail(
         chartCanvas: HTMLCanvasElement,
         chartLocalizedTitle: { [key: string]: string },
         chartCompanyKey: string,
         chartDataDate: Date,
-        chartPeriodType: 'M'|'W',
-        chartValueType: 'abs'|'accum',
+        chartPeriodType: 'M' | 'W',
+        chartValueType: 'abs' | 'accum',
         chartIsTimeChart: boolean,
         chartSelectedPeriod: string,
         chartExtraInfoValue: string,
         salesChartData: SalesChartData,
         salesTableData: SalesTableData,
-        ) {
+    ): Promise<boolean> {
+
+        const base64Image = await this.buildBase64Image(
+            chartCanvas,
+            chartLocalizedTitle,
+            chartCompanyKey,
+            chartDataDate,
+            chartPeriodType,
+            chartValueType,
+            chartIsTimeChart,
+            chartSelectedPeriod,
+            chartExtraInfoValue,
+            salesChartData,
+            salesTableData
+        );
+
+        try {
+
+            const chartTitle = await this.buildChartTitle(chartLocalizedTitle, chartValueType, chartIsTimeChart, chartSelectedPeriod);
+            const chartDate = this.localeDatePipe.transform(chartDataDate, 'medium');
+
+            const imagePath = await this.storeImage(base64Image);
+
+            const email = {
+                attachments: [
+                    imagePath
+                ],
+                subject: `${chartTitle} - ${chartDate}`,
+                isHtml: true
+            };
+
+            // Send a text message using default options
+            this.emailComposer.open(email);
+
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+
+        return true;
+    }
+
+    async shareChartPdfByEmail(
+        chartCanvas: HTMLCanvasElement,
+        chartLocalizedTitle: { [key: string]: string },
+        chartCompanyKey: string,
+        chartDataDate: Date,
+        chartPeriodType: 'M' | 'W',
+        chartValueType: 'abs' | 'accum',
+        chartIsTimeChart: boolean,
+        chartSelectedPeriod: string,
+        chartExtraInfoValue: string,
+        salesChartData: SalesChartData,
+        salesTableData: SalesTableData,
+    ) {
 
         const image = await this.buildBase64Image(
             chartCanvas,
@@ -133,33 +208,18 @@ export class ChartShareService {
         );
     }
 
-    async shareChartPdfByEmail(
-        chartCanvas: HTMLCanvasElement,
-        chartLocalizedTitle: { [key: string]: string },
-        chartCompanyKey: string,
-        chartDataDate: Date,
-        chartPeriodType: 'M'|'W',
-        chartValueType: 'abs'|'accum',
-        chartIsTimeChart: boolean,
-        chartSelectedPeriod: string,
-        chartExtraInfoValue: string,
-        salesChartData: SalesChartData,
-        salesTableData: SalesTableData,
-        ) {
+    private async storeImage(base64Image: string): Promise<string> {
+        const imageFileName = 'sales_chart.png';
+        const imgBlob = this.base64toBlob(base64Image, 'image/png');
 
-        const image = await this.buildBase64Image(
-            chartCanvas,
-            chartLocalizedTitle,
-            chartCompanyKey,
-            chartDataDate,
-            chartPeriodType,
-            chartValueType,
-            chartIsTimeChart,
-            chartSelectedPeriod,
-            chartExtraInfoValue,
-            salesChartData,
-            salesTableData
-        );
+        let filepath = this.file.externalApplicationStorageDirectory;
+        if (!filepath) {
+            filepath = this.file.documentsDirectory;
+        }
+
+        await this.file.writeFile(filepath, imageFileName, imgBlob, { replace: true });
+
+        return filepath.concat(imageFileName);
     }
 
     private async hasStoragePermission(): Promise<boolean> {
@@ -170,13 +230,13 @@ export class ChartShareService {
 
         try {
             const checkPermissionResult = await this.androidPermissions
-                                                    .checkPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE);
+                .checkPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE);
 
 
             // request permissions
             if (!checkPermissionResult.hasPermission) {
                 const res = await this.androidPermissions
-                                      .requestPermissions([this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE]);
+                    .requestPermissions([this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE]);
 
                 return res.hasPermission;
             }
@@ -189,19 +249,62 @@ export class ChartShareService {
         return true;
     }
 
+    private async buildChartTitle(
+        chartLocalizedTitle: { [key: string]: string },
+        chartValueType: 'abs' | 'accum',
+        chartIsTimeChart: boolean,
+        chartSelectedPeriod: string
+    ): Promise<string> {
+
+        const chartName = this.localizedStringsPipe.transform(chartLocalizedTitle).toUpperCase();
+        const aggregationResourceKey = chartValueType === 'abs' ? 'SALES.SHARE_CHARTS.ABSOLUTE' : 'SALES.SHARE_CHARTS.ACCUMULATED';
+        const aggregation = await this.translate.get(aggregationResourceKey).toPromise();
+        let period = '';
+
+        if (!chartIsTimeChart) {
+            period = await this.translate.get(`SHARED.DATES.MONTHS.${chartSelectedPeriod}`).toPromise();
+            period = `(${period.slice(0, 3).toLocaleLowerCase()}) `;
+        }
+
+        return `${chartName} ${period}- ${aggregation}`;
+    }
+
+    private base64toBlob(base64Data: string, contentType: string): Blob {
+        const base64slices = base64Data.split(',');
+        base64Data = base64slices.length === 2 ? base64slices[1] : base64Data;
+        contentType = contentType || '';
+        const sliceSize = 1024;
+        const byteCharacters = atob(base64Data);
+        const bytesLength = byteCharacters.length;
+        const slicesCount = Math.ceil(bytesLength / sliceSize);
+        const byteArrays = new Array(slicesCount);
+
+        for (let sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+            const begin = sliceIndex * sliceSize;
+            const end = Math.min(begin + sliceSize, bytesLength);
+
+            const bytes = new Array(end - begin);
+            for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
+                bytes[i] = byteCharacters[offset].charCodeAt(0);
+            }
+            byteArrays[sliceIndex] = new Uint8Array(bytes);
+        }
+        return new Blob(byteArrays, { type: contentType });
+    }
+
     private async buildBase64Image(
         chartCanvas: HTMLCanvasElement,
         chartLocalizedTitle: { [key: string]: string },
         chartCompanyKey: string,
         chartDataDate: Date,
-        chartPeriodType: 'M'|'W',
-        chartValueType: 'abs'|'accum',
+        chartPeriodType: 'M' | 'W',
+        chartValueType: 'abs' | 'accum',
         chartIsTimeChart: boolean,
         chartSelectedPeriod: string,
         chartExtraInfoValue: string,
         salesChartData: SalesChartData,
         salesTableData: SalesTableData,
-        ): Promise<string> {
+    ): Promise<string> {
 
         const canvas = document.createElement('canvas');
         canvas.width = 2500;
@@ -225,17 +328,7 @@ export class ChartShareService {
         ctx.textBaseline = 'top';
 
         // title
-        const chartName = this.localizedStringsPipe.transform(chartLocalizedTitle).toUpperCase();
-        const aggregationResourceKey = chartValueType === 'abs' ? 'SALES.SHARE_CHARTS.ABSOLUTE' : 'SALES.SHARE_CHARTS.ACCUMULATED';
-        const aggregation = await this.translate.get(aggregationResourceKey).toPromise();
-        let period = '';
-
-        if (!chartIsTimeChart) {
-            period = await this.translate.get(`SHARED.DATES.MONTHS.${chartSelectedPeriod}`).toPromise();
-            period = `(${period.slice(0, 3).toLocaleLowerCase()}) `;
-        }
-
-        const title = `${chartName} ${period}- ${aggregation}`;
+        const title = await this.buildChartTitle(chartLocalizedTitle, chartValueType, chartIsTimeChart, chartSelectedPeriod);
         ctx.font = 'bold 50px Open Sans Condensed';
         ctx.fillStyle = '#000';
         ctx.fillText(title, 100, 100);
@@ -368,7 +461,7 @@ export class ChartShareService {
 
             ctx.font = 'bold 30px Open Sans Condensed';
             ctx.textAlign = 'right';
-            const yAxisScaleYConstant =  chartPosY + stepCompensation - 5;
+            const yAxisScaleYConstant = chartPosY + stepCompensation - 5;
             ctx.fillText(`${salesChartData.yAxisScaleStep * 4}`, chartPosX - 20, yAxisScaleYConstant + stepDelta * 0);
             ctx.fillText(`${salesChartData.yAxisScaleStep * 3}`, chartPosX - 20, yAxisScaleYConstant + stepDelta * 1);
             ctx.fillText(`${salesChartData.yAxisScaleStep * 2}`, chartPosX - 20, yAxisScaleYConstant + stepDelta * 2);
