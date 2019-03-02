@@ -34,9 +34,8 @@ export class InstanceService {
         if (!this._currentInstance) {
             // get the selected instance from the storage
             return {
-                subscriptionAlias: '100001-001',
-                accountKey: '100001',
-                id: '1',
+                alias: '100001-001',
+                account: '100001',
                 description: 'Primavera',
                 modules: []
             };

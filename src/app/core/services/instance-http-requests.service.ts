@@ -44,8 +44,8 @@ export class InstanceHttpRequestService extends HttpRequestService {
      */
     protected buildFinalUrl(partialUrl: string): string {
 
-        const subsAlias = this.instanceService.currentInstance.subscriptionAlias;
-        const accountKey = this.instanceService.currentInstance.accountKey;
+        const subsAlias = this.instanceService.currentInstance.alias;
+        const accountKey = this.instanceService.currentInstance.account;
 
         let finalPartialUrl = this.addHeadSlashToUrl(partialUrl);
         finalPartialUrl = `${accountKey}/${subsAlias}${finalPartialUrl}`;

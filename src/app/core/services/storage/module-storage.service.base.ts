@@ -83,7 +83,7 @@ export abstract class ModuleStorageServiceBase {
         }
 
         if (instanceDependent) {
-            const subscriptionAlias = this.instanceService.currentInstance.subscriptionAlias;
+            const subscriptionAlias = this.instanceService.currentInstance.alias;
             return `${subscriptionAlias}_${moduleKey}_${dataKey}`;
         } else {
             return `${moduleKey}_${dataKey}`;

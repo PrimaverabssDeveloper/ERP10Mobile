@@ -6,13 +6,6 @@ import { Module } from './module';
  * @interface Instance
  */
 export interface Instance {
-    /**
-     * Defines the Instance Id;
-     *
-     * @type {string}
-     * @memberof Instance
-     */
-    id: string;
 
     /**
      * The account key.
@@ -20,7 +13,7 @@ export interface Instance {
      * @type {string}
      * @memberof Instance
      */
-    accountKey: string;
+    account: string;
 
     /**
      * The subscription alias.
@@ -28,7 +21,7 @@ export interface Instance {
      * @type {string}
      * @memberof Instance
      */
-    subscriptionAlias: string;
+    alias: string;
 
     /**
      * Defines the Instance Description;
