@@ -1,3 +1,5 @@
+import { ModuleCompany } from './module-company';
+
 /**
  * This interface defines an Module.
  *
@@ -28,4 +30,6 @@ export interface Module {
      * @memberof Module
      */
     description: string;
+
+    companies: ModuleCompany[];
 }
