@@ -78,15 +78,9 @@ $hr-chart-conteiner-height: $hr-charts-drawer-height - $hr-charts-drawer-handle-
     .show-documents-action-btn {
         width: 20px;
         height: 20px;
-        background-size: 20px;
-        background-repeat: no-repeat;
         margin-left: 15px;
         float: right;
-        background-image: url('../../../../assets/human-resources/images/receipt_menu.png');
-
-        &.active {
-            background-image: url('../../../../assets/human-resources/images/receipt_menu_active.png');
-        }
+        background-color: #9E9E9E;
     }
 
     .salary-portion {

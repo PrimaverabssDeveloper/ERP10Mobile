@@ -29,22 +29,7 @@
                 background-repeat: no-repeat;
                 margin-left: 15px;
                 float: right;
-            }
-
-            .view-action-btn {
-                background-image: url('../../../../assets/human-resources/images/receipt_view.png');
-
-                &:hover {
-                    background-image: url('../../../../assets/human-resources/images/receipt_view_active.png');
-                }
-            }
-
-            .share-action-btn {
-                background-image: url('../../../../assets/human-resources/images/receipt_share.png');
-
-                &:hover {
-                    background-image: url('../../../../assets/human-resources/images/receipt_share_active.png');
-                }
+                background-color: #9E9E9E;
             }
         }
     }
