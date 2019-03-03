@@ -59,19 +59,19 @@ $documents-wrapper-height: calc(100% - #{$customer-name-height + $current-accoun
             &.selected {
                 &.tab-older {
                     .label {
-                        color: red;
+                        color: #E53935;
                     }
                 }
     
                 &.tab-last-month {
                     .label {
-                        color: red;
+                        color: #E53935;
                     }
                 }
     
                 &.tab-unexpired {
                     .label {
-                        color: lightgreen;
+                        color: #00E676;
                     }
                 }
             }
@@ -83,6 +83,22 @@ $documents-wrapper-height: calc(100% - #{$customer-name-height + $current-accoun
 
             .value {
                 width: 100%;
+
+                span.pri-not-expired-icon {
+                    background-color: #E53935;
+                    width: 17px;
+                    height: 15px;
+                }
+
+                span.pri-expired-icon {
+                    background-color: #00E676;
+                    width: 15px;
+                    height: 15px;
+                    mask-size: 140%;
+                    mask-position: center;
+                    margin-top: 1px;
+
+                }
             }
         }
 

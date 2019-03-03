@@ -21,7 +21,8 @@
             [date]="document.headerItems | valueFromDocumentValues:configuration.documentHeader.dateKey"
             [secondDate]="document.headerItems | valueFromDocumentValues:configuration.documentHeader.secondDateKey"
             [value]="document.headerItems | valueFromDocumentValues:configuration.documentHeader.valueKey"
-            [secondValue]="document.headerItems | valueFromDocumentValues:configuration.documentHeader.secondValueKey">
+            [secondValue]="document.headerItems | valueFromDocumentValues:configuration.documentHeader.secondValueKey"
+            [accentColor]="configuration.documentHeader.accentColor">
         </finantial-document-row>
         <finantial-document-value-row *ngFor="let documentValue of documentValues" [documentValue]="documentValue" ></finantial-document-value-row>
     </div>

@@ -13,6 +13,7 @@ export interface FinantialDocumentDocumentHeaderConfiguration {
     secondDateKey?: string;
     valueKey: string;
     secondValueKey?: string;
+    accentColor?: string;
 }
 
 export interface FinantialDocumentLineRowConfiguration {

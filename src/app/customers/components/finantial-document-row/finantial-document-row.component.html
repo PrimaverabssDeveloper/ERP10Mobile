@@ -11,8 +11,12 @@
     </div>
 
     <div class="dates">
-        <div class="date" *ngIf="date">{{ date | localeDate: "shortDate" }}</div>
+        <div class="date" *ngIf="date">
+            <span class="icon pri-icon pri-calendar-icon"></span>
+            {{ date | localeDate: "shortDate" }}
+        </div>
         <div class="second-date" *ngIf="secondDate">
+            <span class="icon pri-icon pri-calendar-icon" [ngStyle]="{'background-color': accentColor}"></span>
             {{ secondDate | localeDate: "shortDate" }}
         </div>
     </div>

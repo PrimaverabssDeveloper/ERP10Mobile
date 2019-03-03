@@ -32,6 +32,10 @@ export class CurrentAccountPage extends PageBase implements OnInit {
         return documents;
     }
 
+    get rowAccentColor(): string {
+        return this.getAccentColor(this.state);
+    }
+
     constructor(
         public loadingController: LoadingController,
         private customersService: CustomersService,
@@ -88,7 +92,8 @@ export class CurrentAccountPage extends PageBase implements OnInit {
                 dateKey: 'DocumentDate',
                 secondDateKey: 'DocumentDueDate',
                 valueKey: 'DocumentTotalValue',
-                secondValueKey: 'DocumentPendingValue'
+                secondValueKey: 'DocumentPendingValue',
+                accentColor: this.getAccentColor(this.state)
             },
             documentHeaderListKeys: [
                 'DocumentDescription',
@@ -136,5 +141,22 @@ export class CurrentAccountPage extends PageBase implements OnInit {
         return {
             left: `calc(${percentagePositon}% - 10px)`
         };
+    }
+
+    private getAccentColor(state: string): string {
+        let accentColor: string;
+        switch (state) {
+            case 'older':
+                accentColor = '#E53935';
+                break;
+            case 'lastMonth':
+                accentColor = '#E53935';
+                break;
+            case 'unexpired':
+                accentColor = '#00E676';
+                break;
+        }
+
+        return accentColor;
     }
 }

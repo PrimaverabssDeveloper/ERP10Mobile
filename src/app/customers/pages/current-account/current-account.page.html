@@ -24,23 +24,36 @@
         <div class="tabs">
             <div class="tab tab-older" [ngClass]="{'selected': state === 'older' }" (click)="changeStateAction('older')">
                 <div class="label">Older</div>
-                <div class="value">{{currentAccount.expiredSixtyDays.total | localeCurrency:currentAccount.currency}}</div>
+                <div class="value">
+                    <span class="pri-icon pri-expired-icon"></span>
+                    {{currentAccount.expiredSixtyDays.total | localeCurrency:currentAccount.currency}}
+                </div>
             </div>
             <div class="tab tab-last-month" [ngClass]="{'selected': state === 'lastMonth' }" (click)="changeStateAction('lastMonth')">
                 <div class="label">Last month</div>
-                <div class="value">{{currentAccount.expiredThirtyDays.total | localeCurrency:currentAccount.currency}}</div>
+                <div class="value">
+                    <span class="pri-icon pri-expired-icon"></span>
+                    {{currentAccount.expiredThirtyDays.total | localeCurrency:currentAccount.currency}}
+                </div>
             </div>
             <div class="arrow" [ngStyle]="getArrowComputedStyle()"></div>
             <div class="tab tab-unexpired" [ngClass]="{'selected': state === 'unexpired' }" (click)="changeStateAction('unexpired')">
                 <div class="label">Unexpired</div>
-                <div class="value">{{currentAccount.unexpired.total | localeCurrency:currentAccount.currency}}</div>
+                <div class="value">
+                    <span class="pri-icon pri-not-expired-icon"></span>
+                    {{currentAccount.unexpired.total | localeCurrency:currentAccount.currency}}
+                </div>
             </div>
         </div>
         <div class="documents-wrapper">
             <div class="documents">
-                <finantial-document-row *ngFor="let doc of documents" [title]="doc.headerItems | valueFromDocumentValues:'DocumentName|DocumentNumber'"
-                    [date]="doc.headerItems | valueFromDocumentValues:'DocumentDate'" [secondDate]="doc.headerItems | valueFromDocumentValues:'DocumentDueDate'"
-                    [value]="doc.headerItems | valueFromDocumentValues:'DocumentTotalValue'" [secondValue]="doc.headerItems | valueFromDocumentValues:'DocumentPendingValue'"
+                <finantial-document-row *ngFor="let doc of documents" 
+                    [title]="doc.headerItems | valueFromDocumentValues:'DocumentName|DocumentNumber'"
+                    [date]="doc.headerItems | valueFromDocumentValues:'DocumentDate'" 
+                    [secondDate]="doc.headerItems | valueFromDocumentValues:'DocumentDueDate'"
+                    [value]="doc.headerItems | valueFromDocumentValues:'DocumentTotalValue'" 
+                    [secondValue]="doc.headerItems | valueFromDocumentValues:'DocumentPendingValue'"
+                    [accentColor]="rowAccentColor"
                     (click)="showDocumentDetailAction(doc)">
                 </finantial-document-row>
             </div>

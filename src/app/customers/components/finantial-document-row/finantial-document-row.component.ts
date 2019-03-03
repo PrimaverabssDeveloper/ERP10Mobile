@@ -13,4 +13,5 @@ export class FinantialDocumentRowComponent {
     @Input() secondDate: string | Date;
     @Input() value: MoneyValue;
     @Input() secondValue: MoneyValue;
+    @Input() accentColor?: string;
 }
