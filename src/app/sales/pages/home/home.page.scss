@@ -72,9 +72,20 @@ $chart-content-height: calc(100% - #{$sales-header-height + $chart-controllers-h
         background-size: 22px;
         background-repeat: no-repeat;
 
+        .icon {
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            background-color: #9E9E9E;
+        }
+
         &.selected {
             background-color: white;
             color: $accent-color;
+
+            .icon {
+                background-color: $sales-accent-color;
+            }
         }
     }
 
@@ -89,21 +100,12 @@ $chart-content-height: calc(100% - #{$sales-header-height + $chart-controllers-h
 
     .chart-ctrl-btn-table {
         float: right;
+        margin-left:5px;
         margin-right:10px;
-        background-image: url('../../../../assets/sales/charts-top-table.png');
-
-        &.selected{
-            background-image: url('../../../../assets/sales/charts-top-table-pressed.png');
-        }
     }
 
     .chart-ctrl-btn-accumulated {
         float: right;
-        background-image: url('../../../../assets/sales/charts-top-accumulated.png');
-
-        &.selected{
-            background-image: url('../../../../assets/sales/charts-top-accumulated-pressed.png');
-        }
     }
 
     .chart-ctrl-btn-absolute {

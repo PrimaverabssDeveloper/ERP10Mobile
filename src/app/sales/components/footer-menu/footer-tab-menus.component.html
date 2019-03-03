@@ -1,11 +1,11 @@
 
 <div class="footer-tab-menus" [ngClass]="{'close': menuClosed, 'open': !menuClosed}">
     <div class="menu">
-        <div class="menu-icon" 
+        <div class="menu-selector" 
              *ngFor="let menu of menus"
              (click)="menuSelectedAction(menu)"
              [ngStyle]="getMenuItemComputedStyle()">
-            <img [src]="getMenuIcon(menu)" />
+            <div class="menu-icon pri-icon" [ngClass]="getMenuIconClass(menu)"></div>
         </div>
     </div>
     <div class="list" *ngIf="selectedMenu">

@@ -360,18 +360,18 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
         this.footerTabMenus = [
             {
                 key: 'charts',
-                icon: '../../../../assets/sales/footer-menu-charts.png',
+                iconClass: 'pri-chart-icon',
                 items: chartItems
             },
             {
                 key: 'salesperson',
-                icon: '../../../../assets/sales/footer-menu-salesperson.png',
-                disabledIcon: '../../../../assets/sales/footer-menu-salesperson-disabled.png',
+                iconClass: 'pri-filter-icon',
+                disabledIconClass: 'pri-filter-disabled-icon',
                 items: salesPersonItems
             },
             {
                 key: 'share',
-                icon: '../../../../assets/sales/footer-menu-share.png',
+                iconClass: 'pri-share-icon',
                 items: [
                     {
                         key: 'send_chart_by_email',

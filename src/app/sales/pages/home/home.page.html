@@ -30,13 +30,18 @@
             <div class="chart-ctrl-btn chart-ctrl-btn-quarter" *ngIf="showTimeFrameSelector" [ngClass]="{'selected': timeFrame === 'quarter'}"
                 (click)="changeTimeFrameAction('quarter')">Q</div>
 
-            <div class="chart-ctrl-btn chart-ctrl-btn-table" [ngClass]="{'selected': viewType === 'table'}" (click)="toggleTableView()"></div>
+            <div class="chart-ctrl-btn chart-ctrl-btn-table" [ngClass]="{'selected': viewType === 'table'}" (click)="toggleTableView()">
+                <div class="icon pri-icon pri-table-icon"></div>
+            </div>
 
             <div class="chart-ctrl-btn chart-ctrl-btn-accumulated" [ngClass]="{'selected': valueType === 'accum'}"
-                (click)="changeValueType('accum')"></div>
+                (click)="changeValueType('accum')">
+                <div class="icon pri-icon pri-sum-icon"></div>
+            </div>
 
             <div class="selected chart-ctrl-btn chart-ctrl-btn-absolute" [ngClass]="{'selected': valueType === 'abs'}"
-                (click)="changeValueType('abs')"></div>
+                (click)="changeValueType('abs')">
+            </div>
         </div>
         <div class="chart-content">
             <sales-chart #saleschart [hidden]="viewType !== 'chart'" [data]="chartData" (chartUpdated)="onChartUpdated($event)"></sales-chart>

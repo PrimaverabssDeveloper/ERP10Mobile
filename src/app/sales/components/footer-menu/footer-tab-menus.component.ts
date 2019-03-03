@@ -92,15 +92,15 @@ export class FooterTabMenuComponent {
     }
 
     /**
-     * Provides the menu tab icon.
-     * If the menu has no items, the disabled icon must be provided.
+     * Provides the menu tab icon class.
+     * If the menu has no items, the disabled icon class must be provided.
      *
      * @param {FooterTabMenu} menu
      * @returns
      * @memberof FooterTabMenuComponent
      */
-    getMenuIcon(menu: FooterTabMenu) {
-        return menu.items && menu.items.length > 0 ? menu.icon : menu.disabledIcon;
+    getMenuIconClass(menu: FooterTabMenu) {
+        return menu.items && menu.items.length > 0 ? menu.iconClass : menu.disabledIconClass;
     }
 
     /**

@@ -26,14 +26,19 @@ $menu-list-row-text-selected-color: $sales-accent-color;
         border-top: 1px solid rgb(211,212,214);
         position: absolute;
 
-        .menu-icon {
+        .menu-selector {
             float: left;
-            text-align: center;
+            position: relative;
+            height: 100%;
 
-            img {
+            .menu-icon {
                 height: 25px ;
                 width: 25px;
-                margin: 10px;
+                transform: translate(-50%, -50%);
+                left: 50%;
+                top: 50%;
+                position: absolute;
+                background-color: $sales-accent-color;
             }
         }
     }

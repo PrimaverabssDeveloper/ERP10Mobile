@@ -17,20 +17,20 @@ export interface FooterTabMenu {
     key: string;
 
     /**
-     * The icon path.
+     * The icon class.
      *
      * @type {string}
      * @memberof FooterTabMenu
      */
-    icon: string;
+    iconClass: string;
 
     /**
-     * The icon path when the menu is disabled.
+     * The icon class when the menu is disabled.
      *
      * @type {string}
      * @memberof FooterTabMenu
      */
-    disabledIcon?: string;
+    disabledIconClass?: string;
 
     /**
      * The menu items collection.
