@@ -28,7 +28,7 @@
 
     // customers
     @include iconClassBuilder("order-asc", "order_asc.svg");
-    @include iconClassBuilder("order_desc", "order_desc.svg");
+    @include iconClassBuilder("order-desc", "order_desc.svg");
     @include iconClassBuilder("expired", "expired.svg");
     @include iconClassBuilder("not-expired", "not_expired.svg");
     @include iconClassBuilder("address", "address.svg");

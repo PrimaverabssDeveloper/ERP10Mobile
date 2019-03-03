@@ -37,27 +37,14 @@ $border:1px solid lightgray;
                 font-weight: 600;
                 color: $toogle-menu-text-color;
                 padding: 15px 0;
+                line-height: 20px;
 
-                &:before {
-                    content: ' ';
-                    background-image: url('../../../../assets/customers/order.png');
-                    background-repeat: no-repeat;
-                    background-size: 20px;
+                span {
+                    background-color: $toogle-menu-text-color;
                     width: 20px;
-                    height: 14px;
-                    float: left;
+                    height: 20px;
                     margin-right: 5px;
                 }
-            }
-
-            .order-icon {
-                background-image: url('../../../../assets/customers/order.png');
-                background-repeat: no-repeat;
-                background-size: 20px;
-                width: 20px;
-                height: 14px;
-                float: left;
-                margin-right: 5px;
             }
         }
 
@@ -65,24 +52,8 @@ $border:1px solid lightgray;
             .label {
                 color: $toogle-menu-active-text-color;
 
-                &:before {
-                    background-image: url('../../../../assets/customers/order_selected.png');
-                }
-            }
-        }
-
-        button.order-asc {
-            .label {
-                &:before {
-                    transform: rotate(0deg);
-                }
-            }
-        }
-
-        button.order-desc {
-            .label {
-                &:before {
-                    transform: rotate(180deg);
+                span {
+                    background-color: $toogle-menu-active-text-color;
                 }
             }
         }

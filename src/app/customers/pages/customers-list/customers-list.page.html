@@ -18,11 +18,20 @@
     <div class="customers-list" [ngClass]="{'recent-state': state === 'recent', 'search-state': state === 'search'}">
         <div class="toogle-menu">
             <button (click)="recentOptionAction()" [ngClass]="{'selected': state === 'recent', 'order-desc': recentOrder === 'desc' }">
-                <div class="label">{{ 'CUSTOMERS.CUSTOMERS_LIST_PAGE.TOOGLE_MENU_RECENT' | translate }}</div>
+                <div class="label">
+                    <span class="pri-icon" [ngClass]="{'pri-order-asc-icon': recentOrder === 'asc', 'pri-order-desc-icon': recentOrder === 'desc' }"></span> 
+                    {{ 'CUSTOMERS.CUSTOMERS_LIST_PAGE.TOOGLE_MENU_RECENT' | translate }}
+                </div>
             </button>
             <button (click)="searchOptionAction()" [ngClass]="{'selected': state === 'search', 'order-desc': searchOrder === 'desc' }">
-                    <div *ngIf="searchOrder === 'asc'" class="label">{{ 'CUSTOMERS.CUSTOMERS_LIST_PAGE.TOOGLE_MENU_SEARCH_ASC' | translate }}</div>
-                    <div *ngIf="searchOrder === 'desc'" class="label">{{ 'CUSTOMERS.CUSTOMERS_LIST_PAGE.TOOGLE_MENU_SEARCH_DESC' | translate }}</div>
+                <div *ngIf="searchOrder === 'asc'" class="label">
+                    <span class="pri-icon pri-order-asc-icon"></span> 
+                    {{ 'CUSTOMERS.CUSTOMERS_LIST_PAGE.TOOGLE_MENU_SEARCH_ASC' | translate }}
+                </div>
+                <div *ngIf="searchOrder === 'desc'" class="label">
+                    <span class="pri-icon pri-order-desc-icon"></span>
+                    {{ 'CUSTOMERS.CUSTOMERS_LIST_PAGE.TOOGLE_MENU_SEARCH_DESC' | translate }}
+                </div>
             </button>
         </div>
         <div class="search">
