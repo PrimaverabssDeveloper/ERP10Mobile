@@ -1,0 +1,13 @@
+<svg id="_2_Gráfico" data-name="2_Gráfico" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #959595;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <g id="_1_48x48" data-name="1_48x48">
+    <path class="cls-1" d="M13,23h7V16H13v7Zm9,0h7V16H22v7Zm9,0h7V16H31v7ZM13,32h7V25H13v7Zm9,0h7V25H22v7Zm9,0h7V25H31v7ZM13,41h7V34H13v7Zm9,0h7V34H22v7Zm9,0h7V34H31v7Zm7-27H13V9H38v5Z"/>
+  </g>
+</svg>

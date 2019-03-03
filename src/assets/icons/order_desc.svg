@@ -1,0 +1,23 @@
+<svg id="Ascend_Descend_32x20" data-name="Ascend/Descend_32x20" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="7 7 36 36">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #959595;
+        stroke-width: 2px;
+      }
+
+      .cls-1, .cls-2 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        fill: #959595;
+      }
+    </style>
+  </defs>
+  <g id="Descend">
+    <path id="Shape_7_copy" data-name="Shape 7 copy" class="cls-1" d="M18.01,15V31.97c0,2.2-1.272,2.723-2.828,1.169L10.01,27.977"/>
+    <path class="cls-2" d="M23,15H41v2H23V15Zm0,6H37v2H23V21Zm0,6H33v2H23V27Zm0,6h6v2H23V33Z"/>
+  </g>
+</svg>

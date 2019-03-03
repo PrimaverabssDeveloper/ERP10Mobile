@@ -1,0 +1,12 @@
+<svg id="vencido_22x24" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ff3939;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="Arrow_copy" data-name="Arrow copy" class="cls-1" d="M21,34h8V23H21V34ZM33.991,23L25,13.01,16.009,23"/>
+  <path id="Arrow_Line_copy" data-name="Arrow Line copy" class="cls-1" d="M14,34H36v3H14V34Zm0-3h3v3H14V31Zm19,0h3v3H33V31Z"/>
+</svg>

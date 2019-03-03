@@ -1,0 +1,42 @@
+
+@mixin iconClassBuilder($iconName, $iconFileName) {
+    &.pri-#{$iconName}-icon {
+        background-color: black;
+        mask-image: url("/assets/icons/#{$iconFileName}");
+        mask-repeat: no-repeat;
+        mask-size: 100%;
+        float: left;
+    }
+}
+
+.pri-icon {
+    // sales
+    @include iconClassBuilder("chart", "chart.svg");
+    @include iconClassBuilder("filter", "filter.svg");
+    @include iconClassBuilder("filter-disabled", "filter_disabled.svg");
+    @include iconClassBuilder("share", "share.svg");
+    @include iconClassBuilder("sum", "sum.svg");
+    @include iconClassBuilder("table", "table.svg");
+
+    // hr
+    @include iconClassBuilder("document-view-filled", "document_view_filled.svg");
+    @include iconClassBuilder("document-view", "document_view.svg");
+    @include iconClassBuilder("document", "document.svg");
+    @include iconClassBuilder("document-filled", "document_filled.svg");
+    @include iconClassBuilder("mail", "mail.svg");
+    @include iconClassBuilder("mail-filled", "mail_filled.svg");
+
+    // customers
+    @include iconClassBuilder("order-asc", "order_asc.svg");
+    @include iconClassBuilder("order_desc", "order_desc.svg");
+    @include iconClassBuilder("expired", "expired.svg");
+    @include iconClassBuilder("not-expired", "not_expired.svg");
+    @include iconClassBuilder("address", "address.svg");
+    @include iconClassBuilder("calendar", "calendar.svg");
+    @include iconClassBuilder("email", "email.svg");
+    @include iconClassBuilder("fax", "fax.svg");
+    @include iconClassBuilder("telephone", "telephone.svg");
+    @include iconClassBuilder("telephone-one", "telephone_one.svg");
+    @include iconClassBuilder("telephone-two", "telephone_two.svg");
+    @include iconClassBuilder("website", "website.svg");
+}
