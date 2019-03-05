@@ -15,7 +15,7 @@ import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
-export class TokenInterceptorService implements HttpInterceptor {
+export class HttpRequestInterceptorService implements HttpInterceptor {
 
     constructor(
         private authentication: AuthenticationService,
