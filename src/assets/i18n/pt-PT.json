@@ -1,5 +1,8 @@
 
 {
+    "CORE": {
+        "NETWORK_ERROR_MESSAGE": "Não foi possível comunicar com o servidor. Tente mais tarde."
+    },
     "SHARED": {
         "SIDE_MENU_COMPONENT" : {
             "MENU_GENERAL_TITLE" : "Geral",
