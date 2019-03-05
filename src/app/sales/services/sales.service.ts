@@ -41,6 +41,11 @@ export class SalesService {
 
         const salesSummary = await this.getSalesSummary();
 
+        // error gettings summaries
+        if (!salesSummary) {
+            return [];
+        }
+
         const htmlTickers: HTMLElement[] = [];
         for (const company of salesSummary.companies) {
 
@@ -65,6 +70,12 @@ export class SalesService {
      */
     async getCompanies(): Promise<Company[]> {
         const salesSummary = await this.getSalesSummary();
+
+        // error gettings summaries
+        if (!salesSummary) {
+            return null;
+        }
+
         let companies: Company[];
 
         if (salesSummary && salesSummary.companies) {
