@@ -2,7 +2,7 @@ import { NgModule, Optional, SkipSelf, APP_INITIALIZER } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { IonicModule, Platform } from '@ionic/angular';
+import { IonicModule, Platform, AlertController } from '@ionic/angular';
 import { SafariViewController } from '@ionic-native/safari-view-controller/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { File } from '@ionic-native/file/ngx';
@@ -18,6 +18,7 @@ import { NativeStorageService } from './services/storage/native-storage.service'
 import { LocalStorageService } from './services/storage/local-storage.service';
 import { AppSettings } from './app-settings';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 export function initAuthentication(authentication: AuthenticationService): () => Promise<any> {
     return (): Promise<any> => {
@@ -77,7 +78,7 @@ export function initInstance(instanceService: InstanceService): () => Promise<an
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptorService,
             multi: true,
-            deps: [AuthenticationService, Router]
+            deps: [AuthenticationService, Router, AlertController, TranslateService]
         }
     ],
     entryComponents: []

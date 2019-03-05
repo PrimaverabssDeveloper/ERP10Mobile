@@ -45,10 +45,10 @@ export class InstanceHttpRequestService extends HttpRequestService {
     protected buildFinalUrl(partialUrl: string): string {
 
         const alias = this.instanceService.currentInstance.alias;
-        // const accountKey = this.instanceService.currentInstance.account;
+        const account = this.instanceService.currentInstance.account;
 
         let finalPartialUrl = this.addHeadSlashToUrl(partialUrl);
-        finalPartialUrl = `${alias}${finalPartialUrl}`;
+        finalPartialUrl = `${account}/${alias}${finalPartialUrl}`;
 
         // build the remain endpoint with the.
         const finalUrl = super.buildFinalUrl(finalPartialUrl);
