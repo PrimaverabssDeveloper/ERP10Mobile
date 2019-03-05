@@ -1,4 +1,4 @@
-import { SalesSummary, Company, SalesCharts, SalesSettings } from '../entities';
+import { SalesSummary, Company, SalesCharts, SalesSettings, CompanySalesData, CompanySales } from '../entities';
 import { InstanceHttpRequestService, DomService } from '../../core/services';
 import { TotalSalesTickerComponent, DailySalesTickerComponent } from '../components';
 import { SalesStorageService } from './sales-storage.service';
@@ -6,6 +6,7 @@ import { EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 
 const SALES_SUMMARY = '/sales';
+const SALES_BY_COMPANY = '/sales?companyKey=';
 
 /**
  * The Sales Service provide all data needed to the Sales Module.
@@ -106,21 +107,18 @@ export class SalesService {
         return salesSummary;
     }
 
-    async getSalesCharts(): Promise<SalesCharts> {
+    async getSalesCharts(companyKey: string): Promise<CompanySales> {
 
-        // let salesSummary: SalesSummary;
+        let salesData: CompanySalesData;
+        const endpoint = `${SALES_BY_COMPANY}${companyKey}`;
+        try {
+            salesData = await this.instanceHttpRequestService.get<CompanySalesData>(endpoint);
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
 
-        // try {
-        //     salesSummary = await this.instanceHttpRequestService
-        //         .get<SalesSummary>(SALES_SUMMARY)
-        //         .toPromise();
-        // } catch (error) {
-        //     console.log(error);
-        //     return null;
-        // }
-
-        // return salesSummary;
-        return null;
+        return salesData ? salesData.data : null;
     }
 
     // #endregion

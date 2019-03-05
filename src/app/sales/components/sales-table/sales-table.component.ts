@@ -91,8 +91,9 @@ export class SalesTableComponent {
 
         let data: SalesTableRowData[] = [];
 
-        for (const dataSet of chart.dataSet) {
-            const dataPoint = dataSet.dataPoints[0];
+        // timeChart only have one dataset
+        const dataSet = chart.dataSet[0];
+        for (const dataPoint of dataSet.dataPoints) {
 
             if (!dataPoint) {
                 data.push({
@@ -123,7 +124,7 @@ export class SalesTableComponent {
             const label = dataPoint.label ? dataPoint.label : 'N/A';
             const description = dataPoint.description ? dataPoint.description : 'N/A';
             const currentYearValue = dataPoint.values.find(v => v.seriesKey === currentYearSerie.key);
-            const previousYearValue = dataSet.dataPoints[0].values.find(v => v.seriesKey === previousYearSerie.key);
+            const previousYearValue = dataPoint.values.find(v => v.seriesKey === previousYearSerie.key);
             const currentYearFinalValue = this.getCorrectValue(currentYearValue, useReportingValue);
             const previousYearFinalValue = this.getCorrectValue(previousYearValue, useReportingValue);
 

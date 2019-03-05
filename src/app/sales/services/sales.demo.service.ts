@@ -1,4 +1,4 @@
-import { SalesSummary, SalesCharts } from '../entities';
+import { SalesSummary, SalesCharts, CompanySales } from '../entities';
 import { InstanceHttpRequestService, DomService } from '../../core/services';
 import { SalesService } from './sales.service';
 import { HttpClient } from '@angular/common/http';
@@ -53,8 +53,8 @@ export class SalesDemoService extends SalesService {
         return salesSummary;
     }
 
-    async getSalesCharts(): Promise<SalesCharts> {
-        const salesCharts = await this.getDemoDataWithFileName<SalesCharts>('sales-charts.json');
+    async getSalesCharts(companyKey: string): Promise<CompanySales> {
+        const salesCharts = await this.getDemoDataWithFileName<CompanySales>('sales-charts.json');
 
         return salesCharts;
     }

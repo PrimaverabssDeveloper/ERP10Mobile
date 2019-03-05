@@ -153,14 +153,15 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
 
         await this.showLoading();
 
-        // get sales charts
-        this.salesCharts = await this.salesService.getSalesCharts();
+        // get all companies
+        this.companies = await this.salesService.getCompanies();
 
-        // extract info from all companies
-        this.companies = this.salesCharts.data.map(cs => ({ key: cs.key, name: cs.name }));
+        if (!this.companies) {
+            alert('NO COMPANIES');
+        }
 
-        // by default, select the first company
-        this.selectedCompanySales = this.salesCharts.data[0];
+        // get sales charts for the company
+        this.selectedCompanySales = await this.salesService.getSalesCharts(this.companies[0].key);
 
         // by default, select the first chart bundle key
         this.selectedChartBundleKey = this.selectedCompanySales.chartBundle[0].key;

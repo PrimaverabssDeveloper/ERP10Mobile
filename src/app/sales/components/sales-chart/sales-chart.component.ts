@@ -400,10 +400,8 @@ export class SalesChartComponent {
         // right display order series
         const series = [currentYearSerie, previousYearSerie];
 
-        for (const dataSet of chart.dataSet) {
-            // the Monthly Chart has always only one set of datapoins
-            const dataPoint = dataSet.dataPoints[0];
-
+        // the Monthly and Weakly Chart has always only one datapoint
+        for (const dataPoint of chart.dataSet[0].dataPoints) {
             // the dataPoint with total values is not used on the chart
             if (dataPoint.isTotal) {
                 continue;
@@ -424,6 +422,32 @@ export class SalesChartComponent {
                 dataSets[i].data.push(finalValue);
             }
         }
+
+
+        // for (const dataSet of chart.dataSet) {
+        //     // the Monthly Chart has always only one set of datapoins => NOT ANY MORE
+        //     const dataPoint = dataSet.dataPoints[0];
+
+        //     // the dataPoint with total values is not used on the chart
+        //     if (dataPoint.isTotal) {
+        //         continue;
+        //     }
+
+        //     labels.push(dataPoint.label);
+
+        //     for (let i = 0; i < series.length; i++) {
+        //         const serie = series[i];
+        //         const value = dataPoint.values.find(v => v.seriesKey === serie.key);
+        //         let finalValue = 0;
+
+        //         if (value) {
+        //             finalValue = this.getCorrectValue(value, useReportingValue);
+        //             maxValue = finalValue > maxValue ? finalValue : maxValue;
+        //         }
+
+        //         dataSets[i].data.push(finalValue);
+        //     }
+        // }
 
         if (timeFrame === 'quarter') {
             maxValue = 0;

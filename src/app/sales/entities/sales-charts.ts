@@ -5,6 +5,11 @@ export interface SalesCharts {
     data: CompanySales[];
 }
 
+export interface CompanySalesData {
+    dataTimestamp: string;
+    data: CompanySales;
+}
+
 export interface CompanySales {
     key: string;
     name: string;
