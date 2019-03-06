@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Instance } from '../../../core/entities';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { PageBase } from '../../../shared/pages';
 import { LoadingController, NavController } from '@ionic/angular';
@@ -37,7 +37,7 @@ export class InstancesPage extends PageBase implements OnInit {
     constructor(
         private instanceService: InstanceService,
         private instancesService: InstancesService,
-        private router: Router,
+        private route: ActivatedRoute,
         private navController: NavController,
         public loadingController: LoadingController) {
         super(loadingController);
@@ -53,9 +53,17 @@ export class InstancesPage extends PageBase implements OnInit {
      * @memberof InstancesPage
      */
     async ngOnInit() {
+
         await this.showLoading();
 
-        const instances = await this.instancesService.getInstancesAsync();
+        let instances: Instance[];
+
+        const instancesJson = this.route.snapshot.queryParams['instances'];
+        if (instancesJson) {
+            instances = JSON.parse(instancesJson);
+        } else {
+            instances = await this.instancesService.getInstancesAsync();
+        }
 
         this.handleInstancesAsync(instances);
 
@@ -84,7 +92,6 @@ export class InstancesPage extends PageBase implements OnInit {
     private async handleInstancesAsync(instances: Instance[]) {
         if (!instances || instances.length === 0) {
             // TODO: show message that there is not instances
-
             return;
         }
 

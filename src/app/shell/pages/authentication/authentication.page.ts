@@ -1,18 +1,22 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { AuthenticationService, StorageService } from '../../../core/services';
+import { AuthenticationService, StorageService, InstanceService } from '../../../core/services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppSettings } from '../../../core/app-settings';
 import { AlertController, NavController } from '@ionic/angular';
+import { InstancesService, InstancesServiceProvider } from '../../services';
 
 @Component({
     templateUrl: './authentication.page.html',
-    styleUrls: ['./authentication.page.scss']
+    styleUrls: ['./authentication.page.scss'],
+    providers: [InstancesServiceProvider]
 })
 export class AuthenticationPage implements OnInit {
 
 
     constructor(
         private authenticationService: AuthenticationService,
+        private instancesService: InstancesService,
+        private instanceService: InstanceService,
         private route: ActivatedRoute,
         private router: Router,
         private appSettings: AppSettings,
@@ -32,8 +36,7 @@ export class AuthenticationPage implements OnInit {
 
         const logout = this.route.snapshot.queryParams['logout'];
         if (logout) {
-            await this.storageService.clear();
-            await this.authenticationService.endSession();
+            await this.endSession();
         }
 
         const isAuthenticated = await this.authenticationService.isAuthenticate();
@@ -71,9 +74,38 @@ export class AuthenticationPage implements OnInit {
         this.goToInstanceSelectorPage();
     }
 
-    private goToInstanceSelectorPage() {
-        // (window as any).location = '/shell/instances';
+    private async goToInstanceSelectorPage() {
 
-        this.zone.run(() => this.navController.navigateForward(['/shell/instances'], { replaceUrl: true}));
+        const instances = await this.instancesService.getInstancesAsync();
+
+        // no instances available
+        if (!instances || instances.length === 0) {
+            // show error modal
+            await this.endSession();
+            return;
+        }
+
+        // only one instance available.
+        // go directly to the dashboard
+        if (instances.length === 1) {
+            await this.instanceService.setCurrentInstanceAsync(instances[0]);
+            this.zone.run(() => this.navController.navigateForward('/shell/dashboard', { replaceUrl: true}));
+            return;
+        }
+
+        // more than one instance availabe. Go to the instance selector
+        const extras = {
+            replaceUrl: true,
+            queryParams: {
+                instances: JSON.stringify(instances),
+            }
+        };
+
+        this.zone.run(() => this.navController.navigateForward(['/shell/instances'], extras));
+    }
+
+    private async endSession() {
+        await this.storageService.clear();
+        await this.authenticationService.endSession();
     }
 }
