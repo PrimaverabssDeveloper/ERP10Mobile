@@ -20,6 +20,7 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="AndroidLaunchMode" value="singleTask" />
+    <preference name="orientation" value="portrait" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -106,3 +107,4 @@
     <plugin name="cordova-plugin-email-composer" spec="^0.9.1" />
     <engine name="android" spec="7.1.1" />
 </widget>
+
