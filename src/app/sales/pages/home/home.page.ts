@@ -80,6 +80,8 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
     private localeChangedSubscription: Subscription;
     private useReferenceCurrencySettingChangedSubscription: Subscription;
 
+    private isCompanySelectorPopoverVisible: boolean;
+
     tableData: {
         chartBundle: ChartBundle,
         chart: ChartData,
@@ -160,14 +162,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
             alert('NO COMPANIES');
         }
 
-        // get sales charts for the company
-        this.selectedCompanySales = await this.salesService.getSalesCharts(this.companies[0].key);
-
-        // by default, select the first chart bundle key
-        this.selectedChartBundleKey = this.selectedCompanySales.chartBundle[0].key;
-
-        // update view
-        this.updateView();
+        this.showCompanyData(this.companies[0]);
 
         // when the locale change, refresh the view
         // so the currencies and date format take the new locale
@@ -203,16 +198,33 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
     }
 
     async companySelectorAction(event: any) {
+
+        // this will prevent the company to be show more than once at the same time
+        if (this.isCompanySelectorPopoverVisible) {
+            return;
+        }
+
+        this.isCompanySelectorPopoverVisible = true;
+
         const popover = await this.popoverController.create({
             component: CompanySelectorComponent,
             componentProps: {
-                companies: this.companies
+                companies: this.companies,
+                onCompanySelected: (company: Company) => {
+                    this.showCompanyData(company);
+                    popover.dismiss();
+                }
             },
+            backdropDismiss: true,
             event: event,
-            translucent: true
+            translucent: true,
         });
 
-        return await popover.present();
+        popover.onDidDismiss().then(() => {
+            this.isCompanySelectorPopoverVisible = false;
+        });
+
+        await popover.present();
     }
 
     changeTimeFrameAction(timeFrame: 'monthly' | 'quarter') {
@@ -255,6 +267,18 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
         if (event) {
             this.salesChartCurrentData = event.chartData;
         }
+    }
+
+    private async showCompanyData(company: Company) {
+
+        // get sales charts for the company
+        this.selectedCompanySales = await this.salesService.getSalesCharts(company.key);
+
+        // by default, select the first chart bundle key
+        this.selectedChartBundleKey = this.selectedCompanySales.chartBundle[0].key;
+
+        // update view
+        this.updateView();
     }
 
     private async updateView() {

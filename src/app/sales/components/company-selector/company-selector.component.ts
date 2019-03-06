@@ -9,8 +9,13 @@ import { Company } from '../../entities';
 
 export class CompanySelectorComponent {
     @Input() companies: Company[];
+    @Input() onCompanySelected: (company: Company) => void;
+
+    constructor() {
+
+    }
 
     companySelectedAction(company: Company) {
-
+        this.onCompanySelected(company);
     }
 }
