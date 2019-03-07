@@ -87,6 +87,9 @@
         "OTHER_CONTACTS_PAGE" : {
             "PAGE_TITLE": "Contactos relacionados"
         },
+        "OTHER_ADDRESSES_PAGE" : {
+            "PAGE_TITLE": "Endereços"
+        },
         "PENDING_ORDERS_PAGE" : {
             "PAGE_TITLE": "Encomendas pendentes"
         },

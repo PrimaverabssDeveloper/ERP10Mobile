@@ -86,6 +86,9 @@
         "OTHER_CONTACTS_PAGE" : {
             "PAGE_TITLE": "Related contacts"
         },
+        "OTHER_ADDRESSES_PAGE" : {
+            "PAGE_TITLE": "Addresses"
+        },
         "PENDING_ORDERS_PAGE" : {
             "PAGE_TITLE": "Pending orders"
         },
