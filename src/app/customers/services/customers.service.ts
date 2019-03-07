@@ -8,7 +8,10 @@ export class CustomersService {
 
     private static readonly RECENT_VIEWED_CUSTOMERS_STORAGE_KEY = 'RECENT_VIEWD_CUSTOMERS_STORAGE_KEY';
 
-    private static readonly SEARCH_CUSTOMERS = (searchTerm) => `customers?searchStr=${searchTerm}`;
+    // private static readonly SEARCH_CUSTOMERS = (searchTerm) => `customers?searchStr=${searchTerm}`;
+    private static readonly SEARCH_CUSTOMERS = (searchTerm) => `customers`;
+
+    private static readonly CUSTOMER_DETAIL = (customerKey, companyKey) => `customers/${customerKey}?companyKey=${companyKey}`;
 
     constructor(
         protected storageService: CustomersStorageService,
@@ -36,10 +39,17 @@ export class CustomersService {
         return result;
     }
 
-    getCustomer(companyKey: string, customerKey: string): Promise<Customer> {
-        return new Promise<Customer>(result => {
-            result(null);
-        });
+    async getCustomer(companyKey: string, customerKey: string): Promise<Customer> {
+        let customer: Customer = null;
+
+        try {
+            customer = await this.instanceHttpRequestService
+                               .get<Customer>(CustomersService.CUSTOMER_DETAIL(customerKey, companyKey));
+        } catch (error) {
+            console.log(error);
+        }
+
+        return customer;
     }
 
     async getRecentViewedCustomers(): Promise<Customer[]> {
