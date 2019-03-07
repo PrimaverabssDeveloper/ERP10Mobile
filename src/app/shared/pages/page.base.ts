@@ -1,4 +1,5 @@
 import { LoadingController } from '@ionic/angular';
+import { Location } from '@angular/common';
 
 /**
  * The base class for all pages.
@@ -17,7 +18,7 @@ export abstract class PageBase {
 
     // #region 'Constructor'
 
-    constructor(public loadingController: LoadingController) {
+    constructor(public loadingController: LoadingController, public location: Location) {
 
     }
 
@@ -71,6 +72,16 @@ export abstract class PageBase {
         //             resolve();
         //         });
         // });
+    }
+
+    /**
+     * Return to the previous page.
+     *
+     * @protected
+     * @memberof PageBase
+     */
+    protected goBack() {
+        this.location.back();
     }
 
     // #endregion
