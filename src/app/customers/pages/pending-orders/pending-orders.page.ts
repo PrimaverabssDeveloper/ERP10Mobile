@@ -42,6 +42,10 @@ export class PendingOrdersPage extends PageBase implements OnInit {
             console.log(error);
         }
 
+        if (!this.pendingOrders) {
+            this.goBack();
+        }
+
         await this.hideLoading();
     }
 

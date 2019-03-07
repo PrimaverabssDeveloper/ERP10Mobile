@@ -65,6 +65,10 @@ export class CurrentAccountPage extends PageBase implements OnInit {
             console.log(error);
         }
 
+        if (!this.currentAccount) {
+            this.goBack();
+        }
+
         await this.hideLoading();
     }
 

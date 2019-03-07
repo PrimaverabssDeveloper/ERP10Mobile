@@ -42,6 +42,10 @@ export class RecentActivityPage extends PageBase implements OnInit {
             console.log(error);
         }
 
+        if (!this.recentActivity) {
+            this.goBack();
+        }
+
         await this.hideLoading();
     }
 
