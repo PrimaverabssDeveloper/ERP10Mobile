@@ -22,8 +22,7 @@
         <div class="customer-address-part">
             <div class="customer-address-part-icon pri-icon pri-address-icon"></div>
             <div class="customer-address-part-label">
-                {{customer.contacts.address}} {{customer.contacts.address2}},
-                {{customer.contacts.postalLocation}}, {{customer.contacts.location}}
+                {{customerAddressBuilder(customer)}}
             </div>
         </div>
         <div class="customer-address-part col-6" *ngIf="customer.contacts.phone">

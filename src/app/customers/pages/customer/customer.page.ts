@@ -121,4 +121,33 @@ export class CustomerPage extends PageBase implements OnInit {
 
         this.router.navigate(commands, extras);
     }
+
+    customerAddressBuilder(customer: Customer): string {
+        // {{customer.contacts.address}} {{customer.contacts.address2}},
+        // {{customer.contacts.postalLocation}}, {{customer.contacts.location}}
+
+        let address =
+            `${customer.contacts.address ? customer.contacts.address : '' } ${customer.contacts.address2 ? customer.contacts.address2 : ''},
+             ${customer.contacts.postalLocation ? customer.contacts.postalLocation : ''},
+             ${customer.contacts.postalCode ? customer.contacts.postalCode : ''}
+            `;
+
+        let isSanitized = false;
+        while (!isSanitized) {
+            isSanitized = true;
+            address = address.trim();
+
+            if (address[0] === ',') {
+                address = address.slice(1, address.length);
+                isSanitized = false;
+            }
+
+            if (address[address.length - 1] === ',') {
+                address = address.slice(1, address.length - 1);
+                isSanitized = false;
+            }
+        }
+
+        return address;
+    }
 }

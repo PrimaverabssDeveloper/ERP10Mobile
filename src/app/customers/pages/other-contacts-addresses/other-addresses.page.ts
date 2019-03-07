@@ -38,7 +38,7 @@ export class OtherAddressesPage extends PageBase implements OnInit {
      * @param {CustomerOtherAddress} otherAddress
      * @memberof OtherAddressesPage
      */
-    async showAddressOnMapAction(otherAddress: CustomerOtherAddress ) {
+    async showAddressOnMapAction(otherAddress: CustomerOtherAddress) {
         const address = `${otherAddress.address}+${otherAddress.address2}+${otherAddress.location}`;
         const url = `https://www.google.com/maps/search/?api=1&query=${escape(address)}`;
         window.open(url, '_system');
@@ -53,21 +53,35 @@ export class OtherAddressesPage extends PageBase implements OnInit {
      */
     buildAddress(otherAddress: CustomerOtherAddress): string {
 
-        let address = `${otherAddress.address}
-                        ${otherAddress.address2},
-                        ${otherAddress.postalCode}
-                        ${otherAddress.postalLocation},
-                        ${otherAddress.location},
-                        ${otherAddress.country}`;
+        const address = this.getStringOrEmpty(otherAddress.address);
+        const address2 = this.getStringOrEmpty(otherAddress.address2);
+        const postalCode = this.getStringOrEmpty(otherAddress.postalCode);
+        const postalLocation = this.getStringOrEmpty(otherAddress.postalLocation);
+        const location = this.getStringOrEmpty(otherAddress.location);
+        const contry = this.getStringOrEmpty(otherAddress.country);
 
-        // Removes the leading and trailing white space
-        address = address.trim();
+        let fullAddress = `${address} ${address2}, ${postalCode} ${postalLocation}, ${location}, ${contry}`;
 
-        // In case of the last chart is a ',', removes it
-        if (address[address.length - 1] === ',') {
-            address = address.slice(0, address.length - 1);
+        let isSanitized = false;
+        while (!isSanitized) {
+            isSanitized = true;
+            fullAddress = fullAddress.trim();
+
+            if (fullAddress[0] === ',') {
+                fullAddress = fullAddress.slice(1, fullAddress.length);
+                isSanitized = false;
+            }
+
+            if (fullAddress[fullAddress.length - 1] === ',') {
+                fullAddress = fullAddress.slice(0, fullAddress.length - 1);
+                isSanitized = false;
+            }
         }
 
-        return address;
+        return fullAddress;
+    }
+
+    private getStringOrEmpty(value: string) {
+        return value ? value : '';
     }
 }
