@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
+import { Location } from '@angular/common';
 import { LoadingController } from '@ionic/angular';
 import { PageBase } from '../../../shared/pages';
 import { SalesService, SalesServiceProvider, SalesSettingsService } from '../../services';
@@ -60,10 +60,11 @@ export class SalesSettingsPage extends PageBase implements OnInit {
 
     constructor(
         public loadingController: LoadingController,
+        public location: Location,
         private salesService: SalesService,
         private salesSettingsService: SalesSettingsService
     ) {
-        super(loadingController);
+        super(loadingController, location);
     }
 
     /**

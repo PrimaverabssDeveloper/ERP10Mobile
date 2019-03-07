@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Document, PendingOrders, FinantialDocumentPageConfiguration } from '../../entities';
 import { CustomersService, CustomersServiceProvider } from '../../services';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MoneyValue, LocalizedString } from '../../../core/entities';
+import { Location } from '@angular/common';
 
 @Component({
     templateUrl: './pending-orders.page.html',
@@ -17,11 +17,12 @@ export class PendingOrdersPage extends PageBase implements OnInit {
 
     constructor(
         public loadingController: LoadingController,
+        public location: Location,
         private customersService: CustomersService,
         private route: ActivatedRoute,
         private router: Router
     ) {
-        super(loadingController);
+        super(loadingController, location);
     }
 
     /**

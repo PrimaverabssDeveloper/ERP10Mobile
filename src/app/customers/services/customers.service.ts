@@ -13,6 +13,15 @@ export class CustomersService {
 
     private static readonly CUSTOMER_DETAIL = (customerKey, companyKey) => `customers/${customerKey}?companyKey=${companyKey}`;
 
+    private static readonly CUSTOMER_PENDING_ORDERS = (customerKey, companyKey) =>
+        `customers/${customerKey}/pendingorders?companyKey=${companyKey}`
+
+    private static readonly CUSTOMER_RECENT_ACTIVITY = (customerKey, companyKey) =>
+        `customers/${customerKey}/recentactivity?companyKey=${companyKey}`
+
+    private static readonly CUSTOMER_CURRENT_ACCOUNT = (customerKey, companyKey) =>
+        `customers/${customerKey}/currentaccount?companyKey=${companyKey}`
+
     constructor(
         protected storageService: CustomersStorageService,
         protected instanceHttpRequestService: InstanceHttpRequestService) {
@@ -70,6 +79,45 @@ export class CustomersService {
         return customers;
     }
 
+    async getPendingOrders(companyKey: string, customerKey: string): Promise<PendingOrders> {
+        let result: PendingOrders;
+
+        try {
+            result = await this.instanceHttpRequestService
+                                  .get<PendingOrders>(CustomersService.CUSTOMER_PENDING_ORDERS(customerKey, companyKey));
+        } catch (error) {
+            console.error(error);
+        }
+
+        return result;
+    }
+
+    async getRecentActivity(companyKey: string, customerKey: string): Promise<RecentActivity> {
+        let result: RecentActivity;
+
+        try {
+            result = await this.instanceHttpRequestService
+                                  .get<RecentActivity>(CustomersService.CUSTOMER_RECENT_ACTIVITY(customerKey, companyKey));
+        } catch (error) {
+            console.error(error);
+        }
+
+        return result;
+    }
+
+    async getCurrentAccount(companyKey: string, customerKey: string): Promise<CurrentAccount> {
+        let result: CurrentAccount;
+
+        try {
+            result = await this.instanceHttpRequestService
+                                  .get<CurrentAccount>(CustomersService.CUSTOMER_CURRENT_ACCOUNT(customerKey, companyKey));
+        } catch (error) {
+            console.error(error);
+        }
+
+        return result;
+    }
+
     async addToRecentViewedCustomers(customer: Customer): Promise<any> {
         const recentViewedCustomers = await this.getRecentViewedCustomers();
         const index = recentViewedCustomers.findIndex(
@@ -85,17 +133,5 @@ export class CustomersService {
         recentViewedCustomers.unshift(customer);
 
         await this.storageService.setData(CustomersService.RECENT_VIEWED_CUSTOMERS_STORAGE_KEY, recentViewedCustomers, true);
-    }
-
-    async getPendingOrders(companyKey: string, customerKey: string): Promise<PendingOrders> {
-        return null;
-    }
-
-    async getRecentActivity(companyKey: string, customerKey: string): Promise<RecentActivity> {
-        return null;
-    }
-
-    async getCurrentAccount(companyKey: string, customerKey: string): Promise<CurrentAccount> {
-        return null;
     }
 }

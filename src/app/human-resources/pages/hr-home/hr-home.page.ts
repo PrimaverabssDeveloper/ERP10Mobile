@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { LoadingController, PopoverController, IonSlides } from '@ionic/angular';
 import { PageBase } from '../../../shared/pages';
 import { HumanResourcesServiceProvider, HumanResourcesService } from '../../services';
@@ -50,6 +51,7 @@ export class HrHomePage extends PageBase implements OnInit {
     constructor(
         public loadingController: LoadingController,
         public popoverController: PopoverController,
+        public location: Location,
         private humanResourcesService: HumanResourcesService,
         private translate: TranslateService,
         private datePipe: DatePipe,
@@ -58,7 +60,7 @@ export class HrHomePage extends PageBase implements OnInit {
         private emailComposer: EmailComposer
     ) {
 
-        super(loadingController);
+        super(loadingController, location);
 
         this.chartsDrawerState = 'open';
         this.salaryValuesState = 'money';

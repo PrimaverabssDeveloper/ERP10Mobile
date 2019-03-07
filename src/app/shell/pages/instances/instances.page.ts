@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Instance } from '../../../core/entities';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 import { PageBase } from '../../../shared/pages';
 import { LoadingController, NavController } from '@ionic/angular';
@@ -39,8 +40,10 @@ export class InstancesPage extends PageBase implements OnInit {
         private instancesService: InstancesService,
         private route: ActivatedRoute,
         private navController: NavController,
-        public loadingController: LoadingController) {
-        super(loadingController);
+        public loadingController: LoadingController,
+        public location: Location
+        ) {
+        super(loadingController, location);
     }
 
     // #endregion

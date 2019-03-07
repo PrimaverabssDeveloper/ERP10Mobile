@@ -7,6 +7,10 @@ import {
 } from '@angular/core';
 
 import {
+    Location
+} from '@angular/common';
+
+import {
     CurrencyPipe
 } from '@angular/common';
 
@@ -132,6 +136,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
     constructor(
         public popoverController: PopoverController,
         public loadingController: LoadingController,
+        public location: Location,
         private alertController: AlertController,
         private salesService: SalesService,
         private salesSettingsService: SalesSettingsService,
@@ -141,7 +146,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
         private chartShareService: ChartShareService
     ) {
 
-        super(loadingController);
+        super(loadingController, location);
 
         this.dataDate = new Date();
         this.timeFrame = 'monthly';

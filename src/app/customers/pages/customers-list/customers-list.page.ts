@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { Customer } from '../../entities';
 import { CustomersService, CustomersServiceProvider } from '../../services';
 import { Subject } from 'rxjs';
@@ -32,10 +33,11 @@ export class CustomersListPage extends PageBase implements OnInit {
 
     constructor(
         public loadingController: LoadingController,
+        public location: Location,
         private customersService: CustomersService,
         private router: Router
     ) {
-        super(loadingController);
+        super(loadingController, location);
 
         this.state = 'recent';
         this.recentOrder = 'asc';

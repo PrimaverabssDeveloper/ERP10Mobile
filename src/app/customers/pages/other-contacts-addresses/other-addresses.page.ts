@@ -3,6 +3,7 @@ import { LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CustomerOtherAddress } from '../../entities';
+import { Location } from '@angular/common';
 
 @Component({
     templateUrl: './other-addresses.page.html',
@@ -15,9 +16,10 @@ export class OtherAddressesPage extends PageBase implements OnInit {
 
     constructor(
         public loadingController: LoadingController,
+        public location: Location,
         private route: ActivatedRoute
     ) {
-        super(loadingController);
+        super(loadingController, location);
     }
 
     /**

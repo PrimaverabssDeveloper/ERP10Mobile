@@ -1,5 +1,6 @@
 import { PageBase } from '../../../shared/pages';
 import { LoadingController } from '@ionic/angular';
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Customer, CustomerSales } from '../../entities';
 import { CustomersService, CustomersServiceProvider } from '../../services';
@@ -20,11 +21,12 @@ export class CustomerPage extends PageBase implements OnInit {
 
     constructor(
         public loadingController: LoadingController,
+        public location: Location,
         private customersService: CustomersService,
         private route: ActivatedRoute,
         private router: Router
     ) {
-        super(loadingController);
+        super(loadingController, location);
         const date = new Date();
         this.currentYear = date.getFullYear();
         this.previousYear = date.getFullYear() - 1;

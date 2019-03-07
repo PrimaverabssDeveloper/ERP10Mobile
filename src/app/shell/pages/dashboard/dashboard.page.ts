@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
 import { MenuController, LoadingController, AlertController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
@@ -83,9 +84,10 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
         private modulesService: ModulesService,
         public menuController: MenuController,
         public loadingController: LoadingController,
-        public alertController: AlertController
+        public alertController: AlertController,
+        public location: Location
     ) {
-        super(loadingController);
+        super(loadingController, location);
 
         this.modulesDefinitions = [];
         this.modulesSummaries = [];

@@ -1,4 +1,5 @@
 import { PageBase } from '../../../shared/pages';
+import { Location } from '@angular/common';
 import { LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Customer, CurrentAccount, Document, FinantialDocumentPageConfiguration, DocumentValue } from '../../entities';
@@ -38,11 +39,12 @@ export class CurrentAccountPage extends PageBase implements OnInit {
 
     constructor(
         public loadingController: LoadingController,
+        public location: Location,
         private customersService: CustomersService,
         private route: ActivatedRoute,
         private router: Router
     ) {
-        super(loadingController);
+        super(loadingController, location);
         this.state = 'older';
     }
 
