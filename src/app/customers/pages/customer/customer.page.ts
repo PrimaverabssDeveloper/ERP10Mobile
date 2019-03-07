@@ -43,17 +43,16 @@ export class CustomerPage extends PageBase implements OnInit {
 
         await this.showLoading();
 
-        try {
-            this.customer = await this.customersService.getCustomer(companyKey, customerKey);
+        this.customer = await this.customersService.getCustomer(companyKey, customerKey);
 
-            // calc the variation between previouse and current sales
+        if (this.customer) {
+            // calculate the variation between previouse and current sales
             this.salesPercentageVariation = MathTools.variationBetweenTwoNumbers(
                 this.customer.sales.totalSales.previousSales,
                 this.customer.sales.totalSales.currentSales,
                 true);
-
-        } catch (error) {
-            console.log(error);
+        } else {
+            this.goBack();
         }
 
         await this.hideLoading();
