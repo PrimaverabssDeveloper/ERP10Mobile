@@ -51,9 +51,12 @@ export class CustomersService {
     async getCustomer(companyKey: string, customerKey: string): Promise<Customer> {
         let customer: Customer = null;
 
+        const sanitizedCustomerKey = this.sanitizeString(customerKey);
+        const sanitizedCompanyKey = this.sanitizeString(companyKey);
+
         try {
             customer = await this.instanceHttpRequestService
-                               .get<Customer>(CustomersService.CUSTOMER_DETAIL(customerKey, companyKey));
+                               .get<Customer>(CustomersService.CUSTOMER_DETAIL(sanitizedCustomerKey, sanitizedCompanyKey));
         } catch (error) {
             console.log(error);
         }
@@ -82,9 +85,12 @@ export class CustomersService {
     async getPendingOrders(companyKey: string, customerKey: string): Promise<PendingOrders> {
         let result: PendingOrders;
 
+        const sanitizedCustomerKey = this.sanitizeString(customerKey);
+        const sanitizedCompanyKey = this.sanitizeString(companyKey);
+
         try {
             result = await this.instanceHttpRequestService
-                                  .get<PendingOrders>(CustomersService.CUSTOMER_PENDING_ORDERS(customerKey, companyKey));
+                               .get<PendingOrders>(CustomersService.CUSTOMER_PENDING_ORDERS(sanitizedCustomerKey, sanitizedCompanyKey));
         } catch (error) {
             console.error(error);
         }
@@ -95,9 +101,12 @@ export class CustomersService {
     async getRecentActivity(companyKey: string, customerKey: string): Promise<RecentActivity> {
         let result: RecentActivity;
 
+        const sanitizedCustomerKey = this.sanitizeString(customerKey);
+        const sanitizedCompanyKey = this.sanitizeString(companyKey);
+
         try {
             result = await this.instanceHttpRequestService
-                                  .get<RecentActivity>(CustomersService.CUSTOMER_RECENT_ACTIVITY(customerKey, companyKey));
+                               .get<RecentActivity>(CustomersService.CUSTOMER_RECENT_ACTIVITY(sanitizedCustomerKey, sanitizedCompanyKey));
         } catch (error) {
             console.error(error);
         }
@@ -108,9 +117,12 @@ export class CustomersService {
     async getCurrentAccount(companyKey: string, customerKey: string): Promise<CurrentAccount> {
         let result: CurrentAccount;
 
+        const sanitizedCustomerKey = this.sanitizeString(customerKey);
+        const sanitizedCompanyKey = this.sanitizeString(companyKey);
+
         try {
             result = await this.instanceHttpRequestService
-                                  .get<CurrentAccount>(CustomersService.CUSTOMER_CURRENT_ACCOUNT(customerKey, companyKey));
+                               .get<CurrentAccount>(CustomersService.CUSTOMER_CURRENT_ACCOUNT(sanitizedCustomerKey, sanitizedCompanyKey));
         } catch (error) {
             console.error(error);
         }
@@ -133,5 +145,17 @@ export class CustomersService {
         recentViewedCustomers.unshift(customer);
 
         await this.storageService.setData(CustomersService.RECENT_VIEWED_CUSTOMERS_STORAGE_KEY, recentViewedCustomers, true);
+    }
+
+    private sanitizeString(value: string): string {
+        return encodeURIComponent(value).replace(/\-/g, '%2D')
+                                        .replace(/\_/g, '%5F')
+                                        .replace(/\./g, '%2E')
+                                        .replace(/\!/g, '%21')
+                                        .replace(/\~/g, '%7E')
+                                        .replace(/\*/g, '%2A')
+                                        .replace(/\'/g, '%27')
+                                        .replace(/\(/g, '%28')
+                                        .replace(/\)/g, '%29');
     }
 }
