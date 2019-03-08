@@ -1,7 +1,8 @@
 
 {
     "CORE": {
-        "NETWORK_ERROR_MESSAGE": "Não foi possível comunicar com o servidor. Tente mais tarde."
+        "NETWORK_ERROR_MESSAGE": "Não foi possível comunicar com o servidor. Tente mais tarde.",
+        "SEARCH_INPUT_HINT": "Search"
     },
     "SHARED": {
         "SIDE_MENU_COMPONENT" : {
@@ -66,8 +67,10 @@
             "TOOGLE_MENU_RECENT": "Recentes",
             "TOOGLE_MENU_SEARCH_ASC": "de A a Z",
             "TOOGLE_MENU_SEARCH_DESC": "de Z a A",
-            "RECENT_LIST_EMPTY_MESSAGE": "Aqui poderá encontrar os últimos clientes aos que acedeu.",
-            "NO_SEARCH_PERFORMED_MESSAGE": "Utilize a pesquisa para encontrar clientes."
+            "MESSAGE_SEARCH_HAS_MORE_RESULTS": "Existem mais clientes que correspondem à sua pesquisa. Volte a definir a sua pesquisa.",
+            "MESSAGE_NO_SEARCH_PERFORMED": "Utilize a pesquisa para encontrar clientes.",
+            "MESSAGE_RECENT_EMPTY": "Aqui poderá encontrar os últimos clientes aos que acedeu.",
+            "MESSAGE_SEARCH_NO_RESULTS": "Não foram encontrados resultados para a sua pesquisa."
         },
         "CUSTOMER_PAGE" : {
             "PAGE_TITLE": "Cliente",
