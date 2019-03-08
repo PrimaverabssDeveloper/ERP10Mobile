@@ -36,14 +36,25 @@
         </div>
         <div class="search">
             <div class="magnifier"></div>
-            <input (keyup)="onSearchUpdate($event.target.value)" />
+            <input [attr.placeholder]="'CORE.SEARCH_INPUT_HINT' | translate" (keyup)="onSearchUpdate($event, $event.target.value)" />
         </div>
-        <div class="list">
+        <div class="message-wrapper" *ngIf="!customers || customers.length === 0">
+            <div class="message">
+                <span *ngIf="state === 'recent'">{{'CUSTOMERS.CUSTOMERS_LIST_PAGE.MESSAGE_RECENT_EMPTY' | translate}}</span>
+                <span *ngIf="state === 'search'">{{searchMessage}}</span>
+            </div>
+        </div>
+        <div class="list" *ngIf="customers && customers.length > 0">
             <div class="list-item" *ngFor="let costumer of customers" (click)="customerAction(costumer)">
                 <div class="key">{{costumer.key}}</div>
                 <div class="company-key">{{costumer.companyKey}}</div>
                 <div class="name">{{costumer.name}}</div>
                 <div class="location">{{costumer.location}}</div>
+            </div>
+            <div *ngIf="hasMoreSearchResults && state === 'search'" class="list-item has-more-search-results-message">
+                <div class="message">
+                        {{'CUSTOMERS.CUSTOMERS_LIST_PAGE.MESSAGE_SEARCH_HAS_MORE_RESULTS' | translate}}
+                </div>
             </div>
         </div>
     </div>

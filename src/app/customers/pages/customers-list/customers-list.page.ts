@@ -7,6 +7,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { PageBase } from '../../../shared/pages';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     templateUrl: './customers-list.page.html',
@@ -14,8 +15,6 @@ import { Router } from '@angular/router';
     providers: [CustomersServiceProvider]
 })
 export class CustomersListPage extends PageBase implements OnInit {
-
-    private searchUpdated = new Subject<string>();
     private searchedCustomers: Customer[];
     private recentViewedCustomers: Customer[];
 
@@ -30,12 +29,15 @@ export class CustomersListPage extends PageBase implements OnInit {
     state: 'recent' | 'search';
     recentOrder: 'asc' | 'desc';
     searchOrder: 'asc' | 'desc';
+    hasMoreSearchResults: boolean;
+    searchMessage: string;
 
     constructor(
         public loadingController: LoadingController,
         public location: Location,
         private customersService: CustomersService,
-        private router: Router
+        private router: Router,
+        private translate: TranslateService
     ) {
         super(loadingController, location);
 
@@ -50,14 +52,12 @@ export class CustomersListPage extends PageBase implements OnInit {
     * @memberof CostumersListPage
     */
     async ngOnInit() {
+
+        this.searchMessage = await this.translate.get('CUSTOMERS.CUSTOMERS_LIST_PAGE.MESSAGE_NO_SEARCH_PERFORMED').toPromise();
+
         await this.showLoading();
         await this.updateRecentCustomersList();
         this.hideLoading();
-
-        // perform customers search after 500ms
-        this.searchUpdated
-            .pipe(debounceTime(500), distinctUntilChanged())
-            .subscribe(st => this.searchCustomers(st));
     }
 
     recentOptionAction() {
@@ -88,21 +88,34 @@ export class CustomersListPage extends PageBase implements OnInit {
         this.router.navigate(['customers/customer', customer.companyKey, customer.key]);
     }
 
-    onSearchUpdate(searchTerm: string) {
-        this.searchUpdated.next(searchTerm);
+    onSearchUpdate(event: KeyboardEvent, value: string) {
+        if (event.which === 13) { // ENTER KEY
+            this.searchCustomers(value);
+        }
     }
 
-    private async searchCustomers(searchTerm: string) {
-        // await this.showLoading();
+    private async searchCustomers(searchTerm: string, pageIndex: number = 0, pageSize: number = 10) {
 
-        const result = await this.customersService
-                                 .searchCustomers(searchTerm);
-
-        if (result) {
-            this.searchedCustomers = result.customers;
+        if (!searchTerm.trim()) { // empty search
+            this.searchedCustomers = [];
+            this.hasMoreSearchResults = false;
+            this.searchMessage = await this.translate.get('CUSTOMERS.CUSTOMERS_LIST_PAGE.MESSAGE_NO_SEARCH_PERFORMED').toPromise();
+            return;
         }
 
-        // this.hideLoading();
+        await this.showLoading();
+
+        const result = await this.customersService
+                                 .searchCustomers(searchTerm, pageIndex, pageSize);
+
+        if (!result || !result.customers || result.customers.length === 0) {
+            this.searchMessage = await this.translate.get('CUSTOMERS.CUSTOMERS_LIST_PAGE.MESSAGE_SEARCH_NO_RESULTS').toPromise();
+        } else {
+            this.searchedCustomers = result.customers;
+            this.hasMoreSearchResults = result.hasMore;
+        }
+
+        await this.hideLoading();
     }
 
     private async addCustomerToRecentList(customer: Customer) {

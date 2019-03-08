@@ -8,8 +8,8 @@ export class CustomersService {
 
     private static readonly RECENT_VIEWED_CUSTOMERS_STORAGE_KEY = 'RECENT_VIEWD_CUSTOMERS_STORAGE_KEY';
 
-    // private static readonly SEARCH_CUSTOMERS = (searchTerm) => `customers?searchStr=${searchTerm}`;
-    private static readonly SEARCH_CUSTOMERS = (searchTerm) => `customers`;
+    private static readonly SEARCH_CUSTOMERS = (searchTerm: string, pageIndex: number, pageSize: number) =>
+        `customers?searchStr=${searchTerm}&pageIndex=${pageIndex}&pageSize=${pageSize}`
 
     private static readonly CUSTOMER_DETAIL = (customerKey, companyKey) => `customers/${customerKey}?companyKey=${companyKey}`;
 
@@ -34,13 +34,13 @@ export class CustomersService {
      * @returns {Promise<CustomersSearchResult>}
      * @memberof CustomersService
      */
-    async searchCustomers(searchTerm: string): Promise<CustomersSearchResult> {
+    async searchCustomers(searchTerm: string, pageIndex: number, pageSize: number): Promise<CustomersSearchResult> {
 
         let result: CustomersSearchResult = null;
 
         try {
             result = await this.instanceHttpRequestService
-                               .get<CustomersSearchResult>(CustomersService.SEARCH_CUSTOMERS(searchTerm));
+                               .get<CustomersSearchResult>(CustomersService.SEARCH_CUSTOMERS(searchTerm, pageIndex, pageSize));
         } catch (error) {
             console.log(error);
         }

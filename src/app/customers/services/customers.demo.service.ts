@@ -15,7 +15,7 @@ export class CustomersDemoService extends CustomersService {
         super(storageService, instanceHttpRequestService);
     }
 
-    searchCustomers(searchTerm: string): Promise<CustomersSearchResult> {
+    async searchCustomers(searchTerm: string, pageIndex: number, pageSize: number): Promise<CustomersSearchResult> {
 
         // return empty result
         if (!searchTerm || searchTerm.trim().length === 0) {
