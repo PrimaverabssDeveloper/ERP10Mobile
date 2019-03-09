@@ -5,7 +5,7 @@ import { CustomersService, CustomersServiceProvider } from '../../services';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { PageBase } from '../../../shared/pages';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -35,11 +35,12 @@ export class CustomersListPage extends PageBase implements OnInit {
     constructor(
         public loadingController: LoadingController,
         public location: Location,
+        public menuController: MenuController,
         private customersService: CustomersService,
         private router: Router,
         private translate: TranslateService
     ) {
-        super(loadingController, location);
+        super(loadingController, location, menuController);
 
         this.state = 'recent';
         this.recentOrder = 'asc';
@@ -93,6 +94,14 @@ export class CustomersListPage extends PageBase implements OnInit {
             this.searchCustomers(value);
         }
     }
+
+    // #region 'Protected Methods'
+
+    protected getMenuId(): string {
+        return 'customers-customers-list-page-menu';
+    }
+
+    // #endregion
 
     private async searchCustomers(searchTerm: string, pageIndex: number = 0, pageSize: number = 10) {
 

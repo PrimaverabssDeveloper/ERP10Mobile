@@ -1,5 +1,5 @@
 <!-- SIDE MENU -->
-<side-menu contentId="content"></side-menu>
+<side-menu contentId="customers-customer-page-content" menuId="customers-customer-page-menu"></side-menu>
 
 <!-- PAGE -->
 <ion-header>
@@ -9,12 +9,12 @@
         </ion-buttons>
         <ion-title><span class="navbar-title">{{ 'CUSTOMERS.CUSTOMER_PAGE.PAGE_TITLE' | translate }}</span></ion-title>
         <ion-buttons slot="end">
-            <ion-menu-button autoHide="false"></ion-menu-button>
+            <ion-menu-button autoHide="false" menu="customers-customer-page-menu"></ion-menu-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content id="content" scrollY='false'>
+<ion-content id="customers-customer-page-content" scrollY='false'>
     <div class="customer" *ngIf="customer">
         <div class="customer-name">
             {{customer.name}}

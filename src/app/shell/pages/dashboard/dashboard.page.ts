@@ -85,9 +85,9 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
         public menuController: MenuController,
         public loadingController: LoadingController,
         public alertController: AlertController,
-        public location: Location
+        public location: Location,
     ) {
-        super(loadingController, location);
+        super(loadingController, location, menuController);
 
         this.modulesDefinitions = [];
         this.modulesSummaries = [];
@@ -95,7 +95,6 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
     }
 
     // #endregion
-
 
     // #region 'Public Properties'
 
@@ -150,6 +149,14 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
 
             this.subscriptions = null;
         }
+    }
+
+    // #endregion
+
+    // #region 'Protected Methods'
+
+    protected getMenuId(): string {
+        return 'shell-dashboard-page-menu';
     }
 
     // #endregion

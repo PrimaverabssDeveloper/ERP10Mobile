@@ -1,5 +1,5 @@
 import { PageBase } from '../../../shared/pages';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, MenuController } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Customer, CustomerSales } from '../../entities';
@@ -22,11 +22,12 @@ export class CustomerPage extends PageBase implements OnInit {
     constructor(
         public loadingController: LoadingController,
         public location: Location,
+        public menuController: MenuController,
         private customersService: CustomersService,
         private route: ActivatedRoute,
         private router: Router
     ) {
-        super(loadingController, location);
+        super(loadingController, location, menuController);
         const date = new Date();
         this.currentYear = date.getFullYear();
         this.previousYear = date.getFullYear() - 1;
@@ -151,4 +152,12 @@ export class CustomerPage extends PageBase implements OnInit {
 
         return address;
     }
+
+    // #region 'Protected Methods'
+
+    protected getMenuId(): string {
+        return 'customers-customer-page-menu';
+    }
+
+    // #endregion
 }

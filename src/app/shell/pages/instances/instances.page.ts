@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { PageBase } from '../../../shared/pages';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController, NavController, MenuController } from '@ionic/angular';
 import { InstancesServiceProvider, InstancesService } from '../../services';
 import { InstanceService } from '../../../core/services';
 
@@ -41,9 +41,10 @@ export class InstancesPage extends PageBase implements OnInit {
         private route: ActivatedRoute,
         private navController: NavController,
         public loadingController: LoadingController,
-        public location: Location
+        public location: Location,
+        public menuController: MenuController
         ) {
-        super(loadingController, location);
+        super(loadingController, location, menuController);
     }
 
     // #endregion
@@ -86,6 +87,14 @@ export class InstancesPage extends PageBase implements OnInit {
         }
 
         this.selectInstanceAsync(instance);
+    }
+
+    // #endregion
+
+    // #region 'Protected Methods'
+
+    protected getMenuId(): string {
+        return null;
     }
 
     // #endregion

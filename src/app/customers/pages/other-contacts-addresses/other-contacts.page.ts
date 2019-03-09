@@ -1,6 +1,6 @@
 import { PageBase } from '../../../shared/pages';
 import { Location } from '@angular/common';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { CustomersService, CustomersServiceProvider } from '../../services';
 import { ActivatedRoute } from '@angular/router';
@@ -18,9 +18,10 @@ export class OtherContactsPage extends PageBase implements OnInit {
     constructor(
         public loadingController: LoadingController,
         public location: Location,
+        public menuController: MenuController,
         private route: ActivatedRoute
     ) {
-        super(loadingController, location);
+        super(loadingController, location, menuController);
     }
 
     /**
@@ -34,4 +35,12 @@ export class OtherContactsPage extends PageBase implements OnInit {
 
         this.customerName = this.route.snapshot.queryParams['customerName'];
     }
+
+    // #region 'Protected Methods'
+
+    protected getMenuId(): string {
+        return 'customers-other-contacts-page-menu';
+    }
+
+    // #endregion
 }

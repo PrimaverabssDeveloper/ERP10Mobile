@@ -1,4 +1,4 @@
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, MenuController } from '@ionic/angular';
 import { Location } from '@angular/common';
 
 /**
@@ -18,11 +18,22 @@ export abstract class PageBase {
 
     // #region 'Constructor'
 
-    constructor(public loadingController: LoadingController, public location: Location) {
+    constructor(public loadingController: LoadingController, public location: Location, public menuCtrl: MenuController) {
 
     }
 
     // #endregion
+
+    // #region 'Public Methods'
+    ionViewWillEnter() {
+
+        // if the hamburgers menu exits, make it availabe again
+        if (this.getMenuId()) {
+            this.menuCtrl.enable(true, this.getMenuId());
+        }
+    }
+    // #endregion
+
 
     // #region 'Protected Methods'
 
@@ -83,6 +94,8 @@ export abstract class PageBase {
     protected goBack() {
         this.location.back();
     }
+
+    protected abstract getMenuId(): string;
 
     // #endregion
 }

@@ -1,5 +1,5 @@
 import { PageBase } from '../../../shared/pages';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Document, PendingOrders, FinantialDocumentPageConfiguration } from '../../entities';
 import { CustomersService, CustomersServiceProvider } from '../../services';
@@ -18,11 +18,12 @@ export class PendingOrdersPage extends PageBase implements OnInit {
     constructor(
         public loadingController: LoadingController,
         public location: Location,
+        public menuController: MenuController,
         private customersService: CustomersService,
         private route: ActivatedRoute,
         private router: Router
     ) {
-        super(loadingController, location);
+        super(loadingController, location, menuController);
     }
 
     /**
@@ -82,4 +83,12 @@ export class PendingOrdersPage extends PageBase implements OnInit {
 
         this.router.navigate(commands, extras);
     }
+
+    // #region 'Protected Methods'
+
+    protected getMenuId(): string {
+        return 'customers-pending-orders-page-menu';
+    }
+
+    // #endregion
 }

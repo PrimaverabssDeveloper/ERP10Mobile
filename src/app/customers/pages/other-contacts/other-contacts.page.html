@@ -1,5 +1,5 @@
 <!-- SIDE MENU -->
-<side-menu contentId="content"></side-menu>
+<side-menu contentId="customers-other-contancts-page-content" menuId="customers-other-contancts-page-menu"></side-menu>
 
 <!-- PAGE -->
 <ion-header>
@@ -9,12 +9,12 @@
         </ion-buttons>
         <ion-title><span class="navbar-title">{{ 'CUSTOMERS.OTHER_CONTACTS_PAGE.PAGE_TITLE' | translate }}</span></ion-title>
         <ion-buttons slot="end">
-            <ion-menu-button autoHide="false"></ion-menu-button>
+            <ion-menu-button autoHide="false" menu="customers-other-contancts-page-menu"></ion-menu-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content id="content" scrollY='false'>
+<ion-content id="customers-other-contancts-page-content" scrollY='false'>
     <div class="other-contacts">
         <div class="customer-name">
             {{customerName}}

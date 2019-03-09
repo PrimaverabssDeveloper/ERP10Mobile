@@ -1,6 +1,6 @@
 import { PageBase } from '../../../shared/pages';
 import { Location } from '@angular/common';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Customer, CurrentAccount, Document, FinantialDocumentPageConfiguration, DocumentValue } from '../../entities';
 import { CustomersService, CustomersServiceProvider } from '../../services';
@@ -40,11 +40,12 @@ export class CurrentAccountPage extends PageBase implements OnInit {
     constructor(
         public loadingController: LoadingController,
         public location: Location,
+        public menuController: MenuController,
         private customersService: CustomersService,
         private route: ActivatedRoute,
         private router: Router
     ) {
-        super(loadingController, location);
+        super(loadingController, location, menuController);
         this.state = 'older';
     }
 
@@ -148,6 +149,14 @@ export class CurrentAccountPage extends PageBase implements OnInit {
             left: `calc(${percentagePositon}% - 10px)`
         };
     }
+
+    // #region 'Protected Methods'
+
+    protected getMenuId(): string {
+        return 'customers-current-account-page-menu';
+    }
+
+    // #endregion
 
     private getAccentColor(state: string): string {
         let accentColor: string;

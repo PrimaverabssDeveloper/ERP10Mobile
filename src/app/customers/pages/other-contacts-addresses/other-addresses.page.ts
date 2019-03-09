@@ -1,5 +1,5 @@
 import { PageBase } from '../../../shared/pages';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CustomerOtherAddress } from '../../entities';
@@ -17,9 +17,10 @@ export class OtherAddressesPage extends PageBase implements OnInit {
     constructor(
         public loadingController: LoadingController,
         public location: Location,
+        public menuController: MenuController,
         private route: ActivatedRoute
     ) {
-        super(loadingController, location);
+        super(loadingController, location, menuController);
     }
 
     /**
@@ -82,6 +83,14 @@ export class OtherAddressesPage extends PageBase implements OnInit {
 
         return fullAddress;
     }
+
+    // #region 'Protected Methods'
+
+    protected getMenuId(): string {
+        return 'customers-other-addresses-page-menu';
+    }
+
+    // #endregion
 
     private getStringOrEmpty(value: string) {
         return value ? value : '';

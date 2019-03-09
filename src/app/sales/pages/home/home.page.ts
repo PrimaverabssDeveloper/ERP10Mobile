@@ -17,7 +17,8 @@ import {
 import {
     PopoverController,
     LoadingController,
-    AlertController
+    AlertController,
+    MenuController
 } from '@ionic/angular';
 
 import {
@@ -137,6 +138,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
         public popoverController: PopoverController,
         public loadingController: LoadingController,
         public location: Location,
+        public menuController: MenuController,
         private alertController: AlertController,
         private salesService: SalesService,
         private salesSettingsService: SalesSettingsService,
@@ -146,7 +148,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
         private chartShareService: ChartShareService
     ) {
 
-        super(loadingController, location);
+        super(loadingController, location, menuController);
 
         this.dataDate = new Date();
         this.timeFrame = 'monthly';
@@ -273,6 +275,14 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
             this.salesChartCurrentData = event.chartData;
         }
     }
+
+    // #region 'Protected Methods'
+
+    protected getMenuId(): string {
+        return 'sales-home-page-menu';
+    }
+
+    // #endregion
 
     private async showCompanyData(company: Company) {
 

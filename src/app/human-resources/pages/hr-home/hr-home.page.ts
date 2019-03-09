@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { LoadingController, PopoverController, IonSlides } from '@ionic/angular';
+import { LoadingController, PopoverController, IonSlides, MenuController } from '@ionic/angular';
 import { PageBase } from '../../../shared/pages';
 import { HumanResourcesServiceProvider, HumanResourcesService } from '../../services';
 import { Salaries, YearSalary, MonthSalary, BaseSalary, Value, SalaryDocument } from '../../models';
@@ -52,6 +52,7 @@ export class HrHomePage extends PageBase implements OnInit {
         public loadingController: LoadingController,
         public popoverController: PopoverController,
         public location: Location,
+        public menuController: MenuController,
         private humanResourcesService: HumanResourcesService,
         private translate: TranslateService,
         private datePipe: DatePipe,
@@ -60,7 +61,7 @@ export class HrHomePage extends PageBase implements OnInit {
         private emailComposer: EmailComposer
     ) {
 
-        super(loadingController, location);
+        super(loadingController, location, menuController);
 
         this.chartsDrawerState = 'open';
         this.salaryValuesState = 'money';
@@ -165,6 +166,14 @@ export class HrHomePage extends PageBase implements OnInit {
 
         return await popover.present();
     }
+
+    // #region 'Protected Methods'
+
+    protected getMenuId(): string {
+        return 'human-resources-hr-home-page-menu';
+    }
+
+    // #endregion
 
     private updateView(salaries: Salaries, localizedMonthsNames: string[]) {
 

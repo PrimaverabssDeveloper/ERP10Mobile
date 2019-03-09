@@ -1,6 +1,6 @@
 import { PageBase } from '../../../shared/pages';
 import { Location } from '@angular/common';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Customer, DocumentLine, DocumentValue, FinantialDocumentDocumentHeaderConfiguration } from '../../entities';
 import { CustomersService, CustomersServiceProvider } from '../../services';
@@ -22,10 +22,11 @@ export class FinancialDocumentLinePage extends PageBase implements OnInit {
 
     constructor(
         public loadingController: LoadingController,
+        public menuController: MenuController,
         public location: Location,
         private route: ActivatedRoute,
     ) {
-        super(loadingController, location);
+        super(loadingController, location, menuController);
     }
 
     /**
@@ -54,4 +55,12 @@ export class FinancialDocumentLinePage extends PageBase implements OnInit {
             this.sidebarColorIndex = colorDv.value as number;
         }
     }
+
+    // #region 'Protected Methods'
+
+    protected getMenuId(): string {
+        return 'customers-finantial-document-line-page-menu';
+    }
+
+    // #endregion
 }

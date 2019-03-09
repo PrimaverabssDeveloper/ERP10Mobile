@@ -13,6 +13,7 @@ import { ModuleDefinition } from '../../../core/entities';
 export class SideMenuComponent implements OnInit {
 
     @Input() contentId: string;
+    @Input() menuId: string;
 
     modulesDefsWithSettings: ModuleDefinition[];
 

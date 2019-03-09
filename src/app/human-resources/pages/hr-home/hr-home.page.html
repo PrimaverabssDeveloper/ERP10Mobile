@@ -1,5 +1,5 @@
 <!-- SIDE MENU -->
-<side-menu contentId="content"></side-menu>
+<side-menu contentId="human-resources-hr-home-page-content" menuId="human-resources-hr-home-page-menu"></side-menu>
 
 
 <!-- PAGE -->
@@ -11,12 +11,12 @@
         </ion-buttons>
         <ion-title><span class="navbar-title">{{'HUMAN_RESOURCES.HR_PAGE.PAGE_TITLE' | translate}}</span></ion-title>
         <ion-buttons slot="end">
-            <ion-menu-button autoHide="false"></ion-menu-button>
+            <ion-menu-button autoHide="false" menu="human-resources-hr-home-page-menu"></ion-menu-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content id="content" scrollY='false'>
+<ion-content id="human-resources-hr-home-page-content" scrollY='false'>
     <ion-grid class="salary-details" (click)="toggleSalaryValuesStateAction()">
         <ion-row>
             <ion-col>
