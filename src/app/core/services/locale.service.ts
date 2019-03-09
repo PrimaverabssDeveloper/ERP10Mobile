@@ -92,6 +92,7 @@ export class LocaleService {
 
     /**
      * Set the locale to be used on data transformation and translations.
+     * If the locale is not valid, the default locale will be used.
      *
      * @param {string} locale
      * @memberof LocaleService
@@ -102,17 +103,15 @@ export class LocaleService {
             throw new Error('The locale can not be empty');
         }
 
-        if (!this._supportedLocales || this._supportedLocales.length === 0) {
-            throw new Error(`
-                The supported locales are not defined.
-                Set all supported locales first, using 'setSupportedLocales,
-                and then set the current locale to be used '`);
-        }
+        // verify if locale is supported
+        if (this._supportedLocales.indexOf(locale) < 0) {
+            // try find a compatible language, like if the locale if "pt-BR", use "pt-PT"
 
-        if (this._supportedLocales.indexOf(locale) === -1) {
-            throw new Error(`
-                This locale is not supported.
-                Only the following locales are supported: ${this._supportedLocales.join(' ,')}`);
+            const language = locale.slice(0, 2);
+            const compatibleLocale = this._supportedLocales.find(l => l.slice(0, 2) === language);
+
+            // if no campatible language is found, use the default
+            locale =  compatibleLocale ? compatibleLocale : this._defaultLocale;
         }
 
         this._locale = locale;
