@@ -89,7 +89,7 @@ export class AuthenticationPage implements OnInit {
         // go directly to the dashboard
         if (instances.length === 1) {
             await this.instanceService.setCurrentInstanceAsync(instances[0]);
-            this.zone.run(() => this.navController.navigateForward('/shell/dashboard', { replaceUrl: true}));
+            this.zone.run(() => this.navController.navigateRoot('/shell/dashboard', { replaceUrl: true}));
             return;
         }
 
@@ -101,7 +101,7 @@ export class AuthenticationPage implements OnInit {
             }
         };
 
-        this.zone.run(() => this.navController.navigateForward(['/shell/instances'], extras));
+        this.zone.run(() => this.navController.navigateRoot(['/shell/instances'], extras));
     }
 
     private async endSession() {

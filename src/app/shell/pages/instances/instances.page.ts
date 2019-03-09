@@ -98,12 +98,12 @@ export class InstancesPage extends PageBase implements OnInit {
             return;
         }
 
-        // Only one instance.
-        // Select automaticaly.
-        if (instances.length === 1) {
-            await this.selectInstanceAsync(instances[0]);
-            return;
-        }
+        // // Only one instance.
+        // // Select automaticaly.
+        // if (instances.length === 1) {
+        //     await this.selectInstanceAsync(instances[0]);
+        //     return;
+        // }
 
         this.instances = instances;
     }
@@ -115,7 +115,7 @@ export class InstancesPage extends PageBase implements OnInit {
         }
 
         await this.instanceService.setCurrentInstanceAsync(instance);
-        this.navController.navigateForward('/shell/dashboard', { replaceUrl: true});
+        this.navController.navigateRoot('/shell/dashboard', { replaceUrl: true});
     }
 
     // #endregion
