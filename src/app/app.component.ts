@@ -33,12 +33,10 @@ export class AppComponent {
         this.statusBar.styleDefault();
         this.splashScreen.hide();
 
-        // window.navigator.language; TBD
-
         // defines locales
         this.locale.setSupportedLocales(['pt-PT', 'en-US', 'es-ES']);
         this.locale.setDefaultLocale('en-US');
-        this.locale.setLocale('en-US');
+        this.locale.setLocale(window.navigator.language);
 
         this.appReady = true;
     }
