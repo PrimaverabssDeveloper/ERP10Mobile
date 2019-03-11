@@ -97,7 +97,13 @@ export class LocaleService {
         this.setSupportedLocales(supportedLocales);
         this.setDefaultLocale(defaultLocale);
 
-        let locale = await this.coreStorageService.getData<string>(LocaleService.LOCALE_CUSTOM_LOCALE);
+        let locale: string;
+
+        try {
+            locale = await this.coreStorageService.getData<string>(LocaleService.LOCALE_CUSTOM_LOCALE);
+        } catch (error) {
+            console.log('no custom localte stored yet');
+        }
         if (!locale) {
             locale = window.navigator.language;
         }
