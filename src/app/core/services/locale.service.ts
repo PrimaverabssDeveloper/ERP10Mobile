@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
+import { CoreStorageService } from './core-storage.service';
 
 /**
  * Manage the app locale.
@@ -15,6 +16,8 @@ import { Observable } from 'rxjs';
     providedIn: 'root',
 })
 export class LocaleService {
+
+    private static readonly LOCALE_CUSTOM_LOCALE = 'LOCALE_CUSTOM_LOCALE_KEY';
 
     // #region 'Private Properties'
     private _locale: string;
@@ -81,7 +84,7 @@ export class LocaleService {
      * @param {TranslateService} translate
      * @memberof LocaleService
      */
-    constructor(private translate: TranslateService) {
+    constructor(private translate: TranslateService, private coreStorageService: CoreStorageService) {
 
     }
 
@@ -90,6 +93,18 @@ export class LocaleService {
 
     // #region 'Public Methods'
 
+    async init(supportedLocales: string[], defaultLocale: string) {
+        this.setSupportedLocales(supportedLocales);
+        this.setDefaultLocale(defaultLocale);
+
+        let locale = await this.coreStorageService.getData<string>(LocaleService.LOCALE_CUSTOM_LOCALE);
+        if (!locale) {
+            locale = window.navigator.language;
+        }
+
+        this.setLocale(locale);
+    }
+
     /**
      * Set the locale to be used on data transformation and translations.
      * If the locale is not valid, the default locale will be used.
@@ -97,7 +112,7 @@ export class LocaleService {
      * @param {string} locale
      * @memberof LocaleService
      */
-    setLocale(locale: string) {
+    private setLocale(locale: string) {
 
         if (!locale) {
             throw new Error('The locale can not be empty');
@@ -126,7 +141,7 @@ export class LocaleService {
      * @param {string} locale
      * @memberof LocaleService
      */
-    setDefaultLocale(locale: string) {
+    private setDefaultLocale(locale: string) {
         if (!locale) {
             throw new Error('The default locale can not be empty');
         }
@@ -155,7 +170,7 @@ export class LocaleService {
      * @param {string[]} locales
      * @memberof LocaleService
      */
-    setSupportedLocales(locales: string[]) {
+    private setSupportedLocales(locales: string[]) {
 
         if (this._supportedLocales) {
             throw new Error('The supported locales can only be setted once.');
@@ -166,6 +181,17 @@ export class LocaleService {
         }
 
         this._supportedLocales = locales;
+    }
+
+    /**
+     * Defines a custom locale to be used. This locale will be permanent.
+     *
+     * @param {string} locale
+     * @memberof LocaleService
+     */
+    async setCustomLocale(locale: string) {
+        await this.coreStorageService.setData(LocaleService.LOCALE_CUSTOM_LOCALE, locale);
+        this.setLocale(locale);
     }
 
     // #endregion

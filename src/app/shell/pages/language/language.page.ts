@@ -81,9 +81,9 @@ export class LanguagePage implements OnInit {
      * @param {string} locale
      * @memberof LanguagePage
      */
-    changeLocaleAction(locale: string) {
+    async changeLocaleAction(locale: string) {
         this.selectedLocale = locale;
-        this.localeService.setLocale(locale);
+        await this.localeService.setCustomLocale(locale);
     }
 
     // #endregion

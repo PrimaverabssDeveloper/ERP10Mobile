@@ -34,9 +34,7 @@ export class AppComponent {
         this.splashScreen.hide();
 
         // defines locales
-        this.locale.setSupportedLocales(['pt-PT', 'en-US', 'es-ES']);
-        this.locale.setDefaultLocale('en-US');
-        this.locale.setLocale(window.navigator.language);
+        await this.locale.init(['pt-PT', 'en-US', 'es-ES'], 'en-US');
 
         this.appReady = true;
     }
