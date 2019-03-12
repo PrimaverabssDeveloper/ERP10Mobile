@@ -11,6 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ModulesService } from '../core/services';
 import { ModuleDefinition } from '../core/entities';
 import { TranslateModule } from '@ngx-translate/core';
+import { HrModuleDefinition } from './module-definition';
 
 @NgModule({
     imports: [
@@ -28,21 +29,6 @@ export class HumanResourcesModule {
     constructor(
         private modulesService: ModulesService,
     ) {
-        const moduleDef: ModuleDefinition = {
-            key: 'HumanResources',
-            displayRelevance: 1,
-            moduleRoutePath: '/humanresources',
-            iconPath: '/assets/human-resources/human_resources_logo.svg',
-            localizedNameKey: 'HUMAN_RESOURCES.MODULE_NAME',
-            summaries: {
-                hasSummaries: false
-            },
-            settings: {
-                hasSettings: true,
-                settingsRoutePath: ''
-            }
-        };
-
-        this.modulesService.addModuleDefinition(moduleDef);
+        this.modulesService.addModuleDefinition(HrModuleDefinition);
     }
 }

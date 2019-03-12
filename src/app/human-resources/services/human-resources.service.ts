@@ -1,5 +1,7 @@
-import { InstanceHttpRequestService, DomService } from '../../core/services';
+import { InstanceHttpRequestService, DomService, InstanceService } from '../../core/services';
 import { Salaries, SalaryDocument } from '../models';
+import { ModuleCompany } from '../../core/entities';
+import { HrModuleDefinition } from '../module-definition';
 
 /**
  * The Human Resources Service provide all data needed to the Human Resources Module.
@@ -11,6 +13,10 @@ import { Salaries, SalaryDocument } from '../models';
  */
 export class HumanResourcesService {
 
+    // #region 'Endpoints'
+    private static readonly SALARIES_BY_COMPANY = (companyKey: string) => `/humanresources/salaries?companyKey=${companyKey}`;
+    // #endregion
+
     // #region 'Constructor'
 
     /**
@@ -19,7 +25,11 @@ export class HumanResourcesService {
      * @param {DomService} domService
      * @memberof HumanResourcesService
      */
-    constructor(protected instanceHttpRequestService: InstanceHttpRequestService, protected domService: DomService) {
+    constructor(
+        protected instanceHttpRequestService: InstanceHttpRequestService,
+        protected domService: DomService,
+        protected instanceService: InstanceService
+        ) {
 
     }
     // #endregion
@@ -32,9 +42,18 @@ export class HumanResourcesService {
      * @returns {Promise<Salaries>}
      * @memberof HumanResourcesService
      */
-    async getSalaries(): Promise<Salaries> {
+    async getSalaries(companyKey: string): Promise<Salaries> {
 
-        return null;
+        let salesData: Salaries;
+        const endpoint = HumanResourcesService.SALARIES_BY_COMPANY(companyKey);
+        try {
+            salesData = await this.instanceHttpRequestService.get<Salaries>(endpoint);
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+
+        return salesData;
     }
 
     /**
@@ -46,6 +65,12 @@ export class HumanResourcesService {
      */
     async getPdfFromDocument(document: SalaryDocument): Promise<Blob> {
         return null;
+    }
+
+    getCompanies(): ModuleCompany[] {
+
+        const hrModule = this.instanceService.currentInstance.modules.find(m => m.name === HrModuleDefinition.key);
+        return hrModule ? hrModule.companies : null;
     }
 
     // #endregion

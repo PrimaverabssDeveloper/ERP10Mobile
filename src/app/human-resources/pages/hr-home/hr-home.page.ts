@@ -77,8 +77,9 @@ export class HrHomePage extends PageBase implements OnInit {
         await this.showLoading();
 
         this.localizedMonthsNames = await this.getAllLocalizedMonthsNamesAsync();
-
-        this.salaries = await this.getSalariesAsync();
+        const companies = this.humanResourcesService.getCompanies();
+        const companyKey = companies[0].companyKey;
+        this.salaries = await this.getSalariesAsync(companyKey);
         if (!this.salaries) {
             alert('TBD: Nao foi possivel obter os salários. tente mais tarde');
         }
@@ -526,11 +527,11 @@ export class HrHomePage extends PageBase implements OnInit {
         return m;
     }
 
-    private async getSalariesAsync(): Promise<Salaries> {
+    private async getSalariesAsync(companyKey: string): Promise<Salaries> {
         let salaries: Salaries;
 
         try {
-            salaries = await this.humanResourcesService.getSalaries();
+            salaries = await this.humanResourcesService.getSalaries(companyKey);
         } catch (error) {
             console.log(error);
         }

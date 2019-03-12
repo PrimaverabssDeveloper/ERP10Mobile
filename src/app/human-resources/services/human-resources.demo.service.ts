@@ -1,4 +1,4 @@
-import { InstanceHttpRequestService, DomService } from '../../core/services';
+import { InstanceHttpRequestService, DomService, InstanceService } from '../../core/services';
 import { HumanResourcesService } from './human-resources.service';
 import { HttpClient } from '@angular/common/http';
 import { Salaries, SalaryDocument } from '../models';
@@ -25,9 +25,10 @@ export class HumanResourcesDemoService extends HumanResourcesService {
     constructor(
         protected instanceHttpRequestService: InstanceHttpRequestService,
         protected domService: DomService,
+        protected instanceService: InstanceService,
         private http: HttpClient
     ) {
-        super(instanceHttpRequestService, domService);
+        super(instanceHttpRequestService, domService, instanceService);
     }
     // #endregion
 
@@ -39,7 +40,7 @@ export class HumanResourcesDemoService extends HumanResourcesService {
      * @returns {Promise<Salaries>}
      * @memberof HumanResourcesService
      */
-    async getSalaries(): Promise<Salaries> {
+    async getSalaries(companyKey: string): Promise<Salaries> {
         return this.getDemoDataWithFileName<Salaries>('salaries.json');
     }
 
