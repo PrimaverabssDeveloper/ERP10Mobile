@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PIPES } from './pipes';
-import { COMPONENTS } from './components';
+import { COMPONENTS, ENTRY_COMPONENTS } from './components';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -14,7 +14,8 @@ import { TranslateModule } from '@ngx-translate/core';
         TranslateModule
     ],
     declarations: [PIPES, COMPONENTS],
-    exports: [PIPES, COMPONENTS]
+    exports: [PIPES, COMPONENTS],
+    entryComponents: [ENTRY_COMPONENTS]
 })
 export class SharedModule {
 }

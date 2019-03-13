@@ -22,7 +22,7 @@ import {
 } from '@ionic/angular';
 
 import {
-    CompanySelectorComponent,
+
     FooterTabMenu,
     FooterMenuItemSelectedEvent,
     FooterTabMenuItem,
@@ -59,6 +59,7 @@ import { SalesChartData } from '../../components/sales-chart/entities';
 import { SalesChartUpdatedEvent } from '../../components/sales-chart/entities/sales-chart-updated-event';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
+import { PopoverSelectorComponent } from '../../../shared/components';
 
 
 
@@ -204,7 +205,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
         }
     }
 
-    async companySelectorAction(event: any) {
+    async showCompanySelectorAction(event: any) {
 
         // this will prevent the company to be show more than once at the same time
         if (this.isCompanySelectorPopoverVisible) {
@@ -214,11 +215,11 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
         this.isCompanySelectorPopoverVisible = true;
 
         const popover = await this.popoverController.create({
-            component: CompanySelectorComponent,
+            component: PopoverSelectorComponent,
             componentProps: {
-                companies: this.companies,
-                onCompanySelected: (company: Company) => {
-                    this.showCompanyData(company);
+                items: this.companies.map(c => ({label: c.key, data: c})),
+                onItemSelected: (item: {label: string, data: any}) => {
+                    this.showCompanyData(item.data);
                     popover.dismiss();
                 }
             },

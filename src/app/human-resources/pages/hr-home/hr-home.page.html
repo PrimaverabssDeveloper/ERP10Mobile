@@ -9,7 +9,10 @@
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title><span class="navbar-title">{{'HUMAN_RESOURCES.HR_PAGE.PAGE_TITLE' | translate}}</span></ion-title>
+        <ion-title>
+            <!-- <span class="page-title" (click)="showCompanySelectorAction($event)">{{'HUMAN_RESOURCES.HR_PAGE.PAGE_TITLE' | translate}}</span> -->
+            <span class="page-title" [ngClass]="{'page-title-company-selector': companies && companies.length > 1}" (click)="showCompanySelectorAction($event)">{{pageTitle}}</span>
+        </ion-title>
         <ion-buttons slot="end">
             <ion-menu-button autoHide="false" menu="human-resources-hr-home-page-menu"></ion-menu-button>
         </ion-buttons>

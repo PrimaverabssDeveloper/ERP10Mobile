@@ -11,6 +11,8 @@ import { LocaleService } from '../../../core/services';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import { PopoverSelectorComponent } from '../../../shared/components';
+import { ModuleCompany } from '../../../core/entities';
 
 @Component({
     templateUrl: './hr-home.page.html',
@@ -22,8 +24,14 @@ export class HrHomePage extends PageBase implements OnInit {
 
     private localizedMonthsNames: string[] = [];
     private salaries: Salaries;
+    private isCompanySelectorPopoverVisible: boolean;
 
     @ViewChild('monthlyChartsSlide') monthlyChartsSlide: IonSlides;
+
+    pageTitle: string;
+
+    // all HR companies
+    companies: ModuleCompany[];
 
     // html template variables
     isDocumentsPopoverVisible: boolean;
@@ -74,24 +82,19 @@ export class HrHomePage extends PageBase implements OnInit {
     * @memberof HrHomePage
     */
     async ngOnInit() {
-        await this.showLoading();
-
         this.localizedMonthsNames = await this.getAllLocalizedMonthsNamesAsync();
-        const companies = this.humanResourcesService.getCompanies();
-        const companyKey = companies[0].companyKey;
-        this.salaries = await this.getSalariesAsync(companyKey);
-        if (!this.salaries) {
-            alert('TBD: Nao foi possivel obter os salários. tente mais tarde');
+        this.companies = this.humanResourcesService.getCompanies();
+        if (!this.companies || this.companies.length === 0) {
+            await this.hideLoading();
+            this.goBack();
+            return;
         }
 
-        this.buildCharts(this.salaries, this.localizedMonthsNames);
+        // get the key from the first company
+        const companyKey = this.companies[0].companyKey;
 
-        this.currentYearSalary = this.salaries.data[this.salaries.data.length - 1];
-        this.currentMonthSalary = this.currentYearSalary.months[this.currentYearSalary.months.length - 1];
-
-        this.updateView(this.salaries, this.localizedMonthsNames);
-
-        this.hideLoading();
+        // show salaries
+        await this.showSalariesForCompany(companyKey);
     }
 
     toggleSalaryValuesStateAction() {
@@ -168,6 +171,43 @@ export class HrHomePage extends PageBase implements OnInit {
         return await popover.present();
     }
 
+    async showCompanySelectorAction(event: any) {
+
+        // dont show popover when there are no more than one company to show
+        if (this.companies.length <= 1) {
+            return;
+        }
+
+        // this will prevent the company to be show more than once at the same time
+        if (this.isCompanySelectorPopoverVisible) {
+            return;
+        }
+
+        this.isCompanySelectorPopoverVisible = true;
+
+        const items = this.companies.map(c => ({label: c.companyKey, data: c}));
+
+        const popover = await this.popoverController.create({
+            component: PopoverSelectorComponent,
+            componentProps: {
+                items: items,
+                onItemSelected: (item: {label: string, data: any}) => {
+                    this.showSalariesForCompany(item.data.companyKey);
+                    popover.dismiss();
+                }
+            },
+            backdropDismiss: true,
+            event: event,
+            translucent: true,
+        });
+
+        popover.onDidDismiss().then(() => {
+            this.isCompanySelectorPopoverVisible = false;
+        });
+
+        await popover.present();
+    }
+
     // #region 'Protected Methods'
 
     protected getMenuId(): string {
@@ -175,6 +215,28 @@ export class HrHomePage extends PageBase implements OnInit {
     }
 
     // #endregion
+
+    private async showSalariesForCompany(companyKey: string) {
+
+        await this.showLoading();
+
+        this.pageTitle = companyKey;
+
+        this.salaries = await this.getSalariesAsync(companyKey);
+        if (!this.salaries) {
+            await this.hideLoading();
+            this.goBack();
+        }
+
+        this.buildCharts(this.salaries, this.localizedMonthsNames);
+
+        this.currentYearSalary = this.salaries.data[this.salaries.data.length - 1];
+        this.currentMonthSalary = this.currentYearSalary.months[this.currentYearSalary.months.length - 1];
+
+        this.updateView(this.salaries, this.localizedMonthsNames);
+
+        await this.hideLoading();
+    }
 
     private updateView(salaries: Salaries, localizedMonthsNames: string[]) {
 

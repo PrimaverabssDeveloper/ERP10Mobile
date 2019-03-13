@@ -22,8 +22,27 @@ $hr-salary-chart-period-selector-height: 50px;
 $hr-chart-conteiner-height: $hr-charts-drawer-height - $hr-charts-drawer-handle-height - $hr-salary-chart-period-selector-height;
 
 
-.navbar-title {
+.page-title {
     color: $hr-theme-color;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &-company-selector:before {
+        content: ' ';
+        background-image: url('../../../../assets/sales/action-bar-dropdown-button.png');
+        background-repeat: no-repeat;
+        background-size: 17px;
+        width: 17px;
+        height: 17px;
+        display: block;
+        float: right;
+        margin: 3px 5px;
+    }
 }
 
 .salary-details {
