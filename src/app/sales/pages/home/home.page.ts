@@ -46,7 +46,8 @@ import {
     CompanySales,
     ChartBundle,
     ChartData,
-    Serie
+    Serie,
+    ChartPeriodType
 } from '../../entities';
 
 import {
@@ -116,7 +117,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
 
     selectedCompanySales: CompanySales;
     selectedChartBundleKey: string;
-    selectedChartBundlePeriodType: 'M' | 'W';
+    selectedChartBundlePeriodType: ChartPeriodType;
     selectedChartBundleLocalizedTitles: { [key: string]: string };
     selectedChartBundleIsTimeChart: boolean;
     extraInfoValue: string;
@@ -341,7 +342,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
             currency: currency
         };
 
-        this.showTimeFrameSelector = chartBundle.isTimeChart && chartBundle.periodType === 'M';
+        this.showTimeFrameSelector = chartBundle.isTimeChart && chartBundle.periodType === ChartPeriodType.Month;
 
         // extra info
         this.extraInfoValue = '';

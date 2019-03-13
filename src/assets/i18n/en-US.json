@@ -121,6 +121,8 @@
             "ACCUMULATED": "Accumulated"
         },
         "CHARTS" : {
+            "WEEKS_CHART_BAR_PREFIX": "W",
+            "QUARTER_CHART_BAR_PREFIX": "Q",
             "TOTAL_SALES": "Total sales",
             "OTHERS": "Others"
         }

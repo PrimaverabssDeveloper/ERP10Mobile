@@ -1,8 +1,9 @@
 import { Chart } from 'chart.js';
-import { Component, Input, ViewChild, HostListener, Output, EventEmitter } from '@angular/core';
-import { Serie, ChartData, ChartBundle } from '../../entities';
+import { Component, Input, ViewChild, HostListener, Output, EventEmitter, OnInit } from '@angular/core';
+import { Serie, ChartData, ChartBundle, ChartPeriodType } from '../../entities';
 import { SalesChartUpdateEvent } from './entities';
 import { LocaleCurrencyPipe } from '../../../shared/pipes';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -11,19 +12,23 @@ import { LocaleCurrencyPipe } from '../../../shared/pipes';
     styleUrls: ['./sales-chart.component.scss']
 })
 
-export class SalesChartComponent {
+export class SalesChartComponent implements OnInit {
 
     private readonly yAxisNumberOfSteps = 4;
     private chart: any;
     private touchDownWithoutMovement: boolean;
     private yAxisMaxValues: number[];
 
+    private monthsLocalized: {[key: string]: string};
+    private quarterBarLegendPrefix: string;
+    private weeksBarLegendPrefix: string;
+
     currentYearLegend: string;
     previousYearLegend: string;
     yAxisScaleStep: number;
     yAxisScaleUnitPrefix: string;
     currentCurrency: string;
-    currentPeriodType: 'M' | 'W';
+    currentPeriodType: ChartPeriodType;
 
     @ViewChild('chartCanvas') chartCanvas;
 
@@ -69,11 +74,33 @@ export class SalesChartComponent {
     /**
      *
      */
-    constructor(private localeCurrencyPipe: LocaleCurrencyPipe) {
+    constructor(private localeCurrencyPipe: LocaleCurrencyPipe, private translateService: TranslateService ) {
         this.yAxisMaxValues = this.getPossibleMaximumYValues(this.yAxisNumberOfSteps);
     }
 
     // #region 'Public Methods'
+
+    /**
+    * Execute on page initialization.
+    *
+    * @memberof SalesChartComponent
+    */
+    async ngOnInit() {
+
+        // translate months
+        this.monthsLocalized = {};
+        for (let monthIndex = 1; monthIndex <= 12; monthIndex++) {
+            const month: string = await this.translateService.get(`SHARED.DATES.MONTHS.${monthIndex}`).toPromise();
+            if (month) {
+                this.monthsLocalized[`${monthIndex}`] = month.slice(0, 3).toLocaleLowerCase();
+            }
+        }
+
+        // get translated prefix
+
+        this.quarterBarLegendPrefix = await this.translateService.get('SALES.CHARTS.QUARTER_CHART_BAR_PREFIX').toPromise();
+        this.weeksBarLegendPrefix = await this.translateService.get('SALES.CHARTS.WEEKS_CHART_BAR_PREFIX').toPromise();
+    }
 
     @HostListener('touchstart', ['$event'])
     onMouseDown(e: TouchEvent) {
@@ -118,6 +145,7 @@ export class SalesChartComponent {
             const data = this.buildTimeChartData(
                 chart,
                 timeFrame,
+                chartBundle.periodType,
                 previousYearSerie,
                 currentYearSerie,
                 useReportingValue,
@@ -349,6 +377,7 @@ export class SalesChartComponent {
     private buildTimeChartData(
         chart: ChartData,
         timeFrame: 'monthly' | 'quarter',
+        periodType: ChartPeriodType,
         previousYearSerie: Serie,
         currentYearSerie: Serie,
         useReportingValue: boolean,
@@ -407,7 +436,11 @@ export class SalesChartComponent {
                 continue;
             }
 
-            labels.push(dataPoint.label);
+            if (periodType === ChartPeriodType.Week) {
+                labels.push(`${this.weeksBarLegendPrefix}${dataPoint.label}`);
+            } else {
+                labels.push(this.monthsLocalized[dataPoint.label]);
+            }
 
             for (let i = 0; i < series.length; i++) {
                 const serie = series[i];
@@ -451,7 +484,12 @@ export class SalesChartComponent {
 
         if (timeFrame === 'quarter') {
             maxValue = 0;
-            labels = ['Q1', 'Q2', 'Q3', 'Q4'];
+            labels = [
+                `${this.quarterBarLegendPrefix}1`,
+                `${this.quarterBarLegendPrefix}2`,
+                `${this.quarterBarLegendPrefix}3`,
+                `${this.quarterBarLegendPrefix}4`
+            ];
 
             if (chart.valueType === 'abs') {
                 for (const ds of dataSets) {

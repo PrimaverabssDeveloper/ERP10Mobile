@@ -1,4 +1,9 @@
 
+export enum ChartPeriodType {
+    Month = 0,
+    Week = 1
+}
+
 export interface SalesCharts {
     syncTimestamp: string;
     dateTimestamp: string;
@@ -24,7 +29,7 @@ export interface ChartBundle {
     order: number;
     titles: {[key: string]: string };
     isTimeChart: boolean;
-    periodType: 'M' | 'W';
+    periodType: ChartPeriodType;
     currency: string;
     reportingCurrency: string;
     series: Serie[];

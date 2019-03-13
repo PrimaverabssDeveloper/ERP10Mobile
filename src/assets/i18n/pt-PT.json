@@ -122,6 +122,8 @@
             "ACCUMULATED": "Acumulado"
         },
         "CHARTS" : {
+            "WEEKS_CHART_BAR_PREFIX": "S",
+            "QUARTER_CHART_BAR_PREFIX": "T",
             "TOTAL_SALES": "Vendas totais",
             "OTHERS": "Outros"
         }

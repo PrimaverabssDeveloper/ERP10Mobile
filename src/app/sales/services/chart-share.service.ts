@@ -8,6 +8,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Platform } from '@ionic/angular';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import { ChartPeriodType } from '../entities';
 
 /**
  * Provide tools to share charts in image and pdf format.
@@ -69,7 +70,7 @@ export class ChartShareService {
         chartLocalizedTitle: { [key: string]: string },
         chartCompanyKey: string,
         chartDataDate: Date,
-        chartPeriodType: 'M' | 'W',
+        chartPeriodType: ChartPeriodType,
         chartValueType: 'abs' | 'accum',
         chartIsTimeChart: boolean,
         chartSelectedPeriod: string,
@@ -130,7 +131,7 @@ export class ChartShareService {
         chartLocalizedTitle: { [key: string]: string },
         chartCompanyKey: string,
         chartDataDate: Date,
-        chartPeriodType: 'M' | 'W',
+        chartPeriodType: ChartPeriodType,
         chartValueType: 'abs' | 'accum',
         chartIsTimeChart: boolean,
         chartSelectedPeriod: string,
@@ -184,7 +185,7 @@ export class ChartShareService {
         chartLocalizedTitle: { [key: string]: string },
         chartCompanyKey: string,
         chartDataDate: Date,
-        chartPeriodType: 'M' | 'W',
+        chartPeriodType: ChartPeriodType,
         chartValueType: 'abs' | 'accum',
         chartIsTimeChart: boolean,
         chartSelectedPeriod: string,
@@ -297,7 +298,7 @@ export class ChartShareService {
         chartLocalizedTitle: { [key: string]: string },
         chartCompanyKey: string,
         chartDataDate: Date,
-        chartPeriodType: 'M' | 'W',
+        chartPeriodType: ChartPeriodType,
         chartValueType: 'abs' | 'accum',
         chartIsTimeChart: boolean,
         chartSelectedPeriod: string,
@@ -309,7 +310,7 @@ export class ChartShareService {
         const canvas = document.createElement('canvas');
         canvas.width = 2500;
 
-        if (chartPeriodType === 'M') {
+        if (chartPeriodType === ChartPeriodType.Month) {
             if (chartIsTimeChart) {
                 canvas.height = chartCanvas.height + 750; // monthly chart
             } else {
@@ -351,7 +352,7 @@ export class ChartShareService {
         // const chartCanvas = document.getElementsByTagName('canvas')[0];
         // chartCanvas.getContext('2d').strokeRect(0, 0, chartCanvas.width - 1, chartCanvas.height - 1);
 
-        if (chartPeriodType === 'W') {
+        if (chartPeriodType === ChartPeriodType.Week) {
             chartHeight = 1020;
             const chartWidth = ((chartCanvas.width * 1020) / chartCanvas.height);
             const chartMargin = {
