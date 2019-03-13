@@ -1,8 +1,9 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Company, Serie, ChartData, ChartBundle } from '../../entities';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Company, Serie, ChartData, ChartBundle, ChartPeriodType } from '../../entities';
 import { MathTools } from '../../../shared/tools';
 import { SalesTableRowData } from './entities/sales-table-row-data';
 import { SalesTableUpdatedEvent } from './entities';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -11,13 +12,17 @@ import { SalesTableUpdatedEvent } from './entities';
     styleUrls: ['./sales-table.component.scss']
 })
 
-export class SalesTableComponent {
+export class SalesTableComponent implements OnInit {
 
     rows: SalesTableRowData[] = [];
 
     currentYearLabel: string;
     previousYearLabel: string;
     currency: string;
+
+    private monthsLocalized: {[key: string]: string};
+    private quarterBarLegendPrefix: string;
+    private weeksBarLegendPrefix: string;
 
     @Input() set data(data: {
         chartBundle: ChartBundle,
@@ -50,6 +55,31 @@ export class SalesTableComponent {
      */
     @Output() tableUpdated = new EventEmitter<SalesTableUpdatedEvent>();
 
+    constructor(private translateService: TranslateService ) {
+    }
+
+    /**
+    * Execute on page initialization.
+    *
+    * @memberof SalesTableComponent
+    */
+   async ngOnInit() {
+
+        // translate months
+        this.monthsLocalized = {};
+        for (let monthIndex = 1; monthIndex <= 12; monthIndex++) {
+            const month: string = await this.translateService.get(`SHARED.DATES.MONTHS.${monthIndex}`).toPromise();
+            if (month) {
+                this.monthsLocalized[`${monthIndex}`] = month.slice(0, 3).toLocaleLowerCase();
+            }
+        }
+
+        // get translated prefix
+
+        this.quarterBarLegendPrefix = await this.translateService.get('SALES.CHARTS.QUARTER_CHART_BAR_PREFIX').toPromise();
+        this.weeksBarLegendPrefix = await this.translateService.get('SALES.CHARTS.WEEKS_CHART_BAR_PREFIX').toPromise();
+    }
+
     private updateTable(
         chartBundle: ChartBundle,
         chart: ChartData,
@@ -66,7 +96,13 @@ export class SalesTableComponent {
         this.currency = currency;
 
         if (chartBundle.isTimeChart) {
-            this.rows = this.buildTimeChartData(chart, timeFrame, previousYearSerie, currentYearSerie, useReportingValue);
+            this.rows = this.buildTimeChartData(
+                                chart,
+                                timeFrame,
+                                chartBundle.periodType,
+                                previousYearSerie,
+                                currentYearSerie,
+                                useReportingValue);
         } else {
             this.rows = this.buildTopChartData(chart, period, previousYearSerie, currentYearSerie, useReportingValue);
         }
@@ -84,6 +120,7 @@ export class SalesTableComponent {
     private buildTimeChartData(
         chart: ChartData,
         timeFrame: 'monthly' | 'quarter',
+        periodType: ChartPeriodType,
         previousYearSerie: Serie,
         currentYearSerie: Serie,
         useReportingValue: boolean,
@@ -121,7 +158,17 @@ export class SalesTableComponent {
                 continue;
             }
 
-            const label = dataPoint.label ? dataPoint.label : 'N/A';
+            let label: string;
+            if (dataPoint.label) {
+                if (periodType === ChartPeriodType.Week) {
+                    label = `${this.weeksBarLegendPrefix}${dataPoint.label}`;
+                } else {
+                    label = this.monthsLocalized[dataPoint.label];
+                }
+            } else {
+                label = 'N/A';
+            }
+
             const description = dataPoint.description ? dataPoint.description : 'N/A';
             const currentYearValue = dataPoint.values.find(v => v.seriesKey === currentYearSerie.key);
             const previousYearValue = dataPoint.values.find(v => v.seriesKey === previousYearSerie.key);
@@ -156,14 +203,14 @@ export class SalesTableComponent {
                             currentYearValue: currentYearValue,
                             previousYearValue: previousYearValue,
                             deltaPercentageValue: MathTools.variationBetweenTwoNumbers(previousYearValue, currentYearValue),
-                            label: `Q${i + 1}`,
-                            description: `Q${i + 1}`,
+                            label: `${this.quarterBarLegendPrefix}${i + 1}`,
+                            description: `${this.quarterBarLegendPrefix}${i + 1}`,
                             isTotal: false
                         };
                     });
                 } else {
                     finalQuarterData = quarterData[quarterData.length - 1];
-                    finalQuarterData.label = `Q${i + 1}`;
+                    finalQuarterData.label = `${this.quarterBarLegendPrefix}${i + 1}`;
                 }
 
                 quartersData.push(finalQuarterData);
