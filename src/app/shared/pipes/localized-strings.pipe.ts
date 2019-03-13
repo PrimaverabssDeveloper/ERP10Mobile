@@ -8,7 +8,7 @@ import { LocaleService } from '../../core/services';
  * @class LocalizedStringsPipe
  * @implements {PipeTransform}
  */
-@Pipe({ name: 'localizedStrings' })
+@Pipe({ name: 'localizedStrings', pure: false })
 export class LocalizedStringsPipe implements PipeTransform {
 
     constructor(private localeService: LocaleService) {
