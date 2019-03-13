@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
     styleUrls: ['./sales-table.component.scss']
 })
 
-export class SalesTableComponent implements OnInit {
+export class SalesTableComponent {
 
     rows: SalesTableRowData[] = [];
 
@@ -58,29 +58,7 @@ export class SalesTableComponent implements OnInit {
     constructor(private translateService: TranslateService ) {
     }
 
-    /**
-    * Execute on page initialization.
-    *
-    * @memberof SalesTableComponent
-    */
-   async ngOnInit() {
-
-        // translate months
-        this.monthsLocalized = {};
-        for (let monthIndex = 1; monthIndex <= 12; monthIndex++) {
-            const month: string = await this.translateService.get(`SHARED.DATES.MONTHS.${monthIndex}`).toPromise();
-            if (month) {
-                this.monthsLocalized[`${monthIndex}`] = month.slice(0, 3).toLocaleLowerCase();
-            }
-        }
-
-        // get translated prefix
-
-        this.quarterBarLegendPrefix = await this.translateService.get('SALES.CHARTS.QUARTER_CHART_BAR_PREFIX').toPromise();
-        this.weeksBarLegendPrefix = await this.translateService.get('SALES.CHARTS.WEEKS_CHART_BAR_PREFIX').toPromise();
-    }
-
-    private updateTable(
+    private async updateTable(
         chartBundle: ChartBundle,
         chart: ChartData,
         period: string,
@@ -90,6 +68,7 @@ export class SalesTableComponent implements OnInit {
         useReportingValue: boolean,
         currency: string
     ) {
+        await this.updateLocalizedResources();
 
         this.currentYearLabel = currentYearSerie.legend;
         this.previousYearLabel = previousYearSerie.legend;
@@ -296,5 +275,18 @@ export class SalesTableComponent implements OnInit {
 
     private getCorrectValue(value: { seriesKey: string, value: number, reportingValue: number }, useReportingValue: boolean): number {
         return useReportingValue ? value.reportingValue : value.value;
+    }
+
+    private async updateLocalizedResources() {
+        this.monthsLocalized = {};
+        for (let monthIndex = 1; monthIndex <= 12; monthIndex++) {
+            const month: string = await this.translateService.get(`SHARED.DATES.MONTHS.${monthIndex}`).toPromise();
+            if (month) {
+                this.monthsLocalized[`${monthIndex}`] = month.slice(0, 3).toLocaleLowerCase();
+            }
+        }
+
+        this.quarterBarLegendPrefix = await this.translateService.get('SALES.CHARTS.QUARTER_CHART_BAR_PREFIX').toPromise();
+        this.weeksBarLegendPrefix = await this.translateService.get('SALES.CHARTS.WEEKS_CHART_BAR_PREFIX').toPromise();
     }
 }

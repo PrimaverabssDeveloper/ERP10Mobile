@@ -28,7 +28,7 @@
             <div class="selected chart-ctrl-btn chart-ctrl-btn-month" *ngIf="showTimeFrameSelector" [ngClass]="{'selected': timeFrame === 'monthly'}"
                 (click)="changeTimeFrameAction('monthly')">M</div>
             <div class="chart-ctrl-btn chart-ctrl-btn-quarter" *ngIf="showTimeFrameSelector" [ngClass]="{'selected': timeFrame === 'quarter'}"
-                (click)="changeTimeFrameAction('quarter')">Q</div>
+                (click)="changeTimeFrameAction('quarter')">{{'SALES.CHARTS.QUARTER_CHART_BAR_PREFIX' | translate }}</div>
 
             <div class="chart-ctrl-btn chart-ctrl-btn-table" [ngClass]="{'selected': viewType === 'table'}" (click)="toggleTableView()">
                 <div class="icon pri-icon pri-table-icon"></div>

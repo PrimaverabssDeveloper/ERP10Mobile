@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
     styleUrls: ['./sales-chart.component.scss']
 })
 
-export class SalesChartComponent implements OnInit {
+export class SalesChartComponent {
 
     private readonly yAxisNumberOfSteps = 4;
     private chart: any;
@@ -80,28 +80,6 @@ export class SalesChartComponent implements OnInit {
 
     // #region 'Public Methods'
 
-    /**
-    * Execute on page initialization.
-    *
-    * @memberof SalesChartComponent
-    */
-    async ngOnInit() {
-
-        // translate months
-        this.monthsLocalized = {};
-        for (let monthIndex = 1; monthIndex <= 12; monthIndex++) {
-            const month: string = await this.translateService.get(`SHARED.DATES.MONTHS.${monthIndex}`).toPromise();
-            if (month) {
-                this.monthsLocalized[`${monthIndex}`] = month.slice(0, 3).toLocaleLowerCase();
-            }
-        }
-
-        // get translated prefix
-
-        this.quarterBarLegendPrefix = await this.translateService.get('SALES.CHARTS.QUARTER_CHART_BAR_PREFIX').toPromise();
-        this.weeksBarLegendPrefix = await this.translateService.get('SALES.CHARTS.WEEKS_CHART_BAR_PREFIX').toPromise();
-    }
-
     @HostListener('touchstart', ['$event'])
     onMouseDown(e: TouchEvent) {
         console.log('touchstart');
@@ -121,7 +99,7 @@ export class SalesChartComponent implements OnInit {
     }
     // #endregion
 
-    private updateChart(
+    private async updateChart(
         chartBundle: ChartBundle,
         chart: ChartData,
         period: string,
@@ -135,6 +113,9 @@ export class SalesChartComponent implements OnInit {
         currentYearAccentColorWithTransparency: string,
         previouseYearAccentColorWithTransparency: string
     ) {
+
+
+        await this.updateLocalizedResources();
 
         this.currentYearLegend = currentYearSerie ? currentYearSerie.legend : null;
         this.previousYearLegend = previousYearSerie ? previousYearSerie.legend : null;
@@ -738,5 +719,18 @@ export class SalesChartComponent implements OnInit {
         }
 
         return m;
+    }
+
+    private async updateLocalizedResources() {
+        this.monthsLocalized = {};
+        for (let monthIndex = 1; monthIndex <= 12; monthIndex++) {
+            const month: string = await this.translateService.get(`SHARED.DATES.MONTHS.${monthIndex}`).toPromise();
+            if (month) {
+                this.monthsLocalized[`${monthIndex}`] = month.slice(0, 3).toLocaleLowerCase();
+            }
+        }
+
+        this.quarterBarLegendPrefix = await this.translateService.get('SALES.CHARTS.QUARTER_CHART_BAR_PREFIX').toPromise();
+        this.weeksBarLegendPrefix = await this.translateService.get('SALES.CHARTS.WEEKS_CHART_BAR_PREFIX').toPromise();
     }
 }
