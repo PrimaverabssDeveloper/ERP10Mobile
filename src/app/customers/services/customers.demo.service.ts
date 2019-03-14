@@ -20,7 +20,7 @@ export class CustomersDemoService extends CustomersService {
         // return empty result
         if (!searchTerm || searchTerm.trim().length === 0) {
             return new Promise<CustomersSearchResult>(result => {
-                result({hasMore: false, customers: []});
+                result({hasMore: false, results: []});
             });
         }
 

@@ -117,10 +117,10 @@ export class CustomersListPage extends PageBase implements OnInit {
         const result = await this.customersService
                                  .searchCustomers(searchTerm, pageIndex, pageSize);
 
-        if (!result || !result.customers || result.customers.length === 0) {
+        if (!result || !result.results || result.results.length === 0) {
             this.searchMessage = await this.translate.get('CUSTOMERS.CUSTOMERS_LIST_PAGE.MESSAGE_SEARCH_NO_RESULTS').toPromise();
         } else {
-            this.searchedCustomers = result.customers;
+            this.searchedCustomers = result.results;
             this.hasMoreSearchResults = result.hasMore;
         }
 
