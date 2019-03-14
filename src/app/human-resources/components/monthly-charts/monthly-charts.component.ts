@@ -11,8 +11,8 @@ import { SalaryChartDataColumn, SalaryChartData, SalaryChartVerticalAxis } from 
 export class MonthlyChartsComponent implements OnInit, OnDestroy {
 
     private touchEventListeners: { [key: string]: (e: TouchEvent) => void};
-    private chartsWrapperSize: {width: number, height: number };
-    private yearsWrapperSize: {width: number, height: number };
+    private chartsWrapperSize: { getWidth: () => number, getHeight: () => number };
+    private yearsWrapperSize: { getWidth: () => number, getHeight: () => number };
     private hasDragStarted: boolean;
     private lastTouchPointX: number;
     private translationOffset: number;
@@ -74,17 +74,19 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
         this.yearsElem.nativeElement.addEventListener('touchmove', this.touchEventListeners['onYearsTouchMove']);
         this.yearsElem.nativeElement.addEventListener('touchend', this.touchEventListeners['onYearsTouchEnd']);
 
-        setTimeout(() => {
-            this.chartsWrapperSize = {
-                width: this.chartsElem.nativeElement.clientWidth,
-                height: this.chartsElem.nativeElement.clientHeight
-            };
+        // setTimeout(() => {
 
-            this.yearsWrapperSize = {
-                width: this.yearsElem.nativeElement.clientWidth,
-                height: this.yearsElem.nativeElement.clientHeight
-            };
-        }, 100);
+        // }, 500);
+
+        this.chartsWrapperSize = {
+            getWidth: () => this.chartsElem.nativeElement.clientWidth,
+            getHeight: () => this.chartsElem.nativeElement.clientHeight
+        };
+
+        this.yearsWrapperSize = {
+            getWidth: () => this.yearsElem.nativeElement.clientWidth,
+            getHeight: () => this.yearsElem.nativeElement.clientHeight
+        };
     }
 
     ngOnDestroy(): void {
@@ -98,46 +100,50 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
     getChartsStyle(): any {
         return {
             'transform': `translateX(${this.translationOffset}px)`,
-            'width': `${ this.chartsWrapperSize && this.years ? this.years.length * this.chartsWrapperSize.width : 0}px`
+            'width': `${ this.chartsWrapperSize && this.years ? this.years.length * this.chartsWrapperSize.getWidth() : 0}px`
         };
     }
 
     getChartStyle(): any {
         return {
-            'width': `${this.chartsWrapperSize ? this.chartsWrapperSize.width : 0}px`
+            'width': `${this.chartsWrapperSize ? this.chartsWrapperSize.getWidth() : 0}px`
         };
     }
 
     getYearsStyle(): any {
+        const chartsWrapperSizeWidth = this.chartsWrapperSize.getWidth();
+
         return {
             'transform': `translateX(${this.translationOffset * .2}px)`,
             // 'left': `${ this.chartsWrapperSize && this.years ? - (this.years.length - 1) * this.chartsWrapperSize.width : 0}px`,
-            'right': `${ this.chartsWrapperSize ? this.chartsWrapperSize.width * .5 - this.chartsWrapperSize.width * .2 * .5 : 0}px`,
-            'width': `${ this.chartsWrapperSize && this.years ? this.years.length * this.chartsWrapperSize.width * .2 : 0}px`
+            'right': `${ this.chartsWrapperSize ? chartsWrapperSizeWidth * .5 - chartsWrapperSizeWidth * .2 * .5 : 0}px`,
+            'width': `${ this.chartsWrapperSize && this.years ? this.years.length * chartsWrapperSizeWidth * .2 : 0}px`
         };
     }
 
     getYearStyle(yearIndex: number): any {
 
-        const yearOffset = (this.years.length - 1 - yearIndex)  * this.chartsWrapperSize.width;
+        const yearOffset = (this.years.length - 1 - yearIndex)  * this.chartsWrapperSize.getWidth();
         const diff = Math.abs(yearOffset - this.translationOffset);
 
-        if (diff < this.chartsWrapperSize.width * .5) {
+        const chartsWrapperSizeWidth = this.chartsWrapperSize.getWidth();
+
+        if (diff < chartsWrapperSizeWidth * .5) {
             return {
-                'opacity': `${1 - .5 * (diff / (this.chartsWrapperSize.width * .5))}`,
-                'transform': `scale(${1.3 - .3 * (diff / (this.chartsWrapperSize.width * .5))})`,
-                'width': `${this.chartsWrapperSize ? this.chartsWrapperSize.width * .2 : 0}px`
+                'opacity': `${1 - .5 * (diff / (chartsWrapperSizeWidth * .5))}`,
+                'transform': `scale(${1.3 - .3 * (diff / (chartsWrapperSizeWidth * .5))})`,
+                'width': `${this.chartsWrapperSize ? chartsWrapperSizeWidth * .2 : 0}px`
             };
         } else {
             return {
                 'opacity': '.5',
-                'width': `${this.chartsWrapperSize ? this.chartsWrapperSize.width * .2 : 0}px`
+                'width': `${this.chartsWrapperSize ? chartsWrapperSizeWidth * .2 : 0}px`
             };
         }
     }
 
     jumpToYearAction(yearIndex: number) {
-        this.translationOffset = (this.years.length - 1 - yearIndex)  * this.chartsWrapperSize.width;
+        this.translationOffset = (this.years.length - 1 - yearIndex)  * this.chartsWrapperSize.getWidth();
         this.currentYear = this.monthsData[yearIndex];
     }
 
@@ -157,14 +163,14 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
     onChartsTouchEnd(e: TouchEvent) {
         this.hasDragStarted = false;
         this.lastTouchPointX = null;
-        let yearIndex = Math.round(this.translationOffset / this.chartsWrapperSize.width);
+        let yearIndex = Math.round(this.translationOffset / this.chartsWrapperSize.getWidth());
 
         // verify is it has scrolled more than it was suposed
         if (yearIndex >= this.monthsData.length) {
             yearIndex = this.monthsData.length - 1;
         }
 
-        this.translationOffset = yearIndex * this.chartsWrapperSize.width;
+        this.translationOffset = yearIndex * this.chartsWrapperSize.getWidth();
         this.currentYear = this.monthsData[yearIndex];
     }
 
@@ -184,8 +190,8 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
     onYearsTouchEnd(e: TouchEvent) {
         this.hasDragStarted = false;
         this.lastTouchPointX = null;
-        const index = Math.round(this.translationOffset / this.chartsWrapperSize.width);
-        this.translationOffset = index * this.chartsWrapperSize.width;
+        const index = Math.round(this.translationOffset / this.chartsWrapperSize.getWidth());
+        this.translationOffset = index * this.chartsWrapperSize.getWidth();
     }
 
     private buildYears() {
