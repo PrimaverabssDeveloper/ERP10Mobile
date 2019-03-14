@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AppSettings } from '../../../core/app-settings';
 import { AlertController, NavController } from '@ionic/angular';
 import { InstancesService, InstancesServiceProvider } from '../../services';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     templateUrl: './authentication.page.html',
@@ -17,6 +18,7 @@ export class AuthenticationPage implements OnInit {
         private authenticationService: AuthenticationService,
         private instancesService: InstancesService,
         private instanceService: InstanceService,
+        private translateService: TranslateService,
         private route: ActivatedRoute,
         private router: Router,
         private appSettings: AppSettings,
@@ -80,8 +82,20 @@ export class AuthenticationPage implements OnInit {
 
         // no instances available
         if (!instances || instances.length === 0) {
-            // show error modal
+            const message = await this.translateService.get('SHELL.AUTHENTICATION.NO_SUBSCRIPTION_MESSAGE').toPromise();
+            const alert = await this.alertController.create({
+                message: message,
+                buttons: [{
+                    text: 'ok',
+                    handler: () => {
+                        this.demoAction();
+                    }
+                }]
+            });
+
+            await alert.present();
             await this.endSession();
+
             return;
         }
 

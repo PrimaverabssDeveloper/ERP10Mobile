@@ -41,6 +41,9 @@
         }
     },
     "SHELL": {
+        "AUTHENTICATION" : {
+            "NO_SUBSCRIPTION_MESSAGE": "The current user does not have any subscription."
+        },
         "INSTANCES_PAGE" : {
             "PAGE_TITLE" : "Select Your Instance"
         },

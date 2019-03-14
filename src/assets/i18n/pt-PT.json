@@ -41,6 +41,9 @@
         }
     },
     "SHELL": {
+        "AUTHENTICATION" : {
+            "NO_SUBSCRIPTION_MESSAGE": "O utilizador atual não tem acesso a nenhuma subscrição."
+        },
         "INSTANCES_PAGE" : {
             "PAGE_TITLE" : "Selecione a Sua Instância"
         },
