@@ -19,7 +19,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content id="human-resources-hr-home-page-content" scrollY='false'>
+<ion-content id="human-resources-hr-home-page-content" scrollY='false' [hidden]="!contentVisible">
     <ion-grid class="salary-details" (click)="toggleSalaryValuesStateAction()">
         <ion-row>
             <ion-col>

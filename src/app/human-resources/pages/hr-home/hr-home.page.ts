@@ -28,6 +28,7 @@ export class HrHomePage extends PageBase implements OnInit {
 
     @ViewChild('monthlyChartsSlide') monthlyChartsSlide: IonSlides;
 
+    contentVisible: boolean;
     pageTitle: string;
 
     // all HR companies
@@ -234,7 +235,7 @@ export class HrHomePage extends PageBase implements OnInit {
         this.currentMonthSalary = this.currentYearSalary.months[this.currentYearSalary.months.length - 1];
 
         this.updateView(this.salaries, this.localizedMonthsNames);
-
+        this.contentVisible = true;
         await this.hideLoading();
     }
 
