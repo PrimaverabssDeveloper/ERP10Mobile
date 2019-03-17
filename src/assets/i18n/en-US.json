@@ -65,6 +65,9 @@
     },
     "CUSTOMERS" : {
         "MODULE_NAME": "Customers",
+        "COMMON" : {
+            "NO_DOCUMENTS_TO_SHOW": "No documents to show"
+        },
         "CUSTOMERS_LIST_PAGE": {
             "PAGE_TITLE": "Customers",
             "TOOGLE_MENU_RECENT": "Recent",
