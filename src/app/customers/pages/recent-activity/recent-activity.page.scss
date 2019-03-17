@@ -5,6 +5,14 @@
     overflow-x: hidden;
     overflow-y: auto;
     height: 100%;
+    
+    .no-documensts {
+        top: 50%;
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        transform: translateY(-50%);
+    }
 
     .group {
         width: 100%;

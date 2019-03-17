@@ -2,5 +2,11 @@
 
 
 .pending-orders {
-    
+    .no-documensts {
+        top: 50%;
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        transform: translateY(-50%);
+    }
 }

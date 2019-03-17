@@ -16,6 +16,9 @@
 
 <ion-content id="customers-recent-activity-page-content" scrollY='false'>
     <div class="recent-activity" *ngIf="recentActivity">
+        <div class="no-documensts" *ngIf="(!recentActivity.invoices || recentActivity.invoices.length === 0) && (!recentActivity.orders || recentActivity.orders.length === 0) && (!recentActivity.payments || recentActivity.payments.length === 0)">
+            {{'CUSTOMERS.COMMON.NO_DOCUMENTS_TO_SHOW' | translate}}
+        </div>
         <div class="group" *ngIf="recentActivity.invoices">
             <div class="group-header">Invoices</div>
             <div class="group-rows">

@@ -16,6 +16,9 @@
 
 <ion-content id="content" scrollY='false'>
     <div class="pending-orders" *ngIf="pendingOrders">
+        <div class="no-documensts" *ngIf="!pendingOrders.documents || pendingOrders.documents.length === 0">
+            {{'CUSTOMERS.COMMON.NO_DOCUMENTS_TO_SHOW' | translate}}
+        </div>
         <finantial-document-row 
             *ngFor="let doc of pendingOrders.documents"
             [title]="doc.headerItems | valueFromDocumentValues:'DocumentName|DocumentNumber'"
