@@ -61,6 +61,7 @@ import { SalesChartUpdatedEvent } from '../../components/sales-chart/entities/sa
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { PopoverSelectorComponent } from '../../../shared/components';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -141,6 +142,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
         public loadingController: LoadingController,
         public location: Location,
         public menuController: MenuController,
+        private route: ActivatedRoute,
         private alertController: AlertController,
         private salesService: SalesService,
         private salesSettingsService: SalesSettingsService,
@@ -171,7 +173,18 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
             alert('NO COMPANIES');
         }
 
-        this.showCompanyData(this.companies[0]);
+        // by default show the first company
+        let companyToShow = this.companies[0];
+
+        const keyFromcompanyToShow = this.route.snapshot.params['company'];
+
+        // shows the company that was provided a parameter
+        if (keyFromcompanyToShow) {
+            companyToShow = this.companies.find(c => c.key === keyFromcompanyToShow);
+            companyToShow = companyToShow ? companyToShow : this.companies[0];
+        }
+
+        this.showCompanyData(companyToShow);
 
         // when the locale change, refresh the view
         // so the currencies and date format take the new locale

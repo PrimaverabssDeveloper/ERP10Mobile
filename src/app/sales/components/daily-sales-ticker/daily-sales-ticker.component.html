@@ -1,4 +1,4 @@
-<div class="daily-sales-ticker">
+<div class="daily-sales-ticker" (click)="navigateToSales()">
     <div class="chart" [ngStyle]="dataStyle">
         <div class="sales-delta-wrapper">
             <div class="sales-delta" [ngClass]="{negative: salesDelta < 0}">{{salesDelta | round }}%</div>

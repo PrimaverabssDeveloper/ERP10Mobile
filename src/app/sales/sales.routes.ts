@@ -3,21 +3,25 @@ import { HomePage, SalesSettingsPage } from './pages';
 
 const salesRoutes: Routes = [
     {
-      path: '',
-      children: [
-          {
-              path: '',
-              redirectTo: 'home',
-              pathMatch: 'full'
-          },
-          {
-              path: 'home',
-              component: HomePage
-          },
-          {
-              path: 'settings',
-              component: SalesSettingsPage
-          }
+        path: '',
+        children: [
+            {
+                path: '',
+                redirectTo: 'home',
+                pathMatch: 'full'
+            },
+            {
+                path: 'home',
+                component: HomePage
+            },
+            {
+                path: 'home/:company',
+                component: HomePage
+            },
+            {
+                path: 'settings',
+                component: SalesSettingsPage
+            }
         ]
     }
 ];

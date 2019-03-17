@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef, OnInit, Input } from '@angular/core';
 
 import { Chart } from 'chart.js';
 import { CompanySalesSummary } from '../../entities';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'sales-ticker',
@@ -24,7 +25,7 @@ export class TotalSalesTickerComponent implements OnInit {
         };
     }
 
-    constructor(private elementRef: ElementRef) {
+    constructor(private elementRef: ElementRef, private router: Router) {
 
     }
 
@@ -35,6 +36,10 @@ export class TotalSalesTickerComponent implements OnInit {
     */
     ngOnInit(): void {
         this.buildChart(this.companySalesSummary);
+    }
+
+    navigateToSales() {
+        this.router.navigate(['sales', 'home', this.companySalesSummary.key]);
     }
 
     private buildChart(companySalesSummary: CompanySalesSummary) {
