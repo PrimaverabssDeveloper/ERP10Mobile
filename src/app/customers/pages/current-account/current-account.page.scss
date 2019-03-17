@@ -141,6 +141,14 @@ $documents-wrapper-height: calc(100% - #{$customer-name-height + $current-accoun
         float: left;
         background: #F8F8F8;
         padding-top: 15px;
+        
+        .no-documensts {
+            top: 50%;
+            position: absolute;
+            text-align: center;
+            width: 100%;
+            transform: translateY(-50%);
+        }
 
         .documents {
             max-height: 100%;

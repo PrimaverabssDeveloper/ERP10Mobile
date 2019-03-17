@@ -26,14 +26,14 @@
                 <div class="label">Older</div>
                 <div class="value">
                     <span class="pri-icon pri-expired-icon"></span>
-                    {{currentAccount.expiredSixtyDays.total | localeCurrency:currentAccount.currency}}
+                    {{currentAccount.expiredSixtyDays ? currentAccount.expiredSixtyDays.total : 0 | localeCurrency:currentAccount.currency}}
                 </div>
             </div>
             <div class="tab tab-last-month" [ngClass]="{'selected': state === 'lastMonth' }" (click)="changeStateAction('lastMonth')">
                 <div class="label">Last month</div>
                 <div class="value">
                     <span class="pri-icon pri-expired-icon"></span>
-                    {{currentAccount.expiredThirtyDays.total | localeCurrency:currentAccount.currency}}
+                    {{currentAccount.expiredThirtyDays ? currentAccount.expiredThirtyDays.total : 0 | localeCurrency:currentAccount.currency}}
                 </div>
             </div>
             <div class="arrow" [ngStyle]="getArrowComputedStyle()"></div>
@@ -41,11 +41,14 @@
                 <div class="label">Unexpired</div>
                 <div class="value">
                     <span class="pri-icon pri-not-expired-icon"></span>
-                    {{currentAccount.unexpired.total | localeCurrency:currentAccount.currency}}
+                    {{currentAccount.unexpired ? currentAccount.unexpired.total : 0 | localeCurrency:currentAccount.currency}}
                 </div>
             </div>
         </div>
         <div class="documents-wrapper">
+            <div class="no-documensts" *ngIf="documents.length === 0">
+                {{'CUSTOMERS.COMMON.NO_DOCUMENTS_TO_SHOW' | translate}}
+            </div>
             <div class="documents">
                 <finantial-document-row *ngFor="let doc of documents" 
                     [title]="doc.headerItems | valueFromDocumentValues:'DocumentName|DocumentNumber'"

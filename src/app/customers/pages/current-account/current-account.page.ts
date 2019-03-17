@@ -20,13 +20,13 @@ export class CurrentAccountPage extends PageBase implements OnInit {
         let documents: Document[];
         switch (this.state) {
             case 'older':
-                documents = this.currentAccount.expiredSixtyDays.documents;
+                documents = this.currentAccount.expiredSixtyDays ? this.currentAccount.expiredSixtyDays.documents : [];
                 break;
             case 'lastMonth':
-                documents = this.currentAccount.expiredThirtyDays.documents;
+                documents = this.currentAccount.expiredThirtyDays ? this.currentAccount.expiredThirtyDays.documents : [];
                 break;
             case 'unexpired':
-                documents = this.currentAccount.unexpired.documents;
+                documents = this.currentAccount.unexpired ? this.currentAccount.unexpired.documents : [];
                 break;
         }
 
