@@ -1,11 +1,12 @@
-import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'month-selector',
     templateUrl: './month-selector.component.html',
     styleUrls: ['./month-selector.component.scss']
 })
-export class MonthSelectorComponent {
+export class MonthSelectorComponent implements OnInit {
 
     // #region 'Properties'
 
@@ -51,14 +52,30 @@ export class MonthSelectorComponent {
 
     // #region 'Constructor'
 
-    constructor() {
+    constructor(private translateService: TranslateService) {
         this.currentMonthSelected = 1;
-        this.months = Array.apply(null, {length: 12}).map(Number.call, (x: number) => `${x + 1}`);
+        this.months = [];
     }
 
     // #endregion
 
     // #region 'Methods'
+
+    /**
+    * Execute on page initialization.
+    *
+    * @memberof MonthSelectorComponent
+    */
+    async ngOnInit() {
+
+        for (let monthIndex = 1; monthIndex <= 12; monthIndex++) {
+            const month: string = await this.translateService.get(`SHARED.DATES.MONTHS.${monthIndex}`).toPromise();
+            if (month) {
+                this.months.push(month.slice(0, 3).toLocaleLowerCase());
+            }
+        }
+    }
+
 
     @HostListener('touchstart', ['$event'])
     onTouchStart(e: TouchEvent) {
