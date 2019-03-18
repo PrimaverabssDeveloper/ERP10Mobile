@@ -551,8 +551,8 @@ export class SalesChartComponent {
 
         for (const dataPoint of dataSet.dataPoints) {
 
-            // the dataPoint with total values or label '@@OTHERS@@' are not used on the chart
-            if (dataPoint.isTotal || dataPoint.label === '@@OTHERS@@') {
+            // the dataPoint with total values or label '##OTHERS##' are not used on the chart
+            if (dataPoint.isTotal || dataPoint.label === '##OTHERS##') {
                 continue;
             }
 

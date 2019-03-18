@@ -374,7 +374,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
         } else {
             const dataSet = chart.dataSet.find(ds => ds.period === this.selectedPeriod);
             if (dataSet) {
-                const othersDataPoint = dataSet.dataPoints.find(dp => dp.label === '@@OTHERS@@');
+                const othersDataPoint = dataSet.dataPoints.find(dp => dp.label === '##OTHERS##');
                 const totalsDataPoint = dataSet.dataPoints.find(dp => dp.isTotal);
                 if (othersDataPoint && totalsDataPoint) {
                     const otherValue = this.getCorrectValue(othersDataPoint.values[1], useReportingValue);

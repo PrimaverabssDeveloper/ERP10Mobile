@@ -249,7 +249,7 @@ export class SalesTableComponent {
             }
 
             // the other data point is not displayed on the table
-            if (dataPoint.label === '@@OTHERS@@') {
+            if (dataPoint.label === '##OTHERS##') {
                 continue;
             }
 
