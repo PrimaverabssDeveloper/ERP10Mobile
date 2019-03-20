@@ -1,4 +1,4 @@
-import { InstanceHttpRequestService, DomService, InstanceService } from '../../core/services';
+import { InstanceHttpRequestService, DomService, InstanceService, ModulesService } from '../../core/services';
 import { Salaries, SalaryDocument } from '../models';
 import { ModuleCompany } from '../../core/entities';
 import { HrModuleDefinition } from '../module-definition';
@@ -28,7 +28,8 @@ export class HumanResourcesService {
     constructor(
         protected instanceHttpRequestService: InstanceHttpRequestService,
         protected domService: DomService,
-        protected instanceService: InstanceService
+        protected instanceService: InstanceService,
+        protected modulesService: ModulesService
         ) {
 
     }
@@ -71,6 +72,22 @@ export class HumanResourcesService {
 
         const hrModule = this.instanceService.currentInstance.modules.find(m => m.name === HrModuleDefinition.key);
         return hrModule ? hrModule.companies : null;
+    }
+
+    async setModulePin(pin: string): Promise<boolean> {
+        return await this.modulesService.setModulePin(HrModuleDefinition.key.toLowerCase(), pin);
+    }
+
+    async verifyModulePin(pin: string): Promise<boolean> {
+        return await this.modulesService.verifyModulePin(HrModuleDefinition.key, pin);
+    }
+
+    async verifyModuleHasPin(pin: string): Promise<boolean> {
+        return await this.modulesService.verifyModuleHasPin(HrModuleDefinition.key);
+    }
+
+    async removeModulePin(pin: string): Promise<boolean> {
+        return await this.modulesService.removeModulePin(HrModuleDefinition.key);
     }
 
     // #endregion
