@@ -11,9 +11,9 @@ import { MonthSalary, YearSalary } from '../../models';
 export class SalaryChartComponent {
     private readonly yAxisNumberOfSteps = 4;
     private readonly grossValueAccentColor = '#B8B8B8';
-    private readonly netValueAccentColor = '#FF7651';
+    private readonly netValueAccentColor = '#348bdd';
     private readonly grossValueHighlightAccentColor = '#8A8A8A';
-    private readonly netValueHighlightAccentColor = '#BF583D';
+    private readonly netValueHighlightAccentColor = '#25629b';
 
     private chart: any;
     private chartData: SalaryChartData;
