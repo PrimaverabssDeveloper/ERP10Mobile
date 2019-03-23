@@ -12,6 +12,7 @@ import { COMPONENTS } from './components';
 import { PIPES } from './pipes';
 import { ModulesService } from '../core/services';
 import { ModuleDefinition } from '../core/entities';
+import { SalesChartsModule } from '../sales-charts/sales-charts.module';
 
 @NgModule({
     imports: [
@@ -20,6 +21,7 @@ import { ModuleDefinition } from '../core/entities';
         IonicModule,
         TranslateModule,
         SharedModule,
+        SalesChartsModule,
         CUSTOMERS_ROUTING
     ],
     declarations: [PAGES, COMPONENTS, PIPES],

@@ -8,6 +8,7 @@ import { FinancialDocumentPage } from './finantial-document/finantial-document.p
 import { FinancialDocumentLinePage } from './finantial-document-line/finantial-document-line.page';
 import { CurrentAccountPage } from './current-account/current-account.page';
 import { RecentActivityPage } from './recent-activity/recent-activity.page';
+import { SalesChartsPage } from './sales-charts/sales-charts.page';
 
 export * from './customers-list/customers-list.page';
 export * from './customer/customer.page';
@@ -18,6 +19,7 @@ export * from './finantial-document/finantial-document.page';
 export * from './finantial-document-line/finantial-document-line.page';
 export * from './current-account/current-account.page';
 export * from './recent-activity/recent-activity.page';
+export * from './sales-charts/sales-charts.page';
 
 export const PAGES = [
     CustomersListPage,
@@ -28,5 +30,6 @@ export const PAGES = [
     FinancialDocumentPage,
     FinancialDocumentLinePage,
     CurrentAccountPage,
-    RecentActivityPage
+    RecentActivityPage,
+    SalesChartsPage
 ];

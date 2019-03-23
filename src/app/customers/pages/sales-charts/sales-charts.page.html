@@ -1,0 +1,19 @@
+<!-- SIDE MENU -->
+<side-menu contentId="customers-sales-charts-page-content" menuId="customers-sales-charts-page-menu"></side-menu>
+
+<!-- PAGE -->
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title><span class="navbar-title">{{ pageTitle }}</span></ion-title>
+        <ion-buttons slot="end">
+            <ion-menu-button autoHide="false" menu="customers-sales-charts-page-menu"></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content id="customers-sales-charts-page-content" scrollY='false'>
+    <sales-charts [data]="salesChartsData"></sales-charts>
+</ion-content>

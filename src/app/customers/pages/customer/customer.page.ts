@@ -85,6 +85,19 @@ export class CustomerPage extends PageBase implements OnInit {
         this.router.navigate(commands, extras);
     }
 
+    async salesChartsAction() {
+        const commands = ['customers/customer', this.customer.companyKey, this.customer.key, 'salescharts'];
+
+        const extras = {
+            // queryParams: {
+            //     addresses: JSON.stringify(this.customer.contacts.otherAddresses),
+            //     customerName: this.customer.name
+            // }
+        };
+
+        this.router.navigate(commands, extras);
+    }
+
     async pendingOrdersAction() {
         const commands = ['customers/customer', this.customer.companyKey, this.customer.key, 'pendingorders'];
 
