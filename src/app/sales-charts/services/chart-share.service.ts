@@ -77,6 +77,8 @@ export class ChartShareService {
         chartExtraInfoValue: string,
         salesChartData: SalesChartData,
         salesTableData: SalesTableData,
+        currentYearAccentColor: string,
+        previousYearAccentColor: string
     ): Promise<boolean> {
 
         const base64Image = await this.buildBase64Image(
@@ -90,7 +92,9 @@ export class ChartShareService {
             chartSelectedPeriod,
             chartExtraInfoValue,
             salesChartData,
-            salesTableData
+            salesTableData,
+            currentYearAccentColor,
+            previousYearAccentColor
         );
 
         const hasStoragePermission = await this.hasStoragePermission();
@@ -138,6 +142,8 @@ export class ChartShareService {
         chartExtraInfoValue: string,
         salesChartData: SalesChartData,
         salesTableData: SalesTableData,
+        currentYearAccentColor: string,
+        previousYearAccentColor: string
     ): Promise<boolean> {
 
         const base64Image = await this.buildBase64Image(
@@ -151,7 +157,9 @@ export class ChartShareService {
             chartSelectedPeriod,
             chartExtraInfoValue,
             salesChartData,
-            salesTableData
+            salesTableData,
+            currentYearAccentColor,
+            previousYearAccentColor
         );
 
         try {
@@ -192,6 +200,8 @@ export class ChartShareService {
         chartExtraInfoValue: string,
         salesChartData: SalesChartData,
         salesTableData: SalesTableData,
+        currentYearAccentColor: string,
+        previousYearAccentColor: string
     ) {
 
         const image = await this.buildBase64Image(
@@ -205,7 +215,9 @@ export class ChartShareService {
             chartSelectedPeriod,
             chartExtraInfoValue,
             salesChartData,
-            salesTableData
+            salesTableData,
+            currentYearAccentColor,
+            previousYearAccentColor
         );
     }
 
@@ -305,6 +317,8 @@ export class ChartShareService {
         chartExtraInfoValue: string,
         salesChartData: SalesChartData,
         salesTableData: SalesTableData,
+        currentYearAccentColor: string,
+        previousYearAccentColor: string
     ): Promise<string> {
 
         const canvas = document.createElement('canvas');
@@ -336,7 +350,7 @@ export class ChartShareService {
 
         // COMPANY
         ctx.font = '50px Open Sans Condensed';
-        ctx.fillStyle = '#1C307D';
+        ctx.fillStyle = currentYearAccentColor;
         ctx.fillText(chartCompanyKey, 100, 180);
 
         // DATE
@@ -375,13 +389,13 @@ export class ChartShareService {
             // current year
             tempCtx.fillStyle = '#000';
             tempCtx.fillText(salesChartData.currentYearLegend, tempCanvas.width - 30 - 80 - 140, 0);
-            tempCtx.fillStyle = '#1C307D';
+            tempCtx.fillStyle = currentYearAccentColor;
             tempCtx.fillRect(tempCanvas.width - 30 - 140, 0, 30, 30);
 
             // previouse year
             tempCtx.fillStyle = '#000';
             tempCtx.fillText(salesChartData.previousYearLegend, tempCanvas.width - 30 - 80, 0);
-            tempCtx.fillStyle = '#DBE0EB';
+            tempCtx.fillStyle = previousYearAccentColor;
             tempCtx.fillRect(tempCanvas.width - 30, 0, 30, 30);
 
             // y axis
@@ -433,13 +447,13 @@ export class ChartShareService {
             // current year
             ctx.fillStyle = '#000';
             ctx.fillText(salesChartData.currentYearLegend, 935, 400);
-            ctx.fillStyle = '#1C307D';
+            ctx.fillStyle = currentYearAccentColor;
             ctx.fillRect(1010, 400, 30, 30);
 
             // previouse year
             ctx.fillStyle = '#000';
             ctx.fillText(salesChartData.previousYearLegend, 1070, 400);
-            ctx.fillStyle = '#DBE0EB';
+            ctx.fillStyle = previousYearAccentColor;
             ctx.fillRect(1150, 400, 30, 30);
 
             // draw chart
@@ -496,13 +510,13 @@ export class ChartShareService {
         // current year
         ctx.fillStyle = '#000';
         ctx.fillText(salesTableData.currentYearLabel, 2120, 400);
-        ctx.fillStyle = '#1C307D';
+        ctx.fillStyle = currentYearAccentColor;
         ctx.fillRect(2196, 400, 30, 30);
 
         // previouse year
         ctx.fillStyle = '#000';
         ctx.fillText(salesTableData.previouseYearLabel, 2250, 400);
-        ctx.fillStyle = '#DBE0EB';
+        ctx.fillStyle = previousYearAccentColor;
         ctx.fillRect(2330, 400, 30, 30);
 
         // DRAW TABLE
@@ -533,7 +547,7 @@ export class ChartShareService {
             // curre
             const currentValue = this.localeCurrencyPipe.transform(rowData.currentYearValue, salesTableData.currency);
             ctx.textAlign = 'right';
-            ctx.fillStyle = 'blue';
+            ctx.fillStyle = currentYearAccentColor;
             ctx.fillText(currentValue, 1850, tableRowYPosition);
             // prev
             const prevValue = this.localeCurrencyPipe.transform(rowData.previousYearValue, salesTableData.currency);

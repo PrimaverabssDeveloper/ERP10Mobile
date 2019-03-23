@@ -1,4 +1,6 @@
-@import '../../styles/variables.scss';
+$accent-color: var(--sales-charts-accent-color);
+$current-year-accent-color: var(--sales-charts-current-year-accent-color);
+$previous-year-accent-color: var(--sales-charts-previous-year-accent-color);
 
 $chart-background-color: rgb(255,255,255);
 $chart-legend-height: 20px;

@@ -1,10 +1,10 @@
 
-@import '../../styles/variables.scss';
+$accent-color: var(--sales-charts-accent-color);
 
 $menu-height: 50px;
 $menu-list-row-height: 40px;
 $menu-list-row-text-color: rgb(204, 204, 204);
-$menu-list-row-text-selected-color: $sales-accent-color;
+$menu-list-row-text-selected-color: $accent-color;
 
 .footer-tab-menus {
     height: $menu-height;
@@ -38,7 +38,7 @@ $menu-list-row-text-selected-color: $sales-accent-color;
                 left: 50%;
                 top: 50%;
                 position: absolute;
-                background-color: $sales-accent-color;
+                background-color: $accent-color;
             }
         }
     }
