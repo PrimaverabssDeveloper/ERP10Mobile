@@ -21,6 +21,7 @@
     <preference name="SplashScreenDelay" value="30000" />
     <preference name="AndroidLaunchMode" value="singleTask" />
     <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="orientation" value="portrait" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -105,6 +106,6 @@
     <plugin name="cordova-base64-to-gallery" spec="4.1.3" />
     <plugin name="cordova-plugin-android-permissions" spec="1.0.0" />
     <plugin name="cordova-plugin-email-composer" spec="^0.9.1" />
-    <allow-navigation href="http://172.16.252.10:8100" sessionid="98a20f6c" />
+    <allow-navigation href="http://172.16.252.9:8100" sessionid="bd299c13" />
     <engine name="android" spec="7.1.1" />
 </widget>
