@@ -3,6 +3,7 @@ import { Ticker, ModuleDefinition } from '../entities';
 import { InstanceService } from './instance.service';
 import { CoreStorageService } from './core-storage.service';
 import { Observable } from 'rxjs';
+import { HttpRequestService } from './http-request.service';
 
 /**
  * Provides access to all available modules definitions.
@@ -23,7 +24,11 @@ export class ModulesService {
         return this._onModulesSummariesVisibilityChanges.asObservable();
     }
 
-    constructor(private instanceService: InstanceService, private coreStorageService: CoreStorageService) {
+    constructor(
+        private instanceService: InstanceService,
+        private coreStorageService: CoreStorageService,
+        private httpRequestService: HttpRequestService
+        ) {
         // this.modulesSummariesHandlers = {};
         this.modulesDefinitions = {};
         this._onModulesSummariesVisibilityChanges = new EventEmitter();
@@ -117,6 +122,88 @@ export class ModulesService {
                   .setData<{[key: string]: boolean}>(this.MODULES_SUMMARIES_VISIBILITY_STATE_STORAGE_KEY, summariesVisibilityState, true);
 
         this._onModulesSummariesVisibilityChanges.emit();
+    }
+
+    /**
+     * Set a password to a module.
+     *
+     * @param {string} moduleName
+     * @param {string} password
+     * @returns {Promise<boolean>}
+     * @memberof ModulesService
+     */
+    async setModulePassword(moduleName: string, password: string): Promise<boolean> {
+
+        let success = true;
+
+        try {
+            success = await this.httpRequestService.post<any>(`app/modules/${moduleName}/pin`, password );
+        } catch (error) {
+            success = false;
+        }
+
+        return success;
+    }
+
+    /**
+     * Validate an module password.
+     *
+     * @param {string} moduleName
+     * @param {string} password
+     * @returns {Promise<boolean>}
+     * @memberof ModulesService
+     */
+    async verifyModulePassword(moduleName: string, password: string): Promise<boolean> {
+
+        let success = true;
+
+        try {
+            success = await this.httpRequestService.post<any>(`app/modules/${moduleName}/pin/validate`, password );
+        } catch (error) {
+            success = false;
+        }
+
+        return success;
+    }
+
+    /**
+     * Verify if the module has password.
+     *
+     * @param {string} moduleName
+     * @returns {Promise<boolean>}
+     * @memberof ModulesService
+     */
+    async verifyModuleHasPassword(moduleName: string): Promise<boolean> {
+
+        let success = true;
+
+        try {
+            success = await this.httpRequestService.get<boolean>(`app/modules/${moduleName}/pin/enabled`);
+        } catch (error) {
+            success = false;
+        }
+
+        return success;
+    }
+
+    /**
+     * Removed the password definition from a module.
+     *
+     * @param {string} moduleName
+     * @returns {Promise<boolean>}
+     * @memberof ModulesService
+     */
+    async removeModulePassword(moduleName: string): Promise<boolean> {
+
+        let success = true;
+
+        try {
+            success = await this.httpRequestService.delete(`app/modules/${moduleName}/pin`);
+        } catch (error) {
+            success = false;
+        }
+
+        return success;
     }
 
     private async getModulesSummariesVisibilityStateAsync(): Promise<{ [key: string]: boolean }> {
