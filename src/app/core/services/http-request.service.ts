@@ -70,7 +70,14 @@ export class HttpRequestService {
      */
     public post<T>(partialUrl: string, body?: any): Promise<T> {
         const finalUrl = this.buildFinalUrl(partialUrl);
-        return this.http.post<T>(finalUrl, body).toPromise<T>();
+
+        const options = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        return this.http.post<T>(finalUrl, body, options).toPromise<T>();
     }
 
     /**

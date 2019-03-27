@@ -22,6 +22,9 @@ export class CustomersService {
     private static readonly CUSTOMER_CURRENT_ACCOUNT = (customerKey, companyKey) =>
         `customers/${customerKey}/currentaccount?companyKey=${companyKey}`
 
+    private static readonly CUSTOMER_SALES_CHARTS = (customerKey, companyKey) =>
+        `customers/${customerKey}/salescharts?companyKey=${companyKey}`
+
     constructor(
         protected storageService: CustomersStorageService,
         protected instanceHttpRequestService: InstanceHttpRequestService) {
@@ -123,6 +126,22 @@ export class CustomersService {
         try {
             result = await this.instanceHttpRequestService
                                .get<CurrentAccount>(CustomersService.CUSTOMER_CURRENT_ACCOUNT(sanitizedCustomerKey, sanitizedCompanyKey));
+        } catch (error) {
+            console.error(error);
+        }
+
+        return result;
+    }
+
+    async getSalesCharts(companyKey: string, customerKey: string): Promise<any> {
+        let result: any;
+
+        const sanitizedCustomerKey = this.sanitizeString(customerKey);
+        const sanitizedCompanyKey = this.sanitizeString(companyKey);
+
+        try {
+            result = await this.instanceHttpRequestService
+                               .get<any>(CustomersService.CUSTOMER_SALES_CHARTS(sanitizedCustomerKey, sanitizedCompanyKey));
         } catch (error) {
             console.error(error);
         }

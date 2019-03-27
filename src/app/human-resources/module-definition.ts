@@ -11,6 +11,6 @@ export const HrModuleDefinition: ModuleDefinition = {
     },
     settings: {
         hasSettings: true,
-        settingsRoutePath: ''
+        settingsRoutePath: '/humanresources/settings'
     }
 };

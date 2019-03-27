@@ -1,0 +1,22 @@
+<!-- PAGE -->
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'HUMAN_RESOURCES.HR_SETTINGS.PAGE_TITLE' | translate }}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content scrollY='false'>
+    <div class="settings sales-settings">
+        <div class="settings-group">
+            <div class="setting-row">
+                <div class="setting-row-label">{{ 'HUMAN_RESOURCES.HR_SETTINGS.TOOGLE_PASSWORD_BUTTON' | translate }}</div>
+                <div class="setting-row-right-container"><ion-toggle [(ngModel)]="passwordEnabled"></ion-toggle></div>
+            </div>
+        </div>
+    </div>
+</ion-content>

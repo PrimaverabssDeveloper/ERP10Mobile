@@ -109,7 +109,7 @@ export class SalesChartComponent {
         currency: string,
         useReportingValue: boolean,
         currentYearAccentColor: string,
-        previouseYearAccentColor: string,
+        previousYearAccentColor: string,
         currentYearAccentColorWithTransparency: string,
         previouseYearAccentColorWithTransparency: string
     ) {
@@ -131,12 +131,12 @@ export class SalesChartComponent {
                 currentYearSerie,
                 useReportingValue,
                 currentYearAccentColor,
-                previouseYearAccentColor,
+                previousYearAccentColor,
                 currentYearAccentColorWithTransparency,
                 previouseYearAccentColorWithTransparency
             );
 
-            this.drawChart(chart.valueType, chartBundle.isTimeChart, currency, data);
+            this.drawChart(chart.valueType, chartBundle.isTimeChart, currency, currentYearAccentColor, previousYearAccentColor, data);
         } else {
 
             const data = this.buildTopChartData(
@@ -146,10 +146,10 @@ export class SalesChartComponent {
                 period,
                 useReportingValue,
                 currentYearAccentColor,
-                previouseYearAccentColor
+                previousYearAccentColor
             );
 
-            this.drawChart(chart.valueType, chartBundle.isTimeChart, currency, data);
+            this.drawChart(chart.valueType, chartBundle.isTimeChart, currency, currentYearAccentColor, previousYearAccentColor, data);
         }
 
         this.chartUpdated.emit({
@@ -167,6 +167,8 @@ export class SalesChartComponent {
         valueType: 'accum' | 'abs',
         isTimeChart: boolean,
         currency: string,
+        currentYearAccentColor: string,
+        previousYearAccentColor: string,
         data: {
             maxValue: number,
             labels: string[],
@@ -238,7 +240,7 @@ export class SalesChartComponent {
                         height:5px;
                         margin-top:3px;
                         margin-right:3px;
-                        background-color:#1D317D;
+                        background-color:${currentYearAccentColor};
                         float:left"></div>
                     <div style="float:left">${this.localeCurrencyPipe.transform(currentYearValue, currency)}</div>
                 </div>
@@ -248,7 +250,7 @@ export class SalesChartComponent {
                         height:5px;
                         margin-top:3px;
                         margin-right:3px;
-                        background-color:#DBE0EB;
+                        background-color:${previousYearAccentColor};
                         float:left"></div>
                     <div style="float:left">${this.localeCurrencyPipe.transform(previousYearValue, currency)}</div>
                 </div>
@@ -551,8 +553,8 @@ export class SalesChartComponent {
 
         for (const dataPoint of dataSet.dataPoints) {
 
-            // the dataPoint with total values or label '@@OTHERS@@' are not used on the chart
-            if (dataPoint.isTotal || dataPoint.label === '@@OTHERS@@') {
+            // the dataPoint with total values or label '##OTHERS##' are not used on the chart
+            if (dataPoint.isTotal || dataPoint.label === '##OTHERS##') {
                 continue;
             }
 

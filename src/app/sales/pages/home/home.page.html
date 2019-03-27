@@ -19,40 +19,5 @@
 </ion-header>
 
 <ion-content id="sales-home-page-content" scrollY='false'>
-    <div class="sales-content">
-        <div class="sales-header">
-            <div class="chart-name">{{selectedChartBundleLocalizedTitles | localizedStrings}}</div>
-            <div class="data-date">{{dataDate | localeDate:'medium'}}</div>
-        </div>
-        <div class="chart-controllers">
-            <div class="selected chart-ctrl-btn chart-ctrl-btn-month" *ngIf="showTimeFrameSelector" [ngClass]="{'selected': timeFrame === 'monthly'}"
-                (click)="changeTimeFrameAction('monthly')">M</div>
-            <div class="chart-ctrl-btn chart-ctrl-btn-quarter" *ngIf="showTimeFrameSelector" [ngClass]="{'selected': timeFrame === 'quarter'}"
-                (click)="changeTimeFrameAction('quarter')">{{'SALES.CHARTS.QUARTER_CHART_BAR_PREFIX' | translate }}</div>
-
-            <div class="chart-ctrl-btn chart-ctrl-btn-table" [ngClass]="{'selected': viewType === 'table'}" (click)="toggleTableView()">
-                <div class="icon pri-icon pri-table-icon"></div>
-            </div>
-
-            <div class="chart-ctrl-btn chart-ctrl-btn-accumulated" [ngClass]="{'selected': valueType === 'accum'}"
-                (click)="changeValueType('accum')">
-                <div class="icon pri-icon pri-sum-icon"></div>
-            </div>
-
-            <div class="selected chart-ctrl-btn chart-ctrl-btn-absolute" [ngClass]="{'selected': valueType === 'abs'}"
-                (click)="changeValueType('abs')">
-            </div>
-        </div>
-        <div class="chart-content">
-            <sales-chart #saleschart [hidden]="viewType !== 'chart'" [data]="chartData" (chartUpdated)="onChartUpdated($event)"></sales-chart>
-            <sales-table [hidden]="viewType !== 'table'" [data]="tableData" (tableUpdated)="onTableUpdated($event)"></sales-table>
-        </div>
-        <div class="extra-info">{{extraInfoValue}}</div>
-        <div class="month-selector-wrapper" *ngIf="!selectedChartBundleIsTimeChart">
-            <month-selector (monthSelected)="onPeriodChanged($event)"></month-selector>
-        </div>
-    </div>
-    <div class="footer-tab-menus-wrapper">
-        <footer-tab-menus [menus]="footerTabMenus" (menuItemSelected)="onFooterMenuItemSelected($event)"></footer-tab-menus>
-    </div>
+    <sales-charts [data]="salesChartsData"></sales-charts>
 </ion-content>

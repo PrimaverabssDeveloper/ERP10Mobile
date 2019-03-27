@@ -1,4 +1,4 @@
-import { InstanceHttpRequestService, DomService, InstanceService } from '../../core/services';
+import { InstanceHttpRequestService, DomService, InstanceService, ModulesService } from '../../core/services';
 import { HumanResourcesService } from './human-resources.service';
 import { HttpClient } from '@angular/common/http';
 import { Salaries, SalaryDocument } from '../models';
@@ -26,9 +26,10 @@ export class HumanResourcesDemoService extends HumanResourcesService {
         protected instanceHttpRequestService: InstanceHttpRequestService,
         protected domService: DomService,
         protected instanceService: InstanceService,
-        private http: HttpClient
+        protected modulesService: ModulesService,
+        private http: HttpClient,
     ) {
-        super(instanceHttpRequestService, domService, instanceService);
+        super(instanceHttpRequestService, domService, instanceService, modulesService);
     }
     // #endregion
 

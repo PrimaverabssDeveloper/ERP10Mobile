@@ -1,10 +1,24 @@
 import { RouterModule, Routes } from '@angular/router';
-import { HrHomePage } from './pages/hr-home/hr-home.page';
+import { HrSettingsPage, HrHomePage } from './pages';
 
 const routes: Routes = [
     {
-      path: '',
-      component: HrHomePage
+        path: '',
+        children: [
+            {
+                path: '',
+                redirectTo: 'home',
+                pathMatch: 'full'
+            },
+            {
+                path: 'home',
+                component: HrHomePage
+            },
+            {
+                path: 'settings',
+                component: HrSettingsPage
+            }
+        ]
     }
 ];
 

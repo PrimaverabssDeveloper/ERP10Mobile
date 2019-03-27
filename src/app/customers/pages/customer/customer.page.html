@@ -50,7 +50,7 @@
         </div>
         <div class="sales">
             <div class="sales-header">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_TITLE' | translate }}</div>
-            <div class="sales-row">
+            <div class="sales-row" (click)="salesChartsAction()">
                 <div class="col-5">
                     <div class="sales-row-label left">{{ 'CUSTOMERS.CUSTOMER_PAGE.SALES_CURRENT_YEAR_TOTAL_SALES_LABEL'
                         | translate }} {{currentYear}}</div>

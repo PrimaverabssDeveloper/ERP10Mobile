@@ -147,6 +147,10 @@
             "NET_EARNING_SECTION_TITLE": "Net Earnings",
             "PAYMENT_METHOD_SECTION_TITLE": "Payment method",
             "COMPENSATION_BREAKDOWN_SECTION_TITLE": "Compensation breakdown"
+        },
+        "HR_SETTINGS" : {
+            "PAGE_TITLE" : "Human Resources",
+            "TOOGLE_PASSWORD_BUTTON" : "Restrict access with PIN"
         }
     }
 }

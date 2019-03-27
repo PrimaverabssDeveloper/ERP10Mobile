@@ -8,7 +8,8 @@ import {
     FinancialDocumentPage,
     FinancialDocumentLinePage,
     CurrentAccountPage,
-    RecentActivityPage
+    RecentActivityPage,
+    SalesChartsPage
 } from './pages';
 
 const customersRoutes: Routes = [
@@ -47,6 +48,10 @@ const customersRoutes: Routes = [
             {
                 path: 'customer/:companyKey/:customerKey/recentactivity',
                 component: RecentActivityPage
+            },
+            {
+                path: 'customer/:companyKey/:customerKey/salescharts',
+                component: SalesChartsPage
             },
             {
                 path: 'customer/finantialdocument',

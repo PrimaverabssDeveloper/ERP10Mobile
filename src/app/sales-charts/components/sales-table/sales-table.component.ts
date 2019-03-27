@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { Company, Serie, ChartData, ChartBundle, ChartPeriodType } from '../../entities';
+import { Serie, ChartData, ChartBundle, ChartPeriodType } from '../../entities';
 import { MathTools } from '../../../shared/tools';
 import { SalesTableRowData } from './entities/sales-table-row-data';
 import { SalesTableUpdatedEvent } from './entities';
@@ -249,7 +249,7 @@ export class SalesTableComponent {
             }
 
             // the other data point is not displayed on the table
-            if (dataPoint.label === '@@OTHERS@@') {
+            if (dataPoint.label === '##OTHERS##') {
                 continue;
             }
 

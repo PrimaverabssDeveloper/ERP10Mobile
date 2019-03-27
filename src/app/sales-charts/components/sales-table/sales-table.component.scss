@@ -1,4 +1,6 @@
-@import '../../styles/variables.scss';
+
+$current-year-text-accent-color: var(--sales-charts-current-year-accent-color);
+$previous-year-text-accent-color:var(--sales-charts-previous-year-accent-color);
 
 $sales-table-row-label-width: 20%;
 $sales-table-row-current-year-value-width: 30%;

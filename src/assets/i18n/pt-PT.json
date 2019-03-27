@@ -148,6 +148,10 @@
             "NET_EARNING_SECTION_TITLE": "Remuneração Líquida",
             "PAYMENT_METHOD_SECTION_TITLE": "Forma de pagamento",
             "COMPENSATION_BREAKDOWN_SECTION_TITLE": "Distribuição dos processamentos"
+        },
+        "HR_SETTINGS" : {
+            "PAGE_TITLE" : "Human Resources",
+            "TOOGLE_PASSWORD_BUTTON" : "Restrict access with PIN"
         }
     }
 }

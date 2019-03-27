@@ -1,6 +1,6 @@
 
 import { Provider } from '@angular/core';
-import { AuthenticationService, InstanceHttpRequestService, DomService, InstanceService } from '../../core/services';
+import { AuthenticationService, InstanceHttpRequestService, DomService, InstanceService, ModulesService } from '../../core/services';
 import { HttpClient } from '@angular/common/http';
 import { HumanResourcesService } from './human-resources.service';
 import { HumanResourcesDemoService } from './human-resources.demo.service';
@@ -17,12 +17,13 @@ export const HumanResourcesServiceProvider: Provider = {
         authService: AuthenticationService,
         instanceHttpRequestService: InstanceHttpRequestService,
         instanceService: InstanceService,
-        domService: DomService
+        domService: DomService,
+        modulesService: ModulesService
     ) => {
         if (authService.isAuthenticateAsDemo) {
-            return new HumanResourcesDemoService(instanceHttpRequestService, domService, instanceService, http);
+            return new HumanResourcesDemoService(instanceHttpRequestService, domService, instanceService, modulesService, http);
         } else {
-            return new HumanResourcesService(instanceHttpRequestService, domService, instanceService);
+            return new HumanResourcesService(instanceHttpRequestService, domService, instanceService, modulesService);
         }
     },
     deps: [
@@ -30,5 +31,7 @@ export const HumanResourcesServiceProvider: Provider = {
         AuthenticationService,
         InstanceHttpRequestService,
         InstanceService,
-        DomService],
+        DomService,
+        ModulesService
+    ],
 };
