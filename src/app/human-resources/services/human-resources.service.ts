@@ -74,20 +74,20 @@ export class HumanResourcesService {
         return hrModule ? hrModule.companies : null;
     }
 
-    async setModulePin(pin: string): Promise<boolean> {
-        return await this.modulesService.setModulePin(HrModuleDefinition.key.toLowerCase(), pin);
+    async setModulePassword(password: string): Promise<boolean> {
+        return await this.modulesService.setModulePassword(HrModuleDefinition.key.toLowerCase(), password);
     }
 
-    async verifyModulePin(pin: string): Promise<boolean> {
-        return await this.modulesService.verifyModulePin(HrModuleDefinition.key, pin);
+    async verifyModulePassword(password: string): Promise<boolean> {
+        return await this.modulesService.verifyModulePassword(HrModuleDefinition.key, password);
     }
 
-    async verifyModuleHasPin(pin: string): Promise<boolean> {
-        return await this.modulesService.verifyModuleHasPin(HrModuleDefinition.key);
+    async verifyModuleHasPassword(): Promise<boolean> {
+        return await this.modulesService.verifyModuleHasPassword(HrModuleDefinition.key);
     }
 
-    async removeModulePin(pin: string): Promise<boolean> {
-        return await this.modulesService.removeModulePin(HrModuleDefinition.key);
+    async removeModulePassword(): Promise<boolean> {
+        return await this.modulesService.removeModulePassword(HrModuleDefinition.key);
     }
 
     // #endregion
