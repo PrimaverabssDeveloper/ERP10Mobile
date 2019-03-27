@@ -5,6 +5,7 @@ import { AppSettings } from '../../../core/app-settings';
 import { AlertController, NavController } from '@ionic/angular';
 import { InstancesService, InstancesServiceProvider } from '../../services';
 import { TranslateService } from '@ngx-translate/core';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 @Component({
     templateUrl: './authentication.page.html',
@@ -25,6 +26,7 @@ export class AuthenticationPage implements OnInit {
         private alertController: AlertController,
         private storageService: StorageService,
         private zone: NgZone,
+        private splashScreen: SplashScreen,
         private navController: NavController
     ) {
     }
@@ -36,6 +38,7 @@ export class AuthenticationPage implements OnInit {
     */
     async ngOnInit() {
 
+        this.splashScreen.hide();
         const logout = this.route.snapshot.queryParams['logout'];
         if (logout) {
             await this.endSession();
