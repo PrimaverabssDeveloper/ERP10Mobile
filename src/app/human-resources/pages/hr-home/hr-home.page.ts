@@ -126,6 +126,14 @@ export class HrHomePage extends PageBase implements OnInit {
         this.updateView(this.salaries, this.localizedMonthsNames);
     }
 
+    hasDocuments(): boolean {
+        if (this.salaryPeriodState === 'yearly') {
+            return this.currentYearSalary.documents && this.currentYearSalary.documents.length > 0;
+        } else {
+            return this.currentMonthSalary.documents && this.currentMonthSalary.documents.length > 0;
+        }
+    }
+
     async showDocumentsPopoverAction(event: any) {
 
         let documents: SalaryDocument[];
