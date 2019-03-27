@@ -190,7 +190,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
             companyKey: companySales.key,
             chartBundles: this.selectedCompanySales.chartBundle,
             useReportingValue: useReportingValue,
-            accentColor: {r: 81, g: 131, b: 254},
+            accentColor: {r: 29, g: 49, b: 125},
             currentYearAccentColor: {r: 29, g: 49, b: 125},
             previousYearAccentColor: {r: 219, g: 224, b: 235}
         };
