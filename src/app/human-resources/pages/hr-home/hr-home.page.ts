@@ -331,31 +331,40 @@ export class HrHomePage extends PageBase implements OnInit {
             );
         }
 
-        const paymentMethods: SalaryExtraInformations = {
-            label: 'HUMAN_RESOURCES.HR_PAGE.PAYMENT_METHOD_SECTION_TITLE',
-            infos: salary.paymentMethods.map(pm => (
-                {
-                    label: pm.label,
-                    value: pm.value,
-                    currency: currency,
-                    percentualValue: pm.percentage
-                }
-            ))
-        };
+        // extra information
+        this.salaryExtraInformations = [];
 
-        const compensationBreakdown: SalaryExtraInformations = {
-            label: 'HUMAN_RESOURCES.HR_PAGE.COMPENSATION_BREAKDOWN_SECTION_TITLE',
-            infos: salary.salaryBreakdown.map(pm => (
-                {
-                    label: pm.label,
-                    value: pm.value,
-                    currency: currency,
-                    percentualValue: pm.percentage
-                }
-            ))
-        };
+        if (salary.paymentMethods && salary.paymentMethods.length > 0) {
+            const paymentMethods: SalaryExtraInformations = {
+                label: 'HUMAN_RESOURCES.HR_PAGE.PAYMENT_METHOD_SECTION_TITLE',
+                infos: salary.paymentMethods.map(pm => (
+                    {
+                        label: pm.label,
+                        value: pm.value,
+                        currency: currency,
+                        percentualValue: pm.percentage
+                    }
+                ))
+            };
 
-        this.salaryExtraInformations = [paymentMethods, compensationBreakdown];
+            this.salaryExtraInformations.push(paymentMethods);
+        }
+
+        if (salary.salaryBreakdown && salary.salaryBreakdown.length > 0) {
+            const compensationBreakdown: SalaryExtraInformations = {
+                label: 'HUMAN_RESOURCES.HR_PAGE.COMPENSATION_BREAKDOWN_SECTION_TITLE',
+                infos: salary.salaryBreakdown.map(pm => (
+                    {
+                        label: pm.label,
+                        value: pm.value,
+                        currency: currency,
+                        percentualValue: pm.percentage
+                    }
+                ))
+            };
+
+            this.salaryExtraInformations.push(compensationBreakdown);
+        }
     }
 
     private buildCharts(salaries: Salaries, localizedMonthsNames: string[]) {
