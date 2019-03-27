@@ -61,6 +61,18 @@ export class HttpRequestService {
     }
 
     /**
+     * Performs HTTP Requests with method GET to get blobs.
+     *
+     * @param {string} partialUrl
+     * @returns {Promise<Blob>}
+     * @memberof HttpRequestService
+     */
+    public getBlob(partialUrl: string): Promise<Blob> {
+        const finalUrl = this.buildFinalUrl(partialUrl);
+        return this.http.get(finalUrl, { responseType: 'blob' }).toPromise<Blob>();
+    }
+
+    /**
      * Performs HTTP Requests with method POST.
      *
      * @template T
