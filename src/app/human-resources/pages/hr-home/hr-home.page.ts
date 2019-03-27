@@ -128,9 +128,9 @@ export class HrHomePage extends PageBase implements OnInit {
 
     hasDocuments(): boolean {
         if (this.salaryPeriodState === 'yearly') {
-            return this.currentYearSalary.documents && this.currentYearSalary.documents.length > 0;
+            return this.currentYearSalary && this.currentYearSalary.documents && this.currentYearSalary.documents.length > 0;
         } else {
-            return this.currentMonthSalary.documents && this.currentMonthSalary.documents.length > 0;
+            return this.currentMonthSalary && this.currentMonthSalary.documents && this.currentMonthSalary.documents.length > 0;
         }
     }
 
@@ -161,14 +161,24 @@ export class HrHomePage extends PageBase implements OnInit {
 
         popover.onWillDismiss().then(result => {
 
+            // get the year and month for the current context
+            let currentYear: number;
+            let currentMonth: number;
+            if (this.salaryPeriodState === 'yearly') {
+                currentYear = this.currentYearSalary.year;
+            } else {
+                currentYear = this.currentMonthSalary.year;
+                currentMonth = this.currentMonthSalary.month;
+            }
+
             // if is dismissed without any action selected, the result.data will be undefined
             if (result.data) {
                 switch (result.data.action) {
                     case 'share':
-                        this.shareDocument(result.data.document);
+                        this.shareDocument(result.data.document, currentYear, currentMonth);
                         break;
                     case 'view':
-                        this.showDocument(result.data.document);
+                        this.showDocument(result.data.document, currentYear, currentMonth);
                         break;
                 }
             }
@@ -638,12 +648,12 @@ export class HrHomePage extends PageBase implements OnInit {
         return localizedMonthsNames;
     }
 
-    private async showDocument(document: SalaryDocument) {
+    private async showDocument(document: SalaryDocument, year: number, month?: number) {
         // show loading
         await this.showLoading();
 
         // download pdf blob
-        const pdfBlob = await this.humanResourcesService.getPdfFromDocument(document);
+        const pdfBlob = await this.humanResourcesService.getPdfFromDocument(document, year, month);
 
         // store the pdf localy
         const path = await this.storeDocumentPdfAsync(document, pdfBlob);
@@ -655,12 +665,12 @@ export class HrHomePage extends PageBase implements OnInit {
         await this.hideLoading();
     }
 
-    private async shareDocument(document: SalaryDocument) {
+    private async shareDocument(document: SalaryDocument, year: number, month?: number) {
         // show loading
         await this.showLoading();
 
         // download pdf blob
-        const pdfBlob = await this.humanResourcesService.getPdfFromDocument(document);
+        const pdfBlob = await this.humanResourcesService.getPdfFromDocument(document, year, month);
 
         // store the pdf localy
         const pdfFilePath = await this.storeDocumentPdfAsync(document, pdfBlob);
@@ -677,7 +687,8 @@ export class HrHomePage extends PageBase implements OnInit {
     }
 
     private async storeDocumentPdfAsync(document: SalaryDocument, pdfBlob: Blob): Promise<string> {
-        const fileName = document.label['en'].toLocaleLowerCase().concat('.pdf');
+        const fileName = document.label['en'].replace(/[^a-z0-9]/gi, '_').toLocaleLowerCase().concat('.pdf');
+
         let filepath = this.file.externalApplicationStorageDirectory;
         if (!filepath) {
             filepath = this.file.documentsDirectory;

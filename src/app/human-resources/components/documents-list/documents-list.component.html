@@ -2,8 +2,8 @@
     <div class="row" *ngFor="let doc of documents">
         <div class="label">{{doc.label | localizedStrings}}</div>
         <div class="actions">
-            <div class="pri-icon pri-document-view-icon action-btn share-action-btn" (click)="shareAction(doc)"></div>
-            <div class="pri-icon pri-mail-icon action-btn view-action-btn" (click)="viewAction(doc)"></div>
+            <div class="pri-icon pri-mail-icon action-btn share-action-btn" (click)="shareAction(doc)"></div>
+            <div class="pri-icon pri-document-view-icon action-btn view-action-btn" (click)="viewAction(doc)"></div>
         </div>
     </div>
 </div>

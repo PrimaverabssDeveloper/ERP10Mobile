@@ -52,7 +52,7 @@ export class HumanResourcesDemoService extends HumanResourcesService {
      * @returns {Promise<Blob>}
      * @memberof HumanResourcesService
      */
-    async getPdfFromDocument(document: SalaryDocument): Promise<Blob> {
+    async getPdfFromDocument(document: SalaryDocument, year: number, month?: number): Promise<Blob> {
         const path = `../assets/human-resources/demo-data/hr_demo_pdf.pdf`;
 
         return this.http.get(path, { responseType: 'blob'})

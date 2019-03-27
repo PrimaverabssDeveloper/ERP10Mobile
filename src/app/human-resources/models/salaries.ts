@@ -30,9 +30,12 @@ export interface MonthSalary extends BaseSalary {
 
 export interface SalaryDocument {
     id: string;
+    companyKey: string;
+    docSignature: string;
     docType: string;
     docSubtype: string;
     label: LocalizedValue;
+    employeeId: string;
 }
 
 export interface Value {

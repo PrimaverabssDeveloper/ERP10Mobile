@@ -15,6 +15,21 @@ export class HumanResourcesService {
 
     // #region 'Endpoints'
     private static readonly SALARIES_BY_COMPANY = (companyKey: string) => `/humanresources/salaries?companyKey=${companyKey}`;
+    private static readonly DOCUMENT_PDF_MONTH = (document: SalaryDocument, year: number, month: number) =>
+            `/humanresources/documents?companykey=${document.companyKey}&` +
+            `type=${document.docType}&` +
+            `signature=${document.docSignature}&` +
+            `employeeId=${document.employeeId}&` +
+            `year=${year}&` +
+            `month=${month}`
+
+    private static readonly DOCUMENT_PDF_YEAR = (document: SalaryDocument, year: number) =>
+            `/humanresources/documents?companykey=${document.companyKey}&` +
+            `type=${document.docType}&` +
+            `signature=${document.docSignature}&` +
+            `employeeId=${document.employeeId}&` +
+            `year=${year}`
+
     // #endregion
 
     // #region 'Constructor'
@@ -64,8 +79,24 @@ export class HumanResourcesService {
      * @returns {Promise<Blob>}
      * @memberof HumanResourcesService
      */
-    async getPdfFromDocument(document: SalaryDocument): Promise<Blob> {
-        return null;
+    async getPdfFromDocument(document: SalaryDocument, year: number, month?: number): Promise<Blob> {
+        let endpoint: string;
+
+        if (month) {
+            endpoint = HumanResourcesService.DOCUMENT_PDF_MONTH(document, year, month);
+        } else {
+            endpoint = HumanResourcesService.DOCUMENT_PDF_YEAR(document, year);
+        }
+
+        let pdfBlob: Blob;
+        try {
+            pdfBlob = await this.instanceHttpRequestService.getBlob(endpoint);
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+
+        return pdfBlob;
     }
 
     getCompanies(): ModuleCompany[] {
