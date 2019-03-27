@@ -1,40 +1,88 @@
 .authentication {
-    .authentication-container {
-        width: 100%;
-        height: 100%;;
-        background: #fff;
-    }
+  .authentication-container {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .logo-container {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    box-orient: horizontal;
+    flex-direction: row;
+
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    box-pack: center;
+    justify-content: center;
+
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    box-align: center;
+    align-items: center;
+
+    flex-grow: 1;
 
     .logo {
-        padding: 50px;
+      -webkit-box-flex: 1;
+      -moz-box-flex: 1;
+      box-flex: 1;
+      -webkit-flex: 1 1 auto;
+      flex: 1 1 auto;
+
+      padding: 10px;
+      margin: 10px;
+
+      text-align: center;
+
+      img {
+        max-height: 512px;
+        max-width: 100%;
+      }
+    }
+  }
+
+  .footer {
+    .prilogo {
+      text-align: center;
+      width: 100%;
+      margin: 0.875em 0;
+
+      img {
+        height: 0.875em;
+      }
+    }
+  }
+
+  button {
+    width: 100%;
+    height: 3em;
+    color: #154bc5;
+    background-color: transparent;
+    border-bottom: 1px solid rgb(47, 47, 47);
+    font-size: 15pt;
+    font-weight: bold;
+
+    &:first-child {
+      border-top: 1px solid rgb(47, 47, 47);
     }
 
-    .footer {
-        position: absolute;
-        bottom: 30px;
-        width: 100%;
+    &:active {
+      color: #fff;
+      background-color: #154bc5;
     }
 
-    button {
-        width: 100%;
-        height: 60px;
-        color: #154bc5;
-        background-color: transparent;
-        border-bottom: 1px solid rgb(47, 47, 47);
-        font-size: 15pt;
-        font-weight: bold;
-
-        &:first-child {
-            border-top: 1px solid rgb(47, 47, 47);
-        }
-
-        &:active {
-            color: #fff;
-            background-color: #154bc5;
-        }
-
-        &:focus {
-            outline: 0;
-        }
+    &:focus {
+      outline: 0;
     }
+  }
 }

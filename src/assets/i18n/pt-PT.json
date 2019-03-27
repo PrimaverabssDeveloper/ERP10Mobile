@@ -12,7 +12,8 @@
             "MENU_SESSION_TITLE" : "Sessão",
             "MENU_SESSION_LOGOUT" : "Logout",
             "ALERT_LOGOUT_HEADER": "Logout",
-            "ALERT_LOGOUT_MESSAGE": "Pretende mesmo sair da aplicação?"
+            "ALERT_LOGOUT_MESSAGE": "Pretende mesmo sair da aplicação?",
+            "MENU_CHANGE_INSTANCES": "Alterar instância"
         },
         "DATES": {
             "MONTHS": {

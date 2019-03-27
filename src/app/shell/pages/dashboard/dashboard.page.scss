@@ -28,6 +28,18 @@ $tickers-height: calc(100% - #{$modules-drawer-height});
         font-weight: bold;
         display: block;
         float: left;
+
+        img.Customers:active {
+            content: url('../../../../assets/customers/customers_logo_pr.svg');
+        }
+
+        img.HumanResources:active {
+            content: url('../../../../assets/human-resources/human_resources_logo_pr.svg');
+        }
+
+        img.Sales:active {
+            content: url('../../../../assets/sales/sales_logo_pr.svg');
+        }
     
         .name {
             margin-top: 5px;
