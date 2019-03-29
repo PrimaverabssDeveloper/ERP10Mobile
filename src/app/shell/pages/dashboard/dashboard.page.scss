@@ -29,16 +29,22 @@ $tickers-height: calc(100% - #{$modules-drawer-height});
         display: block;
         float: left;
 
-        img.Customers:active {
-            content: url('../../../../assets/customers/customers_logo_pr.svg');
+        img.touch-off{
+            display: initial;
         }
 
-        img.HumanResources:active {
-            content: url('../../../../assets/human-resources/human_resources_logo_pr.svg');
+        img.touch-on{
+            display: none;
         }
 
-        img.Sales:active {
-            content: url('../../../../assets/sales/sales_logo_pr.svg');
+        &:active {
+            img.touch-off{
+                display: none;
+            }
+    
+            img.touch-on{
+                display: initial;
+            }   
         }
     
         .name {
