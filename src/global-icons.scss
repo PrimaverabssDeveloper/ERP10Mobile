@@ -10,6 +10,10 @@
 }
 
 .pri-icon {
+    // shell
+    @include iconClassBuilder("ticker-settings", "ticker_settings.svg");
+    @include iconClassBuilder("ticker-settings-active", "ticker_settings_active.svg");
+
     // sales
     @include iconClassBuilder("chart", "chart.svg");
     @include iconClassBuilder("filter", "filter.svg");

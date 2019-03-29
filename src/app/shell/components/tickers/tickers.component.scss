@@ -54,11 +54,7 @@ $ticker-content-height: calc(100% - #{$ticker-header-height});
             right: 0;
             bottom: 0;
 
-            background-image: url(../../../../assets/shell/ticker_settings.png);
-            background-repeat: no-repeat;
-            background-color: transparent;
-            background-size: 25px;
-            background-position: center;
+            background-color: lightgray;
         }
     }
 
