@@ -1,0 +1,11 @@
+<svg id="Fax" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #393939;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="M36,5H14v8H36V5Zm5,10H9a4.012,4.012,0,0,0-4,4V35a4.012,4.012,0,0,0,4,4h5V27H36V39h5a4.012,4.012,0,0,0,4-4V19A4.012,4.012,0,0,0,41,15ZM11,23a2,2,0,1,1,2-2A2,2,0,0,1,11,23Zm6,0a2,2,0,1,1,2-2A2,2,0,0,1,17,23ZM16,45H34V29H16V45Z"/>
+</svg>

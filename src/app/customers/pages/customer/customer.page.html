@@ -20,26 +20,31 @@
             {{customer.name}}
         </div>
         <div class="customer-address-part">
-            <div class="customer-address-part-icon pri-icon pri-address-icon"></div>
+            <div class="customer-address-part-icon touch-off pri-icon pri-address-icon"></div>
+            <div class="customer-address-part-icon touch-on pri-icon pri-address-active-icon"></div>
             <div class="customer-address-part-label">
                 {{customerAddressBuilder(customer)}}
             </div>
         </div>
         <div class="customer-address-part col-6" *ngIf="customer.contacts.phone">
-            <div class="pri-icon pri-telephone-one-icon customer-address-part-icon"></div>
+            <div class="pri-icon pri-telephone-one-icon customer-address-part-icon touch-off"></div>
+            <div class="pri-icon pri-telephone-one-active-icon customer-address-part-icon touch-on"></div>
             <a class="customer-address-part-label" [href]="'phone:' + customer.contacts.phone | safeUrl">{{customer.contacts.phone}}
             </a>
         </div>
         <div class="customer-address-part col-6" *ngIf="customer.contacts.phone2">
-            <div class="pri-icon pri-telephone-two-icon customer-address-part-icon"></div>
+            <div class="pri-icon pri-telephone-two-icon touch-off customer-address-part-icon"></div>
+            <div class="pri-icon pri-telephone-two-active-icon touch-on customer-address-part-icon"></div>
             <a class="customer-address-part-label" [href]="'phone:' + customer.contacts.phone2 | safeUrl">{{customer.contacts.phone2}}</a>
         </div>
         <div class="customer-address-part" *ngIf="customer.contacts.fax">
-            <div class="pri-icon pri-fax-icon customer-address-part-icon"></div>
+            <div class="pri-icon pri-fax-icon touch-off customer-address-part-icon"></div>
+            <div class="pri-icon pri-fax-active-icon touch-on customer-address-part-icon"></div>
             <a class="customer-address-part-label" [href]="'fax:' + customer.contacts.fax | safeUrl">{{customer.contacts.fax}}</a>
         </div>
         <div class="customer-address-part" *ngIf="customer.contacts.webAddress">
-            <div class="pri-icon pri-website-icon customer-address-part-icon"></div>
+            <div class="pri-icon pri-website-icon touch-off customer-address-part-icon"></div>
+            <div class="pri-icon pri-website-active-icon touch-on customer-address-part-icon"></div>
             <a class="customer-address-part-label" [href]='customer.contacts.webAddress | safeUrl'>{{customer.contacts.webAddress}}</a>
         </div>
         <div class="other-addresses" (click)="otherAddressesAction()">

@@ -28,11 +28,33 @@ $row-border: 1px solid rgb(213, 213, 213);
         padding: 15px 10px;
         font-size: 11pt;
 
+
         .customer-address-part-icon {
             float: left;
             height: 20px;
             width: 20px;
             margin-left: 5px;
+
+            &.touch-on {
+                display: none;
+            }
+
+            &.touch-off {
+                display: initial;
+            }
+        }
+
+        &:active {
+
+            .customer-address-part-icon {
+                &.touch-on {
+                    display: initial;
+                }
+    
+                &.touch-off {
+                    display: none;
+                }
+            }
         }
 
         .customer-address-part-label {

@@ -32,11 +32,18 @@
     @include iconClassBuilder("expired", "expired.svg");
     @include iconClassBuilder("not-expired", "not_expired.svg");
     @include iconClassBuilder("address", "address.svg");
+    @include iconClassBuilder("address-active", "address_active.svg");
     @include iconClassBuilder("calendar", "calendar.svg");
     @include iconClassBuilder("email", "email.svg");
+    @include iconClassBuilder("email-active", "email_active.svg");
     @include iconClassBuilder("fax", "fax.svg");
+    @include iconClassBuilder("fax-active", "fax_active.svg");
     @include iconClassBuilder("telephone", "telephone.svg");
+    @include iconClassBuilder("telephone-active", "telephone_active.svg");
     @include iconClassBuilder("telephone-one", "telephone_one.svg");
+    @include iconClassBuilder("telephone-one-active", "telephone_one_active.svg");
     @include iconClassBuilder("telephone-two", "telephone_two.svg");
+    @include iconClassBuilder("telephone-two-active", "telephone_two_active.svg");
     @include iconClassBuilder("website", "website.svg");
+    @include iconClassBuilder("website-active", "website_active.svg");
 }
