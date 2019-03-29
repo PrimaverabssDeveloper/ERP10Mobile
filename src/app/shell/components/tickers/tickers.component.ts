@@ -17,7 +17,7 @@ import { IonSlides } from '@ionic/angular';
 })
 export class TickersComponent implements OnInit {
     get totalTickers(): number {
-        return this.tickers ? this.tickers.length : 0;
+        return this.tickers ? this.tickers ? this.tickers.length : 0 : -1;
     }
 
     currentTickerIndex: number;

@@ -91,7 +91,7 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
 
         this.modulesDefinitions = [];
         this.modulesSummaries = [];
-        this.tickers = [];
+        // this.tickers = [];
     }
 
     // #endregion
@@ -200,6 +200,11 @@ export class DashboardPage extends PageBase implements OnInit, OnDestroy {
 
     private async updateTickers(): Promise<any> {
         const moduleTickers = await this.modulesService.getAllAvailableModulesSummariesTickers();
+
+        if (!this.tickers) {
+            this.tickers = [];
+        }
+
         this.tickers.splice(0, this.tickers.length);
         for (const moduleTicker of moduleTickers) {
             for (const ticker of moduleTicker.tickers) {
