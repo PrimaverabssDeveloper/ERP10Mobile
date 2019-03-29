@@ -2,20 +2,25 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { AuthenticationService, StorageService, InstanceService } from '../../../core/services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppSettings } from '../../../core/app-settings';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, NavController, MenuController, LoadingController } from '@ionic/angular';
 import { InstancesService, InstancesServiceProvider } from '../../services';
 import { TranslateService } from '@ngx-translate/core';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { PageBase } from '../../../shared/pages';
+import { Location } from '@angular/common';
+import { async } from '@angular/core/testing';
 
 @Component({
     templateUrl: './authentication.page.html',
     styleUrls: ['./authentication.page.scss'],
     providers: [InstancesServiceProvider]
 })
-export class AuthenticationPage implements OnInit {
-
+export class AuthenticationPage extends PageBase implements OnInit {
 
     constructor(
+        public loadingController: LoadingController,
+        public location: Location,
+        public menuController: MenuController,
         private authenticationService: AuthenticationService,
         private instancesService: InstancesService,
         private instanceService: InstanceService,
@@ -29,6 +34,7 @@ export class AuthenticationPage implements OnInit {
         private splashScreen: SplashScreen,
         private navController: NavController
     ) {
+        super(loadingController, location, menuController);
     }
 
     /**
@@ -54,10 +60,12 @@ export class AuthenticationPage implements OnInit {
     async loginAction() {
 
         if (this.appSettings.isMobilePlatform) {
+            await this.showLoading();
             const isAuthenticated = await this.authenticationService.authenticate();
             if (isAuthenticated) {
-                this.goToInstanceSelectorPage();
+                await this.goToInstanceSelectorPage();
             }
+            await this.hideLoading();
         } else {
             const alert = await this.alertController.create({
                 header: 'Authentication',
@@ -79,7 +87,11 @@ export class AuthenticationPage implements OnInit {
         this.goToInstanceSelectorPage();
     }
 
-    private async goToInstanceSelectorPage() {
+    protected getMenuId(): string {
+        return null;
+    }
+
+    private async goToInstanceSelectorPage(): Promise<any> {
 
         const instances = await this.instancesService.getInstancesAsync();
 
