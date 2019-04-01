@@ -118,10 +118,10 @@ $border:1px solid lightgray;
         
         .list-item {
             border-bottom: $border;
-            margin: 10px 0 10px 20px;
+            margin: 10px 0 10px 10px;
             height: 70px;
             padding-right: 10px;
-            width: calc(100% - 20px);
+            width: calc(100% - 10px);
 
             .key {
                 float: left;
