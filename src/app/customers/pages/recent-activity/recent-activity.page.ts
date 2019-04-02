@@ -104,7 +104,7 @@ export class RecentActivityPage extends PageBase implements OnInit {
             documentLines: {
                 titleKey: 'LineCode|LineDescription',
                 leftValueKey: 'Quantity',
-                rightValueKey: 'DeliveredQuantity'
+                rightValueKey: 'TotalValue'
             }
         };
 
