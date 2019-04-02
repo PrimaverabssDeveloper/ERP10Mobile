@@ -29,6 +29,7 @@ export class AppComponent {
         await this.authenticationService.init();
 
         this.statusBar.styleDefault();
+        this.statusBar.backgroundColorByHexString('#fff');
 
         // defines locales
         await this.locale.init(['pt-PT', 'en-US', 'es-ES'], 'en-US');
