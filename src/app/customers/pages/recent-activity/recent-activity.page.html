@@ -19,7 +19,7 @@
         <div class="no-documensts" *ngIf="(!recentActivity.invoices || recentActivity.invoices.length === 0) && (!recentActivity.orders || recentActivity.orders.length === 0) && (!recentActivity.payments || recentActivity.payments.length === 0)">
             {{'CUSTOMERS.COMMON.NO_DOCUMENTS_TO_SHOW' | translate}}
         </div>
-        <div class="group" *ngIf="recentActivity.invoices">
+        <div class="group" *ngIf="recentActivity.invoices && recentActivity.invoices.length > 0">
             <div class="group-header">Invoices</div>
             <div class="group-rows">
                 <finantial-document-row *ngFor="let doc of recentActivity.invoices" [title]="doc.headerItems | valueFromDocumentValues:'DocumentName|DocumentNumber'"
@@ -28,7 +28,7 @@
                 </finantial-document-row>
             </div>
         </div>
-        <div class="group" *ngIf="recentActivity.orders">
+        <div class="group" *ngIf="recentActivity.orders && recentActivity.orders.length > 0">
             <div class="group-header">Orders</div>
             <div class="group-rows">
                 <finantial-document-row *ngFor="let doc of recentActivity.orders" [title]="doc.headerItems | valueFromDocumentValues:'DocumentName|DocumentNumber'"
@@ -37,7 +37,7 @@
                 </finantial-document-row>
             </div>
         </div>
-        <div class="group" *ngIf="recentActivity.payments">
+        <div class="group" *ngIf="recentActivity.payments && recentActivity.payments.length > 0">
             <div class="group-header">Payments</div>
             <div class="group-rows">
                 <finantial-document-row *ngFor="let doc of recentActivity.payments" [title]="doc.headerItems | valueFromDocumentValues:'DocumentName|DocumentNumber'"
