@@ -40,6 +40,14 @@ export interface ModuleDefinition {
     iconPath: string;
 
     /**
+     * The module icon path when active.
+     *
+     * @type {string}
+     * @memberof ModuleDefinition
+     */
+    iconPathActive: string;
+
+    /**
      * Module route path.
      *
      * @type {string}

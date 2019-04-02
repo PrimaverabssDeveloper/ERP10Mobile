@@ -21,7 +21,8 @@
     <!-- Modules -->
     <div class="modules-drawer">
         <a *ngFor="let moduleDef of modulesDefinitions | orderBy:'displayRelevance'" class="module-icon" [routerLink]="moduleDef.moduleRoutePath">
-            <img [attr.class]="moduleDef.key" [attr.src]="moduleDef.iconPath">
+            <img class="touch-off" [ngClass]="moduleDef.key" [attr.src]="moduleDef.iconPath">
+            <img class="touch-on" [ngClass]="moduleDef.key" [attr.src]="moduleDef.iconPathActive">
             <div class="name">{{moduleDef.localizedNameKey | translate}}</div>
         </a>
     </div>
