@@ -7,6 +7,14 @@ import { InstancesDemoService } from './instances.demo.service';
 export * from './instances.service';
 export * from './instances.demo.service';
 
+export const InstanceServiceFactory = (http: HttpClient, httpRequestService: HttpRequestService, authService: AuthenticationService) => {
+    if (authService.isAuthenticateAsDemo) {
+            return new InstancesDemoService(httpRequestService, http);
+        } else {
+            return new InstancesService(httpRequestService);
+        }
+};
+
 export const InstancesServiceProvider: Provider = {
     provide: InstancesService,
     useFactory: (
@@ -14,11 +22,7 @@ export const InstancesServiceProvider: Provider = {
         httpRequestService: HttpRequestService,
         authService: AuthenticationService
     ) => {
-        if (authService.isAuthenticateAsDemo) {
-            return new InstancesDemoService(httpRequestService, http);
-        } else {
-            return new InstancesService(httpRequestService);
-        }
+        return InstanceServiceFactory(http, httpRequestService, authService);
     },
     deps: [
         HttpClient,

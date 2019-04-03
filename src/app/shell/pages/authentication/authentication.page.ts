@@ -1,19 +1,20 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { AuthenticationService, StorageService, InstanceService } from '../../../core/services';
+import { AuthenticationService, StorageService, InstanceService, HttpRequestService } from '../../../core/services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppSettings } from '../../../core/app-settings';
 import { AlertController, NavController, MenuController, LoadingController } from '@ionic/angular';
-import { InstancesService, InstancesServiceProvider } from '../../services';
+import { InstancesService, InstancesServiceProvider, InstancesDemoService, InstanceServiceFactory } from '../../services';
 import { TranslateService } from '@ngx-translate/core';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { PageBase } from '../../../shared/pages';
 import { Location } from '@angular/common';
 import { async } from '@angular/core/testing';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     templateUrl: './authentication.page.html',
     styleUrls: ['./authentication.page.scss'],
-    providers: [InstancesServiceProvider]
+    // providers: [InstancesServiceProvider]
 })
 export class AuthenticationPage extends PageBase implements OnInit {
 
@@ -22,11 +23,11 @@ export class AuthenticationPage extends PageBase implements OnInit {
         public location: Location,
         public menuController: MenuController,
         private authenticationService: AuthenticationService,
-        private instancesService: InstancesService,
+        private http: HttpClient,
+        private httpRequestService: HttpRequestService,
         private instanceService: InstanceService,
         private translateService: TranslateService,
         private route: ActivatedRoute,
-        private router: Router,
         private appSettings: AppSettings,
         private alertController: AlertController,
         private storageService: StorageService,
@@ -93,7 +94,9 @@ export class AuthenticationPage extends PageBase implements OnInit {
 
     private async goToInstanceSelectorPage(): Promise<any> {
 
-        const instances = await this.instancesService.getInstancesAsync();
+        const instancesService = InstanceServiceFactory(this.http, this.httpRequestService, this.authenticationService);
+
+        const instances = await instancesService.getInstancesAsync();
 
         // no instances available
         if (!instances || instances.length === 0) {

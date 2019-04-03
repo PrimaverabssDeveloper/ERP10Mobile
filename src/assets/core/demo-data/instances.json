@@ -1,7 +1,7 @@
 [
     {
       "accountKey": "10003",
-      "description": "Primavera",
+      "description": "Primavera Demo",
       "id": "1",
       "modules": [
         {
@@ -24,7 +24,7 @@
     },
     {
       "accountKey": "10002",
-      "description": "Sofrio",
+      "description": "Sofrio  Demo",
       "id": "2",
       "modules": [
         {
@@ -47,7 +47,7 @@
     },
     {
       "accountKey": "10003",
-      "description": "Alcad",
+      "description": "Alcad Demo",
       "id": "3",
       "modules": [
         {
