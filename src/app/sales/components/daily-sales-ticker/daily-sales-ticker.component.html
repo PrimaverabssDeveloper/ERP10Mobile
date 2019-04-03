@@ -1,7 +1,8 @@
 <div class="daily-sales-ticker" (click)="navigateToSales()">
     <div class="chart" [ngStyle]="dataStyle">
         <div class="sales-delta-wrapper">
-            <div class="sales-delta" [ngClass]="{negative: salesDelta < 0}">{{salesDelta | round }}%</div>
+            <div class="sales-delta" *ngIf="salesDeltaAvailable" [ngClass]="{negative: salesDelta < 0}">{{salesDelta | round}}%</div>
+            <div class="sales-delta not-available" *ngIf="!salesDeltaAvailable">N/A</div>
         </div>
         <div class="bars">
             <div class="bar last-week-bar">

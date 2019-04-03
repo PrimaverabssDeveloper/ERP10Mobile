@@ -129,6 +129,12 @@ $bar-legend-height: 3.75em; //25px;
                         border-left-color: transparent;
                     }
                 }
+
+                &.not-available {
+                    &:after {
+                        border: none;
+                    }
+                }
             }
         }
     }

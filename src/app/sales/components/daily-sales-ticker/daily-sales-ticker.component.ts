@@ -17,6 +17,7 @@ export class DailySalesTickerComponent implements OnInit {
 
     companyDailySalesSummary: CompanyDailySalesSummary;
     salesDelta: number;
+    salesDeltaAvailable: boolean;
 
     todayLegend: string;
     lastWeekDayLegend: string;
@@ -78,7 +79,12 @@ export class DailySalesTickerComponent implements OnInit {
         const todaySales = companySalesSummary.sales;
         const lastWeekSales = companySalesSummary.salesPrevious;
 
-        this.salesDelta = ((todaySales - lastWeekSales) / (lastWeekSales)) * 100;
+        if (todaySales === 0 || lastWeekSales === 0) {
+            this.salesDeltaAvailable = false;
+        } else {
+            this.salesDeltaAvailable = true;
+            this.salesDelta = ((todaySales - lastWeekSales) / (lastWeekSales)) * 100;
+        }
 
         if (todaySales > lastWeekSales) {
             this.lastWeekPercentualSales = (lastWeekSales * 100) / todaySales;
