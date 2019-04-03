@@ -307,12 +307,6 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
                 items: chartItems
             },
             {
-                key: 'salesperson',
-                iconClass: 'pri-filter-icon',
-                disabledIconClass: 'pri-filter-disabled-icon',
-                items: salesPersonItems
-            },
-            {
                 key: 'share',
                 iconClass: 'pri-share-icon',
                 items: [
