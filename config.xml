@@ -3,7 +3,7 @@
     <name>V10 Mobile</name>
     <description>PRIMAVERA Erp V10 Mobile</description>
     <author email="webmaster@primaverabss.com" href="https://www.primaverabss.com/">PRIMAVERA BSS</author>
-    <content original-src="index.html" src="http://192.168.1.87:8100" />
+    <content original-src="index.html" src="http://172.16.252.10:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -107,5 +107,6 @@
     <plugin name="cordova-plugin-android-permissions" spec="1.0.0" />
     <plugin name="cordova-plugin-email-composer" spec="^0.9.1" />
     <allow-navigation href="http://172.16.252.9:8100" sessionid="6079b531" />
+    <allow-navigation href="http://172.16.252.10:8100" sessionid="cbdbd6bb" />
     <engine name="android" spec="7.1.1" />
 </widget>
