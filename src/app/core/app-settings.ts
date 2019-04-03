@@ -19,6 +19,7 @@ export class AppSettings {
     private _apiEndpoint: string;
     private _authenticationEndpoint: string;
     private _authenticationRequestTokenEndpoint: string;
+    private _authenticationEndSessionEndpoint: string;
 
     // #endregion
 
@@ -74,6 +75,18 @@ export class AppSettings {
         return this._authenticationRequestTokenEndpoint;
     }
 
+    /**
+     * Provides the end session endpoint
+     * defined on the 'environment' file.
+     *
+     * @readonly
+     * @type {string}
+     * @memberof AppSettings
+     */
+    public get authenticationEndSessionEndpoint(): string {
+        return this._authenticationEndSessionEndpoint;
+    }
+
     // #endregion
 
     // #region 'Constructor'
@@ -83,6 +96,7 @@ export class AppSettings {
         this._apiEndpoint = environment.apiEndpoint;
         this._authenticationEndpoint = environment.authentication.endpoint;
         this._authenticationRequestTokenEndpoint = environment.authentication.requestTokenEndpoint;
+        this._authenticationEndSessionEndpoint = environment.authentication.endSessionEndpoint;
     }
 
     // #endregion

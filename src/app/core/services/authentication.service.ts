@@ -31,6 +31,7 @@ export class AuthenticationService {
     private grantType: string;
     private authenticationEndpoint: string;
     private requestTokenEndpoint: string;
+    private endSessionEndpoint: string;
 
     private authenticationResolve: (value?: boolean | PromiseLike<boolean>) => void;
 
@@ -63,6 +64,7 @@ export class AuthenticationService {
         this.grantType = 'authorization_code';
         this.authenticationEndpoint = this.appSettings.authenticationEndpoint;
         this.requestTokenEndpoint = this.appSettings.authenticationRequestTokenEndpoint;
+        this.endSessionEndpoint = this.appSettings.authenticationEndSessionEndpoint;
     }
 
     async init(): Promise<any> {
@@ -141,27 +143,41 @@ export class AuthenticationService {
             });
     }
 
-    // async isAuthenticateAsDemo(): Promise<boolean> {
-    //     let isAuthenticated: Boolean = false;
-
-    //     try {
-    //         const storageKey = AuthenticationService.STORAGE_SESSION_AUTHENTICATED_AS_DEMO;
-    //         isAuthenticated = await this.coreStorageService.getData<Boolean>(storageKey);
-    //     } catch (error) {
-    //         isAuthenticated = false;
-    //     }
-
-    //     return new Promise<boolean>(
-    //         (resolve) => {
-    //             resolve(isAuthenticated.valueOf());
-    //         });
-    // }
-
     async endSession() {
-        this.sessionData = null;
+
+        if (!this.sessionData) {
+            return;
+        }
+
+        // end the browser session
+        const endSessionUrl = this.generateLogoutUrl(this.endSessionEndpoint, this.sessionData.idToken, this.redirectUri);
+        (window as any).handleOpenURL = (url: string) => {
+            console.log('logout performed with success');
+        };
+
+        let browserAvailable: boolean;
+        try {
+            browserAvailable = await this.safariViewController.isAvailable();
+        } catch (error) {
+            browserAvailable = false;
+        }
+
+        if (browserAvailable) {
+            try {
+                await this.safariViewController.show({
+                    url: endSessionUrl,
+                    hidden: true,
+                    animated: false
+                }).toPromise();
+            } catch (error) {
+                console.log(error);
+            }
+        }
 
         // remove regular authentication session data
         await this.coreStorageService.removeData(AuthenticationService.STORAGE_SESSION_DATA_KEY);
+
+        this.sessionData = null;
     }
 
     private handleAuthenticationUrl(url: string) {
@@ -175,21 +191,8 @@ export class AuthenticationService {
         }
 
         const code = params.get('code');
-        const body = new URLSearchParams();
-        body.set('client_id', this.clientId);
-        body.set('redirect_uri', this.redirectUri);
-        body.set('code', code);
-        body.set('code_verifier', this.proofKey.codeVerifier);
-        body.set('grant_type', this.grantType);
 
-        // const options = {
-        //     headers: {
-        //         'Content-Type': 'application/x-www-form-urlencoded',
-        //         'Accept': 'application/json',
-        //     }
-        // };
-
-        const body2 = {
+        const body = {
             client_id: this.clientId,
             redirect_uri: this.redirectUri,
             code: code,
@@ -203,7 +206,7 @@ export class AuthenticationService {
                 };
 
         this.http
-            .post(this.requestTokenEndpoint, body2, headers)
+            .post(this.requestTokenEndpoint, body, headers)
             .then(res => {
                 const data = JSON.parse(res.data);
                 this.endAuthenticationProcess(data);
@@ -290,6 +293,10 @@ export class AuthenticationService {
         urlParts.push(`redirect_uri=${encodeURIComponent(params.redirectUri)}`);
 
         return urlParts.join('');
+    }
+
+    private generateLogoutUrl(endSessionEndpoint: string, idToken: string, redirectUri: string): string {
+        return `${endSessionEndpoint}?id_token_hint=${idToken}&post_logout_redirect_uri=${encodeURIComponent(this.redirectUri)}`;
     }
 
     private base64UrlSafeEncode(value: Buffer) {

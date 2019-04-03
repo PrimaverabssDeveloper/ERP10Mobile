@@ -8,7 +8,8 @@ export const environment = {
     // apiEndpoint: 'http://dev-mobile.azurewebsites.net/api/v1/mobile',
     authentication: {
         endpoint: 'https://identity.primaverabss.com/connect/authorize',
-        requestTokenEndpoint: 'https://identity.primaverabss.com/connect/token'
+        requestTokenEndpoint: 'https://identity.primaverabss.com/connect/token',
+        endSessionEndpoint: 'https://identity.primaverabss.com/connect/endsession'
     }
 };
 
