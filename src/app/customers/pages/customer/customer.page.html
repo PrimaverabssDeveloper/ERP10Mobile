@@ -19,7 +19,7 @@
         <div class="customer-name">
             {{customer.name}}
         </div>
-        <div class="customer-address-part">
+        <div class="customer-address-part" (click)="showCustomerAddressOnMapAction(customer)">
             <div class="customer-address-part-icon touch-off pri-icon pri-address-icon"></div>
             <div class="customer-address-part-icon touch-on pri-icon pri-address-active-icon"></div>
             <div class="customer-address-part-label">

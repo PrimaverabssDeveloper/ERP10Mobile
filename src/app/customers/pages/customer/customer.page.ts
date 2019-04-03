@@ -166,6 +166,12 @@ export class CustomerPage extends PageBase implements OnInit {
         return address;
     }
 
+    async showCustomerAddressOnMapAction(customer: Customer) {
+        const address = this.customerAddressBuilder(customer);
+        const url = `https://www.google.com/maps/search/?api=1&query=${escape(address)}`;
+        window.open(url, '_system');
+    }
+
     // #region 'Protected Methods'
 
     protected getMenuId(): string {
