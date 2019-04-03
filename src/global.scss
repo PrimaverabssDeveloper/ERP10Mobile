@@ -72,6 +72,10 @@ ion-col
     }
 }
 
+ion-menu-button, .sc-ion-back-button-ios-h {
+    color: #000;
+}
+
 // remove 'outline' from all buttons
 button {
     &:focus{
