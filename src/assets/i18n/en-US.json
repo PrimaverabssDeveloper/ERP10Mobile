@@ -134,6 +134,13 @@
             "OTHERS": "Others"
         }
     },
+    "SALES_CHARTS": {
+        "SALES_CHARTS_COMPONENT" : {
+            "SHARE_OPTION_SEND_CHART_BY_EMAIL": "Send chart by email",
+            "SHARE_OPTION_SEND_PDF_BY_EMAIL": "Send pdf by email",
+            "SHARE_OPTION_SAVE_IMAGE_IN_THE_GALLERY": "Save image in the gallery"
+        }
+    },
     "HUMAN_RESOURCES": {
         "MODULE_NAME": "Human Resources",
         "HR_PAGE": {

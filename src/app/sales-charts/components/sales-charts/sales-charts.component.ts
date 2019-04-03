@@ -198,7 +198,7 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
         root.style.setProperty('--sales-charts-previous-year-accent-color', this.rgbColorBuilder(this.data.previousYearAccentColor));
 
 
-        this.updateFooterMenu(this.data.chartBundles);
+        await this.updateFooterMenu(this.data.chartBundles);
 
         const chartBundle = this.data.chartBundles.find(b => b.key === this.selectedChartBundleKey);
         this.selectedChartBundleLocalizedTitles = chartBundle.titles;
@@ -273,7 +273,7 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
         }
     }
 
-    private updateFooterMenu(chartBundle: ChartBundle[]) {
+    private async updateFooterMenu(chartBundle: ChartBundle[]): Promise<any> {
 
         if (!chartBundle || chartBundle.length === 0) {
             return;
@@ -287,18 +287,17 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
             selected: () => cb.key === this.selectedChartBundleKey
         }));
 
-        // const salesPersonItems: FooterTabMenuItem[] = [
-        //     {
-        //         key: 'sp1',
-        //         label: 'Sales Person 1'
-        //     },
-        //     {
-        //         key: 'sp2',
-        //         label: 'Sales Person 2'
-        //     }
-        // ];
+        const sendChartByEmailResource = await this.translate
+                                                   .get('SALES_CHARTS.SALES_CHARTS_COMPONENT.SHARE_OPTION_SEND_CHART_BY_EMAIL')
+                                                   .toPromise();
 
-        const salesPersonItems: FooterTabMenuItem[] = null;
+        const sendPdfByEmailResource = await this.translate
+                                                   .get('SALES_CHARTS.SALES_CHARTS_COMPONENT.SHARE_OPTION_SEND_PDF_BY_EMAIL')
+                                                   .toPromise();
+
+        const saveImageinTheGalleryResource = await this.translate
+                                                        .get('SALES_CHARTS.SALES_CHARTS_COMPONENT.SHARE_OPTION_SAVE_IMAGE_IN_THE_GALLERY')
+                                                        .toPromise();
 
         this.footerTabMenus = [
             {
@@ -312,15 +311,15 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
                 items: [
                     {
                         key: 'send_chart_by_email',
-                        label: '#Send chart by email'
+                        label: sendChartByEmailResource
                     },
                     {
                         key: 'send_pdf_chart_by_email',
-                        label: '#Send PDF chart by email'
+                        label: sendPdfByEmailResource
                     },
                     {
                         key: 'save_image_in_the_gallery',
-                        label: '#Save Image in the gallery'
+                        label: saveImageinTheGalleryResource
                     }
                 ]
             }

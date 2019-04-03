@@ -107,6 +107,6 @@
     <plugin name="cordova-plugin-android-permissions" spec="1.0.0" />
     <plugin name="cordova-plugin-email-composer" spec="^0.9.1" />
     <allow-navigation href="http://172.16.252.9:8100" sessionid="6079b531" />
-    <allow-navigation href="http://172.16.252.8:8100" sessionid="dd07d313" />
+    <allow-navigation href="http://172.16.252.8:8100" sessionid="d66e00ad" />
     <engine name="android" spec="7.1.1" />
 </widget>
