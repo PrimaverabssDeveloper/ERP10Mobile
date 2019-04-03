@@ -8,7 +8,7 @@ import { Location } from '@angular/common';
 
 @Component({
     templateUrl: './pending-orders.page.html',
-    styleUrls: ['./pending-orders.page.scss'],
+    styleUrls: ['./pending-orders.page.scss', '../../styles/common.scss'],
     providers: [CustomersServiceProvider]
 })
 export class PendingOrdersPage extends PageBase implements OnInit {

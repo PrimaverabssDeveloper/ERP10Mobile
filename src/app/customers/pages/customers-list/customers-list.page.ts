@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     templateUrl: './customers-list.page.html',
-    styleUrls: ['./customers-list.page.scss'],
+    styleUrls: ['./customers-list.page.scss', '../../styles/common.scss'],
     providers: [CustomersServiceProvider]
 })
 export class CustomersListPage extends PageBase implements OnInit {

@@ -9,7 +9,7 @@ import { MathTools } from '../../../shared/tools';
 
 @Component({
     templateUrl: './customer.page.html',
-    styleUrls: ['./customer.page.scss'],
+    styleUrls: ['./customer.page.scss', '../../styles/common.scss'],
     providers: [CustomersServiceProvider]
 })
 export class CustomerPage extends PageBase implements OnInit {

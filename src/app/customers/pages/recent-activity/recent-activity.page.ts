@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     templateUrl: './recent-activity.page.html',
-    styleUrls: ['./recent-activity.page.scss'],
+    styleUrls: ['./recent-activity.page.scss', '../../styles/common.scss'],
     providers: [CustomersServiceProvider]
 })
 export class RecentActivityPage extends PageBase implements OnInit {

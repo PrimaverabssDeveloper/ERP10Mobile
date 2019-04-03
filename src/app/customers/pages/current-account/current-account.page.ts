@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     templateUrl: './current-account.page.html',
-    styleUrls: ['./current-account.page.scss'],
+    styleUrls: ['./current-account.page.scss', '../../styles/common.scss'],
     providers: [CustomersServiceProvider]
 })
 export class CurrentAccountPage extends PageBase implements OnInit {

@@ -7,7 +7,7 @@ import { Location } from '@angular/common';
 
 @Component({
     templateUrl: './other-addresses.page.html',
-    styleUrls: ['./other-contacts-addresses.page.scss'],
+    styleUrls: ['./other-contacts-addresses.page.scss', '../../styles/common.scss'],
 })
 export class OtherAddressesPage extends PageBase implements OnInit {
 

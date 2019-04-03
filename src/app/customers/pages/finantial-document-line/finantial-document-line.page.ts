@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     templateUrl: './finantial-document-line.page.html',
-    styleUrls: ['./finantial-document-line.page.scss'],
+    styleUrls: ['./finantial-document-line.page.scss', '../../styles/common.scss'],
     providers: [CustomersServiceProvider]
 })
 export class FinancialDocumentLinePage extends PageBase implements OnInit {

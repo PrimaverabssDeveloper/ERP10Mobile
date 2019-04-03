@@ -9,7 +9,7 @@ import { ChartBundle } from '../../../sales/entities';
 
 @Component({
     templateUrl: './sales-charts.page.html',
-    styleUrls: ['./sales-charts.page.scss'],
+    styleUrls: ['./sales-charts.page.scss', '../../styles/common.scss'],
     providers: [CustomersServiceProvider]
 })
 export class SalesChartsPage extends PageBase implements OnInit {

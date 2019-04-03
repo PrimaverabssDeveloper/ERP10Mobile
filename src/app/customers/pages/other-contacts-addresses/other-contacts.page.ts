@@ -8,7 +8,7 @@ import { CustomerOtherContacts } from '../../entities';
 
 @Component({
     templateUrl: './other-contacts.page.html',
-    styleUrls: ['./other-contacts-addresses.page.scss'],
+    styleUrls: ['./other-contacts-addresses.page.scss', '../../styles/common.scss'],
 })
 export class OtherContactsPage extends PageBase implements OnInit {
 
