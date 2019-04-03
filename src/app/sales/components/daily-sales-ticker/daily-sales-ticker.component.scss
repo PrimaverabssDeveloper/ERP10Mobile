@@ -17,6 +17,7 @@ $bar-legend-height: 3.75em; //25px;
         float: left;
 
         .today-bar {
+            margin: 0 27% 0 3%;
             .bar-bar {
                 div {
                     background: #1D317D;
@@ -29,6 +30,7 @@ $bar-legend-height: 3.75em; //25px;
         }
 
         .last-week-bar {
+            margin: 0 3% 0 27%;
             .bar-bar {
                 div {
                     background: #DBE0EB;
@@ -46,9 +48,8 @@ $bar-legend-height: 3.75em; //25px;
             .bar {
                 position: relative;
                 height: 100%;
-                width: calc(50% - 5px);
+                width: 20%;
                 overflow: hidden;
-                padding: 0 5px;
                 float: left;
                 
                 .bar-bar {  
@@ -91,7 +92,7 @@ $bar-legend-height: 3.75em; //25px;
         .sales-delta-wrapper {
             height: $sales-delta-height;
             border-bottom: .55px solid #dbe0eb;
-            margin: 0 1.5em; //0 10px;
+            margin:0 25%;
 
             .sales-delta {
                 height: $sales-delta-height;
@@ -99,7 +100,7 @@ $bar-legend-height: 3.75em; //25px;
                 position: absolute;
                 transform: translateX(-50%);
                 left: 50%;
-                font-size: 2.4em;
+                font-size: 3em;
                 font-weight: bold;
             
                 &:after {
@@ -131,61 +132,6 @@ $bar-legend-height: 3.75em; //25px;
             }
         }
     }
-
-    // .data {
-    //     height: 50%;
-    //     position: absolute;
-    //     float: left;
-    //     top: 50%;
-    //     left: 50%;
-    //     transform: translateX(-50%);
-    //     font-size: 18pt;
-        
-    //     .data-wrapper {
-    //         position: absolute;
-    //         top: 50%;
-    //         transform: translateY(-50%);
-    //     }
-
-
-    //     .date {
-    //         float: left;
-    //         width:100%;
-    //         text-align: left;
-    //         color: #596278;
-    //     }
-
-    //     .company {
-    //         float: left;
-    //         width:100%;
-    //         text-align: left;
-    //         font-weight: bold;
-    //         color: #1d317d;
-    //     }
-
-    //     .total-sales {
-    //         float: left;
-    //         width:100%;
-    //         text-align: left;
-    //         margin-top: 20px;
-
-    //         .label {
-    //             padding-bottom: 2px;
-    //             color: #596278;
-    //         }
-
-    //         .line {
-    //             width: 120%;
-    //             margin: 5px -10%;
-    //             height: .55px;
-    //             background: #dbe0eb;
-    //         }
-
-    //         .value {
-    //             color: #1d317d;
-    //         }
-    //     }
-    // }
 
     .data {
         height: 50%;
