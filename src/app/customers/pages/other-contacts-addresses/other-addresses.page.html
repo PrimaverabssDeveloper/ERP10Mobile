@@ -37,16 +37,19 @@ export interface CustomerOtherAddress {
         <div class="contact-card" *ngFor="let address of addresses">
             <div class="name">{{address.code}}</div>
             <div class="contact" *ngIf="address.phone">
-                <div class="pri-icon pri-telephone-one-icon contact-icon"></div>
-                <a class="contact-value" [href]="'phone:' + address.phone | safeUrl">{{address.phone}}</a>
+                <div class="pri-icon touch-off pri-telephone-one-icon contact-icon"></div>
+                <div class="pri-icon touch-on  pri-telephone-one-active-icon contact-icon"></div>
+                <a class="contact-value" [href]="'tel:' + address.phone | safeUrl">{{address.phone}}</a>
             </div>
             <div class="contact" *ngIf="address.fax">
-                <div class="pri-icon pri-fax-icon contact-icon"></div>
+                <div class="pri-icon touch-off pri-fax-icon contact-icon"></div>
+                <div class="pri-icon touch-on  pri-fax-active-icon contact-icon"></div>
                 <a class="contact-value" [href]="'fax:' + address.fax | safeUrl">{{address.fax}}</a>
             </div>
 
             <div class="contact" *ngIf="address.address">
-                <div class="pri-icon pri-address-icon contact-icon"></div>
+                <div class="pri-icon touch-off pri-address-icon contact-icon"></div>
+                <div class="pri-icon touch-on  pri-address-active-icon contact-icon"></div>
                 <a class="contact-value" (click)="showAddressOnMapAction(address)" >{{buildAddress(address)}}</a>
             </div>
         </div>

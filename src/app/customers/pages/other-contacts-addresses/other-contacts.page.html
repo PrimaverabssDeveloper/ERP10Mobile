@@ -23,19 +23,23 @@
             <div class="name">{{contact.name}}</div>
             <div class="position">{{contact.position}}</div>
             <div class="contact" *ngIf="contact.phone">
-                <div class="pri-icon pri-telephone-one-icon contact-icon"></div>
+                <div class="pri-icon touch-off pri-telephone-one-icon contact-icon"></div>
+                <div class="pri-icon touch-on  pri-telephone-one-active-icon contact-icon"></div>
                 <a class="contact-value" [href]="'phone:' + contact.phone | safeUrl">{{contact.phone}}</a>
             </div>
             <div class="contact" *ngIf="contact.mobilePhone">
-                <div class="pri-icon pri-telephone-two-icon contact-icon"></div>
+                <div class="pri-icon touch-off pri-telephone-two-icon contact-icon"></div>
+                <div class="pri-icon touch-on  pri-telephone-two-active-icon contact-icon"></div>
                 <a class="contact-value" [href]="'phone:' + contact.mobilePhone | safeUrl">{{contact.mobilePhone}}</a>
             </div>
             <div class="contact" *ngIf="contact.fax">
-                <div class="pri-icon pri-fax-icon contact-icon"></div>
+                <div class="pri-icon touch-off pri-fax-icon contact-icon"></div>
+                <div class="pri-icon touch-on  pri-fax-active-icon contact-icon"></div>
                 <a class="contact-value" [href]="'fax:' + contact.fax | safeUrl">{{contact.fax}}</a>
             </div>
             <div class="contact" *ngIf="contact.email">
-                <div class="pri-icon pri-email-icon contact-icon"></div>
+                <div class="pri-icon touch-off pri-email-icon contact-icon"></div>
+                <div class="pri-icon touch-on  pri-email-active-icon contact-icon"></div>
                 <a class="contact-value" [href]="'mailto:' + contact.email | safeUrl">{{contact.email}}</a>
             </div>
         </div>
