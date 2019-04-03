@@ -24,10 +24,6 @@ $chart-content-height: calc(100% - #{$sales-header-height + $chart-controllers-h
         font-weight: bolder;
         text-transform: uppercase;
     }
-
-    .data-date {
-
-    }
 }
 
 .chart-controllers {
@@ -84,11 +80,6 @@ $chart-content-height: calc(100% - #{$sales-header-height + $chart-controllers-h
 
     .chart-ctrl-btn-absolute {
         float: right;
-        background-image: url('../../../../assets/sales/charts-top-absolute.png');
-
-        &.selected{
-            background-image: url('../../../../assets/sales/charts-top-absolute-pressed.png');
-        }
     }
 }
 
