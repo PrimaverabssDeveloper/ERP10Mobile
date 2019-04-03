@@ -1,8 +1,8 @@
 
-$sales-delta-height: 25px;
-$week-day-height: 25px;
+$sales-delta-height: 3.75em; //25px;
+$week-day-height: 3.75em; //25px;
 $bars-height: calc( 100% - (#{$sales-delta-height} + #{$week-day-height}));
-$bar-legend-height: 25px;
+$bar-legend-height: 3.75em; //25px;
 
 .daily-sales-ticker {
     width: 100%;
@@ -72,7 +72,11 @@ $bar-legend-height: 25px;
                     position: absolute;
                     width: 100%;
                     text-align: center;
-                    color: #fff;                
+                    color: #fff; 
+                    
+                    span {
+                        font-size: 2.5em;
+                    }
                 }
             }
         }
@@ -81,12 +85,13 @@ $bar-legend-height: 25px;
             height: $week-day-height;
             color: #596278;
             text-transform: uppercase;
+            font-size: 3em;
         }
 
         .sales-delta-wrapper {
             height: $sales-delta-height;
             border-bottom: .55px solid #dbe0eb;
-            margin: 0 10px;
+            margin: 0 1.5em; //0 10px;
 
             .sales-delta {
                 height: $sales-delta-height;
@@ -94,13 +99,13 @@ $bar-legend-height: 25px;
                 position: absolute;
                 transform: translateX(-50%);
                 left: 50%;
-                font-size: 12pt;
+                font-size: 2.4em;
                 font-weight: bold;
             
                 &:after {
                     content: ' ';
                     top: 0;
-                    border-width: 5px;
+                    border-width: 0.4em; //5px;
                     border-style: solid;
                     border-top-color: transparent;
                     border-right-color: transparent;
@@ -109,14 +114,14 @@ $bar-legend-height: 25px;
                     width: 0;
                     height: 0;
                     position: absolute;
-                    right: -15px;
+                    right: -1.1em; //-15px;
                 }
     
                 &.negative {
                     color: rgb(229, 57, 55);
     
                     &:after {
-                        top: 12px;
+                        top: .3em; //12px;
                         border-top-color: rgb(229, 57, 55);
                         border-right-color: transparent;
                         border-bottom-color: transparent;
@@ -127,6 +132,61 @@ $bar-legend-height: 25px;
         }
     }
 
+    // .data {
+    //     height: 50%;
+    //     position: absolute;
+    //     float: left;
+    //     top: 50%;
+    //     left: 50%;
+    //     transform: translateX(-50%);
+    //     font-size: 18pt;
+        
+    //     .data-wrapper {
+    //         position: absolute;
+    //         top: 50%;
+    //         transform: translateY(-50%);
+    //     }
+
+
+    //     .date {
+    //         float: left;
+    //         width:100%;
+    //         text-align: left;
+    //         color: #596278;
+    //     }
+
+    //     .company {
+    //         float: left;
+    //         width:100%;
+    //         text-align: left;
+    //         font-weight: bold;
+    //         color: #1d317d;
+    //     }
+
+    //     .total-sales {
+    //         float: left;
+    //         width:100%;
+    //         text-align: left;
+    //         margin-top: 20px;
+
+    //         .label {
+    //             padding-bottom: 2px;
+    //             color: #596278;
+    //         }
+
+    //         .line {
+    //             width: 120%;
+    //             margin: 5px -10%;
+    //             height: .55px;
+    //             background: #dbe0eb;
+    //         }
+
+    //         .value {
+    //             color: #1d317d;
+    //         }
+    //     }
+    // }
+
     .data {
         height: 50%;
         position: absolute;
@@ -134,7 +194,7 @@ $bar-legend-height: 25px;
         top: 50%;
         left: 50%;
         transform: translateX(-50%);
-        font-size: 18pt;
+        font-size: 3.6em; //18pt;
         
         .data-wrapper {
             position: absolute;
@@ -162,17 +222,17 @@ $bar-legend-height: 25px;
             float: left;
             width:100%;
             text-align: left;
-            margin-top: 20px;
+            margin-top: 1em; //20px;
 
             .label {
-                padding-bottom: 2px;
+                padding-bottom: .3em; //2px;
                 color: #596278;
             }
 
             .line {
                 width: 120%;
                 margin: 5px -10%;
-                height: .55px;
+                height: 1px;
                 background: #dbe0eb;
             }
 
