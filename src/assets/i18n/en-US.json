@@ -110,7 +110,10 @@
             "UNEXPIRED_DOCUMENTS_TAB_LABEL": "Unexpired"
         },
         "RECENT_ACTIVITY_PAGE" : {
-            "PAGE_TITLE": "Recent activity"
+            "PAGE_TITLE": "Recent activity",
+            "SECTION_TITLE_INVOICES": "Invoices",
+            "SECTION_TITLE_ORDERS": "Orders",
+            "SECTION_TITLE_PAYMENTS": "Payments"
         },
         "FINANTIAL_DOCUMENT_PAGE" : {
             "PAGE_TITLE": "Document"

@@ -111,7 +111,10 @@
             "UNEXPIRED_DOCUMENTS_TAB_LABEL": "Não expirado"
         },
         "RECENT_ACTIVITY_PAGE" : {
-            "PAGE_TITLE": "Atividate recente"
+            "PAGE_TITLE": "Atividate recente",
+            "SECTION_TITLE_INVOICES": "Faturas",
+            "SECTION_TITLE_ORDERS": "Encomendas",
+            "SECTION_TITLE_PAYMENTS": "Pagamentos"
         },
         "FINANTIAL_DOCUMENT_PAGE" : {
             "PAGE_TITLE": "Documento"
