@@ -149,6 +149,16 @@ export class AuthenticationService {
             return;
         }
 
+        // remove regular authentication session data
+        await this.coreStorageService.removeData(AuthenticationService.STORAGE_SESSION_DATA_KEY);
+
+        this.sessionData = null;
+
+        // the demo authentication dont need to remove session from browser
+        if (this.isAuthenticateAsDemo) {
+            return;
+        }
+
         // end the browser session
         const endSessionUrl = this.generateLogoutUrl(this.endSessionEndpoint, this.sessionData.idToken, this.redirectUri);
         (window as any).handleOpenURL = (url: string) => {
@@ -173,11 +183,6 @@ export class AuthenticationService {
                 console.log(error);
             }
         }
-
-        // remove regular authentication session data
-        await this.coreStorageService.removeData(AuthenticationService.STORAGE_SESSION_DATA_KEY);
-
-        this.sessionData = null;
     }
 
     private handleAuthenticationUrl(url: string) {
