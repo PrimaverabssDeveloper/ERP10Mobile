@@ -132,7 +132,7 @@ export class AuthenticationService {
                 isAuthenticated = false;
             }
 
-            if (sessionData && new Date(sessionData.expirationDate) > (new Date()) ) {
+            if (sessionData && new Date(sessionData.expirationDate) > (new Date())) {
                 isAuthenticated = true;
             }
         }
@@ -149,40 +149,39 @@ export class AuthenticationService {
             return;
         }
 
+        // the demo authentication dont need to remove session from browser
+        if (!this.isAuthenticateAsDemo) {
+
+            // end the browser session
+            const endSessionUrl = this.generateLogoutUrl(this.endSessionEndpoint, this.sessionData.idToken, this.redirectUri);
+            (window as any).handleOpenURL = (url: string) => {
+                console.log('logout performed with success');
+            };
+
+            let browserAvailable: boolean;
+            try {
+                browserAvailable = await this.safariViewController.isAvailable();
+            } catch (error) {
+                browserAvailable = false;
+            }
+
+            if (browserAvailable) {
+                try {
+                    await this.safariViewController.show({
+                        url: endSessionUrl,
+                        hidden: true,
+                        animated: false
+                    }).toPromise();
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        }
+
         // remove regular authentication session data
         await this.coreStorageService.removeData(AuthenticationService.STORAGE_SESSION_DATA_KEY);
 
         this.sessionData = null;
-
-        // the demo authentication dont need to remove session from browser
-        if (this.isAuthenticateAsDemo) {
-            return;
-        }
-
-        // end the browser session
-        const endSessionUrl = this.generateLogoutUrl(this.endSessionEndpoint, this.sessionData.idToken, this.redirectUri);
-        (window as any).handleOpenURL = (url: string) => {
-            console.log('logout performed with success');
-        };
-
-        let browserAvailable: boolean;
-        try {
-            browserAvailable = await this.safariViewController.isAvailable();
-        } catch (error) {
-            browserAvailable = false;
-        }
-
-        if (browserAvailable) {
-            try {
-                await this.safariViewController.show({
-                    url: endSessionUrl,
-                    hidden: true,
-                    animated: false
-                }).toPromise();
-            } catch (error) {
-                console.log(error);
-            }
-        }
     }
 
     private handleAuthenticationUrl(url: string) {
@@ -206,9 +205,9 @@ export class AuthenticationService {
         };
 
         const headers = {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Accept': 'application/json'
-                };
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json'
+        };
 
         this.http
             .post(this.requestTokenEndpoint, body, headers)
