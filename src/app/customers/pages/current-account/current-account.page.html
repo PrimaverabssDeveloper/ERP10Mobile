@@ -18,19 +18,19 @@
     <div class="current-account" *ngIf="currentAccount">
         <div class="customer-name">Alcad</div>
         <div class="current-account-total">
-            <div class="label">Current account</div>
+            <div class="label">{{'CUSTOMERS.CURRENT_ACCOUNT_PAGE.CURRENT_ACCOUNT_LABEL' | translate}}</div>
             <div class="value">{{currentAccount.total | localeCurrency:currentAccount.currency}}</div>
         </div>
         <div class="tabs">
             <div class="tab tab-older" [ngClass]="{'selected': state === 'older' }" (click)="changeStateAction('older')">
-                <div class="label">Older</div>
+                <div class="label">{{'CUSTOMERS.CURRENT_ACCOUNT_PAGE.OLDER_DOCUMENTS_TAB_LABEL' | translate}}</div>
                 <div class="value">
                     <span class="pri-icon pri-expired-icon"></span>
                     {{currentAccount.expiredSixtyDays ? currentAccount.expiredSixtyDays.total : 0 | localeCurrency:currentAccount.currency}}
                 </div>
             </div>
             <div class="tab tab-last-month" [ngClass]="{'selected': state === 'lastMonth' }" (click)="changeStateAction('lastMonth')">
-                <div class="label">Last month</div>
+                <div class="label">{{'CUSTOMERS.CURRENT_ACCOUNT_PAGE.LAST_MONTH_DOCUMENTS_TAB_LABEL' | translate}}</div>
                 <div class="value">
                     <span class="pri-icon pri-expired-icon"></span>
                     {{currentAccount.expiredThirtyDays ? currentAccount.expiredThirtyDays.total : 0 | localeCurrency:currentAccount.currency}}
@@ -38,7 +38,7 @@
             </div>
             <div class="arrow" [ngStyle]="getArrowComputedStyle()"></div>
             <div class="tab tab-unexpired" [ngClass]="{'selected': state === 'unexpired' }" (click)="changeStateAction('unexpired')">
-                <div class="label">Unexpired</div>
+                <div class="label">{{'CUSTOMERS.CURRENT_ACCOUNT_PAGE.UNEXPIRED_DOCUMENTS_TAB_LABEL' | translate}}</div>
                 <div class="value">
                     <span class="pri-icon pri-not-expired-icon"></span>
                     {{currentAccount.unexpired ? currentAccount.unexpired.total : 0 | localeCurrency:currentAccount.currency}}

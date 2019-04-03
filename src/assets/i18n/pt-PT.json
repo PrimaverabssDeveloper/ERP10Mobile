@@ -104,7 +104,11 @@
             "PAGE_TITLE": "Encomendas pendentes"
         },
         "CURRENT_ACCOUNT_PAGE" : {
-            "PAGE_TITLE": "Conta corrente"
+            "PAGE_TITLE": "Conta Corrente",
+            "CURRENT_ACCOUNT_LABEL": "Conta Corrente",
+            "OLDER_DOCUMENTS_TAB_LABEL": "Anterior",
+            "LAST_MONTH_DOCUMENTS_TAB_LABEL": "Último mês",
+            "UNEXPIRED_DOCUMENTS_TAB_LABEL": "Não expirado"
         },
         "RECENT_ACTIVITY_PAGE" : {
             "PAGE_TITLE": "Atividate recente"

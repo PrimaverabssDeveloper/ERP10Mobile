@@ -103,7 +103,11 @@
             "PAGE_TITLE": "Pending orders"
         },
         "CURRENT_ACCOUNT_PAGE" : {
-            "PAGE_TITLE": "Current account"
+            "PAGE_TITLE": "Current account",
+            "CURRENT_ACCOUNT_LABEL": "Current account",
+            "OLDER_DOCUMENTS_TAB_LABEL": "Older",
+            "LAST_MONTH_DOCUMENTS_TAB_LABEL": "Last Month",
+            "UNEXPIRED_DOCUMENTS_TAB_LABEL": "Unexpired"
         },
         "RECENT_ACTIVITY_PAGE" : {
             "PAGE_TITLE": "Recent activity"
