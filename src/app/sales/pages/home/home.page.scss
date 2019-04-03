@@ -1,9 +1,8 @@
 @import '../../styles/variables.scss';
 
-$accent-color: rgb(80,130,254);
 
 .page-title {
-    color: $accent-color;
+    color: $sales-accent-color;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
