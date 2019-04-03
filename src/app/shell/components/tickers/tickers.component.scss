@@ -1,6 +1,6 @@
-$tickers-pager-height: 50px;
+$tickers-pager-height: 7.5em; //50px;
 $tickers-slides-height: calc(100% - #{$tickers-pager-height});
-$ticker-header-height: 50px;
+$ticker-header-height: 7.5em; //50px;
 $ticker-content-height: calc(100% - #{$ticker-header-height});
 
 .tickers {
@@ -21,9 +21,12 @@ $ticker-content-height: calc(100% - #{$ticker-header-height});
 .tickers-pager {
     width: 100%;
     height: $tickers-pager-height;
-    padding: 15px;
+    padding: 2.25em;
     text-align: center;
-    font-size: 12pt;
+    
+    span {
+        font-size: 2.4em;
+    }
 }
 
 .ticker{
@@ -39,16 +42,16 @@ $ticker-content-height: calc(100% - #{$ticker-header-height});
         .ticker-title{
             text-transform: uppercase;
             font-weight: bold;
-            font-size: 20pt;
+            font-size: 4em;// 20pt;
             color: #596278;
             position: absolute;
             bottom: 0;
-            line-height: 20px;
+            line-height: .8em; //20px;
         }
     
         .ticker-settings {
-            height: 25px;
-            width: 25px;
+            height: 1.5em; //25px;
+            width: 1.5em; //25px;
             position: absolute;
             
             right: 0;
@@ -88,13 +91,12 @@ $ticker-content-height: calc(100% - #{$ticker-header-height});
         height: 95px;
 
         .icon {
-            background-image: url('../../../../assets/shell/images/dashboard_ticker_settings.png');
-            background-size: 50px;
-            background-repeat: no-repeat;
             width: 50px;
             height: 50px;
-            margin-left: auto;
-            margin-right: auto;
+            transform: translateX(-50%);
+            margin-left: 50%;
+            margin-right: 50%;
+            background-color: lightgray;
         }
 
         .label {

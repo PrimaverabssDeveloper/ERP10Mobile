@@ -6,7 +6,7 @@
             </div>
             <div class="ticker-content" [routerLink]="['/shell/ticker-settings']">
                 <div class="no-tickers-open-settings">
-                    <div class="icon"></div>
+                    <div class="icon pri-icon pri-ticker-settings-icon"></div>
                     <div class="label">{{'SHELL.TICKERS_COMPONENT.NO_TICKERS_OPEN_SETTIONS_BTN' | translate}}</div>
                 </div>
             </div>
@@ -26,5 +26,7 @@
             </ion-slide>
         </ion-slides>
     </div>
-    <div class="tickers-pager" *ngIf="totalTickers > 0">{{currentTickerIndex}}/{{totalTickers}}</div>
+    <div class="tickers-pager" *ngIf="totalTickers > 0">
+        <span>{{currentTickerIndex}}/{{totalTickers}}</span>
+    </div>
 </div>

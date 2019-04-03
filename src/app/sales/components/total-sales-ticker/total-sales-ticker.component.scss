@@ -18,7 +18,7 @@
             color: #8A92A5;
             top: 72%;
             left: 52%;
-            font-size: 14pt;
+            font-size: 3em;// 14pt;
         }
 
         .current-year-label {
@@ -26,7 +26,7 @@
             color: #1D317D;
             top: 86%;
             left: 52%;
-            font-size: 14pt;
+            font-size: 3em;// 14pt;
         }
 
         .end-chart {
@@ -51,14 +51,14 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 25pt;
+            font-size: 5em;// 25pt;
             font-weight: bold;
             color: rgb(32, 184, 99);
 
             &:after {
                 content: ' ';
-                top: 2px;
-                border-width: 10px;
+                top: .1em; //2px;
+                border-width: .3em; //10px;
                 border-style: solid;
                 border-top-color: transparent;
                 border-right-color: transparent;
@@ -67,14 +67,14 @@
                 width: 0;
                 height: 0;
                 position: absolute;
-                right: -25px;
+                right: -.8em; //-25px;
             }
 
             &.negative {
                 color: rgb(229, 57, 55);
 
                 &:after {
-                    top: 12px;
+                    top: .37em; //12px;
                     border-top-color: rgb(229, 57, 55);
                     border-right-color: transparent;
                     border-bottom-color: transparent;
@@ -91,7 +91,7 @@
         top: 50%;
         left: 50%;
         transform: translateX(-50%);
-        font-size: 18pt;
+        font-size: 3.6em; //18pt;
         
         .data-wrapper {
             position: absolute;
