@@ -1,5 +1,8 @@
 
-$modules-drawer-height: 160px;
+// $modules-drawer-height: 160px;
+// $tickers-height: calc(100% - #{$modules-drawer-height});
+
+$modules-drawer-height: 20vh;
 $tickers-height: calc(100% - #{$modules-drawer-height});
 
 .v10-navbar-logo {
@@ -17,17 +20,24 @@ $tickers-height: calc(100% - #{$modules-drawer-height});
     bottom: 0;
     width: 100%;
     height: $modules-drawer-height;
-    padding: 10px 15%;
+    padding: 2vh;
+    font-size: 2vh;
+    line-height: 2vh;
 
     .module-icon {
         width: calc(100% / 3);
-        padding: 10px;
+        height: 16vh;
+        // padding: 10px;
         text-align: center;
         text-decoration: none;
         color: black;
         font-weight: bold;
         display: block;
         float: left;
+
+        img {
+            height: 13vh;
+        }
 
         img.touch-off{
             display: initial;
@@ -48,7 +58,9 @@ $tickers-height: calc(100% - #{$modules-drawer-height});
         }
     
         .name {
-            margin-top: 5px;
+            margin-top: 1vh;
+            float: left;
+            width: 100%;
             color: #596278
         }
     }
