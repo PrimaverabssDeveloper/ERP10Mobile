@@ -1,0 +1,157 @@
+
+{
+    "CORE": {
+        "NETWORK_ERROR_MESSAGE": "No ha sido posible comunicar con el servidor. Inténtelo más tarde.",
+        "SEARCH_INPUT_HINT": "Búsqueda"
+    },
+    "SHARED": {
+        "SIDE_MENU_COMPONENT" : {
+            "MENU_GENERAL_TITLE" : "General",
+            "MENU_GENERAL_OPTION_LANGUAGE" : "Idioma",
+            "MENU_MODULES_TITLE" : "Módulos",
+            "MENU_SESSION_TITLE" : "Sesión",
+            "MENU_SESSION_LOGOUT" : "Salir",
+            "ALERT_LOGOUT_HEADER": "Salir",
+            "ALERT_LOGOUT_MESSAGE": "¿Está seguro de que desea salir de la aplicación?",
+            "MENU_CHANGE_INSTANCES": "Cambiar suscripción"
+        },
+        "DATES": {
+            "MONTHS": {
+                "1": "Enero",
+                "2": "Febrero",
+                "3": "Marzo",
+                "4": "Abril",
+                "5": "Mayo",
+                "6": "Junio",
+                "7": "Julio",
+                "8": "Agosto",
+                "9": "Septiembre",
+                "10": "Octubre",
+                "11": "Noviembre",
+                "12": "Diciembre"
+            },
+            "WEEK_DAYS_NUMBER_TO_NAME": {
+                "1": "Domingo",
+                "2": "Lunes",
+                "3": "Martes",
+                "4": "Miércoles",
+                "5": "Jueves",
+                "6": "Sexta-Feita",
+                "7": "Viernes"
+            }
+        }
+    },
+    "SHELL": {
+        "AUTHENTICATION" : {
+            "NO_SUBSCRIPTION_MESSAGE": "O utilizador atual não tem acesso a nenhuma subscrição."
+        },
+        "INSTANCES_PAGE" : {
+            "PAGE_TITLE" : "Selecione a Sua Instância"
+        },
+        "DASHBOARD_PAGE" : {
+        },
+        "LANGUAGE_PAGE" : {
+            "PAGE_TITLE" : "Idioma",
+            "LANGUAGE_PT_PT": "Português",
+            "LANGUAGE_EN_US": "English",
+            "LANGUAGE_ES_ES": "Español (Castellano)"
+        },
+        "TICKER_SETTINGS_PAGE": {
+            "PAGE_TITLE" : "Datos del ticker"
+        },
+        "TICKERS_COMPONENT": {
+            "NO_TICKERS_TITLE": "Sin páginas activas",
+            "NO_TICKERS_OPEN_SETTIONS_BTN": "Configurar ticker"
+        }
+    },
+    "CUSTOMERS" : {
+        "MODULE_NAME": "Clientes",
+        "COMMON" : {
+            "NO_DOCUMENTS_TO_SHOW": "No existen documentos para mostrar"
+        },
+        "CUSTOMERS_LIST_PAGE": {
+            "PAGE_TITLE": "Clientes",
+            "TOOGLE_MENU_RECENT": "Recientes",
+            "TOOGLE_MENU_SEARCH_ASC": "de A a Z",
+            "TOOGLE_MENU_SEARCH_DESC": "de Z a A",
+            "MESSAGE_SEARCH_HAS_MORE_RESULTS": "Existen más clientes que corresponden a su búsqueda. Vuelva a definir su búsqueda.",
+            "MESSAGE_NO_SEARCH_PERFORMED": "Utilice la búsqueda para encontrar los clientes.",
+            "MESSAGE_RECENT_EMPTY": "Aquí encontrará los últimos clientes a los que accedió.",
+            "MESSAGE_SEARCH_NO_RESULTS": "No existen resultados para su consulta."
+        },
+        "CUSTOMER_PAGE" : {
+            "PAGE_TITLE": "Cliente",
+            "CONTACTS_OTHER_ADDRESSES": "Otras direcciones",
+            "CONTACTS_OTHER_CONTACTS": "Otros contactos",
+            "SALES_TITLE": "Datos de Venta",
+            "SALES_CURRENT_YEAR_TOTAL_SALES_LABEL" : "Total de ventas",
+            "SALES_PREVIOUS_YEAR_TOTAL_SALES_LABEL" : "Total de ventas",
+            "SALES_PENDING_ORDERS_LABEL": "Pedidos Pendientes",
+            "SALES_CURRENT_ACCOUNT_VALUE_LABEL": "Valores de Cuenta Corriente",
+            "SALES_AVERAGE_COLLECTION_PERIOD_LABEL": "Plazo Medio de Recebimiento",
+            "SALES_PAYMENT_CONDITIONS_LABEL": "Condición de Pago",
+            "SALES_RECENT_ACTIVITY_LABEL": "Actividad Reciente",
+            "SALES_DAYS_PARTIAL_LABEL": "Días"
+
+        },
+        "OTHER_CONTACTS_PAGE" : {
+            "PAGE_TITLE": "Contactos Relacionados"
+        },
+        "OTHER_ADDRESSES_PAGE" : {
+            "PAGE_TITLE": "Direcciones"
+        },
+        "PENDING_ORDERS_PAGE" : {
+            "PAGE_TITLE": "Pedidos Pendientes"
+        },
+        "CURRENT_ACCOUNT_PAGE" : {
+            "PAGE_TITLE": "Cuenta Corriente"
+        },
+        "RECENT_ACTIVITY_PAGE" : {
+            "PAGE_TITLE": "Actividad Reciente"
+        },
+        "FINANTIAL_DOCUMENT_PAGE" : {
+            "PAGE_TITLE": "Documento"
+        }
+    },
+    "SALES": {
+        "MODULE_NAME": "Vendas",
+        "SALES_SETTINGS_PAGE": {
+            "PAGE_TITLE": "Ventas",
+            "USE_REFERENCE_CURRENCY_TOGGLE": "Utilizar la moneda de referencia",
+            "SHOW_AGGREGATE_DATA_TOGGLE": "Mostrar total agregado",
+            "SHOW_DAILY_SALES_TOGGLE": "Mostrar ventas diarias"
+        },
+        "DAILY_SALES_TICKER_COMPONENT" : {
+            "DAILY_SALES": "Ventas del día"
+        },
+        "SHARE_CHARTS" : {
+            "ABSOLUTE": "Absoluto",
+            "ACCUMULATED": "Acumulado"
+        },
+        "CHARTS" : {
+            "WEEKS_CHART_BAR_PREFIX": "S",
+            "QUARTER_CHART_BAR_PREFIX": "C",
+            "TOTAL_SALES": "Total Ventas",
+            "OTHERS": "Otros"
+        }
+    },
+    "HUMAN_RESOURCES": {
+        "MODULE_NAME": "Recursos Humanos",
+        "HR_PAGE": {
+            "PAGE_TITLE": "Nóminas",
+            "MONTH_STATUS_SALARY_PROCESSED": "Salario procesado el {date}",
+            "MONTH_STATUS_PAYMENT_ISSUED":"Pago emitido",
+            "YEAR_STATUS":"Certificado de Retenciones {year}",
+            "YEARLY_SELECTOR": "Anuales",
+            "MONTHLY_SELECTOR": "Mensuales",
+            "GROSS_EARNING_SECTION_TITLE": "Remuneración Bruta",
+            "NET_EARNING_SECTION_TITLE": "Remuneración Neta",
+            "PAYMENT_METHOD_SECTION_TITLE": "Forma de pago",
+            "COMPENSATION_BREAKDOWN_SECTION_TITLE": "Distribución de los cálculos"
+        },
+        "HR_SETTINGS" : {
+            "PAGE_TITLE" : "Human Resources",
+            "TOOGLE_PASSWORD_BUTTON" : "Restrict access with PIN"
+        }
+    }
+}
