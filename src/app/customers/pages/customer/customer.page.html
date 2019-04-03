@@ -26,13 +26,13 @@
                 {{customerAddressBuilder(customer)}}
             </div>
         </div>
-        <div class="customer-address-part col-6" *ngIf="customer.contacts.phone">
+        <div class="customer-address-part" [ngClass]="{'col-6': customer.contacts.phone && customer.contacts.phone2}" *ngIf="customer.contacts.phone">
             <div class="pri-icon pri-telephone-one-icon customer-address-part-icon touch-off"></div>
             <div class="pri-icon pri-telephone-one-active-icon customer-address-part-icon touch-on"></div>
             <a class="customer-address-part-label" [href]="'phone:' + customer.contacts.phone | safeUrl">{{customer.contacts.phone}}
             </a>
         </div>
-        <div class="customer-address-part col-6" *ngIf="customer.contacts.phone2">
+        <div class="customer-address-part" [ngClass]="{'col-6': customer.contacts.phone && customer.contacts.phone2}" *ngIf="customer.contacts.phone2">
             <div class="pri-icon pri-telephone-two-icon touch-off customer-address-part-icon"></div>
             <div class="pri-icon pri-telephone-two-active-icon touch-on customer-address-part-icon"></div>
             <a class="customer-address-part-label" [href]="'phone:' + customer.contacts.phone2 | safeUrl">{{customer.contacts.phone2}}</a>
