@@ -121,6 +121,9 @@
             "SHOW_AGGREGATE_DATA_TOGGLE": "Mostrar total agregado",
             "SHOW_DAILY_SALES_TOGGLE": "Mostrar vendas diárias"
         },
+        "TOTAL_SALES_TICKER_COMPONENT" : {
+            "TOTAL_SALES": "Total das vendas"
+        },
         "DAILY_SALES_TICKER_COMPONENT" : {
             "DAILY_SALES": "Vendas do dia"
         },
@@ -131,7 +134,7 @@
         "CHARTS" : {
             "WEEKS_CHART_BAR_PREFIX": "S",
             "QUARTER_CHART_BAR_PREFIX": "T",
-            "TOTAL_SALES": "Vendas totais",
+            "TOTAL_SALES": "Total das vendas",
             "OTHERS": "Outros"
         }
     },
