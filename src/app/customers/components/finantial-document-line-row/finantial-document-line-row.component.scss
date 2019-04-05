@@ -52,7 +52,7 @@ $row-data-width: calc(100% - #{$row-index-width + $row-arrow-width});
             border-bottom: $border;
             padding: 0 5px;
             font-weight: bold;
-            color: #959595;
+            color: #596278;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -70,7 +70,7 @@ $row-data-width: calc(100% - #{$row-index-width + $row-arrow-width});
             .row-data-value-label {
                 float: left;
                 padding: 0 5px;
-                color: #959595;
+                color: #596278;
 
                 &:after {
                     content: ' ';
@@ -87,7 +87,7 @@ $row-data-width: calc(100% - #{$row-index-width + $row-arrow-width});
                 float: right;
                 padding: 0 5px;
                 font-weight: bold;
-                color: #959595;
+                color: #596278;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;

@@ -1,5 +1,5 @@
 $hr-theme-color: rgb(52, 139, 221);
-$hr-border:1px solid rgb(212, 212, 212);
+$hr-border: 1px solid rgb(212, 212, 212);
 
 // hr salary portion
 $hr-salary-portion-border-top: $hr-border;
@@ -9,206 +9,208 @@ $hr-salary-portion-value-color: rgb(92, 92, 92);
 // hr salary extra information
 $hr-salary-extra-information-section-border-top: $hr-border;
 $hr-salary-extra-information-section-label-color: $hr-theme-color;
-$hr-salary-extra-information-label-color: rgb(92, 92, 92);
-$hr-salary-extra-information-value-color: rgb(92, 92, 92);
-
+$hr-salary-extra-information-label-color: #596278;
+$hr-salary-extra-information-value-color: #596278;
 
 // Charts
 $hr-charts-drawer-height: 400px;
 $hr-charts-drawer-handle-background-color: rgb(246, 247, 249);
 $hr-charts-drawer-handle-height: 40px;
-$hr-charts-drawer-handle-box-shadow: 0 -3px 3px -3px black;
+$hr-charts-drawer-handle-box-shadow: 0 -7px 8px -9px #8a92a5;
 $hr-salary-chart-period-selector-height: 50px;
-$hr-chart-conteiner-height: $hr-charts-drawer-height - $hr-charts-drawer-handle-height - $hr-salary-chart-period-selector-height;
-
+$hr-chart-conteiner-height: $hr-charts-drawer-height - $hr-charts-drawer-handle-height -
+  $hr-salary-chart-period-selector-height;
 
 .page-title {
-    color: $hr-theme-color;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  color: $hr-theme-color;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-    &-company-selector:before {
-        content: ' ';
-        background-image: url('../../../../assets/sales/action-bar-dropdown-button.png');
-        background-repeat: no-repeat;
-        background-size: 17px;
-        width: 17px;
-        height: 17px;
-        display: block;
-        float: right;
-        margin: 3px 5px;
-    }
+  &-company-selector:before {
+    content: " ";
+    background-image: url("../../../../assets/sales/action-bar-dropdown-button.png");
+    background-repeat: no-repeat;
+    background-size: 17px;
+    width: 17px;
+    height: 17px;
+    display: block;
+    float: right;
+    margin: 3px 5px;
+  }
 }
 
 .salary-details {
-    padding: 0;
+  padding: 0;
 
+  .money {
+    transition: opacity 1s;
+    display: block;
+    float: left;
+    position: absolute;
+    color: #596278;
+  }
+
+  .percentage {
+    transition: opacity 1s;
+    display: block;
+    float: left;
+    position: absolute;
+    color: #596278;
+  }
+
+  .show-money {
     .money {
-        transition: opacity 1s;
-        display: block;
-        float: left;
-        position: absolute;
+      opacity: 1;
     }
 
     .percentage {
-        transition: opacity 1s;
-        display: block;
-        float: left;
-        position: absolute;
+      opacity: 0;
+    }
+  }
+
+  .show-percentage {
+    .money {
+      opacity: 0;
     }
 
-    .show-money {
-        .money {
-            opacity: 1;
-        }
+    .percentage {
+      opacity: 1;
+    }
+  }
 
-        .percentage {
-            opacity: 0;
-        }
+  .salary-date {
+    font-weight: bold;
+    text-align: center;
+    padding: 5px 0;
+    color: #19243b;
+  }
+
+  .salary-status {
+    padding: 5px 10px;
+    font-size: 10pt;
+    color: #19243b;
+  }
+
+  .show-documents-action-btn {
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+    float: right;
+    background-color: #8a92a5;
+  }
+
+  .salary-portion {
+    border-top: $hr-salary-portion-border-top;
+    padding: 20px 10px;
+    margin-bottom: 20px;
+
+    .label {
+      color: $hr-salary-portion-label-color;
+      font-size: 12pt;
     }
 
-    .show-percentage {
-        .money {
-            opacity: 0;
-        }
+    .value {
+      color: $hr-salary-portion-value-color;
+      font-size: 12pt;
+      font-weight: bold;
+    }
+  }
 
-        .percentage {
-            opacity: 1;
-        }
+  .salary-extra-information-section {
+    padding: 10px;
+    border-top: $hr-salary-extra-information-section-border-top;
+
+    .section-label {
+      color: $hr-salary-extra-information-section-label-color;
     }
 
+    .extra-information {
+      margin: 0;
 
-    .salary-date {
-        font-weight: bold;
-        text-align: center;
-        padding: 5px 0;
+      .extra-information-label {
+        color: $hr-salary-extra-information-label-color;
+        padding: 0;
+      }
+
+      .extra-information-value {
+        color: $hr-salary-extra-information-value-color;
+        padding-left: 10px;
+      }
     }
-
-    .salary-status {
-        padding: 5px 10px;
-        font-size: 10pt;
-    }
-
-    .show-documents-action-btn {
-        width: 20px;
-        height: 20px;
-        margin-left: 15px;
-        float: right;
-        background-color: #9E9E9E;
-    }
-
-    .salary-portion {
-        border-top:$hr-salary-portion-border-top;
-        padding: 20px 10px;
-        margin-bottom: 20px;
-
-        .label {
-            color: $hr-salary-portion-label-color;
-            font-size: 12pt;
-        }
-
-        .value{
-            color: $hr-salary-portion-value-color;
-            font-size: 12pt;
-            font-weight: bold;
-        }
-    }
-
-    .salary-extra-information-section {
-        padding: 10px;
-        border-top: $hr-salary-extra-information-section-border-top;
-
-        .section-label {
-            color: $hr-salary-extra-information-section-label-color;
-        }
-
-        .extra-information {
-            margin: 0;
-
-            .extra-information-label {
-                color: $hr-salary-extra-information-label-color;
-                padding: 0;
-            }
-    
-            .extra-information-value {
-                color: $hr-salary-extra-information-value-color;
-                padding-left: 10px;
-            }
-        }
-    }
+  }
 }
 
 .salary-charts-drawer {
-    width: 100%;
-    position: absolute;
-    background-color: white;
+  width: 100%;
+  position: absolute;
+  background-color: white;
+  bottom: 0;
+  height: $hr-charts-drawer-height;
+  transition: bottom 0.35s ease-in-out;
+
+  &.open {
     bottom: 0;
-    height: $hr-charts-drawer-height;
-    transition: bottom .35s ease-in-out; 
+  }
 
-    &.open {
-        bottom: 0;
+  &.close {
+    bottom: -($hr-charts-drawer-height - $hr-charts-drawer-handle-height);
+  }
+
+  .salary-charts-drawer-handle {
+    height: $hr-charts-drawer-handle-height;
+    background: $hr-charts-drawer-handle-background-color;
+    box-shadow: $hr-charts-drawer-handle-box-shadow;
+    width: 100%;
+    position: relative;
+
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
+  }
 
-    &.close {
-        bottom: -($hr-charts-drawer-height - $hr-charts-drawer-handle-height);
+  .salary-chart-period-selector {
+    height: $hr-salary-chart-period-selector-height;
+
+    .period {
+      float: right;
+      font-size: 10pt;
+      margin: 10px 15px 10px 5px;
+      font-weight: bold;
+      color: #8a92a5; 
+
+      &.active {
+        color: #19243b;
+      }
     }
+  }
 
-    .salary-charts-drawer-handle {
-        height: $hr-charts-drawer-handle-height;
-        background: $hr-charts-drawer-handle-background-color;
-        box-shadow: $hr-charts-drawer-handle-box-shadow;
-        width: 100%;
-        position: relative;
+  .chart-container {
+    height: $hr-chart-conteiner-height;
+    width: 100%;
 
-        img {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
+    .chart {
+      position: absolute;
+      width: 100%;
+      height: $hr-chart-conteiner-height;
+      transition: opacity 1s ease-in-out;
+      opacity: 0;
+
+      &.visible {
+        opacity: 1;
+        z-index: 1;
+      }
+
+      > * {
+        height: 100%;
+      }
     }
-
-    .salary-chart-period-selector {
-        height: $hr-salary-chart-period-selector-height;
-
-        .period {
-            float: right;
-            font-size: 10pt;
-            margin: 10px 15px 10px 5px;
-            font-weight: bold;
-            color: rgb(184, 184, 184);  
-
-            &.active {
-                color: rgb(57, 57, 57);  
-            }
-        }
-    }
-
-    .chart-container {
-        height: $hr-chart-conteiner-height;
-        width: 100%;
-
-        .chart {
-            position: absolute;
-            width: 100%;
-            height: $hr-chart-conteiner-height;
-            transition: opacity 1s ease-in-out;
-            opacity: 0;
-
-            &.visible {
-                opacity: 1;
-                z-index: 1;
-            }
-
-            > * {
-                height: 100%;
-            }
-        }
-    }
+  }
 }

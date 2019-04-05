@@ -13,13 +13,13 @@ $sales-table-rows-height: calc(100% - #{$sales-table-header-row-height});
     margin: 0 10px;
     padding: 10px 0;
     height: 100%;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #8A92A5;
 
     .sales-table-header-row {
         width: 100%;
         height: $sales-table-header-row-height;
         font-size: 14pt;
-        border-bottom: 1px solid #000;
+        border-bottom: 1px solid #8A92A5;
 
         &:after {
             content: ' ';
@@ -39,7 +39,7 @@ $sales-table-rows-height: calc(100% - #{$sales-table-header-row-height});
         height: 30px;
         line-height: 30px;
         border-bottom-style: solid;
-        border-bottom-color: #000;
+        border-bottom-color: #DBE0EB;
         border-bottom-width: 0.55px;
         font-size: 12pt;
         letter-spacing: .5px;
@@ -57,6 +57,7 @@ $sales-table-rows-height: calc(100% - #{$sales-table-header-row-height});
         float: left;
         width: $sales-table-row-label-width;
         height: 100%;
+        color: 596278;
     }
 
     .sales-table-row-current-year-value {
@@ -65,6 +66,7 @@ $sales-table-rows-height: calc(100% - #{$sales-table-header-row-height});
         width: $sales-table-row-current-year-value-width;
         color: $current-year-text-accent-color;
         height: 100%;
+        font-weight: bold;
     }
 
     .sales-table-row-previous-year-value {
@@ -73,6 +75,7 @@ $sales-table-rows-height: calc(100% - #{$sales-table-header-row-height});
         width: $sales-table-row-previous-year-value-width;
         color: $previous-year-text-accent-color;
         height: 100%;
+        font-weight: bold;
     }
 
     .sales-table-row-delta-percentage {

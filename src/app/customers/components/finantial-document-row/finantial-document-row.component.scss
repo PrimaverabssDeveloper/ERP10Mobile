@@ -6,6 +6,13 @@
     height: 50px;
     padding: 5px 10px;
 
+    &:nth-child(1) {
+        height: 60px;
+        padding: 10px 10px;
+        border-bottom: 1px solid #8A92A5;
+        color: #19243b;
+    }
+
     border-bottom: $border;
     font-weight: bold;
 
@@ -22,7 +29,8 @@
         .icon {
             width: 16px;
             height: 16px;
-            background-color: #9E9E9E;
+            background-color: #8A92A5;
+            margin-right: 5px;
         }
 
         .date {
@@ -46,7 +54,7 @@
 
         .second-value {
             font-size: 9pt;
-            color: #959595;
+            color: #596278;
         }
     }
 }
