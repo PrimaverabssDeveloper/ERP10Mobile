@@ -14,6 +14,7 @@
     "android-debug": "ionic cordova run android -l",
     "android-deploy": "ionic cordova run android",
     "ios-run": "ionic cordova run ios -- --buildFlag=\"-UseModernBuildSystem=0\"",
+    "ios-run-debug": "ionic cordova run ios -l -- --buildFlag=\"-UseModernBuildSystem=0\"",
     "ios-build": "ionic cordova build ios -- --buildFlag=\"-UseModernBuildSystem=0\""
   },
   "private": true,
