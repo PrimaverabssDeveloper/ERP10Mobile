@@ -135,6 +135,15 @@
             "OTHERS": "Otros"
         }
     },
+    "SALES_CHARTS": {
+        "SALES_CHARTS_COMPONENT" : {
+            "SHARE_OPTION_SEND_CHART_BY_EMAIL": "Enviar gráfico por email",
+            "SHARE_OPTION_SEND_PDF_BY_EMAIL": "Enviar gráfico en PDF por email",
+            "SHARE_OPTION_SAVE_IMAGE_IN_THE_GALLERY": "Guardar imagen en la galería",
+            "SHARE_SAVED_IMAGE_TO_GALLERY_SUCCESS": "Imagen guardada correctamente",
+            "SHARE_SAVED_IMAGE_TO_GALLERY_ERROR": "No ha sido posible guardar la imagen. Vuelva a intentarlo."
+        }
+    },
     "HUMAN_RESOURCES": {
         "MODULE_NAME": "Recursos Humanos",
         "HR_PAGE": {

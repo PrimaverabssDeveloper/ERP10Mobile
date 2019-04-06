@@ -149,7 +149,9 @@
         "SALES_CHARTS_COMPONENT" : {
             "SHARE_OPTION_SEND_CHART_BY_EMAIL": "Enviar gráfico por email",
             "SHARE_OPTION_SEND_PDF_BY_EMAIL": "Enviar PDF por email",
-            "SHARE_OPTION_SAVE_IMAGE_IN_THE_GALLERY": "Gravar imagem na galeria"
+            "SHARE_OPTION_SAVE_IMAGE_IN_THE_GALLERY": "Gravar imagem na galeria",
+            "SHARE_SAVED_IMAGE_TO_GALLERY_SUCCESS": "Imagem guardada com sucesso",
+            "SHARE_SAVED_IMAGE_TO_GALLERY_ERROR": "Não foi possível guardar a sua imagem. Tente novamente."
         }
     },
     "HUMAN_RESOURCES": {

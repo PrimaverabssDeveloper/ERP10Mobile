@@ -425,7 +425,10 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
             this.rgbColorBuilder(this.data.previousYearAccentColor)
         );
 
-        const message = success ? '#image stored with success' : '# not possible to store the image';
+
+        const messageKey = `SALES_CHARTS.SALES_CHARTS_COMPONENT.SHARE_SAVED_IMAGE_TO_GALLERY_${success ? 'SUCCESS' : 'ERROR'}`;
+
+        const message = await this.translate.get(messageKey).toPromise();
 
         const alert = await this.alertController.create({
             header: '',
