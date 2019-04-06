@@ -429,11 +429,12 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
         const messageKey = `SALES_CHARTS.SALES_CHARTS_COMPONENT.SHARE_SAVED_IMAGE_TO_GALLERY_${success ? 'SUCCESS' : 'ERROR'}`;
 
         const message = await this.translate.get(messageKey).toPromise();
+        const okButton = await this.translate.get('SHARED.ALERTS.OK').toPromise();
 
         const alert = await this.alertController.create({
             header: '',
             message: message,
-            buttons: ['OK']
+            buttons: [okButton]
         });
 
         await alert.present();

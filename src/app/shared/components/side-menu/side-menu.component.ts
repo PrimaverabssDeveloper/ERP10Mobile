@@ -44,17 +44,19 @@ export class SideMenuComponent implements OnInit {
     async logoutAction() {
         const header = await this.translateService.get('SHARED.SIDE_MENU_COMPONENT.ALERT_LOGOUT_HEADER').toPromise();
         const message = await this.translateService.get('SHARED.SIDE_MENU_COMPONENT.ALERT_LOGOUT_MESSAGE').toPromise();
+        const cancelButton = await this.translateService.get('SHARED.ALERTS.CANCEL').toPromise();
+        const okButton = await this.translateService.get('SHARED.ALERTS.OK').toPromise();
 
         const alert = await this.alertController.create({
             header: header,
             message: message,
             buttons: [
                 {
-                    text: 'Cancel',
+                    text: cancelButton,
                     role: 'cancel'
                 },
                 {
-                    text: 'Ok',
+                    text: okButton,
                     handler: () => this.zone.run(() => this.logout())
                 }
             ]

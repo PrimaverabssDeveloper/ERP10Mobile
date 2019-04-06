@@ -63,9 +63,10 @@ export class HttpRequestInterceptorService implements HttpInterceptor {
 
     private async show500Error() {
         const errorMessage = await this.translate.get('CORE.NETWORK_ERROR_MESSAGE').toPromise();
+        const okButton = await this.translate.get('SHARED.ALERTS.OK').toPromise();
         const alert = await this.alertController.create({
             message: errorMessage,
-            buttons: ['OK']
+            buttons: [okButton]
         });
 
         await alert.present();

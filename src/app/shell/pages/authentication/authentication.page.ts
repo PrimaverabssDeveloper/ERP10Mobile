@@ -68,11 +68,12 @@ export class AuthenticationPage extends PageBase implements OnInit {
             }
             await this.hideLoading();
         } else {
+            const okButton = await this.translateService.get('SHARED.ALERTS.OK').toPromise();
             const alert = await this.alertController.create({
                 header: 'Authentication',
                 message: 'The authentication can only be performed when the app is running on a mobile device. Starting in demo.',
                 buttons: [{
-                    text: 'ok',
+                    text: okButton,
                     handler: () => {
                         this.demoAction();
                     }
@@ -101,10 +102,11 @@ export class AuthenticationPage extends PageBase implements OnInit {
         // no instances available
         if (!instances || instances.length === 0) {
             const message = await this.translateService.get('SHELL.AUTHENTICATION.NO_SUBSCRIPTION_MESSAGE').toPromise();
+            const okButton = await this.translateService.get('SHARED.ALERTS.OK').toPromise();
             const alert = await this.alertController.create({
                 message: message,
                 buttons: [{
-                    text: 'ok',
+                    text: okButton,
                     handler: () => {
                         this.demoAction();
                     }

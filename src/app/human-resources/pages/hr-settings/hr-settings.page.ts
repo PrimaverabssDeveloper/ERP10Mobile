@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { LoadingController, MenuController, AlertController } from '@ionic/angular';
 import { PageBase } from '../../../shared/pages';
 import { HumanResourcesServiceProvider, HumanResourcesService } from '../../services';
+import { TranslateService } from '@ngx-translate/core';
 
 /**
  * Settings for the sales module.
@@ -46,6 +47,7 @@ export class HrSettingsPage extends PageBase implements OnInit {
         public loadingController: LoadingController,
         public location: Location,
         public menuController: MenuController,
+        private translateService: TranslateService,
         private humanResourcesService: HumanResourcesService,
         private alertController: AlertController
     ) {
@@ -175,9 +177,10 @@ export class HrSettingsPage extends PageBase implements OnInit {
 
 
     private async showAlertModal(message: string) {
+        const okButton = await this.translateService.get('SHARED.ALERTS.OK').toPromise();
         const alert = await this.alertController.create({
             header: message,
-            buttons: ['#Ok']
+            buttons: [okButton]
           });
 
           await alert.present();
