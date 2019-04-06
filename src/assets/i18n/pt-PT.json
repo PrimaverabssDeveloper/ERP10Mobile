@@ -39,6 +39,12 @@
                 "6": "Sexta-Feita",
                 "7": "Sábado"
             }
+        },
+        "ALERTS" : {
+            "OK": "Ok",
+            "CANCEL": "Cancelar",
+            "YES": "Sim",
+            "NO": "Não"
         }
     },
     "SHELL": {

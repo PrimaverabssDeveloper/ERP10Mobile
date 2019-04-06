@@ -39,6 +39,12 @@
                 "6": "Friday",
                 "7": "Saturday"
             }
+        },
+        "ALERTS" : {
+            "OK": "Ok",
+            "CANCEL": "Cancel",
+            "YES": "Yes",
+            "NO": "No"
         }
     },
     "SHELL": {
