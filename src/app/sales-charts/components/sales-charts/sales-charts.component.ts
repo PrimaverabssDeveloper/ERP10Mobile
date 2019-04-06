@@ -313,10 +313,10 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
                         key: 'send_chart_by_email',
                         label: sendChartByEmailResource
                     },
-                    {
-                        key: 'send_pdf_chart_by_email',
-                        label: sendPdfByEmailResource
-                    },
+                    // {
+                    //     key: 'send_pdf_chart_by_email',
+                    //     label: sendPdfByEmailResource
+                    // },
                     {
                         key: 'save_image_in_the_gallery',
                         label: saveImageinTheGalleryResource
