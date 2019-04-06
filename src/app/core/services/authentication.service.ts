@@ -22,6 +22,7 @@ export class AuthenticationService {
 
     private static readonly STORAGE_SESSION_DATA_KEY = 'STORAGE_SESSION_DATA_KEY';
 
+    private userHasLoggedOnIdentity: boolean;
     private proofKey: ProofKey;
     private clientId: string;
     private redirectUri: string;
@@ -81,7 +82,14 @@ export class AuthenticationService {
     async authenticate(): Promise<boolean> {
         (window as any).handleOpenURL = (url: string) => {
             const finalUrl = url.split(' ').join('%20');
+            this.userHasLoggedOnIdentity = true;
             this.handleAuthenticationUrl(finalUrl);
+
+            try {
+                this.safariViewController.hide();
+            } catch (error) {
+                console.log(error);
+            }
         };
 
         this.proofKey = this.generateProofKey();
@@ -225,8 +233,8 @@ export class AuthenticationService {
                 if (available) {
                     this.safariViewController.show(
                         {
-                            url: url,
-                            hidden: true
+                            url: url
+                            // hidden: true
                         }
                     ).subscribe((result: any) => {
                         if (result.event === 'opened') {
@@ -235,6 +243,11 @@ export class AuthenticationService {
                             console.log('Loaded');
                         } else if (result.event === 'closed') {
                             console.log('Closed');
+                            setTimeout(() => {
+                                if (!this.userHasLoggedOnIdentity) {
+                                    this.authenticationResolve(false);
+                                }
+                            }, 500);
                         }
                     },
                         (error: any) => console.error(error)
