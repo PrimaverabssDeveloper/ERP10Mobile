@@ -132,10 +132,12 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
             return {
                 'opacity': `${1 - .5 * (diff / (chartsWrapperSizeWidth * .5))}`,
                 'transform': `scale(${1.3 - .3 * (diff / (chartsWrapperSizeWidth * .5))})`,
-                'width': `${this.chartsWrapperSize ? chartsWrapperSizeWidth * .2 : 0}px`
+                'width': `${this.chartsWrapperSize ? chartsWrapperSizeWidth * .2 : 0}px`,
+                'color': '#19243b',
             };
         } else {
             return {
+                'color': '8A92A5',
                 'opacity': '.5',
                 'width': `${this.chartsWrapperSize ? chartsWrapperSizeWidth * .2 : 0}px`
             };

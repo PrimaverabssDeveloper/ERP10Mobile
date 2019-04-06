@@ -19,8 +19,9 @@ $chart-content-height: calc(100% - #{$sales-header-height + $chart-controllers-h
 .sales-header {
     height: $sales-header-height;
     padding: 10px;
+    color: #19243b;
 
-    .chart-name {
+    .chart-name {        
         font-weight: bolder;
         text-transform: uppercase;
     }
@@ -46,7 +47,7 @@ $chart-content-height: calc(100% - #{$sales-header-height + $chart-controllers-h
             width: 30px;
             height: 30px;
             margin: 5px;
-            background-color: #9E9E9E;
+            background-color: #8A92A5;
         }
 
         &.selected {
@@ -96,6 +97,7 @@ $chart-content-height: calc(100% - #{$sales-header-height + $chart-controllers-h
     text-align: center;
     font-size: 12pt;
     padding: 10px;
+    color: #19243b;
 }
 
 .month-selector-wrapper {
