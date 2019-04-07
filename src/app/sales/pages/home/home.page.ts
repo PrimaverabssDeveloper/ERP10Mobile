@@ -89,7 +89,9 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
         this.companies = await this.salesService.getCompanies();
 
         if (!this.companies) {
-            alert('NO COMPANIES');
+            this.goBack();
+            await this.hideLoading();
+            return;
         }
 
         // by default show the first company
@@ -179,8 +181,16 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
     private async showCompanyData(company: Company) {
 
         // get sales charts for the company
-        this.selectedCompanySales = await this.salesService.getSalesCharts(company.key);
-        await this.updateCharts(this.selectedCompanySales);
+        const companySales = await this.salesService.getSalesCharts(company.key);
+
+        if (companySales) {
+            this.selectedCompanySales = companySales;
+            await this.updateCharts(this.selectedCompanySales);
+        } else if (!this.selectedCompanySales) {
+            // this is the case when the user will see the charts for the first time
+            // in this case, return to the previous screen
+            this.goBack();
+        }
     }
 
     private async updateCharts(companySales: CompanySales) {
