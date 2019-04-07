@@ -125,7 +125,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
                     this.updateCharts(this.selectedCompanySales);
                 });
 
-        this.hideLoading();
+        await this.hideLoading();
     }
 
     async ngOnDestroy() {
@@ -186,10 +186,15 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
         if (companySales) {
             this.selectedCompanySales = companySales;
             await this.updateCharts(this.selectedCompanySales);
-        } else if (!this.selectedCompanySales) {
-            // this is the case when the user will see the charts for the first time
-            // in this case, return to the previous screen
-            this.goBack();
+        } else {
+
+            if (!this.selectedCompanySales) {
+                // this is the case when the user will see the charts for the first time
+                // in this case, return to the previous screen
+                this.goBack();
+            }
+
+            await this.hideLoading();
         }
     }
 
