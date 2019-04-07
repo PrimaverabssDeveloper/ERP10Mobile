@@ -86,6 +86,7 @@ export class SalaryChartComponent {
                     xAxes: [{
                         stacked: true,
                         display: true,
+                        maxBarThickness: 40,
                         gridLines: {
                             display: false
                         }
