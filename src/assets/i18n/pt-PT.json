@@ -176,7 +176,13 @@
         },
         "HR_SETTINGS" : {
             "PAGE_TITLE" : "Human Resources",
-            "TOOGLE_PASSWORD_BUTTON" : "Restrict access with PIN"
+            "TOOGLE_PIN_BUTTON" : "Restrict access with PIN"
+        },
+        "PIN_COMPONENT" : {
+            "CLEAR_PIN_BTN": "Limpar",
+            "RESET_PIN_BTN": "Repor PIN",
+            "INVALID_PIN_MESSAGE": "PIN inválido",
+            "RESET_PIN_ALERT_MESSAGE": "Foi enviado um E-Mail com um link de reposição de PIN."
         }
     }
 }

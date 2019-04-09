@@ -1,0 +1,56 @@
+<div class="cancel" (click)="dismissAction()">
+    {{'SHARED.ALERTS.CANCEL' | translate}}
+</div>
+
+<div class="pin-dialog">
+    <div class="message">
+        {{message}}
+    </div>
+    <div class="error-message">
+        <span *ngIf="errorMessage">{{errorMessage}}</span>&nbsp;
+    </div>
+    <div class="pin">
+        <div class="pin-section" *ngFor="let pinsection of pin" [ngClass]="{'has-value': pinsection }">
+        </div>
+    </div>
+    <div class="keyboard">
+        <div class="key" (click)="keyPressed('1')">
+            <div class="key-label">1</div>
+        </div>
+        <div class="key" (click)="keyPressed('2')">
+            <div class="key-label">2</div>
+        </div>
+        <div class="key" (click)="keyPressed('3')">
+            <div class="key-label">3</div>
+        </div>
+        <div class="key" (click)="keyPressed('4')">
+            <div class="key-label">4</div>
+        </div>
+        <div class="key" (click)="keyPressed('5')">
+            <div class="key-label">5</div>
+        </div>
+        <div class="key" (click)="keyPressed('6')">
+            <div class="key-label">6</div>
+        </div>
+        <div class="key" (click)="keyPressed('7')">
+            <div class="key-label">7</div>
+        </div>
+        <div class="key" (click)="keyPressed('8')">
+            <div class="key-label">8</div>
+        </div>
+        <div class="key" (click)="keyPressed('9')">
+            <div class="key-label">9</div>
+        </div>
+        <div class="clean-key">
+        </div>
+        <div class="key" (click)="keyPressed('0')">
+            <div class="key-label">0</div>
+        </div>
+        <div class="clean-key" (click)="clearPinAction()">
+            <div class="key-label">{{'HUMAN_RESOURCES.PIN_COMPONENT.CLEAR_PIN_BTN' | translate}}</div>
+        </div>
+    </div>
+    <div class="reset-pin">
+        <span *ngIf="resetPinEnabled" (click)="resetPinAction()">{{'HUMAN_RESOURCES.PIN_COMPONENT.RESET_PIN_BTN' | translate}}</span>
+    </div>
+</div>

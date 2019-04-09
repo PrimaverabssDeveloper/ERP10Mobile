@@ -1,10 +1,18 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { LoadingController, PopoverController, IonSlides, MenuController } from '@ionic/angular';
+import { LoadingController, PopoverController, IonSlides, MenuController, ModalController } from '@ionic/angular';
 import { PageBase } from '../../../shared/pages';
 import { HumanResourcesServiceProvider, HumanResourcesService } from '../../services';
 import { Salaries, YearSalary, MonthSalary, BaseSalary, Value, SalaryDocument } from '../../models';
-import { SalaryChartDataColumn, SalaryChartData, SalaryChartVerticalAxis, DocumentsListComponent } from '../../components';
+
+import {
+    SalaryChartDataColumn,
+    SalaryChartData,
+    SalaryChartVerticalAxis,
+    DocumentsListComponent,
+    PinComponentBase
+} from '../../components';
+
 import { TranslateService } from '@ngx-translate/core';
 import { DatePipe } from '@angular/common';
 import { LocaleService } from '../../../core/services';
@@ -13,6 +21,7 @@ import { File } from '@ionic-native/file/ngx';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { PopoverSelectorComponent } from '../../../shared/components';
 import { ModuleCompany } from '../../../core/entities';
+import { PinService } from '../../services/pin.service';
 
 @Component({
     templateUrl: './hr-home.page.html',
@@ -67,7 +76,8 @@ export class HrHomePage extends PageBase implements OnInit {
         private datePipe: DatePipe,
         private fileOpener: FileOpener,
         private file: File,
-        private emailComposer: EmailComposer
+        private emailComposer: EmailComposer,
+        private pinService: PinService
     ) {
 
         super(loadingController, location, menuController);
@@ -83,6 +93,15 @@ export class HrHomePage extends PageBase implements OnInit {
     * @memberof HrHomePage
     */
     async ngOnInit() {
+        const accessModuleAllowed = await this.pinService.accessAllowed();
+
+        if (!accessModuleAllowed) {
+            this.goBack();
+            return;
+        }
+
+        await this.showLoading();
+
         this.localizedMonthsNames = await this.getAllLocalizedMonthsNamesAsync();
         this.companies = this.humanResourcesService.getCompanies();
         if (!this.companies || this.companies.length === 0) {
@@ -96,6 +115,8 @@ export class HrHomePage extends PageBase implements OnInit {
 
         // show salaries
         await this.showSalariesForCompany(companyKey);
+
+        await this.hideLoading();
     }
 
     toggleSalaryValuesStateAction() {

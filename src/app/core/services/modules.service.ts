@@ -4,6 +4,7 @@ import { InstanceService } from './instance.service';
 import { CoreStorageService } from './core-storage.service';
 import { Observable } from 'rxjs';
 import { HttpRequestService } from './http-request.service';
+import { LocaleService } from './locale.service';
 
 /**
  * Provides access to all available modules definitions.
@@ -27,7 +28,8 @@ export class ModulesService {
     constructor(
         private instanceService: InstanceService,
         private coreStorageService: CoreStorageService,
-        private httpRequestService: HttpRequestService
+        private httpRequestService: HttpRequestService,
+        private localeService: LocaleService
         ) {
         // this.modulesSummariesHandlers = {};
         this.modulesDefinitions = {};
@@ -132,12 +134,12 @@ export class ModulesService {
      * @returns {Promise<boolean>}
      * @memberof ModulesService
      */
-    async setModulePassword(moduleName: string, password: string): Promise<boolean> {
+    async setModulePin(moduleName: string, password: string): Promise<boolean> {
 
         let success = true;
 
         try {
-            success = await this.httpRequestService.post<any>(`app/modules/${moduleName}/pin`, password );
+            await this.httpRequestService.post<any>(`app/modules/${moduleName}/pin`, password );
         } catch (error) {
             success = false;
         }
@@ -153,7 +155,7 @@ export class ModulesService {
      * @returns {Promise<boolean>}
      * @memberof ModulesService
      */
-    async verifyModulePassword(moduleName: string, password: string): Promise<boolean> {
+    async verifyModulePin(moduleName: string, password: string): Promise<boolean> {
 
         let success = true;
 
@@ -173,17 +175,8 @@ export class ModulesService {
      * @returns {Promise<boolean>}
      * @memberof ModulesService
      */
-    async verifyModuleHasPassword(moduleName: string): Promise<boolean> {
-
-        let success = true;
-
-        try {
-            success = await this.httpRequestService.get<boolean>(`app/modules/${moduleName}/pin/enabled`);
-        } catch (error) {
-            success = false;
-        }
-
-        return success;
+    async verifyModuleHasPin(moduleName: string): Promise<boolean> {
+        return await this.httpRequestService.get<boolean>(`app/modules/${moduleName}/pin/enabled`);
     }
 
     /**
@@ -193,7 +186,7 @@ export class ModulesService {
      * @returns {Promise<boolean>}
      * @memberof ModulesService
      */
-    async removeModulePassword(moduleName: string): Promise<boolean> {
+    async removeModulePin(moduleName: string): Promise<boolean> {
 
         let success = true;
 
@@ -204,6 +197,21 @@ export class ModulesService {
         }
 
         return success;
+    }
+
+    /**
+     * Reset the module pin by requesting to the service to send an email to the user.
+     *
+     * @param {string} moduleName
+     * @returns {Promise<any>}
+     * @memberof ModulesService
+     */
+    async resetModulePin(moduleName: string): Promise<any> {
+        try {
+            const culturecode = this.localeService.locale.split('-')[0];
+            await this.httpRequestService.get(`app/modules/${moduleName}/pin/reset?culturecode=${culturecode}`);
+        } catch (error) {
+        }
     }
 
     private async getModulesSummariesVisibilityStateAsync(): Promise<{ [key: string]: boolean }> {

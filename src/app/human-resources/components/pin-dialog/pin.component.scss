@@ -1,0 +1,138 @@
+$accent-color: rgb(52, 139, 221);
+
+$section-vetical-margin: 3vw;
+
+$message-width: 70vw;
+$default-text-size: 5vw;
+
+$pin-section-margin: 1vw;
+$pin-heigh: 8vw;
+$pin-width: $pin-heigh * 4;
+$pin-section-size: $pin-heigh - $pin-section-margin*2;
+$pin-border-color: $accent-color;
+$pin-has-value-background-color: $accent-color;
+
+
+$keyboard-width: 70vw;
+$keyboard-key-margin: 1.5vw;
+$keyboard-key-size: $keyboard-width/3 - $keyboard-key-margin * 2;
+$keyboard-height: ($keyboard-key-size + $keyboard-key-margin * 2) * 4;
+
+$keyboard-key-background-color: white;
+$keyboard-key-border-color:$accent-color;
+$keyboard-key-color: $accent-color;
+$keyboard-key-background-color-active: $accent-color;
+$keyboard-key-color-active: white;
+
+.cancel {
+    position: fixed;
+    color: $accent-color;
+    top: 2vw;
+    left: 3vw;
+    font-size: $default-text-size;
+}
+
+.pin-dialog {
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+
+    .message {
+        text-align: center;
+        font-weight: bold;
+        font-size: $default-text-size;
+        width: $message-width;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .error-message {
+        text-align: center;
+        margin-top: $section-vetical-margin;
+        color: #FF0000;
+        font-size: $default-text-size;
+        width: $message-width;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .pin {
+        width: $pin-width;
+        height: $pin-heigh;
+        margin-top: $section-vetical-margin;
+        margin-left: auto;
+        margin-right: auto;
+        .pin-section {
+            width: $pin-section-size;
+            height: $pin-section-size;
+            margin: $pin-section-margin;
+            border-radius: 100%;
+            border: 1px solid $pin-border-color;
+            float: left;
+            transition: background-color 1;
+
+            &.has-value {
+                background-color: $pin-border-color;
+            }
+        }
+    }
+
+    .keyboard {
+        width: $keyboard-width;
+        height: $keyboard-height;
+        margin-top: $section-vetical-margin;
+        margin-left: auto;
+        margin-right: auto;
+        
+        .clean-key {
+            border:1px solid transparent;
+            color: $keyboard-key-color;
+            position: relative;
+            width: $keyboard-key-size;
+            height: $keyboard-key-size;
+            margin: $keyboard-key-margin;
+            float: left;
+            font-size: 5vw;
+
+            .key-label {
+                position: absolute;
+                top:50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .key {
+            background-color: $keyboard-key-background-color;
+            border:1px solid $keyboard-key-border-color;
+            color: $keyboard-key-color;
+            position: relative;
+            border-radius: 100%;
+            width: $keyboard-key-size;
+            height: $keyboard-key-size;
+            margin: $keyboard-key-margin;
+            float: left;
+            font-size: 5vw;
+
+            .key-label {
+                position: absolute;
+                top:50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            &:active {
+                background-color: $keyboard-key-background-color-active;
+                color: $keyboard-key-color-active;
+            }
+        }
+    }
+
+    .reset-pin {
+        margin-top: $section-vetical-margin;
+        font-size: $default-text-size;
+        text-align: center;
+        color: $accent-color;
+    }
+}

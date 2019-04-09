@@ -5,12 +5,19 @@ import { ChartVerticalAxisComponent } from './chart-vertical-axis/chart-vertical
 import { YearlyChartComponent } from './yearly-chart/yearly-chart.component';
 import { DocumentsListComponent } from './documents-list/documents-list.component';
 
+import { AddPinComponent } from './pin-dialog/add-pin.component';
+import { RemovePinComponent } from './pin-dialog/remove-pin.component';
+import { VerifyPinComponent } from './pin-dialog/verify-pin.component';
+
 export * from './salary-chart/salary-chart.component';
 export * from './year-selector/year-selector.component';
 export * from './yearly-chart/yearly-chart.component';
 export * from './monthly-charts/monthly-charts.component';
 export * from './chart-vertical-axis/chart-vertical-axis.component';
 export * from './documents-list/documents-list.component';
+export * from './pin-dialog/pin.component.base';
+export *  from './pin-dialog/add-pin.component';
+export *  from './pin-dialog/verify-pin.component';
 
 export const COMPONENTS = [
     SalaryChartComponent,
@@ -18,9 +25,15 @@ export const COMPONENTS = [
     YearlyChartComponent,
     MonthlyChartsComponent,
     ChartVerticalAxisComponent,
-    DocumentsListComponent
+    DocumentsListComponent,
+    AddPinComponent,
+    VerifyPinComponent,
+    RemovePinComponent
 ];
 
 export const ENTRY_COMPONENTS = [
-    DocumentsListComponent
+    DocumentsListComponent,
+    AddPinComponent,
+    VerifyPinComponent,
+    RemovePinComponent
 ];

@@ -2,8 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { LoadingController, MenuController, AlertController } from '@ionic/angular';
 import { PageBase } from '../../../shared/pages';
-import { HumanResourcesServiceProvider, HumanResourcesService } from '../../services';
+import { HumanResourcesService } from '../../services';
 import { TranslateService } from '@ngx-translate/core';
+import { PinService } from '../../services/pin.service';
 
 /**
  * Settings for the sales module.
@@ -18,27 +19,26 @@ import { TranslateService } from '@ngx-translate/core';
     styleUrls: [
         'hr-settings.page.scss',
         '../../../shared/styles/settings.scss'
-    ],
-    providers: [HumanResourcesServiceProvider]
+    ]
 })
 export class HrSettingsPage extends PageBase implements OnInit {
 
     // #region 'Private Properties'
-    _passwordEnabled: boolean;
+    _pinEnabled: boolean;
     // #endregion
 
 
     // #region 'Public Properties'
-    get passwordEnabled(): boolean {
-        return this._passwordEnabled;
+    get pinEnabled(): boolean {
+        return this._pinEnabled;
     }
 
-    set passwordEnabled(value: boolean) {
-        this._passwordEnabled = value;
+    set pinEnabled(value: boolean) {
+        this._pinEnabled = value;
         if (value) {
-            this.enablePassword();
+            this.enablePin();
         } else {
-            this.disablePassword();
+            this.disablePin();
         }
     }
     // #endregion
@@ -48,7 +48,7 @@ export class HrSettingsPage extends PageBase implements OnInit {
         public location: Location,
         public menuController: MenuController,
         private translateService: TranslateService,
-        private humanResourcesService: HumanResourcesService,
+        private pinService: PinService,
         private alertController: AlertController
     ) {
         super(loadingController, location, menuController);
@@ -61,7 +61,7 @@ export class HrSettingsPage extends PageBase implements OnInit {
     */
     async ngOnInit() {
         try {
-            this._passwordEnabled = await this.isPasswordEnabled();
+            this._pinEnabled = await this.isPinEnabled();
         } catch (error) {
             console.log(error);
             this.goBack();
@@ -76,113 +76,15 @@ export class HrSettingsPage extends PageBase implements OnInit {
 
     // #endregion
 
-    private async isPasswordEnabled(): Promise<boolean> {
-        return await this.humanResourcesService.verifyModuleHasPassword();
+    private async isPinEnabled(): Promise<boolean> {
+        return await this.pinService.verifyModuleHasPin();
     }
 
-    private async enablePassword() {
-
-        const alert = await this.alertController.create({
-            header: 'Prompt!',
-            inputs: [
-              {
-                name: 'PASSWORD',
-                type: 'text',
-                label: '#PASSWORD',
-                // min: 4,
-                // max: 4
-              }
-            ],
-            buttons: [
-              {
-                text: '#Cancel',
-                role: 'cancel',
-                cssClass: 'secondary'
-              }, {
-                text: '#Ok',
-                handler: (value: any) => {
-                    this.validateAndEnablePassword(value.PASSWORD);
-                }
-              }
-            ]
-          });
-
-          await alert.present();
+    private async enablePin() {
+        this._pinEnabled = await this.pinService.enablePinDialog();
     }
 
-    private async disablePassword() {
-
-        const confirmationHandler = async (password: string) => {
-            await this.showLoading();
-
-            try {
-                const validPassword = await this.humanResourcesService.verifyModulePassword(password);
-                if (validPassword) {
-                    await this.humanResourcesService.removeModulePassword();
-                    this._passwordEnabled = false;
-                } else {
-                    this._passwordEnabled = true;
-                    this.showAlertModal('THE PASSWORD WAS INVALID');
-                }
-            } catch (error) {
-                console.log(error);
-                this._passwordEnabled = true;
-            }
-
-            await this.hideLoading();
-        };
-
-        const alert = await this.alertController.create({
-            header: '# Validate password',
-            inputs: [
-              {
-                name: 'PASSWORD',
-                type: 'text',
-                label: '#PASSWORD'
-                // min: 4,
-                // max: 4
-              }
-            ],
-            buttons: [
-              {
-                text: '#Cancel',
-                role: 'cancel',
-                cssClass: 'secondary'
-              }, {
-                text: '#Ok',
-                handler: (value: any) => {
-                    confirmationHandler(value.PASSWORD);
-                }
-              }
-            ]
-          });
-
-          await alert.present();
-    }
-
-    private async validateAndEnablePassword(password: string) {
-        if (!password || password.length === 0) {
-            await this.showAlertModal('#THE PASSWORD IS NOT VALID');
-            this._passwordEnabled = false;
-            return;
-        }
-
-        const result = await this.humanResourcesService.setModulePassword(password);
-
-        if (!result) {
-            await this.showAlertModal('#ERROR STORING PASSWORD');
-            this._passwordEnabled = false;
-        }
-    }
-
-
-    private async showAlertModal(message: string) {
-        const okButton = await this.translateService.get('SHARED.ALERTS.OK').toPromise();
-        const alert = await this.alertController.create({
-            header: message,
-            buttons: [okButton]
-          });
-
-          await alert.present();
+    private async disablePin() {
+        this._pinEnabled = !await this.pinService.disablePinDialog();
     }
 }

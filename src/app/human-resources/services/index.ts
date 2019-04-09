@@ -4,10 +4,12 @@ import { AuthenticationService, InstanceHttpRequestService, DomService, Instance
 import { HttpClient } from '@angular/common/http';
 import { HumanResourcesService } from './human-resources.service';
 import { HumanResourcesDemoService } from './human-resources.demo.service';
+import { PinService } from './pin.service';
 
 export * from './human-resources.service';
 
 export const SERVICES = [
+    PinService
 ];
 
 export const HumanResourcesServiceProvider: Provider = {
