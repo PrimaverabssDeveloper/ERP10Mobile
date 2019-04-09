@@ -38,6 +38,7 @@ $ticker-content-height: calc(100% - #{$ticker-header-height});
         width: 100%;
         height: $ticker-header-height;
         position: relative;
+        transform: translateY(-2em);
 
         .ticker-title{
             text-transform: uppercase;
@@ -50,8 +51,8 @@ $ticker-content-height: calc(100% - #{$ticker-header-height});
         }
     
         .ticker-settings {
-            height: 1.5em; //25px;
-            width: 1.5em; //25px;
+            height: 2em; //25px;
+            width: 2em; //25px;
             position: absolute;
             
             right: 0;

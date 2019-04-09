@@ -1,5 +1,5 @@
 
-$sales-delta-height: 3.75em; //25px;
+$sales-delta-height: 5em; //25px;
 $week-day-height: 3.75em; //25px;
 $bars-height: calc( 100% - (#{$sales-delta-height} + #{$week-day-height}));
 $bar-legend-height: 3.75em; //25px;
@@ -100,7 +100,8 @@ $bar-legend-height: 3.75em; //25px;
                 position: absolute;
                 transform: translateX(-50%);
                 left: 50%;
-                font-size: 3em;
+                font-size: 5em;
+                line-height: 1em;
                 font-weight: bold;
             
                 &:after {
