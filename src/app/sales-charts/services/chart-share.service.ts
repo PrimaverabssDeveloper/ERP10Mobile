@@ -1,3 +1,5 @@
+import * as jsPDF from 'jspdf';
+
 import { Injectable } from '@angular/core';
 import { LocalizedStringsPipe, CurrencySymbolPipe, LocaleCurrencyPipe, LocaleDatePipe } from '../../shared/pipes';
 import { TranslateService } from '@ngx-translate/core';
@@ -81,7 +83,7 @@ export class ChartShareService {
         previousYearAccentColor: string
     ): Promise<boolean> {
 
-        const base64Image = await this.buildBase64Image(
+        const imageData = await this.buildBase64Image(
             chartCanvas,
             chartLocalizedTitle,
             chartCompanyKey,
@@ -101,7 +103,7 @@ export class ChartShareService {
 
         if (hasStoragePermission) {
             try {
-                await this.base64ToGallery.base64ToGallery(base64Image, { prefix: 'sales_chart', mediaScanner: false });
+                await this.base64ToGallery.base64ToGallery(imageData.image, { prefix: 'sales_chart', mediaScanner: false });
             } catch (error) {
                 console.log(error);
                 return false;
@@ -146,7 +148,7 @@ export class ChartShareService {
         previousYearAccentColor: string
     ): Promise<boolean> {
 
-        const base64Image = await this.buildBase64Image(
+        const imageData = await this.buildBase64Image(
             chartCanvas,
             chartLocalizedTitle,
             chartCompanyKey,
@@ -162,30 +164,16 @@ export class ChartShareService {
             previousYearAccentColor
         );
 
-        try {
+        // create the email subject based on chart title and data
+        const chartTitle = await this.buildChartTitle(chartLocalizedTitle, chartValueType, chartIsTimeChart, chartSelectedPeriod);
+        const chartDate = this.localeDatePipe.transform(chartDataDate, 'medium');
+        const emailSubject = `${chartTitle} - ${chartDate}`;
 
-            const chartTitle = await this.buildChartTitle(chartLocalizedTitle, chartValueType, chartIsTimeChart, chartSelectedPeriod);
-            const chartDate = this.localeDatePipe.transform(chartDataDate, 'medium');
+        // store the image so it can be sent as an attachment by email
+        const imagePath = await this.storeImage(imageData.image);
 
-            const imagePath = await this.storeImage(base64Image);
-
-            const email = {
-                attachments: [
-                    imagePath
-                ],
-                subject: `${chartTitle} - ${chartDate}`,
-                isHtml: true
-            };
-
-            // Send a text message using default options
-            this.emailComposer.open(email);
-
-        } catch (error) {
-            console.log(error);
-            return false;
-        }
-
-        return true;
+        // send the email
+        return this.sendAtachmentByEmail(emailSubject, imagePath);
     }
 
     async shareChartPdfByEmail(
@@ -204,7 +192,7 @@ export class ChartShareService {
         previousYearAccentColor: string
     ) {
 
-        const image = await this.buildBase64Image(
+        const imageData = await this.buildBase64Image(
             chartCanvas,
             chartLocalizedTitle,
             chartCompanyKey,
@@ -219,20 +207,82 @@ export class ChartShareService {
             currentYearAccentColor,
             previousYearAccentColor
         );
+
+        // create pdf with with chart image
+        const pdfDoc = new jsPDF();
+
+        // calculate the image size to fit all on the pdf
+        const pdfWidth = pdfDoc.internal.pageSize.getWidth();
+        const pdfHeight = pdfDoc.internal.pageSize.getHeight();
+        let imageWidth = pdfWidth;
+        let imageHeight = (pdfWidth * imageData.size.height) / imageData.size.width;
+        if (imageHeight > pdfHeight) {
+            imageHeight = pdfHeight;
+            imageWidth = (pdfHeight * imageData.size.width) / imageData.size.height;
+        }
+
+        pdfDoc.addImage(imageData.image, 'PNG', 0, 0, imageWidth, imageHeight);
+        const pdfBlob = pdfDoc.output('blob');
+
+        // save the pdf so it can be sent by email
+        const pdfFilePath = await this.storePdf(pdfBlob);
+
+        // build the email subject
+        const chartTitle = await this.buildChartTitle(chartLocalizedTitle, chartValueType, chartIsTimeChart, chartSelectedPeriod);
+        const chartDate = this.localeDatePipe.transform(chartDataDate, 'medium');
+        const emailSubject = `${chartTitle} - ${chartDate}`;
+
+        // send the email
+        return this.sendAtachmentByEmail(emailSubject, pdfFilePath);
+
+    }
+
+    private sendAtachmentByEmail(subject: string, attachmentsFilePath: string): boolean {
+
+        // email composition definitions
+        const email = {
+            attachments: [
+                attachmentsFilePath
+            ],
+            subject: subject,
+            isHtml: true
+        };
+
+        try {
+            // Send a text message using default options
+            this.emailComposer.open(email);
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+
+        return true;
     }
 
     private async storeImage(base64Image: string): Promise<string> {
         const imageFileName = 'sales_chart.png';
         const imgBlob = this.base64toBlob(base64Image, 'image/png');
 
+        return await this.storeFile(imgBlob, imageFileName);
+    }
+
+    private async storePdf(pdfBlob: Blob): Promise<string> {
+        return await this.storeFile(pdfBlob, 'sales_chart.pdf');
+    }
+
+    private async storeFile(fileBlob: Blob, fileName: string): Promise<string> {
+
+        // the the path where is safe to store documents
         let filepath = this.file.externalApplicationStorageDirectory;
         if (!filepath) {
             filepath = this.file.documentsDirectory;
         }
 
-        await this.file.writeFile(filepath, imageFileName, imgBlob, { replace: true });
+        // store the file
+        await this.file.writeFile(filepath, fileName, fileBlob, { replace: true });
 
-        return filepath.concat(imageFileName);
+        // return the full path of the file
+        return filepath.concat(fileName);
     }
 
     private async hasStoragePermission(): Promise<boolean> {
@@ -319,7 +369,7 @@ export class ChartShareService {
         salesTableData: SalesTableData,
         currentYearAccentColor: string,
         previousYearAccentColor: string
-    ): Promise<string> {
+    ): Promise<{image: string, size: { width: number, height: number}}> {
 
         const canvas = document.createElement('canvas');
         canvas.width = 2500;
@@ -335,6 +385,7 @@ export class ChartShareService {
         }
 
         const ctx = canvas.getContext('2d');
+
         // fill with white
         ctx.fillStyle = '#fff';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -580,8 +631,24 @@ export class ChartShareService {
             }
         }
 
-        const base64Image = canvas.toDataURL();
+        // create a canvas to reduce the final image size
+        const finalImageCanvas = document.createElement('canvas');
+        finalImageCanvas.width = 1500;
+        finalImageCanvas.height = (finalImageCanvas.width * canvas.height) / canvas.width;
 
-        return base64Image;
+        // add the canvas to the resized canvas
+        const finalImageCanvasCtx = finalImageCanvas.getContext('2d');
+        finalImageCanvasCtx.drawImage(canvas, 0, 0, finalImageCanvas.width, finalImageCanvas.height);
+
+        // generate the image
+        const base64Image = finalImageCanvas.toDataURL();
+
+        return {
+            image: base64Image,
+            size: {
+                width: finalImageCanvas.width,
+                height: finalImageCanvas.height
+            }
+        };
     }
 }

@@ -12,7 +12,7 @@ import { SalesDataCharts, ChartBundle, Serie, ChartData, ChartPeriodType } from 
 import { Subscription } from 'rxjs';
 import { LocaleService } from '../../../core/services';
 import { ActivatedRoute } from '@angular/router';
-import { AlertController, IonNav } from '@ionic/angular';
+import { AlertController, IonNav, LoadingController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LocaleCurrencyPipe } from '../../../shared/pipes';
 import { FooterTabMenuItem, FooterTabMenu, FooterMenuItemSelectedEvent } from '../footer-menu';
@@ -28,6 +28,9 @@ import { SalesChartsData } from './sales-charts-data';
     styleUrls: ['sales-charts.component.scss']
 })
 export class SalesChartsComponent implements OnInit, OnDestroy {
+
+    private loading: HTMLIonLoadingElement;
+
     private _data: SalesChartsData;
     private readonly currentYearSeriesKey = '1';
     private readonly previousYearSeriesKey = '0';
@@ -100,7 +103,8 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
         private localeService: LocaleService,
         private localeCurrencyPipe: LocaleCurrencyPipe,
         private translate: TranslateService,
-        private chartShareService: ChartShareService
+        private chartShareService: ChartShareService,
+        private loadingController: LoadingController
     ) {
         this.dataDate = new Date();
         this.timeFrame = 'monthly';
@@ -313,10 +317,10 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
                         key: 'send_chart_by_email',
                         label: sendChartByEmailResource
                     },
-                    // {
-                    //     key: 'send_pdf_chart_by_email',
-                    //     label: sendPdfByEmailResource
-                    // },
+                    {
+                        key: 'send_pdf_chart_by_email',
+                        label: sendPdfByEmailResource
+                    },
                     {
                         key: 'save_image_in_the_gallery',
                         label: saveImageinTheGalleryResource
@@ -366,6 +370,7 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
     }
 
     private async shareChartImageByEmail() {
+        await this.showLoading();
         const chartCanvas = this.saleschartcomponent.chartCanvas.nativeElement;
 
         await this.chartShareService.shareChartImageByEmail(
@@ -383,9 +388,12 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
             this.rgbColorBuilder(this.data.currentYearAccentColor),
             this.rgbColorBuilder(this.data.previousYearAccentColor)
         );
+
+        await this.hideLoading();
     }
 
     private async shareChartPdfByEmail() {
+        await this.showLoading();
         const chartCanvas = this.saleschartcomponent.chartCanvas.nativeElement;
 
         await this.chartShareService.shareChartPdfByEmail(
@@ -403,10 +411,12 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
             this.rgbColorBuilder(this.data.currentYearAccentColor),
             this.rgbColorBuilder(this.data.previousYearAccentColor)
         );
+
+        await this.hideLoading();
     }
 
     private async storeImageInGallery() {
-
+        await this.showLoading();
         const chartCanvas = this.saleschartcomponent.chartCanvas.nativeElement;
 
         const success = await this.chartShareService.storeChartImageOnDeviceGallery(
@@ -425,6 +435,7 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
             this.rgbColorBuilder(this.data.previousYearAccentColor)
         );
 
+        await this.hideLoading();
 
         const messageKey = `SALES_CHARTS.SALES_CHARTS_COMPONENT.SHARE_SAVED_IMAGE_TO_GALLERY_${success ? 'SUCCESS' : 'ERROR'}`;
 
@@ -442,6 +453,26 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
 
     private rgbColorBuilder(color: {r: number, g: number, b: number}, alpha: number = 1): string {
         return `rgba(${color.r},${color.g},${color.b}, ${alpha})`;
+    }
+
+    private async showLoading(): Promise<void> {
+        if (this.loading) {
+            return;
+        }
+
+        this.loading = await this.loadingController.create();
+
+        return await this.loading.present();
+    }
+
+    protected async hideLoading(): Promise<void> {
+
+        if (!this.loading) {
+            return;
+        }
+
+        await this.loading.dismiss();
+        this.loading = null;
     }
 }
 
