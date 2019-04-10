@@ -86,18 +86,20 @@ $menu-list-row-text-selected-color: $accent-color;
             height: 40px;
             width: 100%;
             border-bottom: 1px solid rgb(211,212,214);
+            color: $menu-list-row-text-color;
+
+            &:active {
+                color: $menu-list-row-text-selected-color;
+            }
 
             &.selected {
-                span {
-                    color: $menu-list-row-text-selected-color;    
-                }
+                color: $menu-list-row-text-selected-color;
             }
 
             span {
                 font-size: 14pt;
                 line-height: 40px;
                 padding-left: 10px;
-                color: $menu-list-row-text-color;
             }
         }
     }
