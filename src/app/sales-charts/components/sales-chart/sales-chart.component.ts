@@ -375,7 +375,7 @@ export class SalesChartComponent {
         } {
 
         let labels: string[] = [];
-        const dataSets: { label: string, backgroundColor: string, hoverBackgroundColor, data: number[] }[] = [];
+        const dataSets: { label: string, backgroundColor: string, hoverBackgroundColor, data: number[], lineTension: number }[] = [];
         let maxValue = 0;
 
         let finalCurrentYearAccentColor: string;
@@ -395,7 +395,8 @@ export class SalesChartComponent {
                 label: currentYearSerie.legend,
                 data: [],
                 backgroundColor: finalCurrentYearAccentColor,
-                hoverBackgroundColor: finalCurrentYearAccentColor
+                hoverBackgroundColor: finalCurrentYearAccentColor,
+                lineTension: 0
             }
         );
 
@@ -405,7 +406,8 @@ export class SalesChartComponent {
                 label: previousYearSerie.legend,
                 data: [],
                 backgroundColor: finalPreviouseYearAccentColor,
-                hoverBackgroundColor: finalPreviouseYearAccentColor
+                hoverBackgroundColor: finalPreviouseYearAccentColor,
+                lineTension: 0
             }
         );
 
@@ -438,32 +440,6 @@ export class SalesChartComponent {
                 dataSets[i].data.push(finalValue);
             }
         }
-
-
-        // for (const dataSet of chart.dataSet) {
-        //     // the Monthly Chart has always only one set of datapoins => NOT ANY MORE
-        //     const dataPoint = dataSet.dataPoints[0];
-
-        //     // the dataPoint with total values is not used on the chart
-        //     if (dataPoint.isTotal) {
-        //         continue;
-        //     }
-
-        //     labels.push(dataPoint.label);
-
-        //     for (let i = 0; i < series.length; i++) {
-        //         const serie = series[i];
-        //         const value = dataPoint.values.find(v => v.seriesKey === serie.key);
-        //         let finalValue = 0;
-
-        //         if (value) {
-        //             finalValue = this.getCorrectValue(value, useReportingValue);
-        //             maxValue = finalValue > maxValue ? finalValue : maxValue;
-        //         }
-
-        //         dataSets[i].data.push(finalValue);
-        //     }
-        // }
 
         if (timeFrame === 'quarter') {
             maxValue = 0;
