@@ -22,6 +22,7 @@ export class SideMenuComponent implements OnInit {
         private zone: NgZone,
         private alertController: AlertController,
         private navController: NavController,
+        private authenticationService: AuthenticationService,
         private modulesService: ModulesService
     ) {}
 
@@ -31,8 +32,7 @@ export class SideMenuComponent implements OnInit {
     * @memberof SideMenuComponent
     */
     async ngOnInit() {
-        const modulesDefinitions = await this.modulesService.getAvailabeModulesDefinitions();
-        this.modulesDefsWithSettings = modulesDefinitions.filter(m => m.settings && m.settings.hasSettings);
+        this.modulesDefsWithSettings = await this.modulesService.getAvailabeModulesDefinitionsWithSettings();
     }
 
 

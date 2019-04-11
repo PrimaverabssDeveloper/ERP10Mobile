@@ -5,6 +5,7 @@ import { CoreStorageService } from './core-storage.service';
 import { Observable } from 'rxjs';
 import { HttpRequestService } from './http-request.service';
 import { LocaleService } from './locale.service';
+import { AuthenticationService } from './authentication.service';
 
 /**
  * Provides access to all available modules definitions.
@@ -29,7 +30,8 @@ export class ModulesService {
         private instanceService: InstanceService,
         private coreStorageService: CoreStorageService,
         private httpRequestService: HttpRequestService,
-        private localeService: LocaleService
+        private localeService: LocaleService,
+        private authenticationService: AuthenticationService
         ) {
         // this.modulesSummariesHandlers = {};
         this.modulesDefinitions = {};
@@ -63,6 +65,23 @@ export class ModulesService {
         }
 
         return availableModulesDefinitions;
+    }
+
+    /**
+     * Provide the module definitions of all modules that has settings
+     *
+     * @returns {Promise<ModuleDefinition[]>}
+     * @memberof ModulesService
+     */
+    async getAvailabeModulesDefinitionsWithSettings(): Promise<ModuleDefinition[]> {
+        const modules = await this.getAvailabeModulesDefinitions();
+        let modulesWithSettings = modules.filter(m => m.settings && m.settings.hasSettings);
+
+        if  (this.authenticationService.isAuthenticateAsDemo) {
+            modulesWithSettings = modulesWithSettings.filter(m => m.settings.notAvailableInDemo !== true);
+        }
+
+        return modulesWithSettings;
     }
 
     async getAllAvailableModulesSummariesTickers(): Promise<{ moduleKey: string, tickers: Ticker[] }[]> {

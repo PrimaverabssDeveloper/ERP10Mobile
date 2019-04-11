@@ -12,6 +12,7 @@ export const HrModuleDefinition: ModuleDefinition = {
     },
     settings: {
         hasSettings: true,
+        notAvailableInDemo: true,
         settingsRoutePath: '/humanresources/settings'
     }
 };

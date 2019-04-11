@@ -60,12 +60,14 @@ export interface ModuleDefinition {
      *
      * @type {{
      *         hasSettings: boolean;
+     *         notAvailableInDemo?: boolean;
      *         settingsRoutePath?: string;
      *     }}
      * @memberof ModuleDefinition
      */
     settings: {
         hasSettings: boolean;
+        notAvailableInDemo?: boolean;
         settingsRoutePath?: string;
     };
 
