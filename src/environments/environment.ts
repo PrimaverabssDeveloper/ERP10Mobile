@@ -4,8 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 export const environment = {
     production: false,
-    apiEndpoint: 'https://stg-mobile.azurewebsites.net/api/v1/mobile',
-    // apiEndpoint: 'http://dev-mobile.azurewebsites.net/api/v1/mobile',
+    apiEndpoint: 'https://lithium-mobile.primaverabss.com/api/v1/mobile',
     authentication: {
         endpoint: 'https://identity.primaverabss.com/connect/authorize',
         requestTokenEndpoint: 'https://identity.primaverabss.com/connect/token',

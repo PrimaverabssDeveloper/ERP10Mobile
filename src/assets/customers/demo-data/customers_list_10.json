@@ -1,53 +1,84 @@
 {
-	"hasMore" : false,
-	"customers" : [{
-   		"name" : "José Pinto Costa #0", 
-   		"key" : "4075011588",
-   		"companyKey" : "COMP_PT",
-   		"location" : "Braga"
-   	},{
-   		"name" : "José Pinto Costa #1", 
-   		"key" : "6433202975",
-   		"companyKey" : "COMP_PT",
-   		"location" : "Vila Nova de Famalicão"
-   	},{
-   		"name" : "José Pinto Costa #2", 
-   		"key" : "3762829662",
-   		"companyKey" : "COMP_AOA",
-   		"location" : "Vila Nova de Famalicão"
-   	},{
-   		"name" : "José Pinto Costa #3", 
-   		"key" : "2820491711",
-   		"companyKey" : "COMP_AOA",
-   		"location" : "Vila Nova de Famalicão"
-   	},{
-   		"name" : "José Pinto Costa #4", 
-   		"key" : "2457299705",
-   		"companyKey" : "COMP_AOA",
-   		"location" : "Braga"
-   	},{
-   		"name" : "José Pinto Costa #5", 
-   		"key" : "5876104359",
-   		"companyKey" : "COMP_PT",
-   		"location" : "Vila Nova de Famalicão"
-   	},{
-   		"name" : "José Pinto Costa #6", 
-   		"key" : "3370868665",
-   		"companyKey" : "COMP_AOA",
-   		"location" : "Braga"
-   	},{
-   		"name" : "José Pinto Costa #7", 
-   		"key" : "4056589097",
-   		"companyKey" : "COMP_AOA",
-   		"location" : "Vila Nova de Famalicão"
-   	},{
-   		"name" : "José Pinto Costa #8", 
-   		"key" : "6288898140",
-   		"companyKey" : "COMP_AOA",
-   		"location" : "Vila Nova de Famalicão"
-   	},{
-   		"name" : "José Pinto Costa #9", 
-   		"key" : "4179788687",
-   		"companyKey" : "COMP_PT",
-   		"location" : "Vila Nova de Famalicão"
-   	}]}
+    "query": "*",
+    "hasMore": false,
+    "results": [
+        {
+            "id": "VjEwMC1FWEVDVVRJVkUtREVGQVVMVC1ERU1PLkFMQ0FE",
+            "score": 1,
+            "name": "Soluciones Cad de Madrid, SA",
+            "key": "ALCAD",
+            "location": "VILANUEVA DE ARRIBA",
+            "description": "Soluciones Cad de Madrid, SA",
+            "companyDescription": "Empresa de demonstração (PRIVA)",
+            "companyKey": "V100-EXECUTIVE-DEFAULT-DEMO",
+            "taxId": "989922456"
+        },
+        {
+            "id": "VjEwMC1FWEVDVVRJVkUtREVGQVVMVC1ERU1PLkouTS5GLg==",
+            "score": 1,
+            "name": "José Maria Fernandes & Filhos, Lda.",
+            "key": "J.M.F.",
+            "location": "Porto",
+            "description": "José Maria Fernandes & Filhos, Lda.",
+            "companyDescription": "Empresa de demonstração (PRIVA)",
+            "companyKey": "V100-EXECUTIVE-DEFAULT-DEMO",
+            "taxId": "505678900"
+        },
+        {
+            "id": "VjEwMC1FWEVDVVRJVkUtREVGQVVMVC1ERU1PLk1JQ1JPQVZJ",
+            "score": 1,
+            "name": "MicroAvi, Inc.",
+            "key": "MICROAVI",
+            "location": "CHELSEA",
+            "description": "MicroAvi, Inc.",
+            "companyDescription": "Empresa de demonstração (PRIVA)",
+            "companyKey": "V100-EXECUTIVE-DEFAULT-DEMO",
+            "taxId": "9393878719-A"
+        },
+        {
+            "id": "VjEwMC1FWEVDVVRJVkUtREVGQVVMVC1ERU1PLklORk9SU0hPVw==",
+            "score": 1,
+            "name": "Inforshow, Informática Comunicação",
+            "key": "INFORSHOW",
+            "location": "Luanda",
+            "description": "Inforshow, Informática Comunicação",
+            "companyDescription": "Empresa de demonstração (PRIVA)",
+            "companyKey": "V100-EXECUTIVE-DEFAULT-DEMO",
+            "taxId": "823892388"
+        },
+        {
+            "id": "VjEwMC1FWEVDVVRJVkUtREVGQVVMVC1ERU1PLlNJTFZB",
+            "score": 1,
+            "name": "Maria José da Silva",
+            "key": "SILVA",
+            "location": "Cividade",
+            "description": "Maria José da Silva",
+            "companyDescription": "Empresa de demonstração (PRIVA)",
+            "companyKey": "V100-EXECUTIVE-DEFAULT-DEMO",
+            "taxId": ""
+        },
+        {
+            "id": "VjEwMC1FWEVDVVRJVkUtREVGQVVMVC1ERU1PLlNPRlJJTw==",
+            "score": 1,
+            "name": "Sofrio, Lda",
+            "key": "SOFRIO",
+            "location": "POLO  NORTE",
+            "description": "Sofrio, Lda",
+            "companyDescription": "Empresa de demonstração (PRIVA)",
+            "companyKey": "V100-EXECUTIVE-DEFAULT-DEMO",
+            "taxId": "123456789"
+        },
+        {
+            "id": "VjEwMC1FWEVDVVRJVkUtREVGQVVMVC1ERU1PLlZE",
+            "score": 1,
+            "name": "Cliente Indiferenciado",
+            "key": "VD",
+            "location": "",
+            "description": "Cliente Indiferenciado",
+            "companyDescription": "Empresa de demonstração (PRIVA)",
+            "companyKey": "V100-EXECUTIVE-DEFAULT-DEMO",
+            "taxId": ""
+        }
+    ],
+    "properties": {}
+}

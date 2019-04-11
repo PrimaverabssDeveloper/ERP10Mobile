@@ -4,6 +4,8 @@ import { Customer, CustomersSearchResult, PendingOrders, RecentActivity, Current
 import { HttpClient } from '@angular/common/http';
 import { CustomersStorageService } from './customers-storage.service';
 import { InstanceHttpRequestService } from '../../core/services';
+import { CompanySalesData } from '../../sales/entities/sales-charts';
+import { ChartBundle } from '../../sales-charts/entities';
 
 @Injectable()
 export class CustomersDemoService extends CustomersService {
@@ -24,7 +26,9 @@ export class CustomersDemoService extends CustomersService {
             });
         }
 
-        return this.getDemoDataWithFileName<CustomersSearchResult>('customers_list_10.json');
+        var result = await this.getDemoDataWithFileName<CustomersSearchResult>('customers_list_10.json');
+
+        return result;
     }
 
     getCustomer(companyKey: string, customerKey: string): Promise<Customer> {
@@ -42,6 +46,12 @@ export class CustomersDemoService extends CustomersService {
     async getCurrentAccount(companyKey: string, customerKey: string): Promise<CurrentAccount> {
         return this.getDemoDataWithFileName<CurrentAccount>('current_account.json');
     }
+
+    async getSalesCharts(companyKey: string, customerKey: string): Promise<ChartBundle[]> {
+        const res = await this.getDemoDataWithFileName<{ data: { chartBundle: ChartBundle[] } }>('sales-charts.json');
+        return res.data.chartBundle;
+    }
+
 
     private getDemoDataWithFileName<T>(fileName: string): Promise<T> {
         const path = `../assets/customers/demo-data/${fileName}`;

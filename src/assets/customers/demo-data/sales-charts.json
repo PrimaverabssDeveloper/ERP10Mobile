@@ -1,4 +1,5 @@
 {
+    "data":{
     "chartBundle": [
         {
             "key": "MONTLHYTOTALS",
@@ -3113,4 +3114,5 @@
             "filters": []
         }
     ]
+}
 }

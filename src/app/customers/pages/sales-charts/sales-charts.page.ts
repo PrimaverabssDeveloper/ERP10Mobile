@@ -39,15 +39,15 @@ export class SalesChartsPage extends PageBase implements OnInit {
         this.pageTitle = customerKey;
 
         await this.showLoading();
-        let result: any;
+        let chartBundle: ChartBundle[];
         try {
-            result = await this.customersService.getSalesCharts(companyKey, customerKey);
-            this.updateCharts(companyKey, result.data.chartBundle);
+            chartBundle = await this.customersService.getSalesCharts(companyKey, customerKey);
+            this.updateCharts(companyKey, chartBundle);
         } catch (error) {
             console.log(error);
         }
 
-        if (!result) {
+        if (!chartBundle) {
             this.goBack();
         }
 

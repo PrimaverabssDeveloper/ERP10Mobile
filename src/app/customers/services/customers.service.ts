@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CustomersSearchResult, Customer, PendingOrders, RecentActivity, CurrentAccount } from '../entities';
 import { CustomersStorageService } from './customers-storage.service';
 import { InstanceHttpRequestService } from '../../core/services';
+import { ChartBundle } from '../../sales/entities/sales-charts';
 
 @Injectable()
 export class CustomersService {
@@ -133,15 +134,18 @@ export class CustomersService {
         return result;
     }
 
-    async getSalesCharts(companyKey: string, customerKey: string): Promise<any> {
-        let result: any;
+    async getSalesCharts(companyKey: string, customerKey: string): Promise<ChartBundle[]> {
+        let result: ChartBundle[];
 
         const sanitizedCustomerKey = this.sanitizeString(customerKey);
         const sanitizedCompanyKey = this.sanitizeString(companyKey);
 
         try {
-            result = await this.instanceHttpRequestService
-                               .get<any>(CustomersService.CUSTOMER_SALES_CHARTS(sanitizedCustomerKey, sanitizedCompanyKey));
+            const data = await this.instanceHttpRequestService
+                                   .get<{ data: { chartBundle: ChartBundle[] } }>(CustomersService.CUSTOMER_SALES_CHARTS(sanitizedCustomerKey, sanitizedCompanyKey));
+
+            result = data.data.chartBundle;
+                
         } catch (error) {
             console.error(error);
         }

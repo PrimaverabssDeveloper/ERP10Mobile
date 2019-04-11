@@ -1,71 +1,84 @@
 [
-    {
-      "accountKey": "10003",
-      "description": "Primavera Demo",
-      "id": "1",
-      "modules": [
-        {
-          "description": "Recursos Humanos",
-          "id": "1",
-          "name": "HumanResources"
-        },
-        {
-          "description": "Clientes",
-          "id": "2",
-          "name": "Customers"
-        },
-        {
-          "description": "Vendas",
-          "id": "3",
-          "name": "Sales"
-        }
-      ],
-      "subscriptionAlias": "10003-0009"
-    },
-    {
-      "accountKey": "10002",
-      "description": "Sofrio  Demo",
-      "id": "2",
-      "modules": [
-        {
-          "description": "Recursos Humanos",
-          "id": "1",
-          "name": "HumanResources"
-        },
-        {
-          "description": "Clientes",
-          "id": "2",
-          "name": "Customers"
-        },
-        {
-          "description": "Vendas",
-          "id": "3",
-          "name": "Sales"
-        }
-      ],
-      "subscriptionAlias": "10002-001"
-    },
-    {
-      "accountKey": "10003",
-      "description": "Alcad Demo",
-      "id": "3",
-      "modules": [
-        {
-          "description": "Recursos Humanos",
-          "id": "1",
-          "name": "HumanResources"
-        },
-        {
-          "description": "Clientes",
-          "id": "2",
-          "name": "Customers"
-        },
-        {
-          "description": "Vendas",
-          "id": "3",
-          "name": "Sales"
-        }
-      ],
-      "subscriptionAlias": "10003-001"
-    }
-  ]
+  {
+    "accountKey": "10003",
+    "description": "Primavera Demo",
+    "id": "1",
+    "modules": [
+      {
+        "description": "Recursos Humanos",
+        "id": "1",
+        "name": "HumanResources",
+        "companies": [
+          {
+            "companyKey": "DEMO",
+            "description": "Empresa de demonstração"
+          }
+        ]
+      },
+      {
+        "description": "Clientes",
+        "id": "2",
+        "name": "Customers",
+        "companies": [
+          {
+            "companyKey": "DEMO",
+            "description": "Empresa de demonstração"
+          }
+        ]
+      },
+      {
+        "description": "Vendas",
+        "id": "3",
+        "name": "Sales",
+        "companies": [
+          {
+            "companyKey": "DEMO",
+            "description": "Empresa de demonstração"
+          }
+        ]
+      }
+    ],
+    "subscriptionAlias": "10003-0009"
+  },
+  {
+    "accountKey": "10002",
+    "description": "Sofrio  Demo",
+    "id": "2",
+    "modules": [
+      {
+        "description": "Recursos Humanos",
+        "id": "1",
+        "name": "HumanResources",
+        "companies": [
+          {
+            "companyKey": "DEMO",
+            "description": "Empresa de demonstração"
+          }
+        ]
+      },
+      {
+        "description": "Clientes",
+        "id": "2",
+        "name": "Customers",
+        "companies": [
+          {
+            "companyKey": "DEMO",
+            "description": "Empresa de demonstração"
+          }
+        ]
+      },
+      {
+        "description": "Vendas",
+        "id": "3",
+        "name": "Sales",
+        "companies": [
+          {
+            "companyKey": "DEMO",
+            "description": "Empresa de demonstração"
+          }
+        ]
+      }
+    ],
+    "subscriptionAlias": "10002-001"
+  } 
+]
