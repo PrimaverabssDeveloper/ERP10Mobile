@@ -228,7 +228,7 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
             currentYearAccentColor: this.rgbColorBuilder(this.data.currentYearAccentColor),
             currentYearAccentColorWithTransparency: this.rgbColorBuilder(this.data.currentYearAccentColor, .5),
             previouseYearAccentColor: this.rgbColorBuilder(this.data.previousYearAccentColor),
-            previouseYearAccentColorWithTransparency: this.rgbColorBuilder(this.data.currentYearAccentColor, .5)
+            previouseYearAccentColorWithTransparency: this.rgbColorBuilder(this.data.previousYearAccentColor, .5)
         };
 
         // table data
