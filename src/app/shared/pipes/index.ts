@@ -6,6 +6,7 @@ import { LocalizedStringsPipe } from './localized-strings.pipe';
 import { OrderByPipe } from './order-by.pipe';
 import { LocaleCurrencyPipe } from './locale-currency.pipe';
 import { LocaleDatePipe } from './locale-date.pipe';
+import { CompanyKeySanitizerPipe } from './company-key-sanitizer.pipe';
 
 export * from './round.pipe';
 export * from './absolute.pipe';
@@ -15,6 +16,7 @@ export * from './order-by.pipe';
 export * from './localized-strings.pipe';
 export * from './locale-currency.pipe';
 export * from './locale-date.pipe';
+export * from './company-key-sanitizer.pipe';
 
 export const PIPES = [
     RoundPipe,
@@ -24,5 +26,6 @@ export const PIPES = [
     LocalizedStringsPipe,
     OrderByPipe,
     LocaleCurrencyPipe,
-    LocaleDatePipe
+    LocaleDatePipe,
+    CompanyKeySanitizerPipe
 ];
