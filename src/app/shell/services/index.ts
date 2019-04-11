@@ -17,13 +17,7 @@ export const InstanceServiceFactory = (http: HttpClient, httpRequestService: Htt
 
 export const InstancesServiceProvider: Provider = {
     provide: InstancesService,
-    useFactory: (
-        http: HttpClient,
-        httpRequestService: HttpRequestService,
-        authService: AuthenticationService
-    ) => {
-        return InstanceServiceFactory(http, httpRequestService, authService);
-    },
+    useFactory: InstanceServiceFactory,
     deps: [
         HttpClient,
         HttpRequestService,

@@ -12,22 +12,23 @@ export const SERVICES = [
     PinService
 ];
 
+export const HumanResourcesServiceFactory = (
+    http: HttpClient,
+    authService: AuthenticationService,
+    instanceHttpRequestService: InstanceHttpRequestService,
+    instanceService: InstanceService,
+    domService: DomService,
+    modulesService: ModulesService) => {
+    if (authService.isAuthenticateAsDemo) {
+        return new HumanResourcesDemoService(instanceHttpRequestService, domService, instanceService, modulesService, http);
+    } else {
+        return new HumanResourcesService(instanceHttpRequestService, domService, instanceService, modulesService);
+    }
+};
+
 export const HumanResourcesServiceProvider: Provider = {
     provide: HumanResourcesService,
-    useFactory: (
-        http: HttpClient,
-        authService: AuthenticationService,
-        instanceHttpRequestService: InstanceHttpRequestService,
-        instanceService: InstanceService,
-        domService: DomService,
-        modulesService: ModulesService
-    ) => {
-        if (authService.isAuthenticateAsDemo) {
-            return new HumanResourcesDemoService(instanceHttpRequestService, domService, instanceService, modulesService, http);
-        } else {
-            return new HumanResourcesService(instanceHttpRequestService, domService, instanceService, modulesService);
-        }
-    },
+    useFactory: HumanResourcesServiceFactory,
     deps: [
         HttpClient,
         AuthenticationService,
