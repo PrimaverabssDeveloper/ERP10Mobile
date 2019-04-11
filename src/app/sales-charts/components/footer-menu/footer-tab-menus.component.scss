@@ -2,7 +2,7 @@
 $accent-color: var(--sales-charts-accent-color);
 
 $menu-height: 54px;
-$menu-list-row-height: 44px;
+$menu-list-row-height: 50px;
 $menu-list-row-text-color: rgb(204, 204, 204);
 $menu-list-row-text-selected-color: $accent-color;
 
@@ -83,7 +83,7 @@ $menu-list-row-text-selected-color: $accent-color;
         top: $menu-height;
 
         .list-row {
-            height: 40px;
+            height: $menu-list-row-height;
             width: 100%;
             border-bottom: 1px solid rgb(211,212,214);
             color: $menu-list-row-text-color;
@@ -98,7 +98,7 @@ $menu-list-row-text-selected-color: $accent-color;
 
             span {
                 font-size: 14pt;
-                line-height: 40px;
+                line-height: $menu-list-row-height;
                 padding-left: 10px;
             }
         }
