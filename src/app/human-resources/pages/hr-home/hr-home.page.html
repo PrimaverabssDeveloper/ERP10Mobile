@@ -11,7 +11,7 @@
         </ion-buttons>
         <ion-title>
             <!-- <span class="page-title" (click)="showCompanySelectorAction($event)">{{'HUMAN_RESOURCES.HR_PAGE.PAGE_TITLE' | translate}}</span> -->
-            <span class="page-title" [ngClass]="{'page-title-company-selector': companies && companies.length > 1}" (click)="showCompanySelectorAction($event)">{{pageTitle}}</span>
+            <span class="page-title" [ngClass]="{'page-title-company-selector': companies && companies.length > 1}" (click)="showCompanySelectorAction($event)">{{pageTitle | companyKeySanitizer}}</span>
         </ion-title>
         <ion-buttons slot="end">
             <ion-menu-button autoHide="false" menu="human-resources-hr-home-page-menu"></ion-menu-button>

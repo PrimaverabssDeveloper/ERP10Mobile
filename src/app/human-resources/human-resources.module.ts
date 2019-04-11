@@ -9,9 +9,9 @@ import { COMPONENTS, ENTRY_COMPONENTS } from './components';
 import { HR_ROUTING } from './human-resources.routing';
 import { SharedModule } from '../shared/shared.module';
 import { ModulesService } from '../core/services';
-import { ModuleDefinition } from '../core/entities';
 import { TranslateModule } from '@ngx-translate/core';
 import { HrModuleDefinition } from './module-definition';
+import { CompanyKeySanitizerPipe } from '../shared/pipes';
 
 @NgModule({
     imports: [
@@ -23,7 +23,8 @@ import { HrModuleDefinition } from './module-definition';
         HR_ROUTING
     ],
     declarations: [PAGES, COMPONENTS],
-    entryComponents: [ENTRY_COMPONENTS]
+    entryComponents: [ENTRY_COMPONENTS],
+    providers: [CompanyKeySanitizerPipe]
 })
 export class HumanResourcesModule {
     constructor(
