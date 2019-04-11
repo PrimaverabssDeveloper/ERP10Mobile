@@ -12,7 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ModuleDefinition } from '../core/entities';
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
-import { LocalizedStringsPipe, CurrencySymbolPipe, LocaleCurrencyPipe, LocaleDatePipe } from '../shared/pipes';
+import { LocalizedStringsPipe, CurrencySymbolPipe, LocaleCurrencyPipe, LocaleDatePipe, CompanyKeySanitizerPipe } from '../shared/pipes';
 import { SalesChartsModule } from '../sales-charts/sales-charts.module';
 
 @NgModule({
@@ -31,6 +31,7 @@ import { SalesChartsModule } from '../sales-charts/sales-charts.module';
         SERVICES,
         LocalizedStringsPipe,
         LocaleCurrencyPipe,
+        CompanyKeySanitizerPipe,
         LocaleDatePipe,
         CurrencySymbolPipe,
     ]

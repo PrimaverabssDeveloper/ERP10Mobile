@@ -28,7 +28,7 @@ import {
     LocaleService
 } from '../../../core/services';
 
-import { LocalizedStringsPipe, CurrencySymbolPipe } from '../../../shared/pipes';
+import { LocalizedStringsPipe, CurrencySymbolPipe, CompanyKeySanitizerPipe } from '../../../shared/pipes';
 import { Subscription } from 'rxjs';
 import { PopoverSelectorComponent } from '../../../shared/components';
 import { ActivatedRoute } from '@angular/router';
@@ -73,6 +73,7 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
         public location: Location,
         public menuController: MenuController,
         private route: ActivatedRoute,
+        private companyKeySanitizerPipe: CompanyKeySanitizerPipe,
         private salesService: SalesService,
         private salesSettingsService: SalesSettingsService,
         private localeService: LocaleService,
@@ -149,11 +150,19 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
 
         this.isCompanySelectorPopoverVisible = true;
 
+
+        const items = this.companies.map(c => (
+            {
+                label: this.companyKeySanitizerPipe.transform(c.key),
+                data: c
+            })
+        );
+
         const popover = await this.popoverController.create({
             component: PopoverSelectorComponent,
             componentProps: {
-                items: this.companies.map(c => ({label: c.key, data: c})),
-                onItemSelected: (item: {label: string, data: any}) => {
+                items: items,
+                onItemSelected: (item: { label: string, data: any }) => {
                     this.showCompanyData(item.data);
                     popover.dismiss();
                 }
@@ -205,9 +214,9 @@ export class HomePage extends PageBase implements OnInit, OnDestroy {
             companyKey: companySales.key,
             chartBundles: this.selectedCompanySales.chartBundle,
             useReportingValue: useReportingValue,
-            accentColor: {r: 29, g: 49, b: 125},
-            currentYearAccentColor: {r: 29, g: 49, b: 125},
-            previousYearAccentColor: {r: 219, g: 224, b: 235}
+            accentColor: { r: 29, g: 49, b: 125 },
+            currentYearAccentColor: { r: 29, g: 49, b: 125 },
+            previousYearAccentColor: { r: 219, g: 224, b: 235 }
         };
     }
 }
