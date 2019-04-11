@@ -1,7 +1,7 @@
 
 @import '../../styles/variables.scss';
 
-$row-height: 40px;
+$row-height: 50px;
 $row-index-width: $row-height;
 $row-arrow-width: $row-height / 2;
 $row-data-width: calc(100% - #{$row-index-width + $row-arrow-width});
@@ -22,7 +22,7 @@ $row-data-width: calc(100% - #{$row-index-width + $row-arrow-width});
         height: 100%;
         float: left;
         text-align: center;
-        padding: 10px 0;
+        padding: 14px 0;
 
         &.green-color {
             border-left-color: #65B365;
@@ -56,6 +56,7 @@ $row-data-width: calc(100% - #{$row-index-width + $row-arrow-width});
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            line-height: 25px; 
         }
 
         .row-data-value {
@@ -71,11 +72,11 @@ $row-data-width: calc(100% - #{$row-index-width + $row-arrow-width});
                 float: left;
                 padding: 0 5px;
                 color: #596278;
-
+                line-height: 23px;
                 &:after {
                     content: ' ';
                     width: 1px;;
-                    height: 12px;
+                    height: 17px;
                     margin-top: 4px;
                     margin-left: 4px;
                     float: right;
@@ -92,6 +93,7 @@ $row-data-width: calc(100% - #{$row-index-width + $row-arrow-width});
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 max-width: 70%;
+                line-height: 25px;
             }
         }
     }
@@ -100,6 +102,9 @@ $row-data-width: calc(100% - #{$row-index-width + $row-arrow-width});
         float: left;
         width: $row-arrow-width;
         height: 100%;
-        padding: 13px 0;
+
+        img {
+            padding: 16px 8px;
+        }
     }
 }
