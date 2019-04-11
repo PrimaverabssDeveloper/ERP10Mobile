@@ -151,7 +151,7 @@ export class AuthenticationService {
             });
     }
 
-    async endSession() {
+    async endSession(): Promise<any> {
 
         if (!this.sessionData) {
             return;
