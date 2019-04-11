@@ -10,7 +10,7 @@ export class YearSelectorComponent implements OnInit {
 
     @Input() years: string[];
 
-    private hasDragStarted: boolean;
+    hasDragStarted: boolean;
     private lastTouchPointX: number;
     private translationOffset: number;
     private componentWidth: number;

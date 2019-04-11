@@ -13,7 +13,6 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
     private touchEventListeners: { [key: string]: (e: TouchEvent) => void};
     private chartsWrapperSize: { getWidth: () => number, getHeight: () => number };
     private yearsWrapperSize: { getWidth: () => number, getHeight: () => number };
-    private hasDragStarted: boolean;
     private lastTouchPointX: number;
     private translationOffset: number;
 
@@ -21,6 +20,8 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
         year: number,
         monthsChartData: SalaryChartData
     };
+
+    hasDragStarted: boolean;
 
     years: string[];
 
