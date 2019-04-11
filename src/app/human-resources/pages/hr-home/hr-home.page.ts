@@ -22,6 +22,7 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { PopoverSelectorComponent } from '../../../shared/components';
 import { ModuleCompany } from '../../../core/entities';
 import { PinService } from '../../services/pin.service';
+import { CompanyKeySanitizerPipe } from '../../../shared/pipes';
 
 @Component({
     templateUrl: './hr-home.page.html',
@@ -77,7 +78,8 @@ export class HrHomePage extends PageBase implements OnInit {
         private fileOpener: FileOpener,
         private file: File,
         private emailComposer: EmailComposer,
-        private pinService: PinService
+        private pinService: PinService,
+        private companyKeySanitizerPipe: CompanyKeySanitizerPipe
     ) {
 
         super(loadingController, location, menuController);
@@ -225,7 +227,11 @@ export class HrHomePage extends PageBase implements OnInit {
 
         this.isCompanySelectorPopoverVisible = true;
 
-        const items = this.companies.map(c => ({label: c.companyKey, data: c}));
+        const items = this.companies.map(c => (
+            {
+                label: this.companyKeySanitizerPipe.transform(c.companyKey),
+                data: c}
+        ));
 
         const popover = await this.popoverController.create({
             component: PopoverSelectorComponent,

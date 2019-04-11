@@ -47,7 +47,7 @@
         <div class="list" *ngIf="customers && customers.length > 0">
             <div class="list-item" *ngFor="let costumer of customers" (click)="customerAction(costumer)">
                 <div class="key">{{costumer.key}}</div>
-                <div class="company-key">{{costumer.companyKey}}</div>
+                <div class="company-key">{{costumer.companyKey | companyKeySanitizer}}</div>
                 <div class="name">{{costumer.name}}</div>
                 <div class="location">{{costumer.location}}</div>
             </div>
