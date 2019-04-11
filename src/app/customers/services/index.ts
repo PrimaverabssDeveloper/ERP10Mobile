@@ -17,20 +17,21 @@ export const MODULE_SERVICES = [
     DocumentValueService
 ];
 
+export const CustomersServiceFactory = (
+    http: HttpClient,
+    authService: AuthenticationService,
+    storageService: CustomersStorageService,
+    instanceHttpRequestService: InstanceHttpRequestService) => {
+    if (authService.isAuthenticateAsDemo) {
+        return new CustomersDemoService(http, storageService, instanceHttpRequestService);
+    } else {
+        return new CustomersService(storageService, instanceHttpRequestService);
+    }
+};
+
 export const CustomersServiceProvider: Provider = {
     provide: CustomersService,
-    useFactory: (
-        http: HttpClient,
-        authService: AuthenticationService,
-        storageService: CustomersStorageService,
-        instanceHttpRequestService: InstanceHttpRequestService
-    ) => {
-        if (authService.isAuthenticateAsDemo) {
-            return new CustomersDemoService(http, storageService, instanceHttpRequestService);
-        } else {
-            return new CustomersService(storageService, instanceHttpRequestService);
-        }
-    },
+    useFactory: CustomersServiceFactory,
     deps: [HttpClient, AuthenticationService, CustomersStorageService, InstanceHttpRequestService],
 };
 
