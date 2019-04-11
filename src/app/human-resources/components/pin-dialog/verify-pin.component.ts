@@ -10,7 +10,6 @@ import { TranslateService } from '@ngx-translate/core';
 export class VerifyPinComponent extends PinComponentBase {
 
     @Input() verifyPin: (pin: string) => Promise<boolean>;
-    @Input() resetPin: () => Promise<any>;
 
     constructor(
         protected modalController: ModalController,
@@ -37,9 +36,5 @@ export class VerifyPinComponent extends PinComponentBase {
         }
 
         await this.hideLoading();
-    }
-
-    async resetPinAction() {
-        await this.resetPin();
     }
 }

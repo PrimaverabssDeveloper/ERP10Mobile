@@ -10,7 +10,6 @@ export abstract class PinComponentBase implements OnInit {
     message: string;
     errorMessage: string;
     resetPinEnabled: boolean;
-    abstract resetPin: () => Promise<any>;
 
     constructor(
         protected modalController: ModalController,
@@ -56,7 +55,7 @@ export abstract class PinComponentBase implements OnInit {
     }
 
     async resetPinAction() {
-        if (this.resetPinEnabled && this.resetPin) {
+        if (this.resetPinEnabled) {
             const okButton = await this.translate.get('SHARED.ALERTS.OK').toPromise();
             const message = await this.translate.get('HUMAN_RESOURCES.PIN_COMPONENT.RESET_PIN_ALERT_MESSAGE').toPromise();
             const alert = await this.alertController.create({
