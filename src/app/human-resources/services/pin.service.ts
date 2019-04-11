@@ -43,8 +43,7 @@ export class PinService {
         const modal = await this.modalController.create({
             component: VerifyPinComponent,
             componentProps: {
-                'verifyPin': (pin: string) => this.verifyModulePin(pin),
-                'resetPin': () => this.resetModulePin()
+                'verifyPin': (pin: string) => this.verifyModulePin(pin)
             }
         });
 
@@ -63,8 +62,7 @@ export class PinService {
         const modal = await this.modalController.create({
             component: AddPinComponent,
             componentProps: {
-                'addPin': (pin: string): Promise<Boolean> => this.setModulePin(pin),
-                'resetPin': () => this.resetModulePin()
+                'addPin': (pin: string): Promise<Boolean> => this.setModulePin(pin)
             }
         });
 
@@ -80,8 +78,7 @@ export class PinService {
             component: RemovePinComponent,
             componentProps: {
                 'verifyPin': (pin: string) => this.verifyModulePin(pin),
-                'removePin': () => this.disableModulePin(),
-                'resetPin': () => this.resetModulePin()
+                'removePin': () => this.disableModulePin()
             }
         });
 

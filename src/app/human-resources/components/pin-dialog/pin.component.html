@@ -50,7 +50,7 @@
             <div class="key-label">{{'HUMAN_RESOURCES.PIN_COMPONENT.CLEAR_PIN_BTN' | translate}}</div>
         </div>
     </div>
-    <div class="reset-pin">
-        <span *ngIf="resetPinEnabled" (click)="resetPinAction()">{{'HUMAN_RESOURCES.PIN_COMPONENT.RESET_PIN_BTN' | translate}}</span>
+    <div *ngIf="resetPinEnabled" class="reset-pin" (click)="resetPinAction()">
+        <span >{{'HUMAN_RESOURCES.PIN_COMPONENT.RESET_PIN_BTN' | translate}}</span>
     </div>
 </div>

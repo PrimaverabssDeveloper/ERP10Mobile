@@ -11,7 +11,6 @@ export class RemovePinComponent extends PinComponentBase {
 
     @Input() verifyPin: (pin: string) => Promise<boolean>;
     @Input() removePin: () => Promise<boolean>;
-    @Input() resetPin: () => Promise<any>;
 
     constructor(
         protected modalController: ModalController,
