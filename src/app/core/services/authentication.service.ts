@@ -166,23 +166,14 @@ export class AuthenticationService {
                 console.log('logout performed with success');
             };
 
-            let browserAvailable: boolean;
             try {
-                browserAvailable = await this.safariViewController.isAvailable();
+                await this.safariViewController.show({
+                    url: endSessionUrl,
+                    hidden: true,
+                    animated: false
+                }).toPromise();
             } catch (error) {
-                browserAvailable = false;
-            }
-
-            if (browserAvailable) {
-                try {
-                    await this.safariViewController.show({
-                        url: endSessionUrl,
-                        hidden: true,
-                        animated: false
-                    }).toPromise();
-                } catch (error) {
-                    console.log(error);
-                }
+                console.log(error);
             }
         }
 
@@ -227,36 +218,24 @@ export class AuthenticationService {
     }
 
     private openBrowser(url: string) {
-        this.safariViewController
-            .isAvailable()
-            .then((available: boolean) => {
-                if (available) {
-                    this.safariViewController.show(
-                        {
-                            url: url
-                            // hidden: true
-                        }
-                    ).subscribe((result: any) => {
-                        if (result.event === 'opened') {
-                            console.log('Opened');
-                        } else if (result.event === 'loaded') {
-                            console.log('Loaded');
-                        } else if (result.event === 'closed') {
-                            console.log('Closed');
-                            setTimeout(() => {
-                                if (!this.userHasLoggedOnIdentity) {
-                                    this.authenticationResolve(false);
-                                }
-                            }, 500);
-                        }
-                    },
-                        (error: any) => console.error(error)
-                    );
 
-                } else {
-                    // use fallback browser, example InAppBrowser
+        this.safariViewController
+            .show({ url: url })
+            .subscribe((result: any) => {
+                if (result.event === 'opened') {
+                    console.log('Opened');
+                } else if (result.event === 'loaded') {
+                    console.log('Loaded');
+                } else if (result.event === 'closed') {
+                    console.log('Closed');
+                    setTimeout(() => {
+                        if (!this.userHasLoggedOnIdentity) {
+                            this.authenticationResolve(false);
+                        }
+                    }, 500);
                 }
-            }
+            },
+                (error: any) => console.error(error)
             );
     }
 
