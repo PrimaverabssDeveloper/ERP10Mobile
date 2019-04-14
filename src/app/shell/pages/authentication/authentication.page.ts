@@ -48,9 +48,9 @@ export class AuthenticationPage extends PageBase implements OnInit {
         this.splashScreen.hide();
         const logout = this.route.snapshot.queryParams['logout'];
         if (logout) {
-            await this.showLoading();
+            // await this.showLoading();
             await this.endSession();
-            await this.hideLoading();
+            // await this.hideLoading();
         }
 
         const isAuthenticated = await this.authenticationService.isAuthenticate();
