@@ -120,7 +120,7 @@
         }
     },
     "SALES": {
-        "MODULE_NAME": "Vendas",
+        "MODULE_NAME": "Ventas",
         "SALES_SETTINGS_PAGE": {
             "PAGE_TITLE": "Ventas",
             "USE_REFERENCE_CURRENCY_TOGGLE": "Utilizar la moneda de referencia",
