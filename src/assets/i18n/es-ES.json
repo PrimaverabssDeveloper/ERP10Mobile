@@ -36,8 +36,8 @@
                 "3": "Martes",
                 "4": "Miércoles",
                 "5": "Jueves",
-                "6": "Sexta-Feita",
-                "7": "Viernes"
+                "6": "Viernes",
+                "7": "Sábado"
             }
         },
         "ALERTS" : {
@@ -49,10 +49,10 @@
     },
     "SHELL": {
         "AUTHENTICATION" : {
-            "NO_SUBSCRIPTION_MESSAGE": "O utilizador atual não tem acesso a nenhuma subscrição."
+            "NO_SUBSCRIPTION_MESSAGE": "El usuario actual no tiene acceso a ninguna suscripción."
         },
         "INSTANCES_PAGE" : {
-            "PAGE_TITLE" : "Selecione a Sua Instância"
+            "PAGE_TITLE" : "Suscripciones"
         },
         "DASHBOARD_PAGE" : {
         },
