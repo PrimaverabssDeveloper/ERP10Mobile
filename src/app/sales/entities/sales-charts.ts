@@ -1,7 +1,8 @@
 
 export enum ChartPeriodType {
     Month = 0,
-    Week = 1
+    Week = 1,
+    Daily = 3
 }
 
 export interface SalesCharts {

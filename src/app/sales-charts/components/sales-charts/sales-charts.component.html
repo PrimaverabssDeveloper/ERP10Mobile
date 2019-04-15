@@ -29,7 +29,7 @@
         </div>
         <div class="extra-info">{{extraInfoValue}}</div>
         <div class="month-selector-wrapper" *ngIf="!selectedChartBundleIsTimeChart">
-            <month-selector (monthSelected)="onPeriodChanged($event)"></month-selector>
+            <period-selector [periods]="periods" (periodSelected)="onPeriodChanged($event)"></period-selector>
         </div>
     </div>
     <div class="footer-tab-menus-wrapper">

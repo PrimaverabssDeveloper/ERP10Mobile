@@ -83,7 +83,13 @@ export class SalesTableComponent {
                                 currentYearSerie,
                                 useReportingValue);
         } else {
-            this.rows = this.buildTopChartData(chart, period, previousYearSerie, currentYearSerie, useReportingValue);
+            if (chartBundle.periodType === ChartPeriodType.Daily) {
+                this.rows = await this.buildDailyChartData(chart, period, previousYearSerie, currentYearSerie, useReportingValue);
+                this.currentYearLabel = await this.translateService.get('SALES.CHARTS.DAILY_CHART_CURRENT_LEGENT').toPromise();
+                this.previousYearLabel = await this.translateService.get('SALES.CHARTS.DAILY_CHART_CURRENT_LEGENT').toPromise();
+            } else {
+                this.rows = this.buildTopChartData(chart, period, previousYearSerie, currentYearSerie, useReportingValue);
+            }
         }
 
         this.tableUpdated.emit({
@@ -254,6 +260,76 @@ export class SalesTableComponent {
             }
 
             const label = dataPoint.label ? dataPoint.label : 'N/A';
+            const description = dataPoint.description ? dataPoint.description : 'N/A';
+            const currentYearValue = dataPoint.values.find(v => v.seriesKey === currentYearSerie.key);
+            const previousYearValue = dataSet.dataPoints[0].values.find(v => v.seriesKey === previousYearSerie.key);
+            const currentYearFinalValue = this.getCorrectValue(currentYearValue, useReportingValue);
+            const previousYearFinalValue = this.getCorrectValue(previousYearValue, useReportingValue);
+
+            data.push({
+                label: label,
+                description: description,
+                currentYearValue: currentYearFinalValue,
+                previousYearValue: previousYearFinalValue,
+                deltaPercentageValue: MathTools.variationBetweenTwoNumbers(previousYearFinalValue, currentYearFinalValue),
+                isTotal: dataPoint.isTotal
+            });
+        }
+
+        return data;
+    }
+
+    private async buildDailyChartData(
+        chart: ChartData,
+        period: string,
+        previousYearSerie: Serie,
+        currentYearSerie: Serie,
+        useReportingValue: boolean,
+    ): Promise<SalesTableRowData[]> {
+        const data: SalesTableRowData[] = [];
+
+        const dataSet = chart.dataSet.find(ds => ds.period === period);
+
+        if (!dataSet) {
+            return [];
+        }
+
+        for (const dataPoint of dataSet.dataPoints) {
+            if (!dataPoint) {
+                data.push({
+                    label: 'N/A',
+                    description: 'N/A',
+                    currentYearValue: 0,
+                    previousYearValue: 0,
+                    deltaPercentageValue: 0,
+                    isTotal: false
+                });
+
+                continue;
+            }
+
+            if (!dataPoint.values) {
+                data.push({
+                    label: dataPoint.label ? dataPoint.label : 'N/A',
+                    description: dataPoint.description ? dataPoint.description : 'N/A',
+                    currentYearValue: 0,
+                    previousYearValue: 0,
+                    deltaPercentageValue: 0,
+                    isTotal: false
+                });
+
+                continue;
+            }
+
+            // the other data point is not displayed on the table
+            if (dataPoint.label === '##OTHERS##') {
+                continue;
+            }
+
+            const weekDayIndex = (new Date(dataPoint.description)).getDay() + 1;
+            const weekDay = await this.translateService.get(`SHARED.DATES.WEEK_DAYS_NUMBER_TO_NAME.${weekDayIndex}`).toPromise();
+
+            const label = `${weekDay.substr(0, 3)}.`;
             const description = dataPoint.description ? dataPoint.description : 'N/A';
             const currentYearValue = dataPoint.values.find(v => v.seriesKey === currentYearSerie.key);
             const previousYearValue = dataSet.dataPoints[0].values.find(v => v.seriesKey === previousYearSerie.key);

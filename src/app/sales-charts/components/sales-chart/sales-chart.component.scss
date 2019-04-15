@@ -17,12 +17,12 @@ $chart-height: calc(100% - #{$chart-legend-height});
     background-color: white;
     width: 100%;
     height: $chart-legend-height;
-    padding: 1px 5px;
+    padding: 1px 25px;
 
     .chart-legend-year {
         font-size: 10pt;
-        width: 35px;
-        margin-left: 10px;
+        // width: 35px;
+        margin-left: 25px;
         float: right;
 
         &:after {

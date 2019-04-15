@@ -114,7 +114,6 @@ export class SalesChartComponent {
         previouseYearAccentColorWithTransparency: string
     ) {
 
-
         await this.updateLocalizedResources();
 
         this.currentYearLegend = currentYearSerie ? currentYearSerie.legend : null;
@@ -138,18 +137,33 @@ export class SalesChartComponent {
 
             this.drawChart(chart.valueType, chartBundle.isTimeChart, currency, currentYearAccentColor, previousYearAccentColor, data);
         } else {
+            if (chartBundle.periodType === ChartPeriodType.Daily) {
+                this.currentYearLegend = '#selecionado';
+                this.previousYearLegend = '#anterior';
+                const data = await this.buildDailyChartData(
+                    chart,
+                    previousYearSerie,
+                    currentYearSerie,
+                    period,
+                    useReportingValue,
+                    currentYearAccentColor,
+                    previousYearAccentColor
+                );
 
-            const data = this.buildTopChartData(
-                chart,
-                previousYearSerie,
-                currentYearSerie,
-                period,
-                useReportingValue,
-                currentYearAccentColor,
-                previousYearAccentColor
-            );
+                this.drawChart(chart.valueType, chartBundle.isTimeChart, currency, currentYearAccentColor, previousYearAccentColor, data);
+            } else {
+                const data = this.buildTopChartData(
+                    chart,
+                    previousYearSerie,
+                    currentYearSerie,
+                    period,
+                    useReportingValue,
+                    currentYearAccentColor,
+                    previousYearAccentColor
+                );
 
-            this.drawChart(chart.valueType, chartBundle.isTimeChart, currency, currentYearAccentColor, previousYearAccentColor, data);
+                this.drawChart(chart.valueType, chartBundle.isTimeChart, currency, currentYearAccentColor, previousYearAccentColor, data);
+            }
         }
 
         this.chartUpdated.emit({
@@ -472,6 +486,88 @@ export class SalesChartComponent {
 
                     ds.data = quarterValues;
                 }
+            }
+        }
+
+        return {
+            dataSets: dataSets,
+            maxValue: maxValue,
+            labels: labels
+        };
+    }
+
+    private async buildDailyChartData(
+        chart: ChartData,
+        previousYearSerie: Serie,
+        currentYearSerie: Serie,
+        period: string,
+        useReportingValue: boolean,
+        currentYearAccentColor: string,
+        previouseYearAccentColor: string,
+    )
+        : Promise<{
+            maxValue: number,
+            labels: string[],
+            dataSets: { label: string, backgroundColor: string, hoverBackgroundColor: string, data: number[] }[]
+        }> {
+
+        const labels: string[] = [];
+        const dataSets: { label: string, backgroundColor: string, hoverBackgroundColor: string, data: number[] }[] = [];
+        let maxValue = 0;
+
+
+        const currentResource = await this.translateService.get('SALES.CHARTS.DAILY_CHART_CURRENT_LEGENT').toPromise();
+        const previousResource = await this.translateService.get('SALES.CHARTS.DAILY_CHART_CURRENT_LEGENT').toPromise();
+
+        // current year serie
+        dataSets.push(
+            {
+                label: currentResource,
+                data: [],
+                backgroundColor: currentYearAccentColor,
+                hoverBackgroundColor: currentYearAccentColor
+            }
+        );
+
+        // previous year serie
+        dataSets.push(
+            {
+                label: previousResource,
+                data: [],
+                backgroundColor: previouseYearAccentColor,
+                hoverBackgroundColor: previouseYearAccentColor
+            }
+        );
+
+        // right display order series
+        const series = [currentYearSerie, previousYearSerie];
+
+        const dataSet = chart.dataSet.find(ds => ds.period === period);
+
+        for (const dataPoint of dataSet.dataPoints) {
+
+            // the dataPoint with total values or label '##OTHERS##' are not used on the chart
+            if (dataPoint.isTotal || dataPoint.label === '##OTHERS##') {
+                continue;
+            }
+
+            const weekDayIndex = (new Date(dataPoint.description)).getDay() + 1;
+
+            const weekDay = await this.translateService.get(`SHARED.DATES.WEEK_DAYS_NUMBER_TO_NAME.${weekDayIndex}`).toPromise();
+
+            labels.push(`${weekDay.substr(0, 3)}.`);
+
+            for (let i = 0; i < series.length; i++) {
+                const serie = series[i];
+                const value = dataPoint.values.find(v => v.seriesKey === serie.key);
+                let finalValue = 0;
+
+                if (value) {
+                    finalValue = this.getCorrectValue(value, useReportingValue);
+                    maxValue = finalValue > maxValue ? finalValue : maxValue;
+                }
+
+                dataSets[i].data.push(finalValue);
             }
         }
 

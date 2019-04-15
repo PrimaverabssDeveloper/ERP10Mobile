@@ -1,26 +1,24 @@
 
 import {
     Component,
-    HostListener,
-    ElementRef,
     ViewChild,
     OnInit,
     OnDestroy,
     Input
 } from '@angular/core';
-import { SalesDataCharts, ChartBundle, Serie, ChartData, ChartPeriodType } from '../../entities';
+import { ChartBundle, Serie, ChartData, ChartPeriodType } from '../../entities';
 import { Subscription } from 'rxjs';
 import { LocaleService } from '../../../core/services';
-import { ActivatedRoute } from '@angular/router';
-import { AlertController, IonNav, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LocaleCurrencyPipe } from '../../../shared/pipes';
-import { FooterTabMenuItem, FooterTabMenu, FooterMenuItemSelectedEvent } from '../footer-menu';
+import { FooterTabMenu, FooterMenuItemSelectedEvent } from '../footer-menu';
 import { SalesTableData, SalesTableUpdatedEvent } from '../sales-table/entities';
 import { SalesChartData, SalesChartUpdatedEvent } from '../sales-chart/entities';
 import { SalesChartComponent } from '../sales-chart/sales-chart.component';
 import { ChartShareService } from '../../services';
 import { SalesChartsData } from './sales-charts-data';
+import { PeriodData } from '../period-selector/period-selector.component';
 
 @Component({
     selector: 'sales-charts',
@@ -73,7 +71,8 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
     selectedChartBundleIsTimeChart: boolean;
     extraInfoValue: string;
 
-    selectedPeriod: string;
+    selectedPeriod: PeriodData;
+    periods: PeriodData[];
 
     showTimeFrameSelector: boolean;
 
@@ -111,7 +110,6 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
         this.valueType = 'abs';
         this.viewType = 'chart';
         this.showTimeFrameSelector = true;
-        this.selectedPeriod = '1';
     }
 
     async ngOnInit() {
@@ -163,7 +161,7 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
         }
     }
 
-    onPeriodChanged(period: string) {
+    onPeriodChanged(period: PeriodData) {
         this.selectedPeriod = period;
         this.updateView();
     }
@@ -215,12 +213,68 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
         const currentYearSerie = this.getSerieWithKey(chartBundle.series, this.currentYearSeriesKey);
         const previousYearSerie = this.getSerieWithKey(chartBundle.series, this.previousYearSeriesKey);
 
+        // build periods
+        this.periods = [];
+        if (!chartBundle.isTimeChart) {
+
+            // to daily sales
+            if (chartBundle.periodType === ChartPeriodType.Daily) {
+                const lastWeekRes = await this.translate.get('SALES.CHARTS.DAILY_CHART_LAST_WEEK').toPromise();
+                const currentWeekRes = await this.translate.get('SALES.CHARTS.DAILY_CHART_CURRENT_WEEK').toPromise();
+                const lastSeventDaysRes = await this.translate.get('SALES.CHARTS.DAILY_CHART_LAST_SEVENT_DAYS').toPromise();
+
+                this.periods.push({
+                    label: lastWeekRes,
+                    period: chart.dataSet[0].period,
+                    context: chartBundle.key
+                });
+
+                this.periods.push({
+                    label: currentWeekRes,
+                    period: chart.dataSet[1].period,
+                    context: chartBundle.key
+                });
+
+                this.periods.push({
+                    label: lastSeventDaysRes,
+                    period: chart.dataSet[2].period,
+                    context: chartBundle.key
+                });
+
+                // select the last period
+                if (!this.selectedPeriod || this.selectedPeriod.context !== chartBundle.key) {
+                    this.selectedPeriod = this.periods[this.periods.length - 1];
+                }
+
+            } else {
+                // top 5 charts
+                for (let monthIndex = 1; monthIndex <= 12; monthIndex++) {
+                    const month: string = await this.translate.get(`SHARED.DATES.MONTHS.${monthIndex}`).toPromise();
+                    if (month) {
+                        this.periods.push({
+                            label: month.slice(0, 3).toLocaleLowerCase(),
+                            period: `${monthIndex}`,
+                            context: chartBundle.key
+                        });
+                    }
+                }
+
+                // select the first period
+                if (!this.selectedPeriod || this.selectedPeriod.context !== chartBundle.key) {
+                    this.selectedPeriod = this.periods[0];
+                }
+            }
+        } else {
+            this.selectedPeriod = null;
+        }
+
+
         // chart data
         this.chartData = {
             chart: chart,
             chartBundle: chartBundle,
             timeFrame: this.timeFrame,
-            period: this.selectedPeriod,
+            period: this.selectedPeriod ? this.selectedPeriod.period : '-1',
             currency: currency,
             useReportingValue: this.data.useReportingValue,
             previousYearSerie: previousYearSerie,
@@ -236,7 +290,7 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
             chartBundle: chartBundle,
             chart: chart,
             timeFrame: this.timeFrame,
-            period: this.selectedPeriod,
+            period: this.selectedPeriod ? this.selectedPeriod.period : '-1',
             previousYearSerie: previousYearSerie,
             currentYearSerie: currentYearSerie,
             useReportingValue: this.data.useReportingValue,
@@ -260,7 +314,7 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
                 }
             }
         } else {
-            const dataSet = chart.dataSet.find(ds => ds.period === this.selectedPeriod);
+            const dataSet = chart.dataSet.find(ds => ds.period === this.selectedPeriod.period);
             if (dataSet) {
                 const othersDataPoint = dataSet.dataPoints.find(dp => dp.label === '##OTHERS##');
                 const totalsDataPoint = dataSet.dataPoints.find(dp => dp.isTotal);
@@ -292,16 +346,16 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
         }));
 
         const sendChartByEmailResource = await this.translate
-                                                   .get('SALES_CHARTS.SALES_CHARTS_COMPONENT.SHARE_OPTION_SEND_CHART_BY_EMAIL')
-                                                   .toPromise();
+            .get('SALES_CHARTS.SALES_CHARTS_COMPONENT.SHARE_OPTION_SEND_CHART_BY_EMAIL')
+            .toPromise();
 
         const sendPdfByEmailResource = await this.translate
-                                                   .get('SALES_CHARTS.SALES_CHARTS_COMPONENT.SHARE_OPTION_SEND_PDF_BY_EMAIL')
-                                                   .toPromise();
+            .get('SALES_CHARTS.SALES_CHARTS_COMPONENT.SHARE_OPTION_SEND_PDF_BY_EMAIL')
+            .toPromise();
 
         const saveImageinTheGalleryResource = await this.translate
-                                                        .get('SALES_CHARTS.SALES_CHARTS_COMPONENT.SHARE_OPTION_SAVE_IMAGE_IN_THE_GALLERY')
-                                                        .toPromise();
+            .get('SALES_CHARTS.SALES_CHARTS_COMPONENT.SHARE_OPTION_SAVE_IMAGE_IN_THE_GALLERY')
+            .toPromise();
 
         this.footerTabMenus = [
             {
@@ -381,7 +435,7 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
             this.selectedChartBundlePeriodType,
             this.valueType,
             this.selectedChartBundleIsTimeChart,
-            this.selectedPeriod,
+            this.selectedPeriod.period,
             this.extraInfoValue,
             this.salesChartCurrentData,
             this.salesTableCurrentData,
@@ -404,7 +458,7 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
             this.selectedChartBundlePeriodType,
             this.valueType,
             this.selectedChartBundleIsTimeChart,
-            this.selectedPeriod,
+            this.selectedPeriod.period,
             this.extraInfoValue,
             this.salesChartCurrentData,
             this.salesTableCurrentData,
@@ -427,7 +481,7 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
             this.selectedChartBundlePeriodType,
             this.valueType,
             this.selectedChartBundleIsTimeChart,
-            this.selectedPeriod,
+            this.selectedPeriod.period,
             this.extraInfoValue,
             this.salesChartCurrentData,
             this.salesTableCurrentData,
@@ -451,7 +505,7 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
         await alert.present();
     }
 
-    private rgbColorBuilder(color: {r: number, g: number, b: number}, alpha: number = 1): string {
+    private rgbColorBuilder(color: { r: number, g: number, b: number }, alpha: number = 1): string {
         return `rgba(${color.r},${color.g},${color.b}, ${alpha})`;
     }
 

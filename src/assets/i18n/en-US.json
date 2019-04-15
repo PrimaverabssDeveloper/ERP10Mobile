@@ -147,7 +147,12 @@
             "WEEKS_CHART_BAR_PREFIX": "W",
             "QUARTER_CHART_BAR_PREFIX": "Q",
             "TOTAL_SALES": "Total sales",
-            "OTHERS": "Others"
+            "OTHERS": "Others",
+            "DAILY_CHART_CURRENT_LEGENT": "selection",
+            "DAILY_CHART_PREVIOUS_LEGENT": "previous",
+            "DAILY_CHART_CURRENT_WEEK": "current week",
+            "DAILY_CHART_LAST_WEEK": "previous week",
+            "DAILY_CHART_LAST_SEVENT_DAYS": "last 7 days"
         }
     },
     "SALES_CHARTS": {

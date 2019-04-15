@@ -1,0 +1,8 @@
+<div class="period-selector" *ngIf="periods && periods.length > 0">
+    <div class="magnified-selected-period" *ngIf="currentPeriodSelected && isTouchDown" [ngStyle]="magnifiedSelectedPeriodStyle">
+        {{currentPeriodSelected.label}}
+    </div>
+    <div class="period" *ngFor="let period of periods" [ngStyle]="getPeriodStyle()" [ngClass]="{selected: currentPeriodSelected.period === period.period }">
+        {{period.label}}
+    </div>
+</div>
