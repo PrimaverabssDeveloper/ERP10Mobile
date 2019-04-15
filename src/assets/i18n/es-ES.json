@@ -49,7 +49,7 @@
     },
     "SHELL": {
         "AUTHENTICATION" : {
-            "NO_SUBSCRIPTION_MESSAGE": "O utilizador atual não tem acesso a nenhuma subscrição."
+            "NO_SUBSCRIPTION_MESSAGE": "El usuario actual no tiene acceso a ninguna suscripción."
         },
         "INSTANCES_PAGE" : {
             "PAGE_TITLE" : "Suscripciones"
