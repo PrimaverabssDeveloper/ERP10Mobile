@@ -127,6 +127,9 @@
             "SHOW_AGGREGATE_DATA_TOGGLE": "Mostrar total agregado",
             "SHOW_DAILY_SALES_TOGGLE": "Mostrar ventas diarias"
         },
+        "TOTAL_SALES_TICKER_COMPONENT" : {
+            "TOTAL_SALES": "Ventas Totales"
+        },
         "DAILY_SALES_TICKER_COMPONENT" : {
             "DAILY_SALES": "Ventas del día"
         },
