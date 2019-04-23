@@ -10265,10 +10265,10 @@
                 }
             }
         ],
-        "key": "DEMO",
+        "key": "SHOWCASE",
         "currency": "EUR",
         "reportingCurrency": "EUR",
-        "name": "Empresa de demonstração (PRIVA)",
+        "name": "Empresa Showcase",
         "totalCurrentYearSales": 164755.73,
         "totalLastYearSales": 291237.9
     },

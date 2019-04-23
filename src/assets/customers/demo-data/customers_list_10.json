@@ -9,7 +9,7 @@
             "key": "ALCAD",
             "location": "VILANUEVA DE ARRIBA",
             "description": "Soluciones Cad de Madrid, SA",
-            "companyDescription": "Empresa de demonstração (PRIVA)",
+            "companyDescription": "Empresa Showcase",
             "companyKey": "V100-EXECUTIVE-DEFAULT-DEMO",
             "taxId": "989922456"
         },
@@ -20,7 +20,7 @@
             "key": "J.M.F.",
             "location": "Porto",
             "description": "José Maria Fernandes & Filhos, Lda.",
-            "companyDescription": "Empresa de demonstração (PRIVA)",
+            "companyDescription": "Empresa Showcase",
             "companyKey": "V100-EXECUTIVE-DEFAULT-DEMO",
             "taxId": "505678900"
         },
@@ -31,7 +31,7 @@
             "key": "MICROAVI",
             "location": "CHELSEA",
             "description": "MicroAvi, Inc.",
-            "companyDescription": "Empresa de demonstração (PRIVA)",
+            "companyDescription": "Empresa Showcase",
             "companyKey": "V100-EXECUTIVE-DEFAULT-DEMO",
             "taxId": "9393878719-A"
         },
@@ -42,7 +42,7 @@
             "key": "INFORSHOW",
             "location": "Luanda",
             "description": "Inforshow, Informática Comunicação",
-            "companyDescription": "Empresa de demonstração (PRIVA)",
+            "companyDescription": "Empresa Showcase",
             "companyKey": "V100-EXECUTIVE-DEFAULT-DEMO",
             "taxId": "823892388"
         },
@@ -53,7 +53,7 @@
             "key": "SILVA",
             "location": "Cividade",
             "description": "Maria José da Silva",
-            "companyDescription": "Empresa de demonstração (PRIVA)",
+            "companyDescription": "Empresa Showcase",
             "companyKey": "V100-EXECUTIVE-DEFAULT-DEMO",
             "taxId": ""
         },
@@ -64,7 +64,7 @@
             "key": "SOFRIO",
             "location": "POLO  NORTE",
             "description": "Sofrio, Lda",
-            "companyDescription": "Empresa de demonstração (PRIVA)",
+            "companyDescription": "Empresa Showcase",
             "companyKey": "V100-EXECUTIVE-DEFAULT-DEMO",
             "taxId": "123456789"
         },
@@ -75,7 +75,7 @@
             "key": "VD",
             "location": "",
             "description": "Cliente Indiferenciado",
-            "companyDescription": "Empresa de demonstração (PRIVA)",
+            "companyDescription": "Empresa Showcase",
             "companyKey": "V100-EXECUTIVE-DEFAULT-DEMO",
             "taxId": ""
         }

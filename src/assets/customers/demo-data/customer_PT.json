@@ -54,7 +54,7 @@
         "phone": "+34988450444",
         "mobilephone": "+3481540822",
         "fax": "+34988993433",
-        "email": "pedro.afonso.demo@primaverabss.com"
+        "email": "pedro.afonso.showcase@primaverabss.com"
       },
       {
         "type": "COMERCIAL",
@@ -63,7 +63,7 @@
         "phone": "+34988456516",
         "mobilephone": "+3481204600",
         "fax": "+34988885474",
-        "email": "marco.oliveira.demo@primaverabss.com"
+        "email": "marco.oliveira.showcase@primaverabss.com"
       },
       {
         "type": "TECNICO",
@@ -72,7 +72,7 @@
         "phone": "+34988882487",
         "mobilephone": "+3481258999",
         "fax": "+34988418096",
-        "email": "carlos.vieira.demo@primaverabss.com"
+        "email": "carlos.vieira.showcase@primaverabss.com"
       }
     ]
   },
