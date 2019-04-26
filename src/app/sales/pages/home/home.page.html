@@ -18,6 +18,6 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content id="sales-home-page-content" scrollY='false'>
+<ion-content id="sales-home-page-content" scrollY='false' *ngIf="salesChartsData">
     <sales-charts [data]="salesChartsData"></sales-charts>
 </ion-content>
