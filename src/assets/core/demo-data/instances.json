@@ -1,7 +1,7 @@
 [
   {
     "accountKey": "10003",
-    "description": "Primavera Demo",
+    "description": "Primavera Showcase",
     "id": "1",
     "modules": [
       {
@@ -10,8 +10,8 @@
         "name": "HumanResources",
         "companies": [
           {
-            "companyKey": "DEMO",
-            "description": "Empresa de demonstração"
+            "companyKey": "SHOWCASE",
+            "description": "Empresa Showcase"
           }
         ]
       },
@@ -21,8 +21,8 @@
         "name": "Customers",
         "companies": [
           {
-            "companyKey": "DEMO",
-            "description": "Empresa de demonstração"
+            "companyKey": "SHOWCASE",
+            "description": "Empresa Showcase"
           }
         ]
       },
@@ -32,8 +32,8 @@
         "name": "Sales",
         "companies": [
           {
-            "companyKey": "DEMO",
-            "description": "Empresa de demonstração"
+            "companyKey": "SHOWCASE",
+            "description": "Empresa Showcase"
           }
         ]
       }
@@ -42,7 +42,7 @@
   },
   {
     "accountKey": "10002",
-    "description": "Sofrio  Demo",
+    "description": "Sofrio  Showcase",
     "id": "2",
     "modules": [
       {
@@ -52,7 +52,7 @@
         "companies": [
           {
             "companyKey": "DEMO",
-            "description": "Empresa de demonstração"
+            "description": "Empresa Showcase"
           }
         ]
       },
@@ -62,8 +62,8 @@
         "name": "Customers",
         "companies": [
           {
-            "companyKey": "DEMO",
-            "description": "Empresa de demonstração"
+            "companyKey": "SHOWCASE",
+            "description": "Empresa Showcase"
           }
         ]
       },
@@ -73,8 +73,8 @@
         "name": "Sales",
         "companies": [
           {
-            "companyKey": "DEMO",
-            "description": "Empresa de demonstração"
+            "companyKey": "SHOWCASE",
+            "description": "Empresa Showcase"
           }
         ]
       }
