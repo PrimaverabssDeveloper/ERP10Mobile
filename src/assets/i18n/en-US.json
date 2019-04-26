@@ -49,7 +49,8 @@
     },
     "SHELL": {
         "AUTHENTICATION" : {
-            "NO_SUBSCRIPTION_MESSAGE": "The current user does not have any subscription."
+            "NO_SUBSCRIPTION_MESSAGE": "The current user does not have any subscription.",
+            "PRODUCT_TOUR_BTN": "Product Tour"
         },
         "INSTANCES_PAGE" : {
             "PAGE_TITLE" : "Select Your Instance"
