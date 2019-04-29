@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.primavera.v10" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.primavera.v10" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>V10 Mobile</name>
     <description>PRIMAVERA Erp V10 Mobile</description>
     <author email="webmaster@primaverabss.com" href="https://www.primaverabss.com/">PRIMAVERA BSS</author>
-    <content original-src="index.html" src="http://172.16.252.8:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

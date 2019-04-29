@@ -3,10 +3,10 @@
         {
             "key": "ALCAD",
             "name": "ALCAD",
-            "totalSales": 21.0,
-            "totalSalesReporting": 76.0,
+            "totalSales": 121.0,
+            "totalSalesReporting": 121.0,
             "totalSalesPrevious": 93.0,
-            "totalSalesPreviousReporting": 137.0,
+            "totalSalesPreviousReporting": 93.0,
             "currency": "EUR",
             "reportingCurrency": "EUR",
             "totalSalesLegend": "2018",
@@ -19,8 +19,8 @@
                 "reportingCurrency": "EUR",
                 "dataTimestamp": "2018-11-14T00:00:00.000Z",
                 "sales": 214.0,
-                "salesReporting": 129.0,
-                "salesPrevious": 7.0,
+                "salesReporting": 214.0,
+                "salesPrevious": 125.0,
                 "salesPreviousReporting": 125.0,
                 "salesLegend": "2018",
                 "salesPreviousLegend": "2017"
@@ -30,9 +30,9 @@
             "key": "SOFRIO",
             "name": "SOFRIO",
             "totalSales": 246.0,
-            "totalSalesReporting": 105.0,
+            "totalSalesReporting": 246.0,
             "totalSalesPrevious": 152.0,
-            "totalSalesPreviousReporting": 136.0,
+            "totalSalesPreviousReporting": 152.0,
             "currency": "USD",
             "reportingCurrency": "USD",
             "totalSalesLegend": "2018",
@@ -45,9 +45,9 @@
                 "reportingCurrency": "EUR",
                 "dataTimestamp": "2018-11-14T00:00:00.000Z",
                 "sales": 217.0,
-                "salesReporting": 230.0,
+                "salesReporting": 217.0,
                 "salesPrevious": 40.0,
-                "salesPreviousReporting": 37.0,
+                "salesPreviousReporting": 40.0,
                 "salesLegend": "2018",
                 "salesPreviousLegend": "2017"
             }
@@ -55,7 +55,7 @@
         {
             "key": "ZEMA",
             "name": "ZEMA",
-            "totalSales": 39.0,
+            "totalSales": 191.0,
             "totalSalesReporting": 191.0,
             "totalSalesPrevious": 51.0,
             "totalSalesPreviousReporting": 155.0,
@@ -70,12 +70,12 @@
                 "currency": "EUR",
                 "reportingCurrency": "EUR",
                 "dataTimestamp": "2018-11-14T00:00:00.000Z",
-                "sales": 215.0,
+                "sales": 70.0,
                 "salesReporting": 70.0,
                 "salesPrevious": 165.0,
                 "salesPreviousReporting": 242.0,
                 "salesLegend": "2018",
-                "salesPreviousLegend": "2015"
+                "salesPreviousLegend": "2017"
             }
         }
     ]
