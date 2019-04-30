@@ -22,7 +22,14 @@ This repository contains the code base for the PRIMAVERA V10 Mobile (Android and
     npm install
     ```
 
-5. Go to `src` directory and create a file with name `authentication-settings.json`. To create your client id go to [Nitrogen Developers](https://nitrogen.primaverabss.com/developer/dashboard). Client Id OAuth Flow must be PKCE (Proof Key for Code Exchange). For more information on OAuth flows check [OAuth 2.0 Flows](https://oauth.net/2/).
+5. Application Client Id.
+     
+    To create your application client id go to [Nitrogen Developers](https://nitrogen.primaverabss.com/developer/dashboard). OAuth Flow **must** be PKCE (Proof Key for Code Exchange). 
+    
+    For more information on OAuth flows check [OAuth 2.0 Flows](https://oauth.net/2/).
+    
+
+6. Go to `src` directory and create a file with name `authentication-settings.json` and content:
 
     ``` json
     {
@@ -30,13 +37,13 @@ This repository contains the code base for the PRIMAVERA V10 Mobile (Android and
     }   
     ```
     
-6. Start the app in the browser (Google Chrome)
+7. Start the app in the browser (Google Chrome)
     ```
     ionic serve
     ```
 
 
-There are scripts to deploy to mobile devices but aditional steps maybe necessary to deploy to a mobile device, depending on your system configuration. Please check the [Ionic Frameword Documentation](https://ionicframework.com/)
+There are scripts to deploy to mobile devices but aditional steps maybe necessary, depending on your system configuration. Please check the [Ionic Frameword Documentation](https://ionicframework.com/)
 
 Android mobile device deploy scripts `npm run android-deploy` or `npm run android-debug`.
 
