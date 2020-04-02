@@ -2,7 +2,6 @@ import { InstanceHttpRequestService, DomService, InstanceService, ModulesService
 import { HumanResourcesService } from './human-resources.service';
 import { HttpClient } from '@angular/common/http';
 import { Salaries, SalaryDocument } from '../models';
-import { ResponseContentType } from '@angular/http';
 
 /**
  * The Human Resources Service provide all data needed to the Human Resources Module.

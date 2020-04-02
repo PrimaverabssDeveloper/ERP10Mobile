@@ -83,7 +83,7 @@ export class SalesChartsComponent implements OnInit, OnDestroy {
     footerTabMenus: FooterTabMenu[];
     dataDate: Date;
 
-    @ViewChild('saleschart') saleschartcomponent: SalesChartComponent;
+    @ViewChild('saleschart', {static: true}) saleschartcomponent: SalesChartComponent;
 
     @Input() set data(value: SalesChartsData) {
         if (value) {

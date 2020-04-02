@@ -14,7 +14,7 @@ export class DrawerComponent {
 
     state: 'open' | 'close';
 
-    @ViewChild('handler') handlerElem: ElementRef;
+    @ViewChild('handler', {static: true}) handlerElem: ElementRef;
 
     constructor(private element: ElementRef) {
         this.state = 'open';

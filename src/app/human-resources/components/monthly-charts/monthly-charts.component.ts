@@ -34,8 +34,8 @@ export class MonthlyChartsComponent implements OnInit, OnDestroy {
         return this.currentYear ? this.currentYear.monthsChartData.verticalAxisData : null;
     }
 
-    @ViewChild('chartsWrapper') chartsElem: ElementRef;
-    @ViewChild('yearsWrapper') yearsElem: ElementRef;
+    @ViewChild('chartsWrapper', {static: true}) chartsElem: ElementRef;
+    @ViewChild('yearsWrapper', {static: true}) yearsElem: ElementRef;
 
     @Input() set data(data: {
         year: number,

@@ -36,7 +36,7 @@ export class HrHomePage extends PageBase implements OnInit {
     private salaries: Salaries;
     private isCompanySelectorPopoverVisible: boolean;
 
-    @ViewChild('monthlyChartsSlide') monthlyChartsSlide: IonSlides;
+    @ViewChild('monthlyChartsSlide', {static: true}) monthlyChartsSlide: IonSlides;
 
     contentVisible: boolean;
     pageTitle: string;

@@ -30,7 +30,7 @@ export class SalesChartComponent {
     currentCurrency: string;
     currentPeriodType: ChartPeriodType;
 
-    @ViewChild('chartCanvas') chartCanvas;
+    @ViewChild('chartCanvas', {static: true}) chartCanvas;
 
     @Input() set data(data: {
         chartBundle: ChartBundle,

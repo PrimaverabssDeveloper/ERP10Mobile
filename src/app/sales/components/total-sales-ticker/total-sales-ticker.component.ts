@@ -14,7 +14,7 @@ export class TotalSalesTickerComponent implements OnInit {
 
     private chart: any;
 
-    @ViewChild('chart') chartCanvas: ElementRef;
+    @ViewChild('chart', {static: true}) chartCanvas: ElementRef;
 
     companySalesSummary: CompanySalesSummary;
     salesDelta: number;

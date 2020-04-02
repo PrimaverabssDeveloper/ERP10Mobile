@@ -18,7 +18,7 @@ export class SalaryChartComponent {
     private chart: any;
     private chartData: SalaryChartData;
 
-    @ViewChild('chartCanvas') chartCanvas: ElementRef;
+    @ViewChild('chartCanvas', {static: true}) chartCanvas: ElementRef;
 
     @Input() set data(data: SalaryChartData) {
         if (data) {

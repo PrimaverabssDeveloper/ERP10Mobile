@@ -24,7 +24,7 @@ export class TickersComponent implements OnInit {
 
     @Input() tickers: Ticker[];
 
-    @ViewChild('slide') slide: IonSlides;
+    @ViewChild('slide', {static: true}) slide: IonSlides;
 
     constructor() {
 
