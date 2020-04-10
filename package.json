@@ -42,7 +42,7 @@
     "@ngx-translate/core": "10.0.2",
     "@ngx-translate/http-loader": "3.0.1",
     "ajv": "6.9.1",
-    "auth0-js": "9.8.0",
+    "auth0-js": "9.13.2",
     "chart.js": "2.7.2",
     "cordova-android": "7.1.1",
     "cordova-base64-to-gallery": "^4.1.3",
