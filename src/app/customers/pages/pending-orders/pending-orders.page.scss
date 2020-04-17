@@ -2,6 +2,10 @@
 
 
 .pending-orders {
+
+    height: -webkit-fill-available;
+    overflow-y: auto;
+
     .no-documensts {
         top: 50%;
         position: absolute;
