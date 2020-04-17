@@ -65,7 +65,7 @@ export class DailySalesTickerComponent implements OnInit {
         // }
 
         // get the today's month day
-        const date = new Date();
+        const date = new Date(companySalesSummary.dataTimestamp);
         this.todayLegend = `${date.getDate()}`;
 
         // get the day last week month day
