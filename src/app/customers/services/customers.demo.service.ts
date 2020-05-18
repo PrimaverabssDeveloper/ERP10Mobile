@@ -22,11 +22,18 @@ export class CustomersDemoService extends CustomersService {
         // return empty result
         if (!searchTerm || searchTerm.trim().length === 0) {
             return new Promise<CustomersSearchResult>(result => {
-                result({hasMore: false, results: []});
+                result({ hasMore: false, results: [] });
             });
         }
 
         var result = await this.getDemoDataWithFileName<CustomersSearchResult>('customers_list_10.json');
+
+        result.results = result.results.
+            filter(
+                sr => sr.name.toLocaleLowerCase().includes(searchTerm)
+                    || sr.key.toLocaleLowerCase().includes(searchTerm)
+                    || sr.companyKey.toLocaleLowerCase().includes(searchTerm)
+                    )
 
         return result;
     }

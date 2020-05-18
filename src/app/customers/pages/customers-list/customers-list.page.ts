@@ -118,6 +118,8 @@ export class CustomersListPage extends PageBase implements OnInit {
                                  .searchCustomers(searchTerm, pageIndex, pageSize);
 
         if (!result || !result.results || result.results.length === 0) {
+            this.searchedCustomers = [];
+            this.hasMoreSearchResults = false;
             this.searchMessage = await this.translate.get('CUSTOMERS.CUSTOMERS_LIST_PAGE.MESSAGE_SEARCH_NO_RESULTS').toPromise();
         } else {
             this.searchedCustomers = result.results;
