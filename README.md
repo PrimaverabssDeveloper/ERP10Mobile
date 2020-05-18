@@ -24,7 +24,7 @@ This repository contains the code base for the PRIMAVERA V10 Mobile (Android and
 
 5. Application Client Id.
      
-    To create your application client id go to [Nitrogen Developers](https://nitrogen.primaverabss.com/developer/dashboard). OAuth Flow **must** be PKCE (Proof Key for Code Exchange). 
+    To create your application and client id go to [PRIMAVERA APP Developers](https://apps.primaverabss.com/developer/dashboard). OAuth Flow **must** be PKCE (Proof Key for Code Exchange). 
     
     For more information on OAuth flows check [OAuth 2.0 Flows](https://oauth.net/2/).
     
