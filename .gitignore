@@ -33,3 +33,4 @@ $RECYCLE.BIN/
 Thumbs.db
 UserInterfaceState.xcuserstate
 authentication-settings.json
+src/authentication-settings.json
