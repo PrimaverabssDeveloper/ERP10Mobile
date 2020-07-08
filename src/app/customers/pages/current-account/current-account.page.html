@@ -16,7 +16,7 @@
 
 <ion-content id="customers-current-account-page-content" scrollY='false'>
     <div class="current-account" *ngIf="currentAccount">
-        <div class="customer-name">Alcad</div>
+        <div class="customer-name">{{customerKey}}</div>
         <div class="current-account-total">
             <div class="label">{{'CUSTOMERS.CURRENT_ACCOUNT_PAGE.CURRENT_ACCOUNT_LABEL' | translate}}</div>
             <div class="value">{{currentAccount.total | localeCurrency:currentAccount.currency}}</div>

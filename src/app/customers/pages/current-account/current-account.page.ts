@@ -13,6 +13,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class CurrentAccountPage extends PageBase implements OnInit {
 
+    public customerKey:string;
+
     state: 'older' | 'lastMonth' | 'unexpired';
     currentAccount: CurrentAccount;
 
@@ -56,12 +58,12 @@ export class CurrentAccountPage extends PageBase implements OnInit {
     */
     async ngOnInit() {
         const companyKey = this.route.snapshot.paramMap.get('companyKey');
-        const customerKey = this.route.snapshot.paramMap.get('customerKey');
+        this.customerKey = this.route.snapshot.paramMap.get('customerKey');
 
         await this.showLoading();
 
         try {
-            this.currentAccount = await this.customersService.getCurrentAccount(companyKey, customerKey);
+            this.currentAccount = await this.customersService.getCurrentAccount(companyKey, this.customerKey);
         } catch (error) {
             console.log(error);
         }
