@@ -1,8 +1,10 @@
 import { Component, ViewChild, ElementRef, OnInit, Input } from '@angular/core';
 
 import { Chart } from 'chart.js';
-import { CompanySalesSummary, CompanyDailySalesSummary } from '../../entities';
+import { CompanySalesSummary, CompanyDailySalesSummary, SalesSettings } from '../../entities';
 import { Router } from '@angular/router';
+import { SalesSettingsService } from '../../services';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'sales-ticker',
@@ -16,8 +18,11 @@ export class DailySalesTickerComponent implements OnInit {
     private lastWeekPercentualSales: number;
 
     companyDailySalesSummary: CompanyDailySalesSummary;
+    salesSettingsService: SalesSettingsService;
     salesDelta: number;
     salesDeltaAvailable: boolean;
+    useReferenceCurrency: boolean = false;
+    referenceCurrencySettingChangedSubscription: Subscription;
 
     todayLegend: string;
     lastWeekDayLegend: string;
@@ -45,14 +50,37 @@ export class DailySalesTickerComponent implements OnInit {
     constructor(private elementRef: ElementRef, private router: Router) {
 
     }
+    
+    ngOnDestroy(): void {
+        if (this.referenceCurrencySettingChangedSubscription !== null && this.referenceCurrencySettingChangedSubscription !== undefined) {
+            this.referenceCurrencySettingChangedSubscription.unsubscribe();
+            this.referenceCurrencySettingChangedSubscription = null;
+        }
+    }
 
     /**
     * Execute on page initialization.
     *
     * @memberof SalesTickerComponent
     */
-    ngOnInit(): void {
+    async ngOnInit(){
         this.buildChart(this.companyDailySalesSummary);
+
+        await this.salesSettingsService.getUseReferenceCurrencySettingValueAsync()
+            .then(
+                value => {
+                    this.useReferenceCurrency = value;
+                }
+            );
+
+        if (this.referenceCurrencySettingChangedSubscription === undefined) {
+            this.referenceCurrencySettingChangedSubscription = this.salesSettingsService.useReferenceCurrencySettingChanged
+                .subscribe(
+                    value => {
+                        console.log(value);
+                        this.useReferenceCurrency = value.newValue;
+                    });
+        }
     }
 
     navigateToSales() {

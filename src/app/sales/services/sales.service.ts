@@ -4,6 +4,7 @@ import { TotalSalesTickerComponent, DailySalesTickerComponent } from '../compone
 import { SalesStorageService } from './sales-storage.service';
 import { EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
+import { SalesSettingsService } from '.';
 
 const SALES_SUMMARY = '/sales';
 const SALES_BY_COMPANY = '/sales?companyKey=';
@@ -29,8 +30,9 @@ export class SalesService {
     constructor(
         protected instanceHttpRequestService: InstanceHttpRequestService,
         protected domService: DomService,
-        protected storage: SalesStorageService
-        ) {
+        protected storage: SalesStorageService,
+        protected salesSettingsService: SalesSettingsService
+    ) {
     }
 
     // #endregion
@@ -51,11 +53,11 @@ export class SalesService {
         for (const company of salesSummary.companies) {
 
             // total sales ticker
-            const totalSalesTickerHtml = this.domService.createComponent(TotalSalesTickerComponent, { companySalesSummary: company });
+            const totalSalesTickerHtml = this.domService.createComponent(TotalSalesTickerComponent, { companySalesSummary: company, salesSettingsService: this.salesSettingsService });
             htmlTickers.push(totalSalesTickerHtml);
 
             // daily sales ticker
-            const dailySalesProperties = { companyDailySalesSummary: company.dailySales };
+            const dailySalesProperties = { companyDailySalesSummary: company.dailySales, salesSettingsService: this.salesSettingsService };
             const dailySalesTickerHtml = this.domService.createComponent(DailySalesTickerComponent, dailySalesProperties);
             htmlTickers.push(dailySalesTickerHtml);
         }
@@ -98,7 +100,7 @@ export class SalesService {
 
         try {
             salesSummary = await this.instanceHttpRequestService
-                                     .get<SalesSummary>(SALES_SUMMARY);
+                .get<SalesSummary>(SALES_SUMMARY);
         } catch (error) {
             console.log(error);
             return null;

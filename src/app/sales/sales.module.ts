@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { PAGES } from './pages';
 import { SALES_ROUTING } from './sales.routes';
 import { ENTRY_COMPONENTS, COMPONENTS } from './components';
-import { SalesService, SalesServiceProvider, SalesStorageService, SERVICES } from './services';
+import { SalesService, SalesServiceProvider, SalesStorageService, SalesSettingsService } from './services';
 import { ModulesService, AuthenticationService, InstanceHttpRequestService, DomService } from '../core/services';
 import { SharedModule } from '../shared/shared.module';
 import { ModuleDefinition } from '../core/entities';
@@ -28,12 +28,11 @@ import { SalesChartsModule } from '../sales-charts/sales-charts.module';
     declarations: [PAGES, COMPONENTS],
     entryComponents: [ENTRY_COMPONENTS],
     providers: [
-        SERVICES,
         LocalizedStringsPipe,
         LocaleCurrencyPipe,
         CompanyKeySanitizerPipe,
         LocaleDatePipe,
-        CurrencySymbolPipe,
+        CurrencySymbolPipe
     ]
 })
 export class SalesModule {
@@ -43,7 +42,8 @@ export class SalesModule {
         private authService: AuthenticationService,
         private instanceHttpRequestService: InstanceHttpRequestService,
         private domService: DomService,
-        private storageService: SalesStorageService
+        private storageService: SalesStorageService,
+        private salesSettingsService: SalesSettingsService
     ) {
 
         const moduleDef: ModuleDefinition = {
@@ -61,7 +61,8 @@ export class SalesModule {
                         this.authService,
                         this.instanceHttpRequestService,
                         this.domService,
-                        this.storageService);
+                        this.storageService,
+                        this.salesSettingsService);
 
                     return ss.createSalesSummaryTickers();
                 }

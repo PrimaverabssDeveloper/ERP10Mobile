@@ -10,21 +10,18 @@ export * from './sales.service';
 export * from './sales-storage.service';
 export * from './sales-settings.service';
 
-export const SERVICES = [
-    SalesStorageService,
-    SalesSettingsService
-];
 
 export const SalesServiceFactory = (
     http: HttpClient,
     authService: AuthenticationService,
     instanceHttpRequestService: InstanceHttpRequestService,
     domService: DomService,
-    storageService: SalesStorageService) => {
+    storageService: SalesStorageService,
+    salesSettingsService: SalesSettingsService) => {
     if (authService.isAuthenticateAsDemo) {
-        return new SalesDemoService(instanceHttpRequestService, domService, storageService, http);
+        return new SalesDemoService(instanceHttpRequestService, domService, storageService, http, salesSettingsService);
     } else {
-        return new SalesService(instanceHttpRequestService, domService, storageService);
+        return new SalesService(instanceHttpRequestService, domService, storageService, salesSettingsService);
     }
 };
 
@@ -37,6 +34,7 @@ export const SalesServiceProvider: FactoryProvider = {
         AuthenticationService,
         InstanceHttpRequestService,
         DomService,
-        SalesStorageService
+        SalesStorageService,
+        SalesSettingsService
     ],
 };

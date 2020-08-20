@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { SalesSettings } from '../entities';
 import { SalesStorageService } from './sales-storage.service';
 
@@ -15,9 +15,17 @@ import { SalesStorageService } from './sales-storage.service';
 export class SalesSettingsService {
 
     // #region 'Private Properteis'
-    private _showDailySalesSettingChanged: EventEmitter<{ oldValue: boolean, newValue: boolean }>;
-    private _showAggregateDataSettingChanged: EventEmitter<{ oldValue: boolean, newValue: boolean }>;
-    private _useReferenceCurrencySettingChanged: EventEmitter<{ oldValue: boolean, newValue: boolean }>;
+
+    private useReferenceCurrencySettingSource = new Subject<{ oldValue: boolean, newValue: boolean }>();
+    private showAggregateDataSettingSource = new Subject<{ oldValue: boolean, newValue: boolean }>();
+    private showDailySalesSettingSource = new Subject<{ oldValue: boolean, newValue: boolean }>();
+
+    private useReferenceCurrencySetting$ = this.useReferenceCurrencySettingSource.asObservable();
+    private showAggregateDataSetting$ = this.showAggregateDataSettingSource.asObservable();
+    private showDailySalesSetting$ = this.showDailySalesSettingSource.asObservable();
+    
+    id: string;
+
     // #endregion
 
     // #region 'Public Properteis'
@@ -30,7 +38,7 @@ export class SalesSettingsService {
      * @memberof SalesService
      */
     get useReferenceCurrencySettingChanged(): Observable<{ oldValue: boolean, newValue: boolean }> {
-        return this._useReferenceCurrencySettingChanged.asObservable();
+        return this.useReferenceCurrencySetting$;
     }
 
     /**
@@ -41,7 +49,7 @@ export class SalesSettingsService {
      * @memberof SalesService
      */
     get showAggregateDataSettingChanged(): Observable<{ oldValue: boolean, newValue: boolean }> {
-        return this._showAggregateDataSettingChanged.asObservable();
+        return this.showAggregateDataSetting$;
     }
 
     /**
@@ -52,7 +60,7 @@ export class SalesSettingsService {
      * @memberof SalesService
      */
     get showDailySalesSettingChanged(): Observable<{ oldValue: boolean, newValue: boolean }> {
-        return this._showDailySalesSettingChanged.asObservable();
+        return this.showDailySalesSetting$;
     }
 
     // #endregion
@@ -64,9 +72,6 @@ export class SalesSettingsService {
      * @memberof SalesSettingsService
      */
     constructor(private storage: SalesStorageService) {
-        this._useReferenceCurrencySettingChanged = new EventEmitter();
-        this._showAggregateDataSettingChanged = new EventEmitter();
-        this._showDailySalesSettingChanged = new EventEmitter();
     }
 
     /**
@@ -87,7 +92,7 @@ export class SalesSettingsService {
                 newValue: settings.useReferenceCurrency
             };
 
-            this._useReferenceCurrencySettingChanged.emit(eventData);
+            this.useReferenceCurrencySettingSource.next(eventData);
         }
 
         // if the showAggregateData setting changed, emit an event
@@ -97,7 +102,7 @@ export class SalesSettingsService {
                 newValue: settings.showAggregateData
             };
 
-            this._showAggregateDataSettingChanged.emit(eventData);
+            this.showAggregateDataSettingSource.next(eventData);
         }
 
         // if the showDailySales setting changed, emit an event
@@ -107,7 +112,7 @@ export class SalesSettingsService {
                 newValue: settings.showDailySales
             };
 
-            this._showDailySalesSettingChanged.emit(eventData);
+            this.showDailySalesSettingSource.next(eventData);
         }
     }
 

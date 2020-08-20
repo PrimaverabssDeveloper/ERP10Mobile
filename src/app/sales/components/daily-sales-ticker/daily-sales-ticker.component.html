@@ -38,9 +38,12 @@
                 <div class="label">
                     {{ 'SALES.DAILY_SALES_TICKER_COMPONENT.DAILY_SALES' | translate}}
                 </div>
-                <div class="line"></div>
-                <div class="value">
+                <div class="line"></div>                
+                <div class="value" *ngIf="!useReferenceCurrency">
                     {{companyDailySalesSummary.sales | localeCurrency:companyDailySalesSummary.currency}}
+                </div>
+                <div class="value" *ngIf="useReferenceCurrency">                    
+                    {{companyDailySalesSummary.salesReporting | localeCurrency:companyDailySalesSummary.reportingCurrency}}
                 </div>
             </div>
         </div>

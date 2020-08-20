@@ -6,7 +6,8 @@
         <div class="end-chart">
             <div></div>
         </div>
-        <div class="sales-delta" [ngClass]="{negative: salesDelta < 0}">{{salesDelta | round }}%</div>
+        <div class="sales-delta" *ngIf="salesDeltaAvailable" [ngClass]="{negative: salesDelta < 0}">{{salesDelta | round }}%</div>
+        <div class="sales-delta not-available" *ngIf="!salesDeltaAvailable">N/A</div>
     </div>
     <div class="data" [ngStyle]="dataStyle">
         <div class="data-wrapper">
@@ -21,9 +22,13 @@
                     {{ 'SALES.TOTAL_SALES_TICKER_COMPONENT.TOTAL_SALES' | translate}}
                 </div>
                 <div class="line"></div>
-                <div class="value">
+                <div class="value" *ngIf="!useReferenceCurrency">
                     {{companySalesSummary.totalSales | localeCurrency:companySalesSummary.currency}}
                 </div>
+                <div class="value" *ngIf="useReferenceCurrency">                    
+                    {{companySalesSummary.totalSalesReporting | localeCurrency:companySalesSummary.reportingCurrency}}
+                </div>
+
             </div>
         </div>
     </div>

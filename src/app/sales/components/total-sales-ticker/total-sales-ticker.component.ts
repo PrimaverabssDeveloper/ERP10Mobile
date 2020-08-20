@@ -1,8 +1,11 @@
-import { Component, ViewChild, ElementRef, OnInit, Input } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, Input, OnDestroy } from '@angular/core';
 
 import { Chart } from 'chart.js';
-import { CompanySalesSummary } from '../../entities';
+import { CompanySalesSummary, SalesSettings } from '../../entities';
 import { Router } from '@angular/router';
+import { SalesSettingsService } from '../../services';
+import { Subscription } from 'rxjs';
+import { ngModuleJitUrl } from '@angular/compiler';
 
 @Component({
     selector: 'sales-ticker',
@@ -10,14 +13,18 @@ import { Router } from '@angular/router';
     styleUrls: ['./total-sales-ticker.component.scss']
 })
 
-export class TotalSalesTickerComponent implements OnInit {
+export class TotalSalesTickerComponent implements OnInit, OnDestroy {
 
     private chart: any;
 
-    @ViewChild('chart', {static: true}) chartCanvas: ElementRef;
+    @ViewChild('chart', { static: true }) chartCanvas: ElementRef;
 
     companySalesSummary: CompanySalesSummary;
     salesDelta: number;
+    salesSettingsService: SalesSettingsService;
+    useReferenceCurrency: boolean = false;
+    referenceCurrencySettingChangedSubscription: Subscription;
+    salesDeltaAvailable: boolean;
 
     get dataStyle(): any {
         return {
@@ -25,8 +32,16 @@ export class TotalSalesTickerComponent implements OnInit {
         };
     }
 
-    constructor(private elementRef: ElementRef, private router: Router) {
-
+    constructor(
+        private elementRef: ElementRef,
+        private router: Router) {
+    }
+    
+    ngOnDestroy(): void {
+        if (this.referenceCurrencySettingChangedSubscription !== null && this.referenceCurrencySettingChangedSubscription !== undefined) {
+            this.referenceCurrencySettingChangedSubscription.unsubscribe();
+            this.referenceCurrencySettingChangedSubscription = null;
+        }
     }
 
     /**
@@ -34,8 +49,24 @@ export class TotalSalesTickerComponent implements OnInit {
     *
     * @memberof SalesTickerComponent
     */
-    ngOnInit(): void {
+    async ngOnInit() {
         this.buildChart(this.companySalesSummary);
+
+        await this.salesSettingsService.getUseReferenceCurrencySettingValueAsync()
+            .then(
+                value => {
+                    this.useReferenceCurrency = value;
+                }
+            );
+
+        if (this.referenceCurrencySettingChangedSubscription === undefined) {
+            this.referenceCurrencySettingChangedSubscription = this.salesSettingsService.useReferenceCurrencySettingChanged
+                .subscribe(
+                    value => {
+                        console.log(value);
+                        this.useReferenceCurrency = value.newValue;
+                    });
+        }
     }
 
     navigateToSales() {
@@ -50,7 +81,12 @@ export class TotalSalesTickerComponent implements OnInit {
         let totalSales = companySalesSummary.totalSales;
         let totalSalesPrevious = companySalesSummary.totalSalesPrevious;
 
-        this.salesDelta = ((totalSales - totalSalesPrevious) / (totalSalesPrevious)) * 100;
+        if (totalSales === 0 || totalSalesPrevious === 0) {
+            this.salesDeltaAvailable = false;
+        } else {
+            this.salesDeltaAvailable = true;
+            this.salesDelta = ((totalSales - totalSalesPrevious) / (totalSalesPrevious)) * 100;
+        }
 
         if (totalSales > totalSalesPrevious) {
             totalSalesPrevious = (totalSalesPrevious * 62.5) / totalSales;

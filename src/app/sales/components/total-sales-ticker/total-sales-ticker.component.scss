@@ -81,6 +81,12 @@
                     border-left-color: transparent;
                 }
             }
+        
+            &.not-available {
+                &:after {
+                    border: none;
+                }
+            }
         }
     }
 

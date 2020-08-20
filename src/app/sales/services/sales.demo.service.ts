@@ -3,6 +3,7 @@ import { InstanceHttpRequestService, DomService } from '../../core/services';
 import { SalesService } from './sales.service';
 import { HttpClient } from '@angular/common/http';
 import { SalesStorageService } from './sales-storage.service';
+import { SalesSettingsService } from '.';
 
 /**
  * The Sales Service provide all data needed to the Sales Module.
@@ -27,8 +28,9 @@ export class SalesDemoService extends SalesService {
         protected domService: DomService,
         protected storageService: SalesStorageService,
         private http: HttpClient,
+        protected salesSettingsService: SalesSettingsService
     ) {
-        super(instanceHttpRequestService, domService, storageService);
+        super(instanceHttpRequestService, domService, storageService, salesSettingsService);
     }
     // #endregion
 
